@@ -1,5 +1,6 @@
 package tn.esprit.services;
 
+import tn.esprit.entities.Questionnaire;
 import tn.esprit.entities.User;
 import tn.esprit.tools.MyDatabase;
 
@@ -28,8 +29,11 @@ public class UserService implements IGeneralService<User> {
     }
 
     @Override
-    public void modifier(User user) {
+    public void modifier(Questionnaire questionnaire, int id) throws SQLException {
 
+    }
+
+    public void modifier(User user, int id) throws SQLException {
     }
 
     @Override

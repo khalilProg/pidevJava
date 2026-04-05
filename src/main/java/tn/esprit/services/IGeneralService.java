@@ -1,12 +1,15 @@
 package tn.esprit.services;
 
+import tn.esprit.entities.Questionnaire;
+import tn.esprit.entities.User;
+
 import java.sql.SQLException;
 import java.util.List;
 
 public interface IGeneralService<T> {
     void ajouter(T t) throws SQLException;
-    void supprimer(T t);
-    int chercher(T t);
-    void modifier(T t);
+    void supprimer(T t) throws SQLException;
+    int chercher(T t) throws SQLException;
+    void modifier(Questionnaire questionnaire, int id) throws SQLException;
     List<T> recuperer() throws SQLException;
 }

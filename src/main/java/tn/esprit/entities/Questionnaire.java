@@ -17,8 +17,7 @@ public class Questionnaire {
     public void setRendezVous(RendezVous rendezVous) {
         this.rendezVous = rendezVous;
     }
-
-    public Questionnaire(int id, int age, String nom, String prenom, String sexe, String autres, String groupeSanguin, double poids, LocalDateTime date) {
+    public Questionnaire(int id, String nom, String prenom, int age, String sexe, double poids, String autres, LocalDateTime date, String groupeSanguin) {
         this.id = id;
         this.age = age;
         this.nom = nom;
@@ -29,7 +28,27 @@ public class Questionnaire {
         this.poids = poids;
         this.date = date;
     }
+    public Questionnaire(String nom, String prenom, int age, String sexe, double poids, String autres, LocalDateTime date, String groupeSanguin) {
+        this.age = age;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+        this.autres = autres;
+        this.groupeSanguin = groupeSanguin;
+        this.poids = poids;
+        this.date = date;
+    }
 
+    public Questionnaire(Questionnaire q) {
+        this.age = q.getAge();
+        this.nom = q.getNom();
+        this.prenom = q.getPrenom();
+        this.sexe = q.getSexe();
+        this.autres = q.getAutres();
+        this.groupeSanguin = q.getGroupeSanguin();
+        this.poids = q.getPoids();
+        this.date = q.getDate();
+    }
     @Override
     public String toString() {
         return "Questionnaire{" +
