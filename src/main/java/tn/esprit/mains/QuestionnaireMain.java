@@ -15,50 +15,49 @@ public class QuestionnaireMain {
 //        //ajout
 //        try {
 //            qs.ajouter(q6);
-////            qs.ajouter(q5);
+//          //qs.ajouter(q5);
 //            System.out.println("questionnaire ajouté!");
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
-//
-//        System.out.println(qs.getIdFromDB(q6));
-//        suppression
+
+//        //suppression
 //        try {
-//            qs.supprimer(q6);
+//            Questionnaire q7 = new Questionnaire(18,"ben yahia","wajd",50, "homme",80,"", LocalDateTime.now(), "A+");
+//            qs.supprimer(q7);
 //            System.out.println("questionnaire supprimé!");
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
 
-//        //recuperation
-//        try {
-//            List<Questionnaire> questionnaires = qs.recuperer();
-//
-//            System.out.println("Questionnaires in the database:");
-//            for (Questionnaire q : questionnaires) {
-//                System.out.println(q);
-//            }
-//
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
+        //recuperation
+        try {
+            List<Questionnaire> questionnaires = qs.recuperer();
+
+            System.out.println("Questionnaires in the database:");
+            for (Questionnaire q : questionnaires) {
+                System.out.println(q);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
 //        //modif
-//        Questionnaire backUp = new Questionnaire(q6);
-//        int id = qs.getIdFromDB(backUp);
-//        q6.setPoids(60);
-//        q6.setPrenom("jowjow");
-//
+//        Questionnaire q7 = new Questionnaire(52,"ben yahia","jowjow",50, "homme",60,"", LocalDateTime.now(), "A+");
+//        q7.setPoids(50);
+//        q7.setPrenom("wajouda");
 //        try {
-//            qs.modifier(q6, id);
+//            qs.modifier(q7);
 //            System.out.println("questionnaire modifié!");
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
 
         //chercher
+        Questionnaire q7 = new Questionnaire(52,"ben yahia","wajouda",50, "homme",50,"", LocalDateTime.now(), "A+");
         try{
-            qs.chercher(q6);
+            qs.chercher(q7);
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }

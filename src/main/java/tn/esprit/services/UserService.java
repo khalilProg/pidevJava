@@ -28,12 +28,8 @@ public class UserService implements IGeneralService<User> {
         return 0;
     }
 
-    @Override
-    public void modifier(Questionnaire questionnaire, int id) throws SQLException {
 
-    }
-
-    public void modifier(User user, int id) throws SQLException {
+    public void modifier(User user) throws SQLException {
     }
 
     @Override

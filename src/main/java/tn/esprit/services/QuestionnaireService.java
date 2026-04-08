@@ -1,6 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.entities.Questionnaire;
+import tn.esprit.entities.RendezVous;
 import tn.esprit.tools.MyDatabase;
 
 import java.sql.*;
@@ -13,33 +14,13 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
     public QuestionnaireService() {
         cn = MyDatabase.getInstance().getCnx();
     }
-    public int getIdFromDB(Questionnaire questionnaire) throws SQLException {
-        String sql = "SELECT id FROM questionnaire WHERE nom=? AND prenom=? AND age=? AND sexe=? AND poids=? AND autres=? AND group_sanguin=?";
-        PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setString(1, questionnaire.getNom());
-        pst.setString(2, questionnaire.getPrenom());
-        pst.setInt(3, questionnaire.getAge());
-        pst.setString(4, questionnaire.getSexe());
-        pst.setDouble(5, questionnaire.getPoids());
-        pst.setString(6, questionnaire.getAutres());
-//        pst.setTimestamp(7, Timestamp.valueOf(questionnaire.getDate()));
-        pst.setString(7, questionnaire.getGroupeSanguin());
 
-        ResultSet rs = pst.executeQuery();
-        if (rs.next()) {
-            int id = rs.getInt("id");
-            questionnaire.setId(id);
-            return id;
-        } else {
-            return 0;
-        }
-    }
     @Override
     public void ajouter(Questionnaire questionnaire) throws SQLException {
         int clientId=1;
         int campaignId=2;
         String sql = "insert into questionnaire(nom,prenom,age,sexe,poids,autres,client_id,campagne_id,date,group_sanguin) values(?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement q = cn.prepareStatement(sql); //, Statement.RETURN_GENERATED_KEYS
+        PreparedStatement q = cn.prepareStatement(sql);
         q.setString(1,questionnaire.getNom());
         q.setString(2,questionnaire.getPrenom());
         q.setInt(3,questionnaire.getAge());
@@ -48,59 +29,62 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
         q.setString(6,questionnaire.getAutres());
         q.setInt(7, clientId);
         q.setInt(8, campaignId);
+//        q.setInt(7, questionnaire.getClient().getId());
+//        q.setInt(8, questionnaire.getCampagne().getId());
         q.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
         q.setString(10, questionnaire.getGroupeSanguin());
         System.out.println("executing insert...");
         q.executeUpdate();
 
-//        ResultSet rs = q.getGeneratedKeys();
-//        if (rs.next()) {
-//            int generatedId = rs.getInt(1);
-//            questionnaire.setId(generatedId);
-//            System.out.println("Inserted Questionnaire ID: " + generatedId);
-//        }
     }
 
     public void supprimer(Questionnaire questionnaire) throws SQLException {
-        int id=getIdFromDB(questionnaire);
-        // Delete the child first (RendezVous)
+
         String rdv = "DELETE FROM rendez_vous WHERE questionnaire_id = ?";
         PreparedStatement pstRV = cn.prepareStatement(rdv);
-        pstRV.setInt(1, id);
+        pstRV.setInt(1, questionnaire.getId());
         pstRV.executeUpdate();
 
-        // Delete the parent
-        String sqlQ = "DELETE FROM questionnaire WHERE id = ?";
-        PreparedStatement q = cn.prepareStatement(sqlQ);
-        q.setInt(1, id);
+        String qq = "DELETE FROM questionnaire WHERE id = ?";
+        PreparedStatement q = cn.prepareStatement(qq);
+        q.setInt(1, questionnaire.getId());
         q.executeUpdate();
 
     }
     @Override
     public int chercher(Questionnaire questionnaire) throws SQLException {
-        int id = getIdFromDB(questionnaire);
-        if (id!=0){
-            System.out.println("ce quest existe");
+        String sql = "SELECT 1 FROM questionnaire WHERE id = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setInt(1, questionnaire.getId());
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()){
+            System.out.println("ce questionnaire existe avec l'id "+questionnaire.getId());
         }else{
-            System.out.println("ce quest n'existe pas");
+            System.out.println("ce questionnaire n'existe pas");
         }
-        return id;
+        return questionnaire.getId();
     }
 
     @Override
-    public void modifier(Questionnaire questionnaire, int id) throws SQLException {
-        String sql = "UPDATE questionnaire SET nom = ?, prenom = ?, age = ?, sexe = ?, poids = ?, autres = ?, date = ?, group_sanguin = ? WHERE id=?";
-        PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setString(1, questionnaire.getNom());
-        pst.setString(2, questionnaire.getPrenom());
-        pst.setInt(3, questionnaire.getAge());
-        pst.setString(4, questionnaire.getSexe());
-        pst.setDouble(5, questionnaire.getPoids());
-        pst.setString(6, questionnaire.getAutres());
-        pst.setTimestamp(7, Timestamp.valueOf(questionnaire.getDate()));
-        pst.setString(8, questionnaire.getGroupeSanguin());
-        pst.setInt(9, id);
-        pst.executeUpdate();
+    public void modifier(Questionnaire questionnaire) throws SQLException {
+        if(chercher(questionnaire)== questionnaire.getId()){
+            String sql = "UPDATE questionnaire SET nom = ?, prenom = ?, age = ?, sexe = ?, poids = ?, autres = ?, date = ?, group_sanguin = ? WHERE id=?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, questionnaire.getNom());
+            pst.setString(2, questionnaire.getPrenom());
+            pst.setInt(3, questionnaire.getAge());
+            pst.setString(4, questionnaire.getSexe());
+            pst.setDouble(5, questionnaire.getPoids());
+            pst.setString(6, questionnaire.getAutres());
+            pst.setTimestamp(7, Timestamp.valueOf(questionnaire.getDate()));
+            pst.setString(8, questionnaire.getGroupeSanguin());
+            pst.setInt(9, questionnaire.getId());
+            pst.executeUpdate();
+        }
+        else {
+            System.out.println("ce quest n'existe pas");
+        }
+
     }
 
     @Override

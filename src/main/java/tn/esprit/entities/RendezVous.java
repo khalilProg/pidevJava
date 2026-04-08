@@ -5,9 +5,16 @@ import java.time.LocalDateTime;
 public class RendezVous {
 private int id;
 private String status;
+private LocalDateTime dateDon;
+private Questionnaire questionnaire;
+private EntiteDeCollecte entiteDeCollecte;
 
 public RendezVous(){}
 
+public RendezVous(String status, LocalDateTime dateDon) {
+    this.status = status;
+    this.dateDon = dateDon;
+}
 public RendezVous(int id, String status, LocalDateTime dateDon) {
     this.id = id;
     this.status = status;
@@ -47,5 +54,19 @@ public void setDateDon(LocalDateTime dateDon) {
     this.dateDon = dateDon;
 }
 
-private LocalDateTime dateDon;
+public Questionnaire getQuestionnaire() {
+    return questionnaire;
+}
+
+public void setQuestionnaire(Questionnaire questionnaire) {
+    this.questionnaire = questionnaire;
+}
+
+public EntiteDeCollecte getEntiteDeCollecte() {
+    return entiteDeCollecte;
+}
+
+public void setEntiteDeCollecte(EntiteDeCollecte entiteDeCollecte) {
+    this.entiteDeCollecte = entiteDeCollecte;
+}
 }

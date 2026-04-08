@@ -1,5 +1,7 @@
 package tn.esprit.entities;
 
+import com.mysql.cj.xdevapi.Client;
+
 import java.time.LocalDateTime;
 
 public class Questionnaire {
@@ -7,6 +9,8 @@ public class Questionnaire {
     private String nom, prenom, sexe, autres, groupeSanguin;
     private double poids;
     private RendezVous rendezVous;
+    private Campagne campagne;
+    private client client;
 
     public Questionnaire() {}
 
@@ -138,4 +142,19 @@ public class Questionnaire {
 
     private LocalDateTime date;
 
+    public Campagne getCampagne() {
+        return campagne;
+    }
+
+    public void setCampagne(Campagne campagne) {
+        this.campagne = campagne;
+    }
+
+    public client getClient() {
+        return client;
+    }
+
+    public void setClient(client client) {
+        this.client = client;
+    }
 }
