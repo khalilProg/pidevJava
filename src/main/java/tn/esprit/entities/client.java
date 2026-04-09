@@ -75,6 +75,11 @@ public class client {
     }
 
     public client(){}
+    public client(String typeSang, LocalDate dernierDon, User user) {
+        this.typeSang = typeSang;
+        this.dernierDon = dernierDon;
+        this.user = user;
+    }
     public client(int id, String typeSang, LocalDate dernierDon, User user) {
         this.id = id;
         this.typeSang = typeSang;

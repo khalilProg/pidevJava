@@ -4,7 +4,19 @@ public class User {
     private  int id;
     private String nom,prenom,email,password,role,tel;
 
+    public User() {}
+
     public User(String email, String nom, String prenom, String password, String role, String tel) {
+        this.email = email;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.password = password;
+        this.role = role;
+        this.tel = tel;
+    }
+
+    public User(int id, String email, String nom, String prenom, String password, String role, String tel) {
+        this.id = id;
         this.email = email;
         this.nom = nom;
         this.prenom = prenom;

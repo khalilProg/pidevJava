@@ -28,6 +28,13 @@ public class Banque {
         this.demandes = demandes;
     }
 
+    public Banque(String nom, String adresse, String telephone, User user) {
+        this.nom = nom;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.user = user;
+    }
+
     public Banque(int id, String nom, String adresse, String telephone, User user) {
         this.id = id;
         this.nom = nom;
