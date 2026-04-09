@@ -8,7 +8,8 @@ public class Transfert {
     private LocalDate dateEnvoie, dateReception;
     private LocalDateTime createdAt, updatedAt;
     private String fromOrg, toOrg,status;
-    private int id,fromOrgId,toOrgId,quantite;
+    private int id,fromOrgId,toOrgId,quantite,stock;
+    private Demande demande;
 
     public int getId() {
         return id;
@@ -117,8 +118,10 @@ public class Transfert {
 
     public Transfert() {}
 
-    public Transfert(int id, int fromOrgId, int toOrgId, int quantite, LocalDate dateEnvoie, LocalDate dateReception, LocalDateTime createdAt, LocalDateTime updatedAt, String fromOrg, String toOrg, String status) {
+    public Transfert(int id,Demande demande,int stock, int fromOrgId, int toOrgId, int quantite, LocalDate dateEnvoie, LocalDate dateReception, LocalDateTime createdAt, LocalDateTime updatedAt, String fromOrg, String toOrg, String status) {
         this.id = id;
+        this.demande = demande;
+        this.stock = stock;
         this.fromOrgId = fromOrgId;
         this.toOrgId = toOrgId;
         this.quantite = quantite;
@@ -132,4 +135,19 @@ public class Transfert {
     }
 
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public Demande getDemande() {
+        return demande;
+    }
+
+    public void setDemande(Demande demande) {
+        this.demande = demande;
+    }
 }

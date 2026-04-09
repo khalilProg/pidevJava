@@ -56,6 +56,7 @@ public class DemandeMain {
         //} catch (SQLException e) {
           //  System.out.println(e.getMessage());
         //}
+        //recuperation
         try {
             List<Demande> demandes = ds.recuperer();
 
