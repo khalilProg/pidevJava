@@ -1,5 +1,8 @@
 package tn.esprit.mains;
 
+import tn.esprit.entities.Campagne;
+
+import tn.esprit.entities.Client;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.services.QuestionnaireService;
 import java.sql.SQLException;
@@ -23,7 +26,7 @@ public class QuestionnaireMain {
 
 //        //suppression
 //        try {
-//            Questionnaire q7 = new Questionnaire(18,"ben yahia","wajd",50, "homme",80,"", LocalDateTime.now(), "A+");
+//            Questionnaire q7 = new Questionnaire(51,"ben yahia","wajd",50, "homme",80,"", LocalDateTime.now(), "A+");
 //            qs.supprimer(q7);
 //            System.out.println("questionnaire supprimé!");
 //        } catch (SQLException e) {
@@ -44,9 +47,9 @@ public class QuestionnaireMain {
         }
 
 //        //modif
-//        Questionnaire q7 = new Questionnaire(52,"ben yahia","jowjow",50, "homme",60,"", LocalDateTime.now(), "A+");
-//        q7.setPoids(50);
-//        q7.setPrenom("wajouda");
+//        Questionnaire q7 = new Questionnaire(52,"ben yahia","wajouda",50, "homme",50,"", LocalDateTime.now(), "A+");
+//        q7.setPoids(60);
+//        q7.setPrenom("joujou");
 //        try {
 //            qs.modifier(q7);
 //            System.out.println("questionnaire modifié!");
@@ -54,13 +57,13 @@ public class QuestionnaireMain {
 //            System.out.println(e.getMessage());
 //        }
 
-        //chercher
-        Questionnaire q7 = new Questionnaire(52,"ben yahia","wajouda",50, "homme",50,"", LocalDateTime.now(), "A+");
-        try{
-            qs.chercher(q7);
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
+//        //chercher
+//        Questionnaire q7 = new Questionnaire(51,"ben yahia","wajouda",50, "homme",50,"", LocalDateTime.now(), "A+");
+//        try{
+//            qs.chercher(q7);
+//        } catch (SQLException e){
+//            System.out.println(e.getMessage());
+//        }
 
     }
 }

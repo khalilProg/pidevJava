@@ -24,8 +24,6 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         rdv.setString(2,rendezVous.getStatus());
         rdv.setInt(3,questionnaireId);
         rdv.setInt(4,entiteId);
-//        rdv.setInt(3, rendezVous.getQuestionnaire().getId());
-//        rdv.setInt(4, rendezVous.getEntiteDeCollecte().getId());
         System.out.println("executing insert...");
         rdv.executeUpdate();
     }

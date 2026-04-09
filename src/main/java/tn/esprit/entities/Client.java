@@ -1,10 +1,9 @@
 package tn.esprit.entities;
 
-import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.List;
 
-public class client {
+public class Client {
 
     private int id;
     private String typeSang;
@@ -74,12 +73,21 @@ public class client {
         this.id = id;
     }
 
-    public client(){}
-    public client(int id, String typeSang, LocalDate dernierDon, User user) {
+    public Client(){}
+    public Client(int id, String typeSang, LocalDate dernierDon, User user) {
         this.id = id;
         this.typeSang = typeSang;
         this.dernierDon = dernierDon;
         this.user = user;
+    }
+    public Client(int id, String typeSang, LocalDate dernierDon) {
+        this.id = id;
+        this.typeSang = typeSang;
+        this.dernierDon = dernierDon;
+    }
+
+    public Client(int id) {
+        this.id = id;
     }
 
     public String getTypeSang() {

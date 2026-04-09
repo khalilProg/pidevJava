@@ -1,8 +1,4 @@
 package tn.esprit.services;
-
-import tn.esprit.entities.Questionnaire;
-import tn.esprit.entities.User;
-
 import java.sql.SQLException;
 import java.util.List;
 

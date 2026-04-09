@@ -1,7 +1,8 @@
 package tn.esprit.services;
 
+import tn.esprit.entities.Campagne;
+import tn.esprit.entities.Client;
 import tn.esprit.entities.Questionnaire;
-import tn.esprit.entities.RendezVous;
 import tn.esprit.tools.MyDatabase;
 
 import java.sql.*;
@@ -29,8 +30,6 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
         q.setString(6,questionnaire.getAutres());
         q.setInt(7, clientId);
         q.setInt(8, campaignId);
-//        q.setInt(7, questionnaire.getClient().getId());
-//        q.setInt(8, questionnaire.getCampagne().getId());
         q.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
         q.setString(10, questionnaire.getGroupeSanguin());
         System.out.println("executing insert...");
@@ -109,4 +108,5 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
 
         return questionnaires;
     }
+
 }

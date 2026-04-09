@@ -46,6 +46,10 @@ public class Campagne {
                 '}';
     }
 
+    public Campagne(int id) {
+        this.id = id;
+    }
+
     public Campagne(int id, String titre, String description, LocalDate dateDebut, LocalDate dateFin, LocalDateTime createdAt, LocalDateTime updatedAt, String typeSang) {
         this.id = id;
         this.titre = titre;

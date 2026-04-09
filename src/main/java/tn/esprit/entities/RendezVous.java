@@ -7,7 +7,6 @@ private int id;
 private String status;
 private LocalDateTime dateDon;
 private Questionnaire questionnaire;
-private EntiteDeCollecte entiteDeCollecte;
 
 public RendezVous(){}
 
@@ -62,11 +61,4 @@ public void setQuestionnaire(Questionnaire questionnaire) {
     this.questionnaire = questionnaire;
 }
 
-public EntiteDeCollecte getEntiteDeCollecte() {
-    return entiteDeCollecte;
-}
-
-public void setEntiteDeCollecte(EntiteDeCollecte entiteDeCollecte) {
-    this.entiteDeCollecte = entiteDeCollecte;
-}
 }

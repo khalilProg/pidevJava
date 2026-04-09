@@ -24,7 +24,7 @@ public class RendezVousMain {
 
 //        //suppression
 //        try {
-//            RendezVous rd2 = new RendezVous(20,"annulé", LocalDateTime.of(2026, 2, 5, 15, 0));
+//            RendezVous rd2 = new RendezVous(22,"annulé", LocalDateTime.of(2026, 2, 5, 15, 0));
 //            rdv.supprimer(rd2);
 //            System.out.println("rendez vous supprimé!");
 //        } catch (SQLException e) {
@@ -40,8 +40,8 @@ public class RendezVousMain {
 //        }
 
 //        //modif
-//        RendezVous rd2 = new RendezVous(2,"annulé", LocalDateTime.of(2026, 2, 5, 15, 0));
-//        rd2.setStatus("confirmé");
+//        RendezVous rd2 = new RendezVous(2,"confirmé", LocalDateTime.of(2026, 2, 5, 15, 0));
+//        rd2.setStatus("annulé");
 //        try {
 //            rdv.modifier(rd2);
 //            System.out.println("rendez vous modifié!");
@@ -49,18 +49,18 @@ public class RendezVousMain {
 //            System.out.println(e.getMessage());
 //        }
 
-//        //recuperation
-//        try {
-//            List<RendezVous> rendevouet = rdv.recuperer();
-//
-//            System.out.println("Rendez vous in the database:");
-//            for (RendezVous rv : rendevouet) {
-//                System.out.println(rv);
-//            }
-//
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
+        //recuperation
+        try {
+            List<RendezVous> rendevouet = rdv.recuperer();
+
+            System.out.println("Rendez vous in the database:");
+            for (RendezVous rv : rendevouet) {
+                System.out.println(rv);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 }
