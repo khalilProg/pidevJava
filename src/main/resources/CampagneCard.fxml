@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="300.0" minWidth="180.0" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneCard" styleClass="card">
+   <children>
+      <Text fx:id="campaignName" layoutX="45.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text fx:id="campaignDates" layoutX="45.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text fx:id="bloodTypes" layoutX="45.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text fx:id="campaignDescription" layoutX="45.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Button fx:id="participateButton" layoutX="209.0" layoutY="294.0" mnemonicParsing="false" text="Participer" />
+   </children>
+</AnchorPane>

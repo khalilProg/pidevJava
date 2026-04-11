@@ -38,9 +38,11 @@ public class CampagneService implements IGeneralService<Campagne> {
     }
 
     public List<Campagne> recupererByClient(Client client) throws SQLException {
-        String sql = " SELECT DISTINCT c.* FROM compagne c JOIN questionnaire q ON c.id = q.campagne_id JOIN client cl ON q.client_id = cl.id WHERE c.type_sang LIKE CONCAT('%', ?, '%') AND c.date_fin > CURRENT_DATE";
+        String sql = " SELECT DISTINCT c.* FROM compagne c WHERE c.type_sang LIKE CONCAT('%', ?, '%') AND c.date_fin > CURRENT_DATE AND date_debut >= ?";
         PreparedStatement st = cn.prepareStatement(sql);
         st.setString(1, client.getTypeSang());
+        java.sql.Date stMinStartDate = java.sql.Date.valueOf(client.getDernierDon().plusWeeks(3));
+        st.setDate(2, stMinStartDate);
         ResultSet rs = st.executeQuery();
         List<Campagne> campagnes = new ArrayList<>();
         while(rs.next()){
