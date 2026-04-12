@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterRendezVous">
+    <children>
+        <Text layoutX="20.0" layoutY="55.0" text="BLOODLINK">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Text>
+        <Text layoutX="18.0" layoutY="99.0" text="Prendre un rendez-vous">
+            <font>
+                <Font size="48.0" />
+            </font>
+        </Text>
+        <Text layoutX="21.0" layoutY="130.0" text="Veuillez choisir une date et une entité pour votre rendez-vous.">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+
+        <VBox layoutX="109.0" layoutY="173.0" prefHeight="350.0" prefWidth="470.0" spacing="10.0">
+            <children>
+                <Text text="Date et heure du rendez-vous" />
+            <HBox spacing="10.0">
+               <children>
+                   <DatePicker fx:id="dateRdv" prefWidth="150" promptText="date" />
+                   <Spinner fx:id="hourSpinner" prefWidth="60" />
+                   <Spinner fx:id="minuteSpinner" prefWidth="60" />
+               </children>
+            </HBox>
+                <Text fx:id="dateError" fill="RED" visible="false" />
+                <Text fx:id="timeError" fill="RED" visible="false" />
+
+                <Text text="Entité de collecte" />
+                <ComboBox fx:id="entiteCombo" prefWidth="470.0" promptText="choisissez une entite de collecte" />
+                <Text fx:id="entiteError" fill="RED" visible="false" />
+            <HBox alignment="TOP_RIGHT" spacing="10.0">
+               <children>
+      
+                   <Button fx:id="confirmerRdv" onAction="#handleConfirmerRdv" prefHeight="26.0" prefWidth="402.0" text="CONFIRMER LE RENDEZ-VOUS" />
+                  <Button fx:id="annulerRdv" mnemonicParsing="false"  onAction="#handleAnnuler" text="Annuler" />
+               </children>
+            </HBox>
+            </children>
+        </VBox>
+    </children>
+
+</AnchorPane>

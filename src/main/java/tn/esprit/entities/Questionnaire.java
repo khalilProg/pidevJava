@@ -3,7 +3,7 @@ package tn.esprit.entities;
 import java.time.LocalDateTime;
 
 public class Questionnaire {
-    private int id, age;
+    private int id, age, clientId, campagneId;
     private String nom, prenom, sexe, autres, groupeSanguin;
     private double poids;
 
@@ -30,6 +30,20 @@ public class Questionnaire {
         this.date = date;
         this.groupeSanguin = groupSanguin;
     }
+
+    public Questionnaire(String nom, String prenom, int age, String sexe, double poids, String autres, int clientId, int campagneId, LocalDateTime date, String groupSanguin) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.sexe = sexe;
+        this.poids = poids;
+        this.autres = autres;
+        this.clientId =  clientId;
+        this.campagneId = campagneId;
+        this.date = date;
+        this.groupeSanguin = groupSanguin;
+    }
+
     @Override
     public String toString() {
         return "Questionnaire{" +
@@ -119,4 +133,19 @@ public class Questionnaire {
 
     private LocalDateTime date;
 
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public int getCampagneId() {
+        return campagneId;
+    }
+
+    public void setCampagneId(int campagneId) {
+        this.campagneId = campagneId;
+    }
 }

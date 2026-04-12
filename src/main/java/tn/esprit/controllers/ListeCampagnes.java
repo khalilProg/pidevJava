@@ -31,7 +31,6 @@ public class ListeCampagnes {
                 AnchorPane card = loader.load();
                 CampagneCard controller = loader.getController();
                 controller.setData(c);
-
                 campaignContainer.getChildren().add(card);
             }
         } catch (SQLException | IOException e) {

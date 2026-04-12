@@ -16,14 +16,12 @@ public class RendezVousService implements IGeneralService<RendezVous> {
     }
     @Override
     public void ajouter(RendezVous rendezVous) throws SQLException {
-        int questionnaireId=52;
-        int entiteId=2;
         String sql = "insert into rendez_vous(date_don, status, questionnaire_id, entite_id) values(?,?,?,?)";
         PreparedStatement rdv = cn.prepareStatement(sql);
         rdv.setTimestamp(1,Timestamp.valueOf(rendezVous.getDateDon()));
         rdv.setString(2,rendezVous.getStatus());
-        rdv.setInt(3,questionnaireId);
-        rdv.setInt(4,entiteId);
+        rdv.setInt(3,rendezVous.getQuestionnaire_id());
+        rdv.setInt(4,rendezVous.getEntite_id());
         System.out.println("executing insert...");
         rdv.executeUpdate();
     }
@@ -80,6 +78,18 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         }
 
         return rendezvouet;
+    }
+
+    public boolean hasRendezVous(int clientId, int campagneId) throws SQLException {
+        String sql = "SELECT COUNT(*) AS total FROM rendez_vous r JOIN questionnaire q ON r.questionnaire_id = q.id WHERE q.client_id = ? AND q.campagne_id = ?";
+        PreparedStatement st = cn.prepareStatement(sql);
+        st.setInt(1, clientId);
+        st.setInt(2, campagneId);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("total") > 0;
+        }
+        return false;
     }
 
 }

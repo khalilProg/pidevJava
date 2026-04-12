@@ -1,4 +1,4 @@
-package tn.esprit.mains;
+package tn.esprit.tests;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

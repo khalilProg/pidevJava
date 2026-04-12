@@ -7,6 +7,8 @@ private int id;
 private String status;
 private LocalDateTime dateDon;
 private Questionnaire questionnaire;
+private int entite_id;
+private int questionnaire_id;
 
 public RendezVous(){}
 
@@ -19,7 +21,12 @@ public RendezVous(int id, String status, LocalDateTime dateDon) {
     this.status = status;
     this.dateDon = dateDon;
 }
-
+    public RendezVous(String status, LocalDateTime dateDon, int questionnaire_id, int entite_id) {
+        this.status = status;
+        this.dateDon = dateDon;
+        this.questionnaire_id = questionnaire_id;
+        this.entite_id = entite_id;
+    }
 @Override
 public String toString() {
     return "RendezVous{" +
@@ -61,4 +68,19 @@ public void setQuestionnaire(Questionnaire questionnaire) {
     this.questionnaire = questionnaire;
 }
 
+    public int getQuestionnaire_id() {
+        return questionnaire_id;
+    }
+
+    public void setQuestionnaire_id(int questionnaire_id) {
+        this.questionnaire_id = questionnaire_id;
+    }
+
+    public int getEntite_id() {
+        return entite_id;
+    }
+
+    public void setEntite_id(int entite_id) {
+        this.entite_id = entite_id;
+    }
 }

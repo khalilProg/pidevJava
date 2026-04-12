@@ -18,23 +18,25 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
 
     @Override
     public void ajouter(Questionnaire questionnaire) throws SQLException {
-        int clientId=1;
-        int campaignId=2;
         String sql = "insert into questionnaire(nom,prenom,age,sexe,poids,autres,client_id,campagne_id,date,group_sanguin) values(?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement q = cn.prepareStatement(sql);
+        PreparedStatement q = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         q.setString(1,questionnaire.getNom());
         q.setString(2,questionnaire.getPrenom());
         q.setInt(3,questionnaire.getAge());
         q.setString(4,questionnaire.getSexe());
         q.setDouble(5,questionnaire.getPoids());
         q.setString(6,questionnaire.getAutres());
-        q.setInt(7, clientId);
-        q.setInt(8, campaignId);
+        q.setInt(7, questionnaire.getClientId());
+        q.setInt(8, questionnaire.getCampagneId());
         q.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
         q.setString(10, questionnaire.getGroupeSanguin());
         System.out.println("executing insert...");
         q.executeUpdate();
-
+        // generated id to use fil ajouter rendez vous
+        ResultSet rs = q.getGeneratedKeys();
+        if (rs.next()) {
+            questionnaire.setId(rs.getInt(1));
+        }
     }
 
     public void supprimer(Questionnaire questionnaire) throws SQLException {
