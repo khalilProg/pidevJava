@@ -44,6 +44,20 @@ public class Questionnaire {
         this.groupeSanguin = groupSanguin;
     }
 
+    public Questionnaire(int id, String nom, String prenom, int age, String sexe, double poids, String autres, int clientId, int campagneId, LocalDateTime date, String groupSanguin) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.sexe = sexe;
+        this.poids = poids;
+        this.autres = autres;
+        this.clientId =  clientId;
+        this.campagneId = campagneId;
+        this.date = date;
+        this.groupeSanguin = groupSanguin;
+    }
+
     @Override
     public String toString() {
         return "Questionnaire{" +

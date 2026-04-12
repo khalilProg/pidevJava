@@ -61,4 +61,25 @@ public class CampagneService implements IGeneralService<Campagne> {
 
         return campagnes;
     }
+
+    public Campagne getCampagneById(int id) throws SQLException {
+        String sql = "SELECT * FROM compagne WHERE id = ?";
+        try (PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Campagne(
+                        rs.getInt("id"),
+                        rs.getString("titre"),
+                        rs.getString("description"),
+                        rs.getDate("date_debut").toLocalDate(),
+                        rs.getDate("date_fin").toLocalDate(),
+                        rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
+                        rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null,
+                        rs.getString("type_sang")
+                );
+            }
+        }
+        return null;
+    }
 }

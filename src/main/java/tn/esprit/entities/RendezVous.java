@@ -27,6 +27,14 @@ public RendezVous(int id, String status, LocalDateTime dateDon) {
         this.questionnaire_id = questionnaire_id;
         this.entite_id = entite_id;
     }
+
+    public RendezVous(int id, String status, LocalDateTime dateDon, int questionnaire_id, int entite_id) {
+        this.id = id;
+        this.status = status;
+        this.dateDon = dateDon;
+        this.questionnaire_id = questionnaire_id;
+        this.entite_id = entite_id;
+    }
 @Override
 public String toString() {
     return "RendezVous{" +

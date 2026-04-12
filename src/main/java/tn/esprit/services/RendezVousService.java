@@ -72,7 +72,9 @@ public class RendezVousService implements IGeneralService<RendezVous> {
             RendezVous rdv = new RendezVous(
                     rs.getInt("id"),
                     rs.getString("status"),
-                    rs.getTimestamp("date_don").toLocalDateTime()
+                    rs.getTimestamp("date_don").toLocalDateTime(),
+                    rs.getInt("questionnaire_id"),
+                    rs.getInt("entite_id")
             );
             rendezvouet.add(rdv);
         }
@@ -91,5 +93,7 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         }
         return false;
     }
+
+
 
 }

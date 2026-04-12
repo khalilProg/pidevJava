@@ -38,4 +38,23 @@ public class EntiteCollecteService {
         }
         return list;
     }
+
+    public EntiteDeCollecte getEntiteById(int id) throws SQLException {
+        String sql = "SELECT * FROM entite_collecte WHERE id = ?";
+        try (PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new EntiteDeCollecte(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("telephone"),
+                        rs.getString("type"),
+                        rs.getString("ville")
+                );
+            }
+        }
+        return null;
+    }
 }

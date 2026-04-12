@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.esprit.controllers.Liste"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Liste">
+    <children>
+        <TableView fx:id="tableView" layoutX="20" layoutY="20" prefWidth="860" prefHeight="560">
+            <columns>
+                <TableColumn fx:id="campagneColumn" text="Campagne"/>
+                <TableColumn fx:id="dateRdvColumn" text="Date Rendez-vous"/>
+                <TableColumn fx:id="statusColumn" text="Status"/>
+                <TableColumn fx:id="entiteColumn" text="Entite"/>
+                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0"/>
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>

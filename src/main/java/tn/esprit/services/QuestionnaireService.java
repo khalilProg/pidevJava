@@ -103,6 +103,8 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
                     rs.getString("sexe"),
                     rs.getDouble("poids"),
                     rs.getString("autres"),
+                    rs.getInt("client_id"),
+                    rs.getInt("campagne_id"),
                     rs.getTimestamp("date").toLocalDateTime(),
                     rs.getString("group_sanguin"));
             questionnaires.add(q);
@@ -111,4 +113,27 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
         return questionnaires;
     }
 
+    public Questionnaire getQuestionnaireById(int id) throws SQLException {
+        String sql = "SELECT * FROM questionnaire WHERE id = ?";
+        PreparedStatement st = cn.prepareStatement(sql);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+
+        if (rs.next()) {
+            return new Questionnaire(
+                    rs.getInt("id"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getInt("age"),
+                    rs.getString("sexe"),
+                    rs.getDouble("poids"),
+                    rs.getString("autres"),
+                    rs.getInt("client_id"),
+                    rs.getInt("campagne_id"),
+                    rs.getTimestamp("date").toLocalDateTime(),
+                    rs.getString("group_sanguin")
+            );
+        }
+        return null;
+    }
 }
