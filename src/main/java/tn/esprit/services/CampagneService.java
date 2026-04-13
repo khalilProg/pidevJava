@@ -34,8 +34,25 @@ public class CampagneService implements IGeneralService<Campagne> {
 
     @Override
     public List<Campagne> recuperer() throws SQLException {
-        return List.of();
-    }
+        String sql = " SELECT DISTINCT * FROM compagne";
+        PreparedStatement st = cn.prepareStatement(sql);
+        ResultSet rs = st.executeQuery();
+        List<Campagne> campagnes = new ArrayList<>();
+        while(rs.next()){
+            Campagne c = new Campagne(
+                    rs.getInt("id"),
+                    rs.getString("titre"),
+                    rs.getString("description"),
+                    rs.getDate("date_debut").toLocalDate(),
+                    rs.getDate("date_fin").toLocalDate(),
+                    rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
+                    rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null,
+                    rs.getString("type_sang")
+            );
+            campagnes.add(c);
+        }
+
+        return campagnes;    }
 
     public List<Campagne> recupererByClient(Client client) throws SQLException {
         String sql = " SELECT DISTINCT c.* FROM compagne c WHERE c.type_sang LIKE CONCAT('%', ?, '%') AND c.date_fin > CURRENT_DATE AND date_debut >= ?";

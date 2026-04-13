@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.AjouterQuestAdmin"
+            prefHeight="500.0" prefWidth="700.0">
+
+    <VBox layoutX="20" layoutY="20" spacing="15">
+        <Text text="INFORMATIONS DU QUESTIONNAIRE" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e63939;"/>
+
+        <HBox spacing="10">
+            <VBox>
+                <Label text="ÂGE"/>
+                <TextField fx:id="ageField" promptText="Ex: 25"/>
+                <Text fx:id="ageError" fill="RED" visible="false"/>
+            </VBox>
+
+            <VBox>
+                <Label text="SEXE"/>
+                <ComboBox fx:id="sexeCombo">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Homme"/>
+                            <String fx:value="Femme"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Text fx:id="sexeError" fill="RED" visible="false"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="10">
+            <VBox>
+                <Label text="POIDS (KG)"/>
+                <TextField fx:id="poidsField" promptText="Ex: 70"/>
+                <Text fx:id="poidsError" fill="RED" visible="false"/>
+            </VBox>
+            <VBox>
+                <Label text="CAMPAGNE"/>
+                <ComboBox fx:id="campagneCombo"/>
+                <Text fx:id="campagneError" fill="RED" visible="false"/>
+            </VBox>
+        </HBox>
+
+        <VBox>
+            <Label text="PHONE"/>
+            <TextField fx:id="phoneField" promptText="Ex: +21612345678"/>
+            <Text fx:id="phoneError" fill="RED" visible="false"/>
+        </VBox>
+
+        <VBox>
+            <Label text="AUTRES INFORMATIONS"/>
+            <TextArea fx:id="autresField" promptText="Antécédents, allergies, traitements en cours..." prefRowCount="3"/>
+        </VBox>
+
+        <HBox spacing="20" alignment="CENTER_RIGHT">
+<!--            <Button fx:id="annulerBtn" text="ANNULER" onAction="#handleAnnuler"/>-->
+            <Button fx:id="continuerBtn" text="CONTINUER" onAction="#handleContinuer"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

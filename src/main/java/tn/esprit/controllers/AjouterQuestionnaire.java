@@ -97,6 +97,7 @@ public class AjouterQuestionnaire {
             rdvController.setEntities(entities);
             rdvController.setQuestionnaire(q);
             continuer.getScene().setRoot(root);
+
 } catch (IOException ex) {
     ex.printStackTrace();
 }

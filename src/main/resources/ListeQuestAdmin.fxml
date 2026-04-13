@@ -10,7 +10,7 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="tn.esprit.controllers.ListeQuestAdmin"
             prefHeight="400.0" prefWidth="600.0">
-
+    <Button text="Ajouter" layoutX="20" layoutY="10" fx:id="addBtn" onAction="#handleAjouter"/>
     <TableView fx:id="tableView" layoutX="20" layoutY="20" prefWidth="560" prefHeight="360">
         <columns>
             <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
