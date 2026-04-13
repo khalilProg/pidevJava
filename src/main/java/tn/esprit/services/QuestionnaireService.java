@@ -77,7 +77,7 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
             pst.setString(4, questionnaire.getSexe());
             pst.setDouble(5, questionnaire.getPoids());
             pst.setString(6, questionnaire.getAutres());
-            pst.setTimestamp(7, Timestamp.valueOf(questionnaire.getDate()));
+            pst.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
             pst.setString(8, questionnaire.getGroupeSanguin());
             pst.setInt(9, questionnaire.getId());
             pst.executeUpdate();

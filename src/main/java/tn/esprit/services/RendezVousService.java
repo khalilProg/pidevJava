@@ -52,7 +52,7 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         if(chercher(rendezVous)== rendezVous.getId()){
             String sql = "UPDATE rendez_vous SET date_don = ?, status = ? WHERE id=?";
             PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setTimestamp(1, Timestamp.valueOf(rendezVous.getDateDon()));
+            pst.setTimestamp(1, Timestamp.valueOf(rendezVous.getDateDon().plusHours(1)));
             pst.setString(2, rendezVous.getStatus());
             pst.setInt(3, rendezVous.getId());
             pst.executeUpdate();
@@ -94,6 +94,14 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         return false;
     }
 
+
+    public boolean supprimerForClient(int rendezVousId) throws SQLException {
+        String sql = "UPDATE rendez_vous SET status = 'annulé' WHERE id = ?";
+        PreparedStatement st = cn.prepareStatement(sql);
+        st.setInt(1, rendezVousId);
+        int updated = st.executeUpdate();
+        return updated > 0;
+    }
 
 
 }

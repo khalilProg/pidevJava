@@ -48,22 +48,12 @@ public class AjouterQuestionnaire {
             ageError.setVisible(true);
             valid = false;
         } else {
-            try {
                 int ageValue = Integer.parseInt(age.getText());
-                if (ageValue < 18) {
-                    ageError.setText("L'âge doit être ≥ 18 ans");
-                    ageError.setVisible(true);
-                    valid = false;
-                } else if (ageValue > 70) {
-                    ageError.setText("L'âge doit être ≤ 70 ans");
+                if (ageValue < 18 || ageValue > 70) {
+                    ageError.setText("L'âge doit être entre 18 et 70 ans");
                     ageError.setVisible(true);
                     valid = false;
                 }
-            } catch (NumberFormatException e) {
-                ageError.setText("L'âge doit être un nombre valide");
-                ageError.setVisible(true);
-                valid = false;
-            }
         }
 
         // sexe check
@@ -79,22 +69,12 @@ public class AjouterQuestionnaire {
             poidsError.setVisible(true);
             valid = false;
         } else {
-            try {
                 double poidsValue = Double.parseDouble(poids.getText());
-                if (poidsValue < 50) {
-                    poidsError.setText("Le poids doit être ≥ 50 kg");
-                    poidsError.setVisible(true);
-                    valid = false;
-                } else if (poidsValue > 100) {
-                    poidsError.setText("Le poids doit être ≤ 100 kg");
+                if (poidsValue < 50 ||  poidsValue > 100) {
+                    poidsError.setText("Le poids doit être entre 50 et 100 ans");
                     poidsError.setVisible(true);
                     valid = false;
                 }
-            } catch (NumberFormatException e) {
-                poidsError.setText("Le poids doit être un nombre valide");
-                poidsError.setVisible(true);
-                valid = false;
-            }
         }
 
         if (!valid) return; // stop itha validation fails

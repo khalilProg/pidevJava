@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+
+
+<?import java.lang.String?>
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Update" prefWidth="600" prefHeight="700">
+<children>
+    <Text text="Modifier le Rendez-vous et Questionnaire" layoutX="20" layoutY="40">
+        <font>
+            <Font size="24"/>
+        </font>
+    </Text>
+
+    <VBox layoutX="50" layoutY="80" spacing="10">
+        <Label text="Age"/>
+        <TextField fx:id="ageField"/>
+        <Text fx:id="ageError" fill="RED" visible="false"/>
+        <Label text="Sexe"/>
+        <ComboBox fx:id="sexeCombo">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Homme"/>
+                    <String fx:value="Femme"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Poids (kg)"/>
+        <TextField fx:id="poidsField"/>
+        <Text fx:id="poidsError" fill="RED" visible="false"/>
+        <Label text="Autres"/>
+        <TextArea fx:id="autresField" prefRowCount="3"/>
+
+        <Label text="Date du rendez-vous"/>
+        <DatePicker fx:id="dateRdvPicker"/>
+        <Text fx:id="dateError" fill="RED" visible="false"/>
+        <HBox spacing="5">
+            <Label text="Heure"/>
+            <Spinner fx:id="hourSpinner" prefWidth="60"/>
+            <Label text="Minute"/>
+            <Spinner fx:id="minuteSpinner" prefWidth="60"/>
+        </HBox>
+        <Text fx:id="timeError" fill="RED" visible="false"/>
+        <Label text="Entité de collecte"/>
+        <ComboBox fx:id="entiteCombo"/>
+
+        <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="confirmerBtn" text="Confirmer" onAction="#handleConfirmer" />
+            <Button fx:id="annulerBtn" text="Annuler" onAction="#handleAnnuler"/>
+        </HBox>
+    </VBox>
+
+</children>
+</AnchorPane>
