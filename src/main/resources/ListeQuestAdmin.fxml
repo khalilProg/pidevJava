@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.ListeQuestAdmin"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <TableView fx:id="tableView" layoutX="20" layoutY="20" prefWidth="560" prefHeight="360">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="nomColumn" text="Nom" prefWidth="100"/>
+            <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="100"/>
+            <TableColumn fx:id="ageColumn" text="Age" prefWidth="50"/>
+            <TableColumn fx:id="sexeColumn" text="Sexe" prefWidth="60"/>
+            <TableColumn fx:id="poidsColumn" text="Poids" prefWidth="60"/>
+            <TableColumn fx:id="autresColumn" text="Autres" prefWidth="120"/>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
+            <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="120"/>
+            <TableColumn fx:id="typeSangColumn" text="Groupe Sanguin" prefWidth="80"/>
+        </columns>
+    </TableView>
+</AnchorPane>
