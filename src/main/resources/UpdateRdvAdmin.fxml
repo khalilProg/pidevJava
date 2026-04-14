@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.UpdateRdvAdmin"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Text text="Modifier le Rendez-vous" layoutX="20" layoutY="40">
+            <font>
+                <Font size="24"/>
+            </font>
+        </Text>
+        <VBox layoutX="50" layoutY="80" spacing="10">
+            <Label text="Date du rendez-vous"/>
+            <DatePicker fx:id="dateRdvPicker"/>
+            <Text fx:id="dateError" fill="RED" visible="false"/>
+            <HBox spacing="5">
+                <Label text="Heure"/>
+                <Spinner fx:id="hourSpinner" prefWidth="60"/>
+                <Label text="Minute"/>
+                <Spinner fx:id="minuteSpinner" prefWidth="60"/>
+            </HBox>
+            <Text fx:id="timeError" fill="RED" visible="false"/>
+            <Label text="Entité de collecte"/>
+            <ComboBox fx:id="entiteCombo"/>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="confirmerBtn" text="Confirmer" onAction="#handleConfirmer" />
+                <Button fx:id="annulerBtn" text="Annuler" onAction="#handleAnnuler"/>
+            </HBox>
+        </VBox>
+
+    </children>
+</AnchorPane>

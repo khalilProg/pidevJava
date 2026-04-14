@@ -23,6 +23,7 @@
             <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
             <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="120"/>
             <TableColumn fx:id="typeSangColumn" text="Groupe Sanguin" prefWidth="80"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0"/>
         </columns>
     </TableView>
 </AnchorPane>

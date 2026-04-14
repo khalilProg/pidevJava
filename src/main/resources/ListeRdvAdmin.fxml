@@ -17,6 +17,7 @@
             <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
             <TableColumn fx:id="qIdColumn" text="Questionnaire id" prefWidth="120"/>
             <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="80"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0"/>
         </columns>
     </TableView>
 

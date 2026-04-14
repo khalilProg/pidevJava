@@ -6,12 +6,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import tn.esprit.entities.Questionnaire;
+import tn.esprit.entities.RendezVous;
 import tn.esprit.services.CampagneService;
 import tn.esprit.services.QuestionnaireService;
+import tn.esprit.services.RendezVousService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,6 +35,7 @@ public class ListeQuestAdmin {
     @FXML private TableColumn<Questionnaire, LocalDateTime> dateColumn;
     @FXML private TableColumn<Questionnaire, String> campagneColumn;
     @FXML private TableColumn<Questionnaire, String> typeSangColumn;
+    @FXML private TableColumn<Questionnaire, Void> actionsColumn;
     @FXML private Button addBtn;
 
     @FXML public void initialize() {
@@ -54,7 +59,32 @@ public class ListeQuestAdmin {
         });
 
         typeSangColumn.setCellValueFactory(new PropertyValueFactory<>("groupeSanguin"));
+        // Actions column
+        actionsColumn.setCellFactory(col -> new TableCell<Questionnaire, Void>() {
+            private final Button deleteBtn = new Button("Delete");
 
+            {
+                deleteBtn.setOnAction(e -> {
+                    // Get the current row
+                    Questionnaire q = getTableView().getItems().get(getIndex());
+
+                    try {
+                        // Delete questionnaire (and its rendez-vous) from DB
+                        new QuestionnaireService().supprimer(q);
+                        // Remove it from the TableView
+                        getTableView().getItems().remove(q);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : deleteBtn);
+            }
+        });
         // Load data
         try {
             List<Questionnaire> questionnaires = new QuestionnaireService().recuperer();
@@ -63,11 +93,11 @@ public class ListeQuestAdmin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
 
-    @FXML
-    private void handleAjouter() {
+    @FXML private void handleAjouter() {
         try {
             // Load the FXML for adding a questionnaire
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterQuestAdmin.fxml"));
