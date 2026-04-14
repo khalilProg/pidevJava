@@ -32,11 +32,6 @@ public class CampagneCard {
     }
     @FXML public void openQuestionnaire() {
         try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterQuestionnaire.fxml"));
-//            Parent root = loader.load();
-//            AjouterQuestionnaire aq = loader.getController();
-//            aq.setCampagne(campagne);
-//            participateButton.getScene().setRoot(root);
 
             int clientId = currentClient.getId();
             int campagneId = campagne.getId();
