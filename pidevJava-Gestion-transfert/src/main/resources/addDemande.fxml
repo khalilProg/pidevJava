@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.addDemandeController"
+            stylesheets="@style.css"
+            prefHeight="400" prefWidth="500">
+
+    <children>
+
+        <VBox spacing="12" layoutX="50" layoutY="30">
+
+            <Label text="Ajouter une demande" style="-fx-font-size:18; -fx-text-fill:white;"/>
+
+            <TextField fx:id="txtBanque" promptText="Banque ID"/>
+            <TextField fx:id="txtQuantite" promptText="Quantité"/>
+
+            <!-- URGENCE LISTE -->
+            <ComboBox fx:id="comboUrgence" promptText="Urgence">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="FAIBLE"/>
+                        <String fx:value="MOYENNE"/>
+                        <String fx:value="ELEVEE"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- TYPE SANG (si tu veux en ComboBox aussi) -->
+            <ComboBox fx:id="comboType" promptText="Type de sang">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="A+"/>
+                        <String fx:value="A-"/>
+                        <String fx:value="B+"/>
+                        <String fx:value="B-"/>
+                        <String fx:value="O+"/>
+                        <String fx:value="O-"/>
+                        <String fx:value="AB+"/>
+                        <String fx:value="AB-"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <HBox spacing="10">
+
+                <Button text="Valider" onAction="#ajouterDemande"/>
+                <Button text="Retour" onAction="#retour"/>
+
+            </HBox>
+
+        </VBox>
+
+    </children>
+</AnchorPane>
