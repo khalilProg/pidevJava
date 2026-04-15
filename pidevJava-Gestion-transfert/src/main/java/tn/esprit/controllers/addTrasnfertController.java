@@ -40,8 +40,12 @@ public class addTrasnfertController {
                 return;
             }
 
-            t.setFromOrgId(Integer.parseInt(txtFrom.getText()));
-            t.setToOrgId(Integer.parseInt(txtTo.getText()));
+            t.setFromOrgId(1);
+            t.setToOrgId(demande.getIdBanque());
+
+            // 🔥 AJOUT IMPORTANT
+            t.setFromOrg("BloodLink Central");
+            t.setToOrg("Charle nicole");
 
             if (txtQuantite.getText().isEmpty()) {
                 System.out.println("Quantité obligatoire !");

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.backDemandeController"
+            prefHeight="500" prefWidth="800">
+
+    <children>
+
+        <TableView fx:id="tableDemande" layoutX="20" layoutY="20" prefWidth="760">
+
+            <columns>
+
+                <TableColumn fx:id="colId" text="ID"/>
+                <TableColumn fx:id="colType" text="Type"/>
+                <TableColumn fx:id="colQuantite" text="Quantité"/>
+                <TableColumn fx:id="colStatus" text="Status"/>
+                <TableColumn fx:id="colActions" text="Actions"/>
+
+            </columns>
+
+        </TableView>
+
+    </children>
+
+</AnchorPane>

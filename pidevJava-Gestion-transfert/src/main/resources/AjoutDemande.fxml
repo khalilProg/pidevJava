@@ -44,6 +44,7 @@
 
             </TableView>
             <Button text="Transferts" onAction="#goToTransfert" styleClass="btn-primary"/>
+            <Button text="Demandes" onAction="#goToDemande"/>
         </VBox>
 
     </children>
