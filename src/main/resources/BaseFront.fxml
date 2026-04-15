@@ -22,8 +22,8 @@
         <Button text="Accueil" styleClass="nav-link" onAction="#goToAccueil"/>
         <Button text="Historique" styleClass="nav-link" onAction="#goToHistorique"/>
         <Button text="Campagnes" styleClass="nav-link" onAction="#goToCampagnes"/>
-        <Button text="Questionnaires" styleClass="nav-link" onAction="#goToQuestionnaires"/>
-        <Button text="Rendez vous" styleClass="nav-link" onAction="#goToRendezVous"/>
+<!--        <Button text="Questionnaires" styleClass="nav-link" onAction="#goToQuestionnaires"/>-->
+<!--        <Button text="Rendez vous" styleClass="nav-link" onAction="#goToRendezVous"/>-->
     </HBox>
 
     <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="user-section">
@@ -41,14 +41,6 @@
                 <Label text="ben haj yahia wajd" styleClass="user-name-label" />
             </children>
         </HBox>
-        <!-- Adding the User Profile badge from the screenshot -->
-<!--        <HBox alignment="CENTER" spacing="10" styleClass="user-profile-badge">-->
-<!--            <padding>-->
-<!--                <Insets top="8" bottom="8" left="12" right="20"/>-->
-<!--            </padding>-->
-            <!-- User Icon Placeholder -->
-<!--            <Label text="ben haj yahia wajd" textFill="#FFFFFF" style="-fx-font-weight: 600; -fx-font-size: 14px;" styleClass="avatar-label"/>-->
-<!--        </HBox>-->
-<!--        <Button text="MENU ≡" styleClass="menu-button"/>-->
+
     </HBox>
 </HBox>

@@ -1,66 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.SVGPath?>
-<?import javafx.geometry.Insets?>
+
 <?import javafx.scene.text.Text?>
- 
-<HBox prefHeight="800.0" prefWidth="1550.0" styleClass="admin-layout" stylesheets="@styles.css"
-      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="tn.esprit.controllers.HomeAdmin">
- 
-    <!-- SIDEBAR -->
-    <VBox fx:id="sidebar" styleClass="sidebar" spacing="0">
-        <!-- Logo Section -->
-        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="sidebar-brand-section">
-            <SVGPath content="M 12 2 C 12 2 4 10 4 16 C 4 20.418 7.582 24 12 24 C 16.418 24 20 20.418 20 16 C 20 10 12 2 12 2 Z" fill="#FF3E3E"/>
-            <Label text="BLOODLINK" styleClass="nav-logo-text" style="-fx-font-size: 20px;"/>
-            <Label text="ADMIN" styleClass="admin-badge"/>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="@styles.css, @stylesAdmin.css"
+            fx:controller="tn.esprit.controllers.Home"
+            prefHeight="400.0" prefWidth="600.0">
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude"/>
+
+    <!-- Welcome Banner -->
+    <VBox styleClass="welcome-banner-card" spacing="15" AnchorPane.leftAnchor="308" AnchorPane.topAnchor="100" prefWidth="1200" minWidth="1200" maxWidth="1200">
+        <Label textFill="white" text="BLOODLINK ADMINISTRATION" styleClass="welcome-badge-text"/>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Text fill="white" text="Bienvenue, Administrateur" styleClass="welcome-title"/>
         </HBox>
- 
+        <Text wrappingWidth="600" styleClass="welcome-description" fill="white"
+              text="Vous êtes sur le centre de contrôle de BloodLink. Gérez les stocks, suivez les commandes et supervisez la communauté des donneurs en toute simplicité."/>
+
         <Region prefHeight="20"/>
- 
-        <!-- Navigation Section -->
-        <Label text="GESTION" styleClass="sidebar-label"/>
-        
-        <VBox spacing="8">
-            <Button fx:id="btnDashboard" text="⊞  Dashboard" styleClass="sidebar-nav-item, sidebar-nav-item-active" onAction="#goToDashboard"/>
-            <Button fx:id="btnQuestionnaires" text="☷  Questionnaires" styleClass="sidebar-nav-item" onAction="#goToQuestionnaires"/>
-            <Button fx:id="btnRendezVous" text="📅  Rendez vous" styleClass="sidebar-nav-item" onAction="#goToRendezVous"/>
-        </VBox>
+
+        <Button text="+  NOUVEL UTILISATEUR" styleClass="btn-primary-modern" style="-fx-padding: 15 40;"/>
     </VBox>
- 
-    <!-- MAIN CONTENT AREA -->
-    <VBox styleClass="admin-main-content" HBox.hgrow="ALWAYS">
-        <!-- Top Bar -->
-        <HBox styleClass="admin-top-bar" alignment="CENTER_RIGHT" spacing="25">
-            <StackPane styleClass="notification-bell">
-                <SVGPath content="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"
-                         fill="#888888" scaleX="1.2" scaleY="1.2"/>
-                <Circle radius="4" fill="#E63939" translateX="8" translateY="-8"/>
-            </StackPane>
-            <Label fx:id="dateLabel" text="15 Apr 2026" style="-fx-text-fill: #888888; -fx-font-size: 14px; -fx-font-weight: 700;"/>
-        </HBox>
- 
-        <!-- Welcome Banner -->
-        <VBox styleClass="welcome-banner-card" spacing="15">
-            <Label text="BLOODLINK ADMINISTRATION" styleClass="welcome-badge-text"/>
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Text text="Bienvenue, Administrateur" styleClass="welcome-title"/>
-                <Text text="👋" style="-fx-font-size: 40px;"/>
-            </HBox>
-            <Text wrappingWidth="600" styleClass="welcome-description"
-                  text="Vous êtes sur le centre de contrôle de BloodLink. Gérez les stocks, suivez les commandes et supervisez la communauté des donneurs en toute simplicité."/>
-            
-            <Region prefHeight="20"/>
-            
-            <Button text="+  NOUVEL UTILISATEUR" styleClass="btn-primary-modern" style="-fx-padding: 15 40;"/>
-        </VBox>
-        
-        <!-- Placeholder for future dashboard stats -->
-        <Region VBox.vgrow="ALWAYS"/>
-    </VBox>
- 
-</HBox>
+
+</AnchorPane>

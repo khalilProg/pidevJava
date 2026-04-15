@@ -7,10 +7,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.UpdateRdvAdmin">
-    <fx:include source="BaseFront.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
 
     <children>
-        <VBox layoutX="70.0" layoutY="130.0" spacing="30.0" AnchorPane.leftAnchor="70.0">
+        <VBox layoutX="70.0" layoutY="130.0" spacing="30.0" AnchorPane.leftAnchor="670.0">
             <children>
                 <VBox spacing="8.0">
                     <children>

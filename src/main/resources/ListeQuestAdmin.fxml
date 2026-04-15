@@ -13,22 +13,22 @@
             fx:controller="tn.esprit.controllers.ListeQuestAdmin">
 
     <!-- Navbar -->
-    <fx:include source="BaseFront.fxml" fx:id="headerInclude"
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude"
                 AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
     <!-- Page Title -->
 
-    <Text fill="WHITE" layoutX="70" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
+    <Text fill="WHITE" layoutX="300" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
           text="Liste questionnaires" styleClass="hero-title">
         <font><Font size="32.0"/></font>
     </Text>
-    <Text fill="#888888" layoutX="70" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
+    <Text fill="#888888" layoutX="300" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
           text="Consultez la liste des questionnaires soumis." >
         <font><Font size="16.0"/></font>
     </Text>
-        <Button text="+ Ajouter Questionnaire" layoutX="70" layoutY="120" fx:id="addBtn" onAction="#handleAjouter" styleClass="btn-primary-modern" AnchorPane.topAnchor="130" AnchorPane.rightAnchor="70"/>
+        <Button text="+ Ajouter Questionnaire" layoutX="70" layoutY="120" fx:id="addBtn" onAction="#handleAjouter" styleClass="btn-primary-modern" AnchorPane.topAnchor="130" AnchorPane.rightAnchor="55"/>
 
 
-    <TableView fx:id="tableView" prefWidth="1400" prefHeight="520" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70" AnchorPane.bottomAnchor="30" >
+    <TableView fx:id="tableView" prefWidth="1400" prefHeight="520" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30" >
         <columns>
             <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
             <TableColumn fx:id="nomColumn" text="Nom" prefWidth="100"/>

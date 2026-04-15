@@ -154,7 +154,7 @@ public class AjouterQuestAdmin {
         );
 
         // --- Load AjouterRendezVous page ---
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterRendezVous.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterRendezVousAdmin.fxml"));
         Parent root = loader.load();
         AjouterRendezVous rdvController = loader.getController();
         rdvController.setCampagne(selectedCampagne);

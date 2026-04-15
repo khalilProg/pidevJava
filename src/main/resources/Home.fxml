@@ -14,23 +14,18 @@
             xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.controllers.Home">
 
-    <!-- Navbar include -->
     <fx:include source="BaseFront.fxml" fx:id="headerInclude"
                 AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
 
-    <!-- ============================================ -->
-    <!--  HERO SECTION                                -->
-    <!-- ============================================ -->
+
     <HBox AnchorPane.topAnchor="85" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"
           styleClass="hero-section" alignment="CENTER">
         <padding>
             <Insets top="40" left="80" right="80" bottom="60"/>
         </padding>
 
-        <!-- LEFT COLUMN: Headlines + CTA -->
         <VBox alignment="TOP_LEFT" spacing="18" HBox.hgrow="ALWAYS" maxWidth="700">
 
-            <!-- LIVE Badge -->
             <HBox alignment="CENTER_LEFT" spacing="12" styleClass="live-badge-row">
                 <HBox alignment="CENTER" styleClass="live-badge" spacing="6">
                     <padding>
