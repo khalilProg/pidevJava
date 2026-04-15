@@ -43,7 +43,7 @@
                 </columns>
 
             </TableView>
-
+            <Button text="Transferts" onAction="#goToTransfert" styleClass="btn-primary"/>
         </VBox>
 
     </children>

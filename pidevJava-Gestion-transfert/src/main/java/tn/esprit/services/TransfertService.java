@@ -26,7 +26,7 @@ public class TransfertService implements IGeneralService<Transfert>{
 
         pst.setInt(1, t.getDemande() != null ? t.getDemande().getId() : 0);
         pst.setInt(2, t.getStock());
-        pst.setInt(3, t.getFromOrgId());
+        pst.setInt(3, 1);
         pst.setString(4, t.getFromOrg());
         pst.setInt(5, t.getToOrgId());
         pst.setString(6, t.getToOrg());

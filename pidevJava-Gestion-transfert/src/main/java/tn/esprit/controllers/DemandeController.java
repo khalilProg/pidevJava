@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +31,7 @@ public class DemandeController {
     @FXML private TableColumn<Demande, String> colStatus;
     @FXML private TableColumn<Demande, Void> colActions;
     @FXML private Button btnAdd;
+    @FXML private Button btnTransfert;
     @FXML private TextField txtBanque;
     @FXML private TextField txtType;
     @FXML private TextField txtQuantite;
@@ -175,5 +177,19 @@ public class DemandeController {
         alert.show();
     }
 
+
+    @FXML
+    private void goToTransfert() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TransfertView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) tableDemande.getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

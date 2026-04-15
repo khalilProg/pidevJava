@@ -47,7 +47,7 @@ public class DemandeService implements IGeneralService<Demande>{
         }
 
         // client_id (important en dernier)
-        q.setInt(8, demande.getClientId());
+        q.setInt(8, 1);
 
         q.executeUpdate();
     }
