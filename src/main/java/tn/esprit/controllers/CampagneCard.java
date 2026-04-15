@@ -26,7 +26,8 @@ public class CampagneCard {
         this.campagne = c;
         campaignName.setText(c.getTitre());
         campaignDates.setText(c.getDateDebut() + " - " + c.getDateFin());
-        bloodTypes.setText(c.getTypeSang());
+//        bloodTypes.setText(c.getTypeSang());
+        bloodTypes.setText(c.getTypeSang().replace("[", "").replace("]", "").replace("\"", ""));
         campaignDescription.setText(c.getDescription());
 
     }

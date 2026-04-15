@@ -14,57 +14,78 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterQuestionnaire">
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterQuestionnaire">
+   <fx:include source="BaseFront.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+
    <children>
-      <Text layoutX="20.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLOODLINK">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Text>
-      <Text layoutX="18.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remplir le questionnaire">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Text>
-      <Text layoutX="21.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez compléter les informations nécessaires pour votre don.">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <VBox layoutX="109.0" layoutY="173.0" prefHeight="379.0" prefWidth="470.0" spacing="10.0" AnchorPane.bottomAnchor="49.0">
+      <VBox layoutX="70.0" layoutY="110.0" spacing="20.0" AnchorPane.leftAnchor="70.0">
          <children>
-            <Label text="Age" />
-            <TextField fx:id="age" prefHeight="26.0" prefWidth="452.0">
-               <padding>
-                  <Insets left="10.0" right="10.0" />
-               </padding>
-            </TextField>
-            <Text fx:id="ageError" fill="RED" visible="false"/>
-            <Label text="Sexe" />
-            <ComboBox fx:id="sexe" prefWidth="150.0">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Homme" />
-                     <String fx:value="Femme" />
-                  </FXCollections>
-               </items>
-            </ComboBox>
-            <Text fx:id="sexeError" fill="RED" visible="false"/>
-            <Label text="Poids (KG)" />
-            <TextField fx:id="poids" prefHeight="26.0" prefWidth="452.0">
-               <padding>
-                  <Insets left="10.0" right="10.0" />
-               </padding>
-            </TextField>
-            <Text fx:id="poidsError" fill="RED" visible="false"/>
-            <Label text="Autres" />
-            <TextArea fx:id="autres" prefHeight="38.0" prefWidth="470.0" />
-            <HBox prefHeight="41.0" prefWidth="470.0">
+            <VBox spacing="8.0">
                <children>
-                  <Button fx:id="continuer" mnemonicParsing="false" onAction="#handleContinuer" text="Continuer" />
-                  <Button fx:id="annuler" mnemonicParsing="false" onAction="#handleAnnuler" text="Annuler" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Remplir le questionnaire" styleClass="hero-title">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#888888" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez compléter les informations nécessaires pour votre don.">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
-            </HBox>
+            </VBox>
+
+            <VBox prefWidth="500.0" prefHeight="100.0" spacing="10.0">
+               <children>
+                  <VBox spacing="3.0">
+                     <children>
+                        <Label text="Âge" styleClass="stat-card-subtitle" />
+                        <TextField fx:id="age" promptText="Entrez votre âge" />
+                        <Text fx:id="ageError" fill="#FF3E3E" visible="false" styleClass="error-text"/>
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label text="Sexe" styleClass="stat-card-subtitle" />
+                        <ComboBox fx:id="sexe" prefWidth="500.0" promptText="Sélectionnez votre sexe">
+                        <items>
+                           <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Homme"/>
+                              <String fx:value="Femme"/>
+                           </FXCollections>
+                        </items>
+                        </ComboBox>
+                        <Text fx:id="sexeError" fill="#FF3E3E" visible="false" styleClass="error-text"/>
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label text="Poids (KG)" styleClass="stat-card-subtitle" />
+                        <TextField fx:id="poids" promptText="Ex: 70" />
+                        <Text fx:id="poidsError" fill="#FF3E3E" visible="false" styleClass="error-text"/>
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label text="Autres informations" styleClass="stat-card-subtitle" />
+                        <TextArea fx:id="autres" prefHeight="100.0" promptText="Antécédents médicaux, allergies..." />
+                     </children>
+                  </VBox>
+
+                  <HBox spacing="15.0" alignment="CENTER_LEFT">
+                     <padding>
+                        <Insets top="10.0"/>
+                     </padding>
+                     <children>
+                        <Button fx:id="continuer" mnemonicParsing="false" onAction="#handleContinuer" text="Continuer" styleClass="btn-primary-modern" />
+                        <Button fx:id="annuler" mnemonicParsing="false" onAction="#handleAnnuler" text="Annuler" styleClass="btn-outline" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>

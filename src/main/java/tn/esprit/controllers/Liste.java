@@ -7,9 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import tn.esprit.entities.EntiteDeCollecte;
-import tn.esprit.entities.Questionnaire;
-import tn.esprit.entities.RendezVous;
+import tn.esprit.entities.*;
 import tn.esprit.services.CampagneService;
 import tn.esprit.services.EntiteCollecteService;
 import tn.esprit.services.QuestionnaireService;
@@ -17,6 +15,7 @@ import tn.esprit.services.RendezVousService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,7 +27,8 @@ public class Liste {
     @FXML private TableColumn<RendezVous, LocalDateTime> dateRdvColumn;
     @FXML private TableColumn<RendezVous, String> statusColumn;
     @FXML private TableColumn<RendezVous, Void> actionsColumn;
-
+    User u = new User(9,"chaffai", "yassine", "yassinechaffai4@gmail.com");
+    private Client currentClient = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
     @FXML
     public void initialize() {
         try {
@@ -42,7 +42,8 @@ public class Liste {
 
             // Only keep non-annulé
             for (RendezVous rdv : rendezvous) {
-                if (!"annulé".equalsIgnoreCase(rdv.getStatus())) {
+                Questionnaire q = qsService.getQuestionnaireById(rdv.getQuestionnaire_id());
+                if (q.getClientId() == currentClient.getId() && !"annulé".equalsIgnoreCase(rdv.getStatus())) {
                     data.add(rdv);
                 }
             }

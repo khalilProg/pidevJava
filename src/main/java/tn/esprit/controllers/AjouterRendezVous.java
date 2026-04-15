@@ -115,6 +115,11 @@ public class AjouterRendezVous {
         Parent root = loader.load();
         annulerRdv.getScene().setRoot(root);
     }
+    @FXML public void btnAnnuler(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeRdvAdmin.fxml"));
+        Parent root = loader.load();
+        annulerRdv.getScene().setRoot(root);
+    }
 
 
 }

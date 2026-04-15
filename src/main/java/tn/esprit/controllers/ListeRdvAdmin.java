@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
@@ -34,11 +35,12 @@ public class ListeRdvAdmin {
     @FXML private TableColumn<RendezVous, Void> actionsColumn;
 
     @FXML public void initialize() {
-        RendezVousService rdvService = new RendezVousService();
-        QuestionnaireService qsService = new QuestionnaireService();
-        CampagneService campagneService = new CampagneService();
-        EntiteCollecteService entiteService = new EntiteCollecteService();
+//        RendezVousService rdvService = new RendezVousService();
+//        QuestionnaireService qsService = new QuestionnaireService();
+//        CampagneService campagneService = new CampagneService();
+//        EntiteCollecteService entiteService = new EntiteCollecteService();
         // Set up columns
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateDon"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -62,6 +64,8 @@ public class ListeRdvAdmin {
             private final HBox container = new HBox(5, updateBtn, deleteBtn);
 
             {
+                container.setAlignment(Pos.CENTER);
+                container.setSpacing(10);
                 deleteBtn.setOnAction(e -> {
                     RendezVous rdv = getTableView().getItems().get(getIndex());
                     try {
@@ -97,10 +101,12 @@ public class ListeRdvAdmin {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
+
                 } else {
                     RendezVous rdv = getTableView().getItems().get(getIndex());
                     updateBtn.setVisible(rdv.getDateDon().isAfter(LocalDateTime.now()));
                     setGraphic(container);
+                    setAlignment(Pos.CENTER);
                 }
             }
         });
