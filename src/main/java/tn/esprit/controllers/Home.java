@@ -22,14 +22,23 @@ public class Home implements Initializable {
 
     @FXML
     public void goToDonation(ActionEvent event) {
+        loadPage(event, "/AjouterRendezVous.fxml");
+    }
+
+    @FXML
+    public void goToCampagnes(ActionEvent event) {
+        loadPage(event, "/ListeCampagnes.fxml");
+    }
+
+    private void loadPage(ActionEvent event, String fxmlPath) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            System.err.println("Error loading ListeCampagnes.fxml");
+            System.err.println("Error loading " + fxmlPath);
             e.printStackTrace();
         }
     }

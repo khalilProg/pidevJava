@@ -13,105 +13,90 @@
             stylesheets="@styles.css"
             xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.controllers.Home">
+    <fx:include source="BaseFront.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
 
-    <fx:include source="BaseFront.fxml" fx:id="headerInclude"
-                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
-
-
-    <HBox AnchorPane.topAnchor="85" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"
-          styleClass="hero-section" alignment="CENTER">
-        <padding>
-            <Insets top="40" left="80" right="80" bottom="60"/>
-        </padding>
-
-        <VBox alignment="TOP_LEFT" spacing="18" HBox.hgrow="ALWAYS" maxWidth="700">
-
-            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="live-badge-row">
-                <HBox alignment="CENTER" styleClass="live-badge" spacing="6">
-                    <padding>
-                        <Insets top="5" bottom="5" left="14" right="14"/>
-                    </padding>
-                    <Circle radius="5" fill="#FF3E3E" styleClass="live-dot"/>
-                    <Label text="LIVE" styleClass="live-text"/>
-                </HBox>
-                <Label text="Chaque don est un nouvel espoir." styleClass="live-message"/>
-            </HBox>
-
-            <!-- Main heading white -->
-            <Text styleClass="hero-heading-white" wrappingWidth="650">
-                <text>Sauvez des vies,</text>
-                <font><Font size="54"/></font>
-            </Text>
-
-            <!-- Main heading red -->
-            <Text styleClass="hero-heading-red" wrappingWidth="650">
-                <text>Une goutte à la fois.</text>
-                <font><Font size="54"/></font>
-            </Text>
-
-            <!-- Description text -->
-            <VBox spacing="4">
-                <Text styleClass="hero-description" wrappingWidth="520">
-                    <text>Bienvenue sur votre espace BloodLink. Gérez vos dons,</text>
-                    <font><Font size="16"/></font>
-                </Text>
-                <Text styleClass="hero-description" wrappingWidth="520">
-                    <text>suivez vos commandes de sang et restez informé des</text>
-                    <font><Font size="16"/></font>
-                </Text>
-                <Text styleClass="hero-description" wrappingWidth="520">
-                    <text>campagnes de collecte en temps réel.</text>
-                    <font><Font size="16"/></font>
-                </Text>
-            </VBox>
-
-            <!-- CTA Button -->
-            <HBox>
-                <padding>
-                    <Insets top="15"/>
-                </padding>
-                <Button text="🩸  Faire un don" styleClass="btn-cta" onAction="#goToDonation"
-                        fx:id="ctaButton"/>
-            </HBox>
-        </VBox>
-
-        <!-- RIGHT COLUMN: Stat Cards -->
-        <VBox alignment="CENTER_RIGHT" spacing="25" HBox.hgrow="SOMETIMES" minWidth="380" maxWidth="450">
+    <!-- HERO SECTION -->
+    <StackPane AnchorPane.topAnchor="85" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <!-- Background Decorative Glows -->
+        <Pane styleClass="hero-glow-1" mouseTransparent="true" />
+        <Pane styleClass="hero-glow-2" mouseTransparent="true" />
+        
+        <HBox alignment="CENTER" styleClass="hero-container">
             <padding>
-                <Insets top="40"/>
+                <Insets top="40" left="80" right="80" bottom="60"/>
             </padding>
-
-            <!-- Card 1: Direct Impact -->
-            <HBox alignment="CENTER_LEFT" spacing="18" styleClass="stat-card">
-                <padding>
-                    <Insets top="22" bottom="22" left="25" right="30"/>
-                </padding>
-                <StackPane styleClass="stat-icon-circle" minWidth="44" minHeight="44" maxWidth="44" maxHeight="44">
-                    <Circle radius="20" fill="#FF3E3E" opacity="0.18"/>
-                    <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                            fill="#FF3E3E" scaleX="0.85" scaleY="0.85"/>
-                </StackPane>
-                <VBox spacing="3">
-                    <Label text="Direct Impact" styleClass="stat-card-title"/>
-                    <Label text="1 don = 3 vies sauvées" styleClass="stat-card-subtitle"/>
+    
+            <!-- LEFT COLUMN: Content -->
+            <VBox alignment="CENTER_LEFT" spacing="25" HBox.hgrow="ALWAYS" maxWidth="750">
+    
+                <HBox alignment="CENTER_LEFT" spacing="12" styleClass="live-badge-row-v2">
+                    <HBox alignment="CENTER" styleClass="live-badge-v2" spacing="8">
+                        <padding>
+                            <Insets top="6" bottom="6" left="16" right="16"/>
+                        </padding>
+                        <Circle radius="5" fill="#FF3E3E" styleClass="live-dot-v2"/>
+                        <Label text="LIVE" styleClass="live-text-v2"/>
+                    </HBox>
+                    <Label text="Chaque don est un nouvel espoir." styleClass="live-message-v2"/>
+                </HBox>
+    
+                <VBox spacing="5" styleClass="hero-text-container">
+                    <Text styleClass="hero-title-main" text="Sauvez des vies," />
+                    <Text styleClass="hero-title-sub" text="Une goutte à la fois." />
                 </VBox>
-            </HBox>
-
-            <!-- Card 2: Besoin Urgent -->
-            <HBox alignment="CENTER_LEFT" spacing="18" styleClass="stat-card">
-                <padding>
-                    <Insets top="22" bottom="22" left="25" right="30"/>
-                </padding>
-                <StackPane styleClass="stat-icon-circle" minWidth="44" minHeight="44" maxWidth="44" maxHeight="44">
-                    <Circle radius="20" fill="#FF3E3E" opacity="0.18"/>
-                    <SVGPath content="M 12 2 C 12 2 4 10 4 16 C 4 20.418 7.582 24 12 24 C 16.418 24 20 20.418 20 16 C 20 10 12 2 12 2 Z"
-                            fill="#FF3E3E" scaleX="0.75" scaleY="0.75"/>
-                </StackPane>
-                <VBox spacing="3">
-                    <Label text="Besoin Urgent" styleClass="stat-card-title"/>
-                    <Label text="Stocks critiques : O-" styleClass="stat-card-subtitle"/>
+    
+                <VBox spacing="8" styleClass="hero-description-container">
+                    <Label text="Bienvenue sur votre espace BloodLink. Gérez vos dons," styleClass="hero-description-v2"/>
+                    <Label text="suivez vos stocks et restez informé des campagnes" styleClass="hero-description-v2"/>
+                    <Label text="de collecte en temps réel." styleClass="hero-description-v2"/>
                 </VBox>
-            </HBox>
-        </VBox>
-    </HBox>
+    
+                <HBox spacing="20">
+                    <padding>
+                        <Insets top="15"/>
+                    </padding>
+                    <Button text="Faire un don" styleClass="btn-prime-home" onAction="#goToDonation" fx:id="ctaButton"/>
+                </HBox>
+            </VBox>
+    
+            <!-- RIGHT COLUMN: Stat Cards -->
+            <VBox alignment="CENTER_RIGHT" spacing="30" HBox.hgrow="SOMETIMES" minWidth="400" maxWidth="480">
+                <padding>
+                    <Insets top="40"/>
+                </padding>
+    
+                <!-- Card 1: Direct Impact -->
+                <HBox alignment="CENTER_LEFT" spacing="20" styleClass="glass-card">
+                    <padding>
+                        <Insets top="25" bottom="25" left="30" right="30"/>
+                    </padding>
+                    <StackPane styleClass="icon-box-red" minWidth="56" minHeight="56">
+                        <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                                 fill="#FF3E3E" scaleX="1.1" scaleY="1.1"/>
+                    </StackPane>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Impact Direct" styleClass="glass-card-title"/>
+                        <Label text="1 don = 3 vies sauvées" styleClass="glass-card-subtitle"/>
+                    </VBox>
+                    <SVGPath content="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" fill="#444" styleClass="card-arrow"/>
+                </HBox>
+    
+                <!-- Card 2: Stocks -->
+                <HBox alignment="CENTER_LEFT" spacing="20" styleClass="glass-card">
+                    <padding>
+                        <Insets top="25" bottom="25" left="30" right="30"/>
+                    </padding>
+                    <StackPane styleClass="icon-box-red" minWidth="56" minHeight="56">
+                        <SVGPath content="M 12 2 C 12 2 4 10 4 16 C 4 20.418 7.582 24 12 24 C 16.418 24 20 20.418 20 16 C 20 10 12 2 12 2 Z"
+                                 fill="#FF3E3E" scaleX="1.0" scaleY="1.0"/>
+                    </StackPane>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Besoin Urgent" styleClass="glass-card-title"/>
+                        <Label text="Stocks critiques : O-" styleClass="glass-card-subtitle"/>
+                    </VBox>
+                    <SVGPath content="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" fill="#444" styleClass="card-arrow"/>
+                </HBox>
+            </VBox>
+        </HBox>
+    </StackPane>
 </AnchorPane>

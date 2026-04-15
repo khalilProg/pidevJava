@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -32,6 +33,7 @@ public class Liste {
     @FXML
     public void initialize() {
         try {
+            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             RendezVousService rdvService = new RendezVousService();
             QuestionnaireService qsService = new QuestionnaireService();
             CampagneService campagneService = new CampagneService();
@@ -81,7 +83,7 @@ public class Liste {
                 private final Button deleteBtn = new Button("Delete");
                 private final HBox container = new HBox(5, updateBtn, deleteBtn);
 
-                {
+                {   container.setAlignment(Pos.CENTER);
                     deleteBtn.setOnAction(e -> {
                         RendezVous rdv = getTableView().getItems().get(getIndex());
                         try {
@@ -121,6 +123,8 @@ public class Liste {
                         RendezVous rdv = getTableView().getItems().get(getIndex());
                         updateBtn.setVisible(rdv.getDateDon().isAfter(LocalDateTime.now()));
                         setGraphic(container);
+                        setAlignment(Pos.CENTER);
+
                     }
                 }
             });

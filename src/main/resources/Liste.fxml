@@ -26,11 +26,11 @@
         <TableView fx:id="tableView" prefWidth="1400" prefHeight="520"
                    AnchorPane.topAnchor="200" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70" AnchorPane.bottomAnchor="30">
             <columns>
-                <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="300"/>
-                <TableColumn fx:id="dateRdvColumn" text="Date Rendez-vous" prefWidth="250"/>
-                <TableColumn fx:id="statusColumn" text="Status" prefWidth="200"/>
-                <TableColumn fx:id="entiteColumn" text="Entite" prefWidth="300"/>
-                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="200"/>
+                <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="100"/>
+                <TableColumn fx:id="dateRdvColumn" text="Date Rendez-vous" prefWidth="150"/>
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="150"/>
+                <TableColumn fx:id="entiteColumn" text="Entite" prefWidth="150"/>
+                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150"/>
             </columns>
         </TableView>
     </children>
