@@ -12,25 +12,19 @@
 <?import javafx.scene.shape.SVGPath?>
 <AnchorPane maxWidth="400.0" prefWidth="380.0" styleClass="card" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneCard">
    <children>
-      <VBox spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox spacing="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox spacing="4.0">
                <children>
                   <Text fx:id="campaignName" styleClass="card-title" text="Nom de la Campagne" />
-<!--                  <Text fx:id="campaignDates" fill="#888888" styleClass="card-subtitle" text="Dates de la campagne" />-->
-                  <HBox spacing="10" alignment="CENTER_LEFT">
-                     <SVGPath content="M6.75 3V4.5M17.25 3V4.5M3 18.75V7.5C3 6.67157 3.67157 6 4.5 6H19.5C20.3284 6 21 6.67157 21 7.5V18.75M3 18.75C3 19.5784 3.67157 20.25 4.5 20.25H19.5C20.3284 20.25 21 19.5784 21 18.75M3 18.75V11.25C3 10.4216 3.67157 9.75 4.5 9.75H19.5C20.3284 9.75 21 10.4216 21 11.25V18.75M9 15.75H15"
-                              fill="#FF3E3E" scaleX="0.8" scaleY="0.8" />
-                     <Text fx:id="campaignDates" fill="#888888" text="Dates" />
-                  </HBox>
+                  <Text text="" />
                </children>
             </VBox>
-
+            <Text fx:id="campaignDates" fill="#888888" text="Dates" />
             <HBox spacing="10" alignment="CENTER_LEFT">
                <Text fx:id="text" text="Besoins: " />
                <Text fx:id="bloodTypes" fill="#FF3E3E" style="-fx-font-weight: 800; -fx-font-size: 14px;" text="Groupes sanguins attendus" />
             </HBox>
-<!--            <Text fx:id="bloodTypes" fill="#FF3E3E" style="-fx-font-weight: 800; -fx-font-size: 14px;" text="Groupes sanguins attendus" />-->
 
             <Text fx:id="campaignDescription" fill="#CCCCCC" style="-fx-font-size: 14px;" wrappingWidth="340.0" text="Description de la campagne..." />
 

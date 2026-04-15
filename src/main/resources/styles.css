@@ -260,7 +260,7 @@
 #bloodTypes {
     -fx-fill: #FF3E3E;
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
 }
 
 /* ==============================
@@ -471,17 +471,17 @@
 #campaignName {
     -fx-font-size: 26px;
     -fx-font-weight: 900;
-    -fx-fill: #FF3E3E;
+    -fx-fill: #c3c0c0;
 }
 
-#campaignDates, #campaignDescription {
-    -fx-fill: #CCCCCC;
-    -fx-font-size: 14px;
+#campaignDates, #campaignDescription, #text{
+    -fx-fill: #838282;
+    -fx-font-size: 12px;
 }
 
 #bloodTypes {
     -fx-fill: #FF3E3E;
-    -fx-font-weight: bold;
+    /*-fx-font-weight: bold;*/
     -fx-font-size: 14px;
 }
 
