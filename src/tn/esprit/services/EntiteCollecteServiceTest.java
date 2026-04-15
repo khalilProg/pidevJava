@@ -23,7 +23,7 @@ public class EntiteCollecteServiceTest {
     @Test
     @Order(1)
     void testGetByCampagneId() throws SQLException {
-        List<EntiteDeCollecte> entities = service.getByCampagneId(1); // assume campagne ID 1 exists
+        List<EntiteDeCollecte> entities = service.getByCampagneId(2);
         assertFalse(entities.isEmpty(), "Should return at least one entity");
         testEntiteId = entities.get(0).getId();
 

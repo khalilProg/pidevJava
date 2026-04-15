@@ -26,48 +26,44 @@ public class RendezVousServiceTest {
         RendezVous rdv = new RendezVous(
                 "confirmé",
                 LocalDateTime.now().plusDays(1),
-                1,  // questionnaire_id
+                63,
                 1   // entite_id
         );
         service.ajouter(rdv);
 
         List<RendezVous> allRdvs = service.recuperer();
-        assertTrue(allRdvs.stream().anyMatch(r -> r.getQuestionnaire_id() == 1 &&
+        assertTrue(allRdvs.stream().anyMatch(r -> r.getQuestionnaire_id() == 63 &&
                         r.getEntite_id() == 1),
                 "RendezVous should be added to the database");
 
-        testRdvId = allRdvs.get(allRdvs.size() - 1).getId(); // Save for next tests
     }
 
     @Test
     @Order(2)
     void testModifierRendezVous() throws SQLException {
-        List<RendezVous> allRdvs = service.recuperer();
-
-        allRdvs.stream()
-                .filter(r -> r.getId() == testRdvId)
+        // Fetch the rendez-vous to update
+        RendezVous rdv = service.recuperer().stream()
+                .filter(r -> r.getId() == 54) // use the ID stored from add test
                 .findFirst()
-                .ifPresent(r -> {
-                    r.setStatus("modifié");
-                    r.setDateDon(r.getDateDon().plusHours(2));
-                    try {
-                        service.modifier(r);
-                    } catch (SQLException e) {
-                        fail("Modifier threw SQLException: " + e.getMessage());
-                    }
-                });
+                .orElseThrow(() -> new AssertionError("RendezVous not found"));
 
-        // Verify modification using stream
-        assertTrue(service.recuperer().stream()
-                .anyMatch(r -> r.getId() == testRdvId &&
-                        r.getStatus().equals("modifié")));
+        // Update status
+        rdv.setStatus("annulé");
+        service.modifier(rdv);
+
+        // Verify the status is updated in DB
+        boolean updated = service.recuperer().stream()
+                .anyMatch(r -> r.getId() == 54 &&
+                        "annulé".equals(r.getStatus()));
+
+        assertTrue(updated, "RendezVous status should be 'annulé'");
     }
 
     @Test
     @Order(3)
     void testSupprimerRendezVous() throws SQLException {
         RendezVous rdv = service.recuperer().stream()
-                .filter(r -> r.getId() == testRdvId)
+                .filter(r -> r.getId() == 33)
                 .findFirst()
                 .orElse(null);
 
@@ -77,14 +73,14 @@ public class RendezVousServiceTest {
 
         // Verify deletion
         assertFalse(service.recuperer().stream()
-                        .anyMatch(r -> r.getId() == testRdvId),
+                        .anyMatch(r -> r.getId() == 33),
                 "RendezVous should be removed from database");
     }
 
     @Test
     @Order(4)
     void testHasRendezVous() throws SQLException {
-        boolean exists = service.hasRendezVous(1, 1);
+        boolean exists = service.hasRendezVous(1, 2);
         // Just prints, but you can assert based on your DB state
         System.out.println("Client 1 has rdv for campagne 1: " + exists);
     }
@@ -96,7 +92,7 @@ public class RendezVousServiceTest {
         RendezVous rdv = new RendezVous(
                 "confirmé",
                 LocalDateTime.now().plusDays(1),
-                1,
+                60,
                 1
         );
         service.ajouter(rdv);

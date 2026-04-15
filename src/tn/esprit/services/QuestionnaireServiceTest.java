@@ -30,7 +30,7 @@ public class QuestionnaireServiceTest {
                 70.0,
                 "Aucune",
                 1,
-                1,
+                3,
                 java.time.LocalDateTime.now(),
                 "A+"
         );
