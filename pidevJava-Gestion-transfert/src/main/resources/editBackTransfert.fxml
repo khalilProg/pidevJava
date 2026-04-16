@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.EditTransfertController"
+            prefHeight="450" prefWidth="500"
+            stylesheets="@style.css">
+
+    <children>
+
+        <VBox spacing="12" layoutX="40" layoutY="30" prefWidth="420">
+
+            <!-- TITLE -->
+            <Label text="Modifier Transfert"
+                   styleClass="form-title"/>
+
+            <!-- FROM -->
+            <TextField fx:id="txtFrom"
+                       promptText="From Org ID"/>
+
+            <!-- TO -->
+            <TextField fx:id="txtTo"
+                       promptText="To Org ID"/>
+
+            <!-- QUANTITE -->
+            <TextField fx:id="txtQuantite"
+                       promptText="Quantité"/>
+
+            <!-- DATE ENVOIE -->
+            <DatePicker fx:id="dateEnvoie"/>
+
+            <!-- DATE RECEPTION -->
+            <DatePicker fx:id="dateReception"/>
+
+            <!-- STATUS -->
+            <ComboBox fx:id="comboStatus"
+                      promptText="Status"/>
+
+            <!-- BUTTONS -->
+            <HBox spacing="10">
+
+                <Button text="Modifier"
+                        onAction="#updateTransfert"
+                        styleClass="btn-primary"/>
+
+                <Button text="Retour"
+                        onAction="#retour"
+                        styleClass="btn-secondary"/>
+
+            </HBox>
+
+        </VBox>
+
+    </children>
+</AnchorPane>

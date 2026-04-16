@@ -32,6 +32,12 @@ public class addDemandeController {
 
     @FXML
     public void ajouterDemande() {
+
+        // 🔥 VALIDATION AVANT TOUT
+        if (!validateForm()) {
+            return;
+        }
+
         try {
 
             if (isEditMode) {
@@ -60,10 +66,71 @@ public class addDemandeController {
                 System.out.println("Ajouté avec succès");
             }
 
+            clearForm();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void clearForm() {
+        txtBanque.clear();
+        txtQuantite.clear();
+        comboType.setValue(null);
+        comboUrgence.setValue(null);
+    }
+
+    private boolean validateForm() {
+        StringBuilder errors = new StringBuilder();
+
+        // BANQUE
+        if (txtBanque.getText().isEmpty()) {
+            errors.append("Banque ID obligatoire\n");
+        } else {
+            try {
+                Integer.parseInt(txtBanque.getText());
+            } catch (NumberFormatException e) {
+                errors.append("Banque ID doit être un nombre\n");
+            }
+        }
+
+        // TYPE SANG
+        if (comboType.getValue() == null) {
+            errors.append("Type de sang obligatoire\n");
+        }
+
+        // QUANTITE
+        if (txtQuantite.getText().isEmpty()) {
+            errors.append("Quantité obligatoire\n");
+        } else {
+            try {
+                int q = Integer.parseInt(txtQuantite.getText());
+                if (q <= 0) {
+                    errors.append("Quantité doit être > 0\n");
+                }
+            } catch (NumberFormatException e) {
+                errors.append("Quantité invalide\n");
+            }
+        }
+
+        // URGENCE
+        if (comboUrgence.getValue() == null) {
+            errors.append("Urgence obligatoire\n");
+        }
+
+        // AFFICHAGE ERREUR
+        if (errors.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Vérifier les champs");
+            alert.setContentText(errors.toString());
+            alert.show();
+            return false;
+        }
+
+        return true;
+    }
+
     @FXML
 
     private void retour() {

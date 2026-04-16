@@ -1,12 +1,17 @@
 package tn.esprit.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import tn.esprit.entities.Demande;
 import tn.esprit.entities.Transfert;
 import tn.esprit.services.DemandeService;
@@ -68,12 +73,17 @@ public class backDemandeController {
                 btnEdit.setStyle("-fx-background-color: #f1c40f; -fx-text-fill: black;");
                 btnDelete.setStyle("-fx-background-color: black; -fx-text-fill: white;");
 
+                btnValidate.setStyle(btnValidate.getStyle() + "; -fx-cursor: hand;");
+                btnReject.setStyle(btnReject.getStyle() + "; -fx-cursor: hand;");
+                btnEdit.setStyle(btnEdit.getStyle() + "; -fx-cursor: hand;");
+                btnDelete.setStyle(btnDelete.getStyle() + "; -fx-cursor: hand;");
+
                 // ================= VALIDATE =================
                 btnValidate.setOnAction(e -> {
+
                     Demande d = getTableView().getItems().get(getIndex());
 
                     try {
-                        // popup dates
                         Dialog<ButtonType> dialog = new Dialog<>();
                         dialog.setTitle("Planifier le transfert");
 
@@ -89,6 +99,10 @@ public class backDemandeController {
 
                         dialog.getDialogPane().setContent(content);
                         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+                        dialog.getDialogPane().getStylesheets().add(
+                            getClass().getResource("/style.css").toExternalForm()
+                        );
+                        dialog.getDialogPane().getStyleClass().add("planification-dialog");
 
                         dialog.showAndWait().ifPresent(response -> {
 
@@ -110,7 +124,7 @@ public class backDemandeController {
 
                                     t.setStock(1);
 
-                                    // 👉 dates choisies dans popup
+                                    // dates popup
                                     t.setDateEnvoie(dateEnvoie.getValue());
                                     t.setDateReception(dateReception.getValue());
 
@@ -136,6 +150,7 @@ public class backDemandeController {
 
                 // ================= REJECT =================
                 btnReject.setOnAction(e -> {
+
                     Demande d = getTableView().getItems().get(getIndex());
 
                     try {
@@ -150,11 +165,13 @@ public class backDemandeController {
 
                 // ================= DELETE =================
                 btnDelete.setOnAction(e -> {
+
                     Demande d = getTableView().getItems().get(getIndex());
 
                     try {
                         demandeService.supprimer(d);
                         tableDemande.getItems().remove(d);
+
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -162,17 +179,23 @@ public class backDemandeController {
 
                 // ================= EDIT =================
                 btnEdit.setOnAction(e -> {
+
                     Demande d = getTableView().getItems().get(getIndex());
 
-                    // simple exemple (tu peux ouvrir popup)
-                    System.out.println("Edit: " + d.getId());
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/editBackDemande.fxml"));
+                        Parent root = loader.load();
+
+                        EditDemandeController controller = loader.getController();
+                        controller.setDemande(d);
+
+                        Stage stage = (Stage) tableDemande.getScene().getWindow();
+                        stage.setScene(new Scene(root));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 });
-            }
-
-            private final HBox pane = new HBox(8, btnValidate, btnReject, btnEdit, btnDelete);
-
-            {
-                pane.setAlignment(Pos.CENTER);
             }
 
             @Override
@@ -186,14 +209,33 @@ public class backDemandeController {
 
                 Demande d = getTableView().getItems().get(getIndex());
 
+                HBox box = new HBox(8);
+                box.setAlignment(Pos.CENTER);
+
+                // EDIT toujours visible
+                box.getChildren().add(btnEdit);
+
+                // autres actions seulement EN_ATTENTE
                 if ("EN_ATTENTE".equals(d.getStatus())) {
-                    setGraphic(pane);
-                } else {
-                    // 🔥 état confirmé/refusé
-                    // tu peux choisir ce que tu affiches
-                    setGraphic(btnDelete); // ou null si tu veux clean UI
+                    box.getChildren().addAll(btnValidate, btnReject, btnDelete);
                 }
+
+                setGraphic(box);
             }
         });
+    }
+
+    @FXML
+    private void goToTransfert() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TransfertBackView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) tableDemande.getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
