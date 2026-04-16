@@ -238,4 +238,18 @@ public class backDemandeController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void goToAddDemande() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addBackDemande.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) tableDemande.getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,8 +12,6 @@ import javafx.stage.Stage;
 import tn.esprit.entities.Demande;
 import tn.esprit.services.DemandeService;
 import javafx.scene.control.TextField;
-
-import java.awt.event.ActionEvent;
 
 public class addDemandeController {
     @FXML
@@ -158,5 +157,19 @@ public class addDemandeController {
         comboType.setValue(d.getTypeSang());
         txtQuantite.setText(String.valueOf(d.getQuantite()));
         comboUrgence.setValue(d.getUrgence());
+    }
+
+    @FXML
+    private void goBack() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DemandeBackView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) txtBanque.getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

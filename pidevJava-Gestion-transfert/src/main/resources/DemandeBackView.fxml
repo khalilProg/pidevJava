@@ -15,6 +15,11 @@
                 layoutY="460"
                 onAction="#goToTransfert"
                 styleClass="btn-primary"/>
+        <Button text="➕ Ajouter Demande"
+                onAction="#goToAddDemande"
+                style="-fx-background-color:#e63939; -fx-text-fill:white; -fx-font-weight:bold;"
+                layoutX="20"
+                layoutY="450"/>
         <TableView fx:id="tableDemande" layoutX="20" layoutY="20" prefWidth="760">
 
             <columns>
