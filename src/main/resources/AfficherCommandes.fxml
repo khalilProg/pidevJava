@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane styleClass="main-container" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AfficherCommandesController">
+    <!-- TOP NAV BAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
+            <HBox alignment="CENTER_LEFT" spacing="6">
+                <Label styleClass="brand-icon" text="🩸" />
+                <Label styleClass="brand-label" text="BLOODLINK" />
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="user-badge" text="👤  chaffai yassine" />
+        </HBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <VBox spacing="20" style="-fx-background-color: #121212;">
+            <padding>
+                <Insets bottom="32" left="32" right="32" top="28" />
+            </padding>
+
+            <!-- Page Header -->
+            <VBox spacing="0">
+                <Label styleClass="breadcrumb-label" text="BLOODLINK" />
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label style="-fx-font-size: 24px;" text="📦" />
+                    <Label styleClass="page-title" text="Mes Commandes" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button onAction="#handleNouvelleCommande" styleClass="submit-button" text="＋ Nouvelle commande" />
+                </HBox>
+                <Label styleClass="page-subtitle" text="Consultez et suivez l'état de vos commandes de produits sanguins." />
+            </VBox>
+
+            <!-- Filters Bar -->
+            <HBox spacing="16">
+                <TextField fx:id="tfSearch" prefWidth="350" promptText="🔍  Référence, groupe sanguin..." styleClass="dark-field" HBox.hgrow="ALWAYS"/>
+                <ComboBox fx:id="cbStatutFiltre" prefWidth="250" promptText="Tous les statuts" styleClass="dark-combo" />
+                <ComboBox fx:id="cbPrioriteFiltre" prefWidth="250" promptText="Toutes priorités" styleClass="dark-combo" />
+            </HBox>
+
+            <!-- Table Card -->
+            <VBox spacing="10" styleClass="form-card" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT">
+                    <Label style="-fx-text-fill: #777777; -fx-font-size: 11px; -fx-font-weight: bold;" text="HISTORIQUE DES COMMANDES" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="lblCount" style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;" text="0 commande(s)" />
+                </HBox>
+                
+                <TableView fx:id="tableCommandes" styleClass="dark-table" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colReference" prefWidth="120" text="RÉFÉRENCE" />
+                        <TableColumn fx:id="colTypeSang" prefWidth="150" text="TYPE SANG" />
+                        <TableColumn fx:id="colQuantite" prefWidth="120" text="QUANTITÉ" />
+                        <TableColumn fx:id="colPriorite" prefWidth="150" text="PRIORITÉ" />
+                        <TableColumn fx:id="colStatut" prefWidth="180" text="STATUT" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </center>
+</BorderPane>

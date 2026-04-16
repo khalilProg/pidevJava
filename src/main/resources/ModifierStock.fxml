@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.ModifierStockController"
+            styleClass="main-container"
+            stylesheets="@commande.css">
+
+    <!-- ═══ TOP NAV BAR ═══ -->
+    <top>
+        <HBox styleClass="nav-bar" alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" spacing="6">
+                <Label text="🩸" styleClass="brand-icon"/>
+                <Label text="BLOODLINK" styleClass="brand-label"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <!-- Optional user badge from Commande -->
+            <Button text="👤  Admin UI" styleClass="user-badge"/>
+        </HBox>
+    </top>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="edge-to-edge-scroll"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox spacing="0" style="-fx-background-color: #121212;">
+                <padding><Insets top="0" right="32" bottom="40" left="32"/></padding>
+
+                <!-- Page Header -->
+                <VBox styleClass="page-header" spacing="0">
+                    <Label text="BLOODLINK" styleClass="breadcrumb-label"/>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="🖋" style="-fx-font-size: 24px;"/>
+                        <Label text="Modifier un " styleClass="page-title"/>
+                        <Label text="Stock Existant" styleClass="page-title-highlight"/>
+                    </HBox>
+                    <Label text="Mettez à jour les informations de l'inventaire sanguin."
+                           styleClass="page-subtitle"/>
+                </VBox>
+
+                <Region prefHeight="24"/>
+
+                <!-- ═══ FORM CARD ═══ -->
+                <VBox styleClass="form-card" spacing="20" maxWidth="900">
+                    <VBox.margin><Insets left="0" right="0"/></VBox.margin>
+
+                    <!-- Form Header -->
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <StackPane styleClass="form-header-icon">
+                            <Label text="📋"/>
+                        </StackPane>
+                        <VBox spacing="2">
+                            <Label text="MODIFICATION DE STOCK" styleClass="form-title"/>
+                            <Label text="Veuillez remplir les champs obligatoires avant de valider."
+                                   styleClass="form-description"/>
+                        </VBox>
+                    </HBox>
+
+                    <Separator styleClass="dark-separator"/>
+
+                    <HBox spacing="20">
+                        <!-- TYPE ORGANISATION -->
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="TYPE ORGANISATION" styleClass="field-label"/>
+                            <ComboBox fx:id="cbTypeOrg" promptText="Choisir un type"
+                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                        </VBox>
+
+                        <!-- ORGANISATION -->
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="ORGANISATION" styleClass="field-label"/>
+                            <ComboBox fx:id="cbOrganisation" promptText="Sélectionnez un type d'abord"
+                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="20">
+                        <!-- TYPE SANG -->
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="TYPE SANG" styleClass="field-label"/>
+                            <ComboBox fx:id="cbTypeSang" promptText="Choisir un type de sang"
+                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                        </VBox>
+
+                        <!-- QUANTITÉ -->
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="QUANTITÉ (UNITÉS)" styleClass="field-label"/>
+                            <TextField fx:id="txtQuantite" promptText="Ex: 50"
+                                       styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                        </VBox>
+                    </HBox>
+
+                    <Region prefHeight="8"/>
+                    <Separator styleClass="dark-separator"/>
+
+                    <!-- Action Buttons -->
+                    <HBox alignment="CENTER_RIGHT" spacing="16">
+                        <Button fx:id="btnAnnuler" text="Annuler" styleClass="cancel-button"/>
+                        <Button fx:id="btnEnregistrer" text="🔒  METTRE À JOUR" styleClass="submit-button"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

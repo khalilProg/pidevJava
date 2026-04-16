@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane styleClass="main-container" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminModifierCommandeController">
+
+    <!-- ═══ TOP NAV BAR ═══ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
+            <HBox alignment="CENTER_LEFT" spacing="6">
+                <Label styleClass="brand-icon" text="🩸" />
+                <Label styleClass="brand-label" text="BLOODLINK" />
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="user-badge" text="👤  Admin UI" />
+        </HBox>
+    </top>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge-scroll" vbarPolicy="AS_NEEDED">
+            <VBox spacing="0" style="-fx-background-color: #121212;">
+                <padding><Insets bottom="40" left="32" right="32" top="0" /></padding>
+
+                <!-- Page Header -->
+                <VBox spacing="0" styleClass="page-header">
+                    <Label styleClass="breadcrumb-label" text="BLOODLINK / ADMIN" />
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label style="-fx-font-size: 24px;" text="⚙" />
+                        <Label styleClass="page-title" text="Modifier la " />
+                        <Label styleClass="page-title-highlight" text="Commande Client" />
+                    </HBox>
+                    <Label styleClass="page-subtitle" text="Mettez à jour les statuts et priorités en tant qu'administrateur." />
+                </VBox>
+
+                <Region prefHeight="24" />
+
+                <!-- ═══ FORM CARD ═══ -->
+                <VBox maxWidth="900" spacing="20" styleClass="form-card">
+                    <VBox.margin><Insets left="0" right="0" /></VBox.margin>
+
+                    <!-- Form Header -->
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <StackPane styleClass="form-header-icon">
+                            <Label text="📋" />
+                        </StackPane>
+                        <VBox spacing="2">
+                            <Label styleClass="form-title" text="ADMINISTRATION DE LA COMMANDE" />
+                            <Label styleClass="form-description" text="Vous avez les droits de mettre à jour le statut et la priorité." />
+                        </VBox>
+                    </HBox>
+
+                    <Separator styleClass="dark-separator" />
+
+                    <!-- Row 1: Reference + Quantité -->
+                    <HBox spacing="20">
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="REFERENCE" />
+                            <TextField fx:id="tfReference" maxWidth="1.7976931348623157E308" promptText="Ex: 2024001" styleClass="dark-field" />
+                        </VBox>
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="QUANTITÉ" />
+                            <TextField fx:id="tfQuantite" maxWidth="1.7976931348623157E308" promptText="Quantité" styleClass="dark-field" />
+                        </VBox>
+                    </HBox>
+
+                    <!-- Row 2: Type Sang + Priorité -->
+                    <HBox spacing="20">
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="TYPE SANG" />
+                            <ComboBox fx:id="cbTypeSang" maxWidth="1.7976931348623157E308" promptText="Choisir un type de sang" styleClass="dark-combo" />
+                        </VBox>
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="PRIORITÉ" />
+                            <ComboBox fx:id="cbPriorite" maxWidth="1.7976931348623157E308" promptText="Choisir une priorité" styleClass="dark-combo" />
+                        </VBox>
+                    </HBox>
+
+                    <!-- Row 3: Statut + Banque -->
+                    <HBox spacing="20">
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="STATUT DE LA COMMANDE" />
+                            <ComboBox fx:id="cbStatut" maxWidth="1.7976931348623157E308" promptText="Ex: En attente, Validée..." styleClass="dark-combo" />
+                        </VBox>
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="BANQUE" />
+                            <ComboBox fx:id="cbBanque" maxWidth="1.7976931348623157E308" promptText="Choisir une banque" styleClass="dark-combo" />
+                        </VBox>
+                    </HBox>
+
+                    <Region prefHeight="8" />
+                    <Separator styleClass="dark-separator" />
+
+                    <!-- Status label for feedback -->
+                    <Label fx:id="lblStatus" styleClass="status-success" text="" />
+
+                    <!-- Action Buttons -->
+                    <HBox alignment="CENTER_RIGHT" spacing="16">
+                        <Button onAction="#handleCancel" styleClass="cancel-button" text="Annuler" />
+                        <Button onAction="#handleSubmit" styleClass="submit-button" text="🚀  ENREGISTRER MODIFICATIONS" />
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
