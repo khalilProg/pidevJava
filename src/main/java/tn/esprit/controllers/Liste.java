@@ -29,7 +29,9 @@ public class Liste {
     @FXML private TableColumn<RendezVous, String> statusColumn;
     @FXML private TableColumn<RendezVous, Void> actionsColumn;
     User u = new User(9,"chaffai", "yassine", "yassinechaffai4@gmail.com");
-    private Client currentClient = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
+    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
+    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
+
     @FXML
     public void initialize() {
         try {

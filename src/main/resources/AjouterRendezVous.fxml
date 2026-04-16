@@ -74,7 +74,7 @@
                            </padding>
                            <children>
                                <Button fx:id="confirmerRdv" onAction="#handleConfirmerRdv" styleClass="btn-primary-modern" text="CONFIRMER LE RENDEZ-VOUS" />
-                               <Button fx:id="annulerRdv" mnemonicParsing="false" onAction="#btnAnnuler" styleClass="btn-outline" text="Annuler" />
+                               <Button fx:id="annulerRdv" mnemonicParsing="false" onAction="#handleAnnuler" styleClass="btn-outline" text="Annuler" />
                            </children>
                         </HBox>
                     </children>

@@ -19,6 +19,7 @@ import tn.esprit.services.RendezVousService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Update {
@@ -107,6 +108,9 @@ public class Update {
         poidsError.setVisible(false);
         dateError.setVisible(false);
         timeError.setVisible(false);
+        EntiteDeCollecte selectedEntity = entiteCombo.getValue();
+        LocalDate date = dateRdvPicker.getValue();
+        int minute = minuteSpinner.getValue();
 
         // --- Validate Age ---
         int ageValue = 0;
@@ -162,7 +166,25 @@ public class Update {
             // Stop if validation failed
             return;
         }
+        LocalDateTime rdvDateTime = date.atTime(hour, minute);
+        int selectedId = selectedEntity.getId();
+        int campagneId = campagne.getId();
+        boolean dejaReservé = new RendezVousService().recuperer().stream()
+                .anyMatch(r -> {
+                    try {
+                        return r.getEntite_id() == selectedId &&
+                                r.getDateDon().equals(rdvDateTime) &&
+                                new QuestionnaireService().getQuestionnaireById(r.getQuestionnaire_id()).getCampagneId() == campagneId;
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
+        if (dejaReservé) {
+            dateError.setText("Ce créneau est déjà réservé pour cette entité de collecte.");
+            dateError.setVisible(true);
+            return; // stop adding the rendez-vous
+        }
         // --- Update Questionnaire & RendezVous ---
         questionnaire.setAge(ageValue);
         questionnaire.setSexe(sexeCombo.getValue());

@@ -98,7 +98,23 @@ public class AjouterRendezVous {
         if (!valid) return; // stop itha validation fails
         LocalDateTime rdvDateTime = date.atTime(hour, minute);
         int selectedId = selectedEntity.getId();
+        int campagneId = campagne.getId();
+        boolean dejaReservé = new RendezVousService().recuperer().stream()
+                .anyMatch(r -> {
+                    try {
+                        return r.getEntite_id() == selectedId &&
+                                r.getDateDon().equals(rdvDateTime) &&
+                                new QuestionnaireService().getQuestionnaireById(r.getQuestionnaire_id()).getCampagneId() == campagneId;
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
+        if (dejaReservé) {
+            dateError.setText("Ce créneau est déjà réservé pour cette entité de collecte.");
+            dateError.setVisible(true);
+            return; // stop adding the rendez-vous
+        }
         new QuestionnaireService().ajouter(questionnaire);
         int questionnaireId = questionnaire.getId();
         RendezVous rdv = new RendezVous("confirmé", rdvDateTime, questionnaireId, selectedId);
@@ -110,6 +126,66 @@ public class AjouterRendezVous {
 
     }
 
+
+
+    @FXML
+    private void handleConfirmerRdvAdmin() throws SQLException, IOException {
+        boolean valid = true;
+        LocalDate date = dateRdv.getValue();
+        int hour = hourSpinner.getValue();
+        int minute = minuteSpinner.getValue();
+        // reset lel errors
+        entiteError.setVisible(false);
+        dateError.setVisible(false);
+        timeError.setVisible(false);
+        EntiteDeCollecte selectedEntity = entiteCombo.getValue();
+
+        if (selectedEntity == null) {
+            entiteError.setText("Veuillez choisir une entité de collecte");
+            entiteError.setVisible(true);
+            valid = false;
+        }
+
+        if (date == null || date.isBefore(campagne.getDateDebut()) || date.isAfter(campagne.getDateFin())) {
+            dateError.setText("La date doit être comprise entre " + campagne.getDateDebut() + " et " + campagne.getDateFin());
+            dateError.setVisible(true);
+            valid = false;
+        }
+        if (hour < 8 || hour > 17) {
+            timeError.setText("l'heure doit etre entre 8h et 17h");
+            timeError.setVisible(true);
+            valid = false;
+        }
+        if (!valid) return; // stop itha validation fails
+        LocalDateTime rdvDateTime = date.atTime(hour, minute);
+        int selectedId = selectedEntity.getId();
+        int campagneId = campagne.getId();
+        boolean dejaReservé = new RendezVousService().recuperer().stream()
+                .anyMatch(r -> {
+                    try {
+                        return r.getEntite_id() == selectedId &&
+                                r.getDateDon().equals(rdvDateTime) &&
+                                new QuestionnaireService().getQuestionnaireById(r.getQuestionnaire_id()).getCampagneId() == campagneId;
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+        if (dejaReservé) {
+            dateError.setText("Ce créneau est déjà réservé pour cette entité de collecte.");
+            dateError.setVisible(true);
+            return; // stop adding the rendez-vous
+        }
+        new QuestionnaireService().ajouter(questionnaire);
+        int questionnaireId = questionnaire.getId();
+        RendezVous rdv = new RendezVous("confirmé", rdvDateTime, questionnaireId, selectedId);
+        new RendezVousService().ajouter(rdv);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeRdvAdmin.fxml"));
+        Parent root = loader.load();
+        confirmerRdv.getScene().setRoot(root);
+
+    }
     @FXML public void handleAnnuler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
         Parent root = loader.load();

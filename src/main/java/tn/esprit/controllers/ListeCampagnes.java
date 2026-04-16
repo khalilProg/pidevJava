@@ -7,6 +7,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.Client;
+import tn.esprit.entities.User;
 import tn.esprit.services.CampagneService;
 
 import java.io.IOException;
@@ -17,8 +18,8 @@ import java.util.List;
 public class ListeCampagnes {
     @FXML private TilePane campaignContainer;
     private CampagneService campagneService = new CampagneService();
-    private Client currentClient = new Client(2, "A-", LocalDate.of(2003, 10, 17));
-    private Client currentClient1 = new Client(1, "O+", LocalDate.of(2023, 1, 1));
+    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1)); //1
+    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17)); //2
 
     @FXML
     public void initialize() {

@@ -26,7 +26,7 @@
         <Label text="GESTION" styleClass="sidebar-label"/>
         
         <VBox spacing="8">
-            <Button fx:id="btnDashboard" text="⊞  Dashboard" styleClass="sidebar-nav-item, sidebar-nav-item-active" onAction="#goToDashboard"/>
+            <Button fx:id="btnDashboard" text="Acceuil" styleClass="sidebar-nav-item, sidebar-nav-item-active" onAction="#goToDashboard"/>
             <Button fx:id="btnQuestionnaires" text="☷  Questionnaires" styleClass="sidebar-nav-item" onAction="#goToQuestionnaires"/>
             <Button fx:id="btnRendezVous" text="📅  Rendez vous" styleClass="sidebar-nav-item" onAction="#goToRendezVous"/>
         </VBox>

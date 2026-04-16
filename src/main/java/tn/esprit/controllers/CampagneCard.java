@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.Client;
+import tn.esprit.entities.Questionnaire;
+import tn.esprit.services.QuestionnaireService;
 import tn.esprit.services.RendezVousService;
 
 import java.io.IOException;
@@ -21,7 +23,9 @@ public class CampagneCard {
     @FXML private Text campaignDescription;
     @FXML private Button participateButton;
     private Campagne campagne;
-    private Client currentClient = new Client(2, "A-", LocalDate.of(2003, 10, 17));
+    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17));
+    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1));
+
     public void setData(Campagne c) {
         this.campagne = c;
         campaignName.setText(c.getTitre());
@@ -31,7 +35,7 @@ public class CampagneCard {
         campaignDescription.setText(c.getDescription());
 
     }
-    @FXML public void openQuestionnaire() {
+    @FXML public void openQuestionnaire() throws SQLException {
         try {
 
             int clientId = currentClient.getId();
@@ -39,7 +43,18 @@ public class CampagneCard {
 
             RendezVousService rdvService = new RendezVousService();
 
-            if (rdvService.hasRendezVous(clientId, campagneId)) {
+            if (rdvService.hasRendezVous(clientId, campagneId) && rdvService.recuperer().stream()
+                    .anyMatch(r -> {
+                                try {
+                                    Questionnaire q = new QuestionnaireService().getQuestionnaireById(r.getQuestionnaire_id());
+                                    return q.getClientId() == clientId &&
+                                            q.getCampagneId() == campagneId &&
+                                            !r.getStatus().equalsIgnoreCase("annulé");
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                    }
+            )) {
                 // Show message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Info");

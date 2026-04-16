@@ -18,6 +18,7 @@ import tn.esprit.services.RendezVousService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class UpdateRdvAdmin {
@@ -82,9 +83,12 @@ public class UpdateRdvAdmin {
 
         dateError.setVisible(false);
         timeError.setVisible(false);
-
-        LocalDate dateValue = dateRdvPicker.getValue();
+        LocalDate date = dateRdvPicker.getValue();
         int hour = hourSpinner.getValue();
+        int minute = minuteSpinner.getValue();
+
+        EntiteDeCollecte selectedEntity = entiteCombo.getValue();
+        LocalDate dateValue = dateRdvPicker.getValue();
 
         if (dateValue == null || dateValue.isBefore(campagne.getDateDebut()) || dateValue.isAfter(campagne.getDateFin())) {
             dateError.setText("La date doit être comprise entre " + campagne.getDateDebut() + " et " + campagne.getDateFin());
@@ -100,6 +104,25 @@ public class UpdateRdvAdmin {
 
         if (!valid) return;
 
+        LocalDateTime rdvDateTime = date.atTime(hour, minute);
+        int selectedId = selectedEntity.getId();
+        int campagneId = campagne.getId();
+        boolean dejaReservé = new RendezVousService().recuperer().stream()
+                .anyMatch(r -> {
+                    try {
+                        return r.getEntite_id() == selectedId &&
+                                r.getDateDon().equals(rdvDateTime) &&
+                                new QuestionnaireService().getQuestionnaireById(r.getQuestionnaire_id()).getCampagneId() == campagneId;
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+        if (dejaReservé) {
+            dateError.setText("Ce créneau est déjà réservé pour cette entité de collecte.");
+            dateError.setVisible(true);
+            return; // stop adding the rendez-vous
+        }
         // Update rdv
         rendezVous.setDateDon(dateValue.atTime(hour, minuteSpinner.getValue()));
         rendezVous.setEntite_id(entiteCombo.getValue().getId());

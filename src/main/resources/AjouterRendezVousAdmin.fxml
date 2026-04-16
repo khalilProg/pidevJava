@@ -73,7 +73,7 @@
                                 <Insets top="10.0" />
                             </padding>
                             <children>
-                                <Button fx:id="confirmerRdv" onAction="#handleConfirmerRdv" styleClass="btn-primary-modern" text="CONFIRMER LE RENDEZ-VOUS" />
+                                <Button fx:id="confirmerRdv" onAction="#handleConfirmerRdvAdmin" styleClass="btn-primary-modern" text="CONFIRMER LE RENDEZ-VOUS" />
                                 <Button fx:id="annulerRdv" mnemonicParsing="false" onAction="#btnAnnuler" styleClass="btn-outline" text="Annuler" />
                             </children>
                         </HBox>
