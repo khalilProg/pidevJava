@@ -1,162 +1,193 @@
 package tn.esprit.controllers;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import tn.esprit.entities.Demande;
+import tn.esprit.entities.Banque;
+import tn.esprit.entities.Transfert;
 import tn.esprit.services.DemandeService;
-import javafx.scene.control.TextField;
+import tn.esprit.services.BanqueService;
+import tn.esprit.services.StockService;
+import tn.esprit.services.TransfertService;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class addDemandeController {
-    @FXML
-    private TextField txtBanque;
-    @FXML private TextField txtType;
-    @FXML private TextField txtQuantite;
-    @FXML private ComboBox<String> comboUrgence;
-    @FXML private ComboBox<String> comboType;
-    private Demande demandeToEdit;
-    private boolean isEditMode = false;
-    private DemandeService service = new DemandeService();
-    private DemandeController mainController;
 
-    public void setMainController(DemandeController controller) {
-        this.mainController = controller;
+    @FXML private ComboBox<Banque> cbBanque;
+    @FXML private Label banqueError;
+
+    @FXML private ComboBox<String> comboType;
+    @FXML private Label typeError;
+
+    @FXML private TextField txtQuantite;
+    @FXML private Label quantiteError;
+
+    @FXML private ComboBox<String> comboUrgence;
+    @FXML private Label urgenceError;
+
+    private final DemandeService demandeService = new DemandeService();
+    private final BanqueService banqueService = new BanqueService();
+    private final StockService stockService = new StockService();
+    private final TransfertService transfertService = new TransfertService();
+
+    @FXML
+    public void initialize() {
+        populateBanques();
+        setupBanqueComboBox();
+    }
+
+    private void populateBanques() {
+        try {
+            List<Banque> banques = banqueService.recuperer();
+            cbBanque.setItems(FXCollections.observableArrayList(banques));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setupBanqueComboBox() {
+        cbBanque.setConverter(new StringConverter<Banque>() {
+            @Override
+            public String toString(Banque b) {
+                return (b != null) ? b.getNom() : "";
+            }
+
+            @Override
+            public Banque fromString(String string) {
+                return null; 
+            }
+        });
     }
 
     @FXML
     public void ajouterDemande() {
-
-        // 🔥 VALIDATION AVANT TOUT
-        if (!validateForm()) {
-            return;
-        }
+        if (!validateForm()) return;
 
         try {
+            // 1. Créer la Demande
+            Demande d = new Demande();
+            Banque selectedBanque = cbBanque.getValue();
+            
+            d.setBanque(selectedBanque.getId());
+            d.setTypeSang(comboType.getValue());
+            d.setQuantite(Integer.parseInt(txtQuantite.getText()));
+            d.setUrgence(comboUrgence.getValue());
+            d.setStatus("CONFIRME"); // Automatiquement confirmée car stock vérifié
+            d.setCreatedAt(LocalDateTime.now());
+            d.setUpdatedAt(LocalDateTime.now());
 
-            if (isEditMode) {
-                // 🔥 UPDATE
-                demandeToEdit.setBanque(Integer.parseInt(txtBanque.getText()));
-                demandeToEdit.setTypeSang(comboType.getValue());
-                demandeToEdit.setQuantite(Integer.parseInt(txtQuantite.getText()));
-                demandeToEdit.setUrgence(comboUrgence.getValue());
+            demandeService.ajouter(d);
 
-                service.modifier(demandeToEdit);
+            // 2. Créer le Transfert associé (EN_ATTENTE de validation de dates)
+            Transfert t = new Transfert();
+            t.setDemande(d);
+            t.setFromOrgId(1); // BloodLink Central
+            t.setFromOrg("BloodLink Central");
+            t.setToOrgId(selectedBanque.getId());
+            t.setToOrg(selectedBanque.getNom());
+            t.setQuantite(d.getQuantite());
+            t.setStatus("EN_ATTENTE");
+            t.setCreatedAt(LocalDateTime.now());
+            t.setUpdatedAt(LocalDateTime.now());
+            
+            // On peut mettre un stock_id par défaut ou chercher le premier stock du type
+            // Pour l'instant on laisse à 1 (ou 0) car le choix final se fera à l'acceptation
+            t.setStock(1); 
 
-                System.out.println("Modifié avec succès");
+            transfertService.ajouter(t);
 
-            } else {
-                // 🔥 ADD
-                Demande d = new Demande();
-
-                d.setBanque(Integer.parseInt(txtBanque.getText()));
-                d.setTypeSang(comboType.getValue());
-                d.setQuantite(Integer.parseInt(txtQuantite.getText()));
-                d.setUrgence(comboUrgence.getValue());
-                d.setStatus("EN_ATTENTE");
-
-                service.ajouter(d);
-
-                System.out.println("Ajouté avec succès");
-            }
-
-            clearForm();
+            System.out.println("Demande et Transfert créés avec succès");
+            goBack();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void clearForm() {
-        txtBanque.clear();
-        txtQuantite.clear();
-        comboType.setValue(null);
-        comboUrgence.setValue(null);
     }
 
     private boolean validateForm() {
-        StringBuilder errors = new StringBuilder();
+        boolean isValid = true;
+        resetErrors();
 
-        // BANQUE
-        if (txtBanque.getText().isEmpty()) {
-            errors.append("Banque ID obligatoire\n");
-        } else {
-            try {
-                Integer.parseInt(txtBanque.getText());
-            } catch (NumberFormatException e) {
-                errors.append("Banque ID doit être un nombre\n");
-            }
+        // VAL: Banque
+        if (cbBanque.getValue() == null) {
+            showError(banqueError, cbBanque, "Veuillez sélectionner une banque");
+            isValid = false;
         }
 
-        // TYPE SANG
+        // VAL: Type Sang
         if (comboType.getValue() == null) {
-            errors.append("Type de sang obligatoire\n");
+            showError(typeError, comboType, "Type de sang obligatoire");
+            isValid = false;
         }
 
-        // QUANTITE
-        if (txtQuantite.getText().isEmpty()) {
-            errors.append("Quantité obligatoire\n");
+        // VAL: Quantité
+        String qStr = txtQuantite.getText();
+        if (qStr == null || qStr.trim().isEmpty()) {
+            showError(quantiteError, txtQuantite, "Quantité obligatoire");
+            isValid = false;
         } else {
             try {
-                int q = Integer.parseInt(txtQuantite.getText());
+                int q = Integer.parseInt(qStr);
                 if (q <= 0) {
-                    errors.append("Quantité doit être > 0\n");
+                    showError(quantiteError, txtQuantite, "La quantité doit être positive");
+                    isValid = false;
+                } else if (comboType.getValue() != null) {
+                    // VERIF STOCK
+                    int available = stockService.getAvailableQuantity(comboType.getValue());
+                    if (q > available) {
+                        showError(quantiteError, txtQuantite, "Stock insuffisant (Disponible: " + available + " UNITÉS)");
+                        isValid = false;
+                    }
                 }
             } catch (NumberFormatException e) {
-                errors.append("Quantité invalide\n");
+                showError(quantiteError, txtQuantite, "Format invalide");
+                isValid = false;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
-        // URGENCE
+        // VAL: Urgence
         if (comboUrgence.getValue() == null) {
-            errors.append("Urgence obligatoire\n");
+            showError(urgenceError, comboUrgence, "Niveau d'urgence obligatoire");
+            isValid = false;
         }
 
-        // AFFICHAGE ERREUR
-        if (errors.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Vérifier les champs");
-            alert.setContentText(errors.toString());
-            alert.show();
-            return false;
-        }
-
-        return true;
+        return isValid;
     }
 
-    @FXML
-
-    private void retour() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutDemande.fxml"));
-            Parent root = loader.load();
-
-            // récupérer la fenêtre actuelle
-            Stage stage = (Stage) txtBanque.getScene().getWindow();
-
-            // changer seulement la scène (PAS nouvelle fenêtre)
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void showError(Label errorLabel, Control field, String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+        errorLabel.setManaged(true);
+        if (!field.getStyleClass().contains("text-field-error")) {
+            field.getStyleClass().add("text-field-error");
         }
     }
 
-    public void setEditData(Demande d) {
-        this.demandeToEdit = d;
-        this.isEditMode = true;
+    private void resetErrors() {
+        Label[] labels = {banqueError, typeError, quantiteError, urgenceError};
+        Control[] fields = {cbBanque, comboType, txtQuantite, comboUrgence};
 
-        txtBanque.setText(String.valueOf(d.getBanque()));
-        comboType.setValue(d.getTypeSang());
-        txtQuantite.setText(String.valueOf(d.getQuantite()));
-        comboUrgence.setValue(d.getUrgence());
+        for (Label l : labels) {
+            if (l != null) {
+                l.setVisible(false);
+                l.setManaged(false);
+            }
+        }
+        for (Control c : fields) {
+            if (c != null) {
+                c.getStyleClass().remove("text-field-error");
+            }
+        }
     }
 
     @FXML
@@ -164,10 +195,8 @@ public class addDemandeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DemandeBackView.fxml"));
             Parent root = loader.load();
-
-            Stage stage = (Stage) txtBanque.getScene().getWindow();
+            Stage stage = (Stage) txtQuantite.getScene().getWindow();
             stage.setScene(new Scene(root));
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -37,17 +37,14 @@ public class backTransfertController {
     private final TransfertService service = new TransfertService();
     private List<Transfert> list;
 
-    // ================= INIT =================
     @FXML
     public void initialize() {
 
-        // ID Formatting ("#6")
         colId.setCellValueFactory(param -> 
             new SimpleStringProperty("#" + param.getValue().getId())
         );
         colId.setStyle("-fx-font-weight: bold; -fx-alignment: center;");
 
-        // Demande Formatting ("DEM-12")
         colDemande.setCellValueFactory(param -> {
             Transfert t = param.getValue();
             if (t.getDemande() != null) {
@@ -58,26 +55,20 @@ public class backTransfertController {
         });
         colDemande.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
 
-        // From Org formatting (Multiline)
         colFrom.setCellFactory(column -> createMultilineCell("fromOrg"));
-
-        // To Org formatting (Multiline)
         colTo.setCellFactory(column -> createMultilineCell("toOrg"));
 
-        // Quantite format ("50 UNITÉS")
         colQuantite.setCellValueFactory(param -> 
             new SimpleStringProperty(param.getValue().getQuantite() + " UNITÉS")
         );
         colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
 
-        // Date Envoie
         colDateEnvoie.setCellValueFactory(param -> {
             LocalDate date = param.getValue().getDateEnvoie();
             if (date == null) return new SimpleStringProperty("--/--/----");
             return new SimpleStringProperty(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         });
 
-        // Status Badges
         colStatus.setCellFactory(column -> {
             return new TableCell<Transfert, String>() {
                 @Override
@@ -91,7 +82,7 @@ public class backTransfertController {
                         Label badge = new Label();
                         badge.setStyle("-fx-padding: 4 12; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 11px;");
                         
-                        String statusStr = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "INCONNU";
+                        String statusStr = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "EN_ATTENTE";
                         
                         if (statusStr.equals("EN_COURS") || statusStr.equals("EN COURS")) {
                             badge.setText("🚚  EN COURS");
@@ -99,6 +90,9 @@ public class backTransfertController {
                         } else if (statusStr.equals("RECU") || statusStr.equals("REÇU")) {
                             badge.setText("✔  REÇU");
                             badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(46, 204, 113, 0.2); -fx-text-fill: #2ecc71; -fx-border-color: #2ecc71; -fx-border-radius: 12;");
+                        } else if (statusStr.equals("EN_ATTENTE") || statusStr.equals("EN ATTENTE")) {
+                            badge.setText("⏳  EN ATTENTE");
+                            badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(52, 152, 219, 0.2); -fx-text-fill: #3498db; -fx-border-color: #3498db; -fx-border-radius: 12;");
                         } else {
                             badge.setText("✖  " + statusStr);
                             badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(231, 76, 60, 0.2); -fx-text-fill: #e74c3c; -fx-border-color: #e74c3c; -fx-border-radius: 12;");
@@ -148,7 +142,6 @@ public class backTransfertController {
         };
     }
 
-    // ================= LOAD =================
     private void loadData() {
         try {
             list = service.recuperer();
@@ -158,24 +151,25 @@ public class backTransfertController {
         }
     }
 
-    // ================= ACTIONS =================
     private void addActions() {
         colActions.setCellFactory(param -> new TableCell<>() {
 
-            private final Button btnEdit = new Button("✏ MODIFIER");
-            private final Button btnDelete = new Button("🗑 SUPPRIMER");
+            private final Button btnAccept = new Button("ACCEPTER");
+            private final Button btnReject = new Button("REFUSER");
+            private final Button btnEdit = new Button("✏");
+            private final Button btnDelete = new Button("🗑");
 
             {
-                // 🎨 STYLES BASED ON MOCKUP
-                btnEdit.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;");
-                btnEdit.setOnMouseEntered(e -> btnEdit.setStyle("-fx-background-color: rgba(255,255,255,0.1); -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px; -fx-background-radius: 15;"));
-                btnEdit.setOnMouseExited(e -> btnEdit.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;"));
+                String baseStyle = "-fx-background-color: transparent; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 10px; -fx-padding: 4 8; -fx-border-radius: 15; -fx-background-radius: 15;";
+                
+                btnAccept.setStyle(baseStyle + "-fx-text-fill: #2ecc71; -fx-border-color: #2ecc71;");
+                btnReject.setStyle(baseStyle + "-fx-text-fill: #e74c3c; -fx-border-color: #e74c3c;");
+                btnEdit.setStyle(baseStyle + "-fx-text-fill: white; -fx-border-color: #555;");
+                btnDelete.setStyle(baseStyle + "-fx-text-fill: #e63939; -fx-border-color: #555;");
 
-                btnDelete.setStyle("-fx-background-color: transparent; -fx-text-fill: #e63939; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;");
-                btnDelete.setOnMouseEntered(e -> btnDelete.setStyle("-fx-background-color: rgba(230, 57, 57, 0.1); -fx-text-fill: #e63939; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px; -fx-background-radius: 15;"));
-                btnDelete.setOnMouseExited(e -> btnDelete.setStyle("-fx-background-color: transparent; -fx-text-fill: #e63939; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;"));
-
-                // ================= DELETE =================
+                btnAccept.setOnAction(e -> handleAccept(getTableView().getItems().get(getIndex())));
+                btnReject.setOnAction(e -> handleReject(getTableView().getItems().get(getIndex())));
+                
                 btnDelete.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
                     try {
@@ -186,20 +180,15 @@ public class backTransfertController {
                     }
                 });
 
-                // ================= EDIT =================
                 btnEdit.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/editBackTransfert.fxml"));
                         Parent root = loader.load();
-
-                        // 🔥 envoyer transfert au controller edit
                         EditTransfertController controller = loader.getController();
                         controller.setTransfert(t);
-
                         Stage stage = (Stage) tableTransfert.getScene().getWindow();
                         stage.setScene(new Scene(root));
-
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -209,21 +198,68 @@ public class backTransfertController {
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty) {
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                     setGraphic(null);
                     return;
                 }
-                HBox actions = new HBox(15);
+                Transfert t = getTableRow().getItem();
+                HBox actions = new HBox(8);
                 actions.setAlignment(Pos.CENTER_LEFT);
-                actions.getChildren().addAll(btnEdit, btnDelete);
+
+                if ("EN_ATTENTE".equals(t.getStatus())) {
+                    actions.getChildren().addAll(btnAccept, btnReject);
+                } else {
+                    actions.getChildren().addAll(btnEdit, btnDelete);
+                }
+                
                 setGraphic(actions);
             }
         });
     }
 
-    @FXML
-    private void addTransfert(javafx.event.ActionEvent event) {
-        navigateTo(event, "/addTransfert.fxml");
+    private void handleAccept(Transfert t) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Planifier le transfert");
+        dialog.setHeaderText("Veuillez choisir les dates pour le transfert #" + t.getId());
+
+        DatePicker dateEnv = new DatePicker(LocalDate.now());
+        DatePicker dateRec = new DatePicker(LocalDate.now().plusDays(1));
+
+        VBox content = new VBox(15, 
+            new Label("Date d'envoi :"), dateEnv,
+            new Label("Date de réception prévue :"), dateRec
+        );
+        content.setPadding(new Insets(20));
+        content.setStyle("-fx-background-color: #1a1a1a;");
+        
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.getDialogPane().getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        dialog.getDialogPane().setStyle("-fx-background-color: #1a1a1a;");
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    t.setDateEnvoie(dateEnv.getValue());
+                    t.setDateReception(dateRec.getValue());
+                    t.setStatus("EN_COURS");
+                    service.modifier(t);
+                    tableTransfert.refresh();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void handleReject(Transfert t) {
+        try {
+            t.setStatus("ANNULÉ");
+            service.modifier(t);
+            tableTransfert.refresh();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -248,7 +284,6 @@ public class backTransfertController {
     
     @FXML
     private void retour() {
-        // Safe navigation logic depending on flow
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_dashboard.fxml"));
             Parent root = loader.load();

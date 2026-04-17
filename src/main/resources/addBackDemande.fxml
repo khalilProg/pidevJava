@@ -11,8 +11,52 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
 <BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.addDemandeController">
+   
+   <left>
+      <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 20px;" />
+            <Label styleClass="logo-text" style="-fx-font-size: 18px;" text="BLOODLINK" />
+            <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 10px; -fx-font-weight: bold;" text="ADMIN" />
+         </HBox>
+         
+         <Region prefHeight="30.0" />
+         <Label styleClass="sidebar-category" text="GESTION" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="    Dashboard" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="👥  Utilisateurs" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item, sidebar-item-active" text="📄  Demandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBack" styleClass="sidebar-item" text="🚚  Transferts" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📝  Questionnaires" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📅  Rendez-vous" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📢  Campagnes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🏥  Collectes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
+         
+         <Region VBox.vgrow="ALWAYS" />
+         <VBox spacing="10.0">
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8px; -fx-background-radius: 20px;" text="👤" />
+                <VBox>
+                    <Label style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;" text="Admin Utilisateur" />
+                    <Label style="-fx-text-fill: -muted; -fx-font-size: 10px;" text="Administrateur" />
+                </VBox>
+            </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent; -fx-border-color: -primary; -fx-border-radius: 20px; -fx-text-fill: -primary; -fx-cursor: hand; -fx-padding: 8;" text="⏻ Déconnexion" />
+         </VBox>
+      </VBox>
+   </left>
+
    <center>
       <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
          <padding>
@@ -23,63 +67,79 @@
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
                 <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="NOUVELLE DEMANDE" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Créer une nouvelle demande de transfert sanguin." />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Envoyer une demande de sang vers une banque partenaire." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" text="← RETOUR" onAction="#goBack" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" />
          </HBox>
 
          <!-- FORM CARD -->
-         <VBox styleClass="glass-card" spacing="25.0" maxWidth="600">
+         <VBox styleClass="glass-card" spacing="30.0" maxWidth="800">
              
-            <!-- BANQUE -->
-            <VBox spacing="8.0">
-                <Label styleClass="form-label" text="IDENTIFIANT BANQUE" />
-                <TextField fx:id="txtBanque" promptText="ID Banque" styleClass="text-field-custom" />
-            </VBox>
+            <Label style="-fx-text-fill: #e63939; -fx-font-weight: 900; -fx-font-size: 18px;" text="DÉTAILS DE LA DEMANDE" />
 
-            <!-- TYPE DE SANG -->
-            <VBox spacing="8.0">
-                <Label styleClass="form-label" text="TYPE DE SANG" />
-                <ComboBox fx:id="comboType" promptText="Type de sang" styleClass="text-field-custom" prefWidth="600">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="A+" />
-                            <String fx:value="A-" />
-                            <String fx:value="B+" />
-                            <String fx:value="B-" />
-                            <String fx:value="O+" />
-                            <String fx:value="O-" />
-                            <String fx:value="AB+" />
-                            <String fx:value="AB-" />
-                        </FXCollections>
-                    </items>
-                </ComboBox>
-            </VBox>
+            <GridPane hgap="30" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" />
+                    <ColumnConstraints percentWidth="50" />
+                </columnConstraints>
+                
+                <!-- BANQUE -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+                    <Label styleClass="form-label" text="BANQUE DESTINATAIRE" />
+                    <ComboBox fx:id="cbBanque" promptText="Sélectionner une banque" styleClass="text-field-custom" prefWidth="800" />
+                    <Label fx:id="banqueError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
 
-            <!-- QUANTITE -->
-            <VBox spacing="8.0">
-                <Label styleClass="form-label" text="QUANTITÉ" />
-                <TextField fx:id="txtQuantite" promptText="Quantité" styleClass="text-field-custom" />
-            </VBox>
+                <!-- TYPE DE SANG -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="TYPE DE SANG" />
+                    <ComboBox fx:id="comboType" promptText="Type de sang" styleClass="text-field-custom" prefWidth="400">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="A+" />
+                                <String fx:value="A-" />
+                                <String fx:value="B+" />
+                                <String fx:value="B-" />
+                                <String fx:value="O+" />
+                                <String fx:value="O-" />
+                                <String fx:value="AB+" />
+                                <String fx:value="AB-" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label fx:id="typeError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
 
-            <!-- URGENCE -->
-            <VBox spacing="8.0">
-                <Label styleClass="form-label" text="NIVEAU D'URGENCE" />
-                <ComboBox fx:id="comboUrgence" promptText="Urgence" styleClass="text-field-custom" prefWidth="600">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="FAIBLE" />
-                            <String fx:value="MOYENNE" />
-                            <String fx:value="ELEVEE" />
-                        </FXCollections>
-                    </items>
-                </ComboBox>
-            </VBox>
+                <!-- QUANTITE -->
+                <VBox spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="QUANTITÉ (UNITÉS)" />
+                    <TextField fx:id="txtQuantite" promptText="Ex: 50" styleClass="text-field-custom" />
+                    <Label fx:id="quantiteError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+
+                <!-- URGENCE -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+                    <Label styleClass="form-label" text="NIVEAU D'URGENCE" />
+                    <ComboBox fx:id="comboUrgence" promptText="Niveau d'urgence" styleClass="text-field-custom" prefWidth="800">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="FAIBLE" />
+                                <String fx:value="MOYENNE" />
+                                <String fx:value="URGENTE" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label fx:id="urgenceError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+            </GridPane>
 
             <Region prefHeight="10" />
 
-            <Button mnemonicParsing="false" onAction="#ajouterDemande" styleClass="button-primary" text="ENREGISTRER LA DEMANDE" prefWidth="600" />
+            <HBox spacing="15.0" alignment="CENTER_RIGHT">
+                <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" text="ANNULER" />
+                <Button mnemonicParsing="false" onAction="#ajouterDemande" styleClass="button-primary" text="✓ ENREGISTRER" prefWidth="180" />
+            </HBox>
             
          </VBox>
 
