@@ -327,3 +327,84 @@
     -fx-background-color: transparent;
     -fx-padding: 0;
 }
+
+/* ==========================================================
+ * CUSTOM LIST UI COMPONENTS
+ * ========================================================== */
+
+.filter-label {
+    -fx-text-fill: -muted;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 1px;
+}
+
+.initials-circle {
+    -fx-background-color: #222222;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+    -fx-padding: 6px;
+    -fx-background-radius: 50%;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-alignment: center;
+}
+
+.donneur-name {
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+}
+
+.badge-groupe {
+    -fx-background-color: rgba(230, 57, 57, 0.2);
+    -fx-text-fill: #e63939;
+    -fx-padding: 4px 12px;
+    -fx-background-radius: 12px;
+    -fx-font-weight: 800;
+    -fx-font-size: 11px;
+}
+
+.badge-campagne {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 6px;
+    -fx-text-fill: -muted;
+    -fx-padding: 4px 10px;
+    -fx-font-size: 10px;
+    -fx-font-weight: 600;
+}
+
+.badge-status {
+    -fx-background-color: rgba(216, 172, 28, 0.2);
+    -fx-text-fill: #d8ac1c;
+    -fx-padding: 4px 12px;
+    -fx-background-radius: 12px;
+    -fx-font-weight: 800;
+    -fx-font-size: 11px;
+}
+
+.action-icon-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-text-fill: -muted;
+    -fx-padding: 6px;
+    -fx-background-radius: 50%;
+    -fx-min-width: 28px;
+    -fx-min-height: 28px;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.action-icon-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-text-fill: #ffffff;
+}
+
+.action-icon-delete {
+    -fx-background-color: rgba(230, 57, 57, 0.1);
+    -fx-text-fill: #e63939;
+}
+
+.action-icon-delete:hover {
+    -fx-background-color: rgba(230, 57, 57, 0.3);
+}

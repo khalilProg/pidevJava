@@ -1,6 +1,5 @@
 package tn.esprit.entities;
 
-import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class client {
         this.id = id;
     }
 
-    public client(){}
+    public client(int i, String s, LocalDate localDate){}
     public client(String typeSang, LocalDate dernierDon, User user) {
         this.typeSang = typeSang;
         this.dernierDon = dernierDon;

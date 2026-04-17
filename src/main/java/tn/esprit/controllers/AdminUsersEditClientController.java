@@ -41,7 +41,7 @@ public class AdminUsersEditClientController {
     @FXML
     private ComboBox<String> roleCombo;
 
-    // Client fields
+    // client fields
     @FXML
     private ComboBox<String> groupeSangCombo;
     @FXML
@@ -150,7 +150,7 @@ public class AdminUsersEditClientController {
             valid = false;
         }
 
-        // Client validation
+        // client validation
         if (groupeSanguin == null || groupeSanguin.isEmpty()) {
             showFieldError(groupeSangError, "Veuillez sélectionner un groupe sanguin.");
             valid = false;
@@ -190,7 +190,7 @@ public class AdminUsersEditClientController {
             return;
         }
 
-        // Then update Client info
+        // Then update client info
         if (currentClient != null) {
             currentClient.setTypeSang(groupeSanguin);
             currentClient.setDernierDon(dernierDon);
@@ -200,7 +200,7 @@ public class AdminUsersEditClientController {
                 clientService.modifier(currentClient);
             } catch (Exception e) {
                 e.printStackTrace();
-                showFieldError(groupeSangError, "Erreur modif Client: " + e.getMessage());
+                showFieldError(groupeSangError, "Erreur modif client: " + e.getMessage());
                 return;
             }
         }

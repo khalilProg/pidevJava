@@ -246,6 +246,16 @@ public class backTransfertController {
     }
 
     @FXML
+    void handleNavigateQuestionnaires(javafx.event.ActionEvent event) {
+        navigateTo(event, "/ListeQuestAdmin.fxml");
+    }
+
+    @FXML
+    void handleNavigateRendezVous(javafx.event.ActionEvent event) {
+        navigateTo(event, "/ListeRdvAdmin.fxml");
+    }
+
+    @FXML
     void handleLogout(javafx.event.ActionEvent event) {
         navigateTo(event, "/login.fxml");
     }

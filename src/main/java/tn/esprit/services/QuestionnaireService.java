@@ -17,25 +17,24 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
 
     @Override
     public void ajouter(Questionnaire questionnaire) throws SQLException {
-        int clientId=1;
-        int campaignId=2;
         String sql = "insert into questionnaire(nom,prenom,age,sexe,poids,autres,client_id,campagne_id,date,group_sanguin) values(?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement q = cn.prepareStatement(sql);
+        PreparedStatement q = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         q.setString(1,questionnaire.getNom());
         q.setString(2,questionnaire.getPrenom());
         q.setInt(3,questionnaire.getAge());
         q.setString(4,questionnaire.getSexe());
         q.setDouble(5,questionnaire.getPoids());
         q.setString(6,questionnaire.getAutres());
-        q.setInt(7, clientId);
-        q.setInt(8, campaignId);
-//        q.setInt(7, questionnaire.getClient().getId());
-//        q.setInt(8, questionnaire.getCampagne().getId());
-        q.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+        q.setInt(7, questionnaire.getClientId());
+        q.setInt(8, questionnaire.getCampagneId());
+        q.setTimestamp(9, Timestamp.valueOf(questionnaire.getDate() != null ? questionnaire.getDate() : LocalDateTime.now()));
         q.setString(10, questionnaire.getGroupeSanguin());
         System.out.println("executing insert...");
         q.executeUpdate();
-
+        ResultSet generatedKeys = q.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            questionnaire.setId(generatedKeys.getInt(1));
+        }
     }
 
     public void supprimer(Questionnaire questionnaire) throws SQLException {
@@ -103,10 +102,34 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
                     rs.getString("autres"),
                     rs.getString("group_sanguin"),
                     rs.getDouble("poids"),
-                    rs.getTimestamp("date").toLocalDateTime());
+                    rs.getTimestamp("date").toLocalDateTime(),
+                    rs.getInt("client_id"),
+                    rs.getInt("campagne_id"));
             questionnaires.add(q);
         }
 
         return questionnaires;
+    }
+
+    public Questionnaire getQuestionnaireById(int id) throws SQLException {
+        String sql = "SELECT * FROM questionnaire WHERE id = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            return new Questionnaire(
+                    rs.getInt("id"),
+                    rs.getInt("age"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("sexe"),
+                    rs.getString("autres"),
+                    rs.getString("group_sanguin"),
+                    rs.getDouble("poids"),
+                    rs.getTimestamp("date").toLocalDateTime(),
+                    rs.getInt("client_id"),
+                    rs.getInt("campagne_id"));
+        }
+        return null;
     }
 }

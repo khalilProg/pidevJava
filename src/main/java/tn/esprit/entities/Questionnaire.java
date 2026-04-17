@@ -7,6 +7,9 @@ public class Questionnaire {
     private String nom, prenom, sexe, autres, groupeSanguin;
     private double poids;
     private RendezVous rendezVous;
+    private int clientId;
+    private int campagneId;
+    private LocalDateTime date;
 
     public Questionnaire() {}
 
@@ -18,6 +21,7 @@ public class Questionnaire {
         this.rendezVous = rendezVous;
     }
 
+    // Original constructor (without clientId/campagneId)
     public Questionnaire(int id, int age, String nom, String prenom, String sexe, String autres, String groupeSanguin, double poids, LocalDateTime date) {
         this.id = id;
         this.age = age;
@@ -28,6 +32,35 @@ public class Questionnaire {
         this.groupeSanguin = groupeSanguin;
         this.poids = poids;
         this.date = date;
+    }
+
+    // Full constructor with clientId and campagneId
+    public Questionnaire(int id, int age, String nom, String prenom, String sexe, String autres, String groupeSanguin, double poids, LocalDateTime date, int clientId, int campagneId) {
+        this.id = id;
+        this.age = age;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+        this.autres = autres;
+        this.groupeSanguin = groupeSanguin;
+        this.poids = poids;
+        this.date = date;
+        this.clientId = clientId;
+        this.campagneId = campagneId;
+    }
+
+    // Constructor used by AjouterQuestionnaire/AjouterQuestAdmin: (nom, prenom, age, sexe, poids, autres, clientId, campagneId, date, groupeSanguin)
+    public Questionnaire(String nom, String prenom, int age, String sexe, double poids, String autres, int clientId, int campagneId, LocalDateTime date, String groupeSanguin) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.sexe = sexe;
+        this.poids = poids;
+        this.autres = autres;
+        this.clientId = clientId;
+        this.campagneId = campagneId;
+        this.date = date;
+        this.groupeSanguin = groupeSanguin;
     }
 
     @Override
@@ -117,6 +150,19 @@ public class Questionnaire {
         this.date = date;
     }
 
-    private LocalDateTime date;
+    public int getClientId() {
+        return clientId;
+    }
 
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public int getCampagneId() {
+        return campagneId;
+    }
+
+    public void setCampagneId(int campagneId) {
+        this.campagneId = campagneId;
+    }
 }

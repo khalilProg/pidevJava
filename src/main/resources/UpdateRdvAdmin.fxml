@@ -1,76 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
-<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.UpdateRdvAdmin">
-    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-    <children>
-        <VBox layoutX="70.0" layoutY="130.0" spacing="30.0" AnchorPane.leftAnchor="670.0">
-            <children>
-                <VBox spacing="8.0">
-                    <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier le Rendez-vous" styleClass="hero-title">
-                            <font>
-                                <Font size="36.0" />
-                            </font>
-                        </Text>
-                        <Text fill="#888888" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajustement administratif de la date et de l'entité de collecte.">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Text>
-                    </children>
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.UpdateRdvAdmin">
+   <!-- Sidebar -->
+   <left>
+      <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 20px;" />
+            <Label styleClass="logo-text" style="-fx-font-size: 18px;" text="BLOODLINK" />
+            <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 10px; -fx-font-weight: bold;" text="ADMIN" />
+         </HBox>
+         
+         <Region prefHeight="30.0" />
+         <Label styleClass="sidebar-category" text="GESTION" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="    Dashboard" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item" text="👥  Utilisateurs" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="📄  Demandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item" text="🚚  Transferts" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateQuestionnaires" styleClass="sidebar-item" text="📝  Questionnaires" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateRendezVous" styleClass="sidebar-item, sidebar-item-active" text="📅  Rendez-vous" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📢  Campagnes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🏥  Collectes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
+         
+         <Region VBox.vgrow="ALWAYS" />
+         <VBox spacing="10.0">
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8px; -fx-background-radius: 20px;" text="👤" />
+                <VBox>
+                    <Label style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;" text="Admin Utilisateur" />
+                    <Label style="-fx-text-fill: -muted; -fx-font-size: 10px;" text="Administrateur" />
                 </VBox>
+            </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: transparent; -fx-border-color: -primary; -fx-border-radius: 20px; -fx-text-fill: -primary; -fx-cursor: hand; -fx-padding: 8;" text="⏻ Déconnexion" />
+         </VBox>
+      </VBox>
+   </left>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="25.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER LE RENDEZ-VOUS" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Ajustement administratif de la date et de l'entité de collecte." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+         </HBox>
 
-                <VBox prefWidth="500.0" spacing="20.0">
-                    <children>
-                        <VBox spacing="10.0">
-                            <children>
-                                <Label text="Date du rendez-vous" styleClass="stat-card-subtitle" />
-                                <DatePicker fx:id="dateRdvPicker" prefWidth="500.0"/>
-                                <Text fx:id="dateError" fill="#FF3E3E" visible="false" styleClass="error-text"/>
-                            </children>
-                        </VBox>
+         <VBox styleClass="glass-card" spacing="25.0" VBox.vgrow="ALWAYS">
+            
+            <!-- Date -->
+            <VBox spacing="8.0">
+                <Label text="DATE DU RENDEZ-VOUS" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: 800;" />
+                <DatePicker fx:id="dateRdvPicker" prefWidth="500.0" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-background-radius: 8;" />
+                <Text fx:id="dateError" fill="#FF3E3E" visible="false" style="-fx-font-size: 11px;" />
+            </VBox>
 
-                        <VBox spacing="10.0">
-                            <children>
-                                <Label text="Heure" styleClass="stat-card-subtitle" />
-                                <HBox spacing="15.0" alignment="CENTER_LEFT">
-                                    <children>
-                                        <Spinner fx:id="hourSpinner" prefWidth="80.0"/>
-                                        <Label text="h" styleClass="stat-card-subtitle" />
-                                        <Spinner fx:id="minuteSpinner" prefWidth="80.0"/>
-                                        <Label text="m" styleClass="stat-card-subtitle" />
-                                    </children>
-                                </HBox>
-                                <Text fx:id="timeError" fill="#FF3E3E" visible="false" styleClass="error-text"/>
-                            </children>
-                        </VBox>
+            <!-- Time -->
+            <VBox spacing="8.0">
+                <Label text="HEURE" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: 800;" />
+                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                    <Spinner fx:id="hourSpinner" prefWidth="80.0" />
+                    <Label text="h" style="-fx-text-fill: -muted; -fx-font-weight: bold;" />
+                    <Spinner fx:id="minuteSpinner" prefWidth="80.0" />
+                    <Label text="m" style="-fx-text-fill: -muted; -fx-font-weight: bold;" />
+                </HBox>
+                <Text fx:id="timeError" fill="#FF3E3E" visible="false" style="-fx-font-size: 11px;" />
+            </VBox>
 
-                        <VBox spacing="10.0">
-                            <children>
-                                <Label text="Entité de collecte" styleClass="stat-card-subtitle" />
-                                <ComboBox fx:id="entiteCombo" prefWidth="500.0"/>
-                            </children>
-                        </VBox>
+            <!-- Entite -->
+            <VBox spacing="8.0">
+                <Label text="ENTITÉ DE COLLECTE" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: 800;" />
+                <ComboBox fx:id="entiteCombo" maxWidth="1.7976931348623157E308" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-background-radius: 8;" />
+            </VBox>
 
-                        <HBox alignment="CENTER_LEFT" spacing="15.0">
-                           <padding>
-                               <Insets top="10.0"/>
-                           </padding>
-                           <children>
-                               <Button fx:id="confirmerBtn" text="Confirmer" onAction="#handleConfirmer" styleClass="btn-primary-modern" />
-                               <Button fx:id="annulerBtn" text="Annuler" onAction="#handleAnnuler" styleClass="btn-outline"/>
-                           </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
-    </children>
-</AnchorPane>
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Buttons -->
+            <HBox spacing="15.0" alignment="CENTER_RIGHT">
+                <Button fx:id="annulerBtn" text="ANNULER" onAction="#handleAnnuler" style="-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 20px; -fx-text-fill: white; -fx-padding: 10 25; -fx-font-weight: bold; -fx-cursor: hand;" />
+                <Button fx:id="confirmerBtn" text="CONFIRMER ✔" onAction="#handleConfirmer" styleClass="button-primary" style="-fx-background-radius: 20px; -fx-padding: 10 25;" />
+            </HBox>
+         </VBox>
+         
+      </VBox>
+   </center>
+</BorderPane>

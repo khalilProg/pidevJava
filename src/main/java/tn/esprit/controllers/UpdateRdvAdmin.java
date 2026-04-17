@@ -2,11 +2,15 @@ package tn.esprit.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.EntiteDeCollecte;
 import tn.esprit.entities.Questionnaire;
@@ -141,4 +145,52 @@ public class UpdateRdvAdmin {
         annulerBtn.getScene().setRoot(root);
     }
 
+    // ── Navigation Handlers ──
+
+    @FXML
+    void handleLogout(ActionEvent event) {
+        navigateTo(event, "/login.fxml");
+    }
+
+    @FXML
+    void handleNavigateDashboard(ActionEvent event) {
+        navigateTo(event, "/admin_dashboard.fxml");
+    }
+
+    @FXML
+    void handleNavigateUsers(ActionEvent event) {
+        navigateTo(event, "/admin_users.fxml");
+    }
+
+    @FXML
+    void handleNavigateDemandes(ActionEvent event) {
+        navigateTo(event, "/DemandeBackView.fxml");
+    }
+
+    @FXML
+    void handleNavigateTransferts(ActionEvent event) {
+        navigateTo(event, "/TransfertBackView.fxml");
+    }
+
+    @FXML
+    void handleNavigateQuestionnaires(ActionEvent event) {
+        navigateTo(event, "/ListeQuestAdmin.fxml");
+    }
+
+    @FXML
+    void handleNavigateRendezVous(ActionEvent event) {
+        navigateTo(event, "/ListeRdvAdmin.fxml");
+    }
+
+    private void navigateTo(ActionEvent event, String path) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(path));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to navigate to " + path + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

@@ -16,18 +16,18 @@ public class RendezVousService implements IGeneralService<RendezVous> {
     }
     @Override
     public void ajouter(RendezVous rendezVous) throws SQLException {
-        int questionnaireId=52;
-        int entiteId=2;
         String sql = "insert into rendez_vous(date_don, status, questionnaire_id, entite_id) values(?,?,?,?)";
-        PreparedStatement rdv = cn.prepareStatement(sql);
+        PreparedStatement rdv = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         rdv.setTimestamp(1,Timestamp.valueOf(rendezVous.getDateDon()));
         rdv.setString(2,rendezVous.getStatus());
-        rdv.setInt(3,questionnaireId);
-        rdv.setInt(4,entiteId);
-//        rdv.setInt(3, rendezVous.getQuestionnaire().getId());
-//        rdv.setInt(4, rendezVous.getEntiteDeCollecte().getId());
+        rdv.setInt(3, rendezVous.getQuestionnaire_id());
+        rdv.setInt(4, rendezVous.getEntite_id());
         System.out.println("executing insert...");
         rdv.executeUpdate();
+        ResultSet generatedKeys = rdv.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            rendezVous.setId(generatedKeys.getInt(1));
+        }
     }
 
     @Override
@@ -36,6 +36,24 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         PreparedStatement pstRV = cn.prepareStatement(rdv);
         pstRV.setInt(1, rendezVous.getId());
         pstRV.executeUpdate();
+    }
+
+    public boolean supprimerForClient(int rdvId) throws SQLException {
+        String sql = "UPDATE rendez_vous SET status = 'annulé' WHERE id = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setInt(1, rdvId);
+        return pst.executeUpdate() > 0;
+    }
+
+    public boolean hasRendezVous(int clientId, int campagneId) throws SQLException {
+        String sql = "SELECT rv.id FROM rendez_vous rv " +
+                "JOIN questionnaire q ON rv.questionnaire_id = q.id " +
+                "WHERE q.client_id = ? AND q.campagne_id = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setInt(1, clientId);
+        pst.setInt(2, campagneId);
+        ResultSet rs = pst.executeQuery();
+        return rs.next();
     }
 
     public int chercher(RendezVous rendezVous) throws SQLException {
@@ -54,11 +72,12 @@ public class RendezVousService implements IGeneralService<RendezVous> {
     @Override
     public void modifier(RendezVous rendezVous) throws SQLException {
         if(chercher(rendezVous)== rendezVous.getId()){
-            String sql = "UPDATE rendez_vous SET date_don = ?, status = ? WHERE id=?";
+            String sql = "UPDATE rendez_vous SET date_don = ?, status = ?, entite_id = ? WHERE id=?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setTimestamp(1, Timestamp.valueOf(rendezVous.getDateDon()));
             pst.setString(2, rendezVous.getStatus());
-            pst.setInt(3, rendezVous.getId());
+            pst.setInt(3, rendezVous.getEntite_id());
+            pst.setInt(4, rendezVous.getId());
             pst.executeUpdate();
         }
         else {
@@ -76,7 +95,9 @@ public class RendezVousService implements IGeneralService<RendezVous> {
             RendezVous rdv = new RendezVous(
                     rs.getInt("id"),
                     rs.getString("status"),
-                    rs.getTimestamp("date_don").toLocalDateTime()
+                    rs.getTimestamp("date_don").toLocalDateTime(),
+                    rs.getInt("questionnaire_id"),
+                    rs.getInt("entite_id")
             );
             rendezvouet.add(rdv);
         }

@@ -1,36 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css"
-            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.ListeRdvAdmin">
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeRdvAdmin">
+   <!-- Sidebar -->
+   <left>
+      <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <!-- Logo -->
+         <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 20px;" />
+            <Label styleClass="logo-text" style="-fx-font-size: 18px;" text="BLOODLINK" />
+            <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 10px; -fx-font-weight: bold;" text="ADMIN" />
+         </HBox>
+         
+         <Region prefHeight="30.0" />
+         <Label styleClass="sidebar-category" text="GESTION" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="    Dashboard" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item" text="👥  Utilisateurs" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="📄  Demandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item" text="🚚  Transferts" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateQuestionnaires" styleClass="sidebar-item" text="📝  Questionnaires" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateRendezVous" styleClass="sidebar-item, sidebar-item-active" text="📅  Rendez-vous" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📢  Campagnes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🏥  Collectes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
+         
+         <Region VBox.vgrow="ALWAYS" />
+         <VBox spacing="10.0">
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8px; -fx-background-radius: 20px;" text="👤" />
+                <VBox>
+                    <Label style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;" text="Admin Utilisateur" />
+                    <Label style="-fx-text-fill: -muted; -fx-font-size: 10px;" text="Administrateur" />
+                </VBox>
+            </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: transparent; -fx-border-color: -primary; -fx-border-radius: 20px; -fx-text-fill: -primary; -fx-cursor: hand; -fx-padding: 8;" text="⏻ Déconnexion" />
+         </VBox>
+      </VBox>
+   </left>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="35.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         
+         <!-- Header -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="RENDEZ-VOUS" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les rendez-vous des donneurs et leur statut." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox spacing="15.0" alignment="CENTER">
+               <Button text="🧠 Générer Analyse IA" style="-fx-background-color: transparent; -fx-border-color: rgba(230,57,57,0.3); -fx-text-fill: #e63939; -fx-border-radius: 20px; -fx-padding: 10px 20px; -fx-cursor: hand;" />
+               <Button text="📥" style="-fx-background-color: transparent; -fx-border-color: rgba(230,57,57,0.5); -fx-text-fill: #e63939; -fx-border-radius: 20px; -fx-padding: 10px 15px; -fx-cursor: hand;" />
+               <Button text="📅  2 RÉS." styleClass="button-primary" style="-fx-background-radius: 20px; -fx-padding: 10px 25px; -fx-font-weight: 800;" />
+            </HBox>
+         </HBox>
 
-    <!-- Navbar -->
-    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
-    <Text fill="WHITE" layoutX="300" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Liste rendez vous" styleClass="hero-title">
-        <font><Font size="32.0"/></font>
-    </Text>
-    <Text fill="#888888" layoutX="300" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Consultez la liste des rendez vous soumis.">
-        <font><Font size="16.0"/></font>
-    </Text>
-    <TableView fx:id="tableView" prefWidth="1400" prefHeight="520" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30" >
-        <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
-            <TableColumn fx:id="dateColumn" text="Date" prefWidth="100"/>
-            <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
-            <TableColumn fx:id="qIdColumn" text="Questionnaire id" prefWidth="100"/>
-            <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="120"/>
-            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0"/>
-        </columns>
-    </TableView>
+         <VBox styleClass="glass-card" spacing="30.0" VBox.vgrow="ALWAYS">
+            
+            <!-- Filter Section -->
+            <VBox spacing="20.0">
+               <!-- Filter Row 1 -->
+               <HBox spacing="20.0">
+                  <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                     <Label text="RECHERCHE" styleClass="filter-label" />
+                     <TextField promptText="Nom ou Prénom..." styleClass="text-field-custom" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="300.0">
+                     <Label text="CAMPAGNE" styleClass="filter-label" />
+                     <ComboBox promptText="Toutes les campagnes" maxWidth="1.7976931348623157E308" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="300.0">
+                     <Label text="ENTITÉ" styleClass="filter-label" />
+                     <ComboBox promptText="Toutes les entités" maxWidth="1.7976931348623157E308" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
+                  </VBox>
+               </HBox>
+               <!-- Filter Row 2 -->
+               <HBox spacing="20.0" alignment="BOTTOM_LEFT">
+                  <VBox spacing="8.0" prefWidth="200.0">
+                     <Label text="DATE" styleClass="filter-label" />
+                     <DatePicker promptText="mm / dd / yyyy" maxWidth="1.7976931348623157E308" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8;" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="200.0">
+                     <Label text="HEURE" styleClass="filter-label" />
+                     <TextField promptText="--:-- --" styleClass="text-field-custom" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="200.0">
+                     <Label text="STATUT" styleClass="filter-label" />
+                     <ComboBox promptText="Tous les statuts" maxWidth="1.7976931348623157E308" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="200.0">
+                     <Label text="TRI" styleClass="filter-label" />
+                     <ComboBox promptText="Ordre par défaut" maxWidth="1.7976931348623157E308" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button text="↺ RESET" style="-fx-background-color: transparent; -fx-border-color: #e63939; -fx-text-fill: #e63939; -fx-font-weight: 800; -fx-border-radius: 20px; -fx-padding: 10px 30px; -fx-cursor: hand;" />
+               </HBox>
+            </VBox>
 
-</AnchorPane>
+            <!-- Table -->
+            <TableView fx:id="tableView" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
+               <columns>
+                  <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                  <TableColumn fx:id="donneurColumn" text="DONNEUR" prefWidth="250" />
+                  <TableColumn fx:id="dateLieuColumn" text="DATE &amp; LIEU" prefWidth="250" />
+                  <TableColumn fx:id="campagneColumn" text="CAMPAGNE" prefWidth="150" />
+                  <TableColumn fx:id="statusColumn" text="STATUT" prefWidth="120" />
+                  <TableColumn fx:id="actionsColumn" text="ACTIONS" prefWidth="150" />
+               </columns>
+            </TableView>
+         </VBox>
+         
+      </VBox>
+   </center>
+</BorderPane>

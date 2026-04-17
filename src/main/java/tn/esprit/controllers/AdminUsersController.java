@@ -246,6 +246,16 @@ public class AdminUsersController implements Initializable {
     }
 
     @FXML
+    void handleNavigateQuestionnaires(ActionEvent event) {
+        navigateTo(event, "/ListeQuestAdmin.fxml");
+    }
+
+    @FXML
+    void handleNavigateRendezVous(ActionEvent event) {
+        navigateTo(event, "/ListeRdvAdmin.fxml");
+    }
+
+    @FXML
     void handleNavigateAddUser(ActionEvent event) {
         navigateTo(event, "/admin_users_add.fxml");
     }

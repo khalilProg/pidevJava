@@ -28,7 +28,7 @@ public class ClientService implements IGeneralService<client> {
         if (generatedKeys.next()) {
             c.setId(generatedKeys.getInt(1));
         }
-        System.out.println("Client ajouté avec id=" + c.getId());
+        System.out.println("client ajouté avec id=" + c.getId());
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ClientService implements IGeneralService<client> {
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setInt(1, c.getId());
             pst.executeUpdate();
-            System.out.println("Client supprimé avec id=" + c.getId());
+            System.out.println("client supprimé avec id=" + c.getId());
         } catch (SQLException e) {
             System.out.println("Erreur suppression client: " + e.getMessage());
         }
@@ -72,7 +72,7 @@ public class ClientService implements IGeneralService<client> {
                 pst.setDate(2, Date.valueOf(c.getDernierDon()));
                 pst.setInt(3, c.getId());
                 pst.executeUpdate();
-                System.out.println("Client modifié avec id=" + c.getId());
+                System.out.println("client modifié avec id=" + c.getId());
             } else {
                 System.out.println("Ce client n'existe pas");
             }
@@ -108,5 +108,32 @@ public class ClientService implements IGeneralService<client> {
             clients.add(cl);
         }
         return clients;
+    }
+
+    public client getByPhone(String phone) throws SQLException {
+        String sql = "SELECT c.id, c.type_sang, c.dernier_don, c.user_id, " +
+                "u.nom, u.prenom, u.email, u.password, u.role, u.telephone " +
+                "FROM client c JOIN user u ON c.user_id = u.id WHERE u.telephone = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, phone);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            User u = new User(
+                    rs.getInt("user_id"),
+                    rs.getString("email"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("password"),
+                    rs.getString("role"),
+                    rs.getString("telephone")
+            );
+            return new client(
+                    rs.getInt("id"),
+                    rs.getString("type_sang"),
+                    rs.getDate("dernier_don").toLocalDate(),
+                    u
+            );
+        }
+        return null;
     }
 }
