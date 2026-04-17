@@ -5,13 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.backDemandeController">
-   <!-- Sidebar -->
+   
    <left>
       <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
          <padding>
@@ -53,7 +54,6 @@
       </VBox>
    </left>
 
-   <!-- Main Content -->
    <center>
       <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
          <padding>
@@ -62,21 +62,35 @@
          
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="GESTION DES DEMANDES" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les demandes de produits sanguins." />
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="DEMANDES DE SANG" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les demandes de sang et validez ou refusez les requêtes." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
-            <Button text="➕ Ajouter Demande" onAction="#goToAddDemande" styleClass="button-primary" style="-fx-background-radius: 20; -fx-padding: 8 20;" />
+            <Button mnemonicParsing="false" text="+ NOUVELLE DEMANDE" onAction="#goToAddDemande" styleClass="button-primary" style="-fx-padding: 8 20; -fx-background-radius: 20;" />
          </HBox>
 
          <VBox styleClass="glass-card" spacing="20.0" VBox.vgrow="ALWAYS">
+            
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+                <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="text-field-custom" prefWidth="400.0">
+                    <Label text="🔍" style="-fx-text-fill: -muted;" />
+                    <TextField promptText="Rechercher par type, statut, banque..." styleClass="transparent-input" HBox.hgrow="ALWAYS" />
+                </HBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20px; -fx-text-fill: white; -fx-padding: 8 20;" text="Toutes urgenc" />
+                <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20px; -fx-text-fill: white; -fx-padding: 8 20;" text="Tous statuts" />
+            </HBox>
+
             <TableView fx:id="tableDemande" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
                <columns>
                   <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
-                  <TableColumn fx:id="colType" text="Type Sanguin" prefWidth="150"/>
-                  <TableColumn fx:id="colQuantite" text="Quantité" prefWidth="120"/>
-                  <TableColumn fx:id="colStatus" text="Statut" prefWidth="120"/>
-                  <TableColumn fx:id="colActions" text="Actions" prefWidth="200"/>
+                  <TableColumn fx:id="colBanque" text="BANQUE" prefWidth="250"/>
+                  <TableColumn fx:id="colType" text="TYPE SANG" prefWidth="100"/>
+                  <TableColumn fx:id="colQuantite" text="QUANTITÉ" prefWidth="100"/>
+                  <TableColumn fx:id="colUrgence" text="URGENCE" prefWidth="120"/>
+                  <TableColumn fx:id="colStatus" text="STATUT" prefWidth="120"/>
+                  <TableColumn fx:id="colDate" text="DATE" prefWidth="120"/>
+                  <TableColumn fx:id="colActions" text="ACTIONS" prefWidth="150"/>
                </columns>
             </TableView>
          </VBox>

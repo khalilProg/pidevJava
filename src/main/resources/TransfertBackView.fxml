@@ -67,7 +67,6 @@
                  <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Suivez les transferts entre organisations et leur statut." />
              </VBox>
              <Region HBox.hgrow="ALWAYS" />
-             <Button mnemonicParsing="false" text="+ NOUVEL TRANSFERT" onAction="#addTransfert" styleClass="button-primary" style="-fx-padding: 8 20; -fx-background-radius: 20;" />
          </HBox>
 
          <VBox styleClass="glass-card" spacing="20.0" VBox.vgrow="ALWAYS">

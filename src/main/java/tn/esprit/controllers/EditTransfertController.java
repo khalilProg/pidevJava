@@ -12,16 +12,25 @@ import tn.esprit.services.TransfertService;
 
 public class EditTransfertController {
 
-    @FXML private Label titleLabel; // Added to match mockup dynamic title
+    @FXML private Label titleLabel;
 
     @FXML private TextField txtFrom;
+    @FXML private Label txtFromError;
+
     @FXML private TextField txtTo;
+    @FXML private Label txtToError;
+
     @FXML private TextField txtQuantite;
+    @FXML private Label txtQuantiteError;
 
     @FXML private DatePicker dateEnvoie;
+    @FXML private Label dateEnvoieError;
+
     @FXML private DatePicker dateReception;
+    @FXML private Label dateReceptionError;
 
     @FXML private ComboBox<String> comboStatus;
+    @FXML private Label comboStatusError;
 
     private Transfert transfert;
     private final TransfertService service = new TransfertService();
@@ -38,7 +47,6 @@ public class EditTransfertController {
     public void setTransfert(Transfert t) {
         this.transfert = t;
 
-        // Dynamic title matching mockup
         if (titleLabel != null) {
             titleLabel.setText("MODIFIER TRANSFERT #" + t.getId());
         }
@@ -50,7 +58,6 @@ public class EditTransfertController {
         dateEnvoie.setValue(t.getDateEnvoie());
         dateReception.setValue(t.getDateReception());
 
-        // Map status cleanly to combo
         String status = t.getStatus();
         if (status != null) {
             status = status.toUpperCase();
@@ -75,7 +82,6 @@ public class EditTransfertController {
             transfert.setDateEnvoie(dateEnvoie.getValue());
             transfert.setDateReception(dateReception.getValue());
 
-            // Convert back to DB format
             String status = comboStatus.getValue();
             if (status.equals("EN COURS")) status = "EN_COURS";
             if (status.equals("REÇU")) status = "RECU";
@@ -85,7 +91,6 @@ public class EditTransfertController {
 
             service.modifier(transfert);
 
-            // Go back directly instead of alerting to save clicks
             retour();
 
         } catch (Exception e) {
@@ -94,33 +99,80 @@ public class EditTransfertController {
     }
 
     private boolean validateForm() {
-        StringBuilder errors = new StringBuilder();
+        boolean isValid = true;
+        resetErrors();
 
-        if (txtFrom.getText().isEmpty()) errors.append("- ID Origine obligatoire\n");
-        if (txtTo.getText().isEmpty()) errors.append("- ID Destination obligatoire\n");
-        if (txtQuantite.getText().isEmpty()) {
-            errors.append("- Quantité obligatoire\n");
+        if (txtFrom.getText() == null || txtFrom.getText().trim().isEmpty()) {
+            showError(txtFromError, txtFrom, "ID Origine obligatoire");
+            isValid = false;
+        }
+
+        if (txtTo.getText() == null || txtTo.getText().trim().isEmpty()) {
+            showError(txtToError, txtTo, "ID Destination obligatoire");
+            isValid = false;
+        }
+
+        if (txtQuantite.getText() == null || txtQuantite.getText().trim().isEmpty()) {
+            showError(txtQuantiteError, txtQuantite, "Quantité obligatoire");
+            isValid = false;
         } else {
             try {
                 if (Integer.parseInt(txtQuantite.getText()) <= 0) {
-                    errors.append("- Quantité doit être > 0\n");
+                    showError(txtQuantiteError, txtQuantite, "Doit être > 0");
+                    isValid = false;
                 }
             } catch (NumberFormatException e) {
-                errors.append("- Quantité invalide\n");
+                showError(txtQuantiteError, txtQuantite, "Non valide");
+                isValid = false;
             }
         }
-        if (dateEnvoie.getValue() == null) errors.append("- Date d'envoi obligatoire\n");
-        if (dateReception.getValue() == null) errors.append("- Date de réception obligatoire\n");
-        if (comboStatus.getValue() == null) errors.append("- Statut obligatoire\n");
 
-        if (errors.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Erreur de validation");
-            alert.setContentText(errors.toString());
-            alert.show();
-            return false;
+        if (dateEnvoie.getValue() == null) {
+            showError(dateEnvoieError, dateEnvoie, "Date obligatoire");
+            isValid = false;
         }
-        return true;
+
+        if (dateReception.getValue() == null) {
+            showError(dateReceptionError, dateReception, "Date obligatoire");
+            isValid = false;
+        } else if (dateEnvoie.getValue() != null && dateReception.getValue().isBefore(dateEnvoie.getValue())) {
+            showError(dateReceptionError, dateReception, "Date invalide");
+            isValid = false;
+        }
+
+        if (comboStatus.getValue() == null) {
+            showError(comboStatusError, comboStatus, "Statut obligatoire");
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private void showError(Label errorLabel, Control inputField, String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+        errorLabel.setManaged(true);
+        if (!inputField.getStyleClass().contains("text-field-error")) {
+            inputField.getStyleClass().add("text-field-error");
+        }
+    }
+
+    private void resetErrors() {
+        Label[] labels = {txtFromError, txtToError, txtQuantiteError, dateEnvoieError, dateReceptionError, comboStatusError};
+        Control[] fields = {txtFrom, txtTo, txtQuantite, dateEnvoie, dateReception, comboStatus};
+
+        for (Label l : labels) {
+            if (l != null) {
+                l.setVisible(false);
+                l.setManaged(false);
+                l.setText("");
+            }
+        }
+        for (Control c : fields) {
+            if (c != null) {
+                c.getStyleClass().remove("text-field-error");
+            }
+        }
     }
 
     @FXML
