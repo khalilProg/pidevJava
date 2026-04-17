@@ -29,7 +29,7 @@
       <!-- Center Card -->
       <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
-            <VBox maxWidth="450.0" prefWidth="450.0" spacing="20.0" styleClass="glass-card">
+            <VBox maxWidth="450.0" prefWidth="450.0" spacing="15.0" styleClass="glass-card">
                <children>
                   <!-- Title -->
                   <VBox alignment="CENTER" spacing="5.0">
@@ -39,57 +39,59 @@
                         <Label styleClass="subtitle-text" text="Rejoignez la communauté BloodLink" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </VBox>
 
-                  <!-- Error Message Label -->
-                  <Label fx:id="errorLabel" style="-fx-text-fill: -primary; -fx-font-weight: bold; -fx-font-size: 13px;" text="" visible="false" />
-
                   <!-- Prénom -->
-                  <VBox spacing="5.0">
+                  <VBox spacing="3.0">
                      <children>
                         <Label styleClass="form-label" text="PRÉNOM" />
                         <TextField fx:id="prenomF" maxWidth="1.7976931348623157E308" promptText="Votre prénom" styleClass="text-field-custom" />
+                        <Label fx:id="prenomError" styleClass="field-error" text="" visible="false" managed="false" />
                      </children>
                   </VBox>
 
                   <!-- Nom -->
-                  <VBox spacing="5.0">
+                  <VBox spacing="3.0">
                      <children>
                         <Label styleClass="form-label" text="NOM" />
                         <TextField fx:id="nomF" maxWidth="1.7976931348623157E308" promptText="Votre nom" styleClass="text-field-custom" />
+                        <Label fx:id="nomError" styleClass="field-error" text="" visible="false" managed="false" />
                      </children>
                   </VBox>
 
                   <!-- Email -->
-                  <VBox spacing="5.0">
+                  <VBox spacing="3.0">
                      <children>
                         <Label styleClass="form-label" text="ADRESSE EMAIL" />
                         <TextField fx:id="emailF" maxWidth="1.7976931348623157E308" promptText="nom@exemple.com" styleClass="text-field-custom" />
+                        <Label fx:id="emailError" styleClass="field-error" text="" visible="false" managed="false" />
                      </children>
                   </VBox>
 
                   <!-- Phone -->
-                  <VBox spacing="5.0">
+                  <VBox spacing="3.0">
                      <children>
                         <Label styleClass="form-label" text="TÉLÉPHONE" />
                         <TextField fx:id="telF" maxWidth="1.7976931348623157E308" promptText="Ex: +216 12 345 678" styleClass="text-field-custom" />
+                        <Label fx:id="telError" styleClass="field-error" text="" visible="false" managed="false" />
                      </children>
                   </VBox>
 
                   <!-- Password -->
-                  <VBox spacing="5.0">
+                  <VBox spacing="3.0">
                      <children>
                         <Label styleClass="form-label" text="MOT DE PASSE" />
                         <PasswordField fx:id="passF" maxWidth="1.7976931348623157E308" promptText="........" styleClass="text-field-custom" />
+                        <Label fx:id="passError" styleClass="field-error" text="" visible="false" managed="false" />
                      </children>
                   </VBox>
 
                   <!-- Action Buttons -->
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegister" styleClass="button-primary" text="👤+ S'INSCRIRE">
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
                   

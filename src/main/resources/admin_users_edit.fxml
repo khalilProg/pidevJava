@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminUsersAddController">
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminUsersEditController">
    <!-- Sidebar -->
    <left>
       <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
@@ -29,7 +29,6 @@
          
          <Label styleClass="sidebar-category" text="GESTION" />
          
-         <!-- Links -->
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="    Dashboard" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item, sidebar-item-active" text="👥  Utilisateurs" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
@@ -67,15 +66,15 @@
          
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="NOUVEL UTILISATEUR" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Créez un nouveau compte utilisateur dans le système." />
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER UTILISATEUR" />
+                <Label fx:id="subtitleLabel" style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Mettre à jour les informations du compte." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" text="← RETOUR" onAction="#handleNavigateUsers" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" />
          </HBox>
          
-         <VBox styleClass="glass-card" spacing="25.0" maxWidth="800.0" alignment="CENTER_LEFT">
-             <Label style="-fx-text-fill: -primary; -fx-font-weight: 900; -fx-font-size: 18px;" text="DÉTAILS DU NOUVEL UTILISATEUR" />
+         <VBox styleClass="glass-card" spacing="25.0" maxWidth="800.0" alignment="CENTER_LEFT" style="-fx-padding: 40;">
+             <Label style="-fx-text-fill: -primary; -fx-font-weight: 900; -fx-font-size: 18px;" text="INFORMATIONS DU PROFIL" />
              
              <!-- Row 1: Prenom & Nom -->
              <HBox spacing="20.0">
@@ -98,11 +97,11 @@
                  <Label fx:id="emailError" styleClass="field-error" text="" visible="false" managed="false" />
              </VBox>
              
-             <!-- Row 3: Pass & Role -->
+             <!-- Row 3: Pass (optional) & Role -->
              <HBox spacing="20.0">
                  <VBox spacing="3.0" HBox.hgrow="ALWAYS">
-                     <Label styleClass="form-label" text="MOT DE PASSE" />
-                     <PasswordField fx:id="passF" promptText="........" styleClass="text-field-custom" />
+                     <Label styleClass="form-label" text="MOT DE PASSE (Optionnel)" />
+                     <PasswordField fx:id="passF" promptText="Laissez vide pour conserver l'actuel" styleClass="text-field-custom" />
                      <Label fx:id="passError" styleClass="field-error" text="" visible="false" managed="false" />
                  </VBox>
                  <VBox spacing="3.0" HBox.hgrow="ALWAYS">
@@ -113,7 +112,7 @@
              </HBox>
              
              <HBox alignment="CENTER_RIGHT">
-                 <Button mnemonicParsing="false" onAction="#handleAddUser" styleClass="button-primary" style="-fx-background-radius: 20px; -fx-padding: 10 30;" text="✓ CRÉER LE COMPTE" />
+                 <Button mnemonicParsing="false" onAction="#handleUpdateUser" styleClass="button-primary" style="-fx-background-radius: 20px; -fx-padding: 10 30;" text="✓ METTRE À JOUR" />
              </HBox>
          </VBox>
          

@@ -223,3 +223,37 @@
 .card-btn-outline:hover {
     -fx-background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* Per-field error label */
+.field-error {
+    -fx-text-fill: #e63939;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-padding: 2 0 0 2;
+}
+
+/* Invalid field border highlight */
+.text-field-error {
+    -fx-border-color: #e63939;
+}
+
+/* Combo Box Popup Styling */
+.combo-box-popup .list-view {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8 12;
+}
+
+.combo-box-popup .list-cell:filled:selected,
+.combo-box-popup .list-cell:filled:hover {
+    -fx-background-color: -primary;
+    -fx-text-fill: white;
+}
