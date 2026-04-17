@@ -1,0 +1,63 @@
+.root {
+    -fx-background-color: #0a0a0a;
+    -fx-font-family: "Montserrat";
+}
+
+/* Container */
+.container {
+    -fx-padding: 20;
+}
+
+/* Table */
+.table-dark {
+    -fx-background-color: #111;
+    -fx-border-color: rgba(255,255,255,0.08);
+}
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: #111;
+}
+
+.table-view .label {
+    -fx-text-fill: white;
+}
+
+.table-row-cell {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-text-fill: white;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: rgba(230,57,57,0.2);
+}
+
+/* Bouton principal */
+.btn-primary {
+    -fx-background-color: #e63939;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+
+/* Boutons actions */
+.btn-edit {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.btn-edit:hover {
+    -fx-text-fill: #e63939;
+}
+
+.btn-delete {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.btn-delete:hover {
+    -fx-text-fill: red;
+}

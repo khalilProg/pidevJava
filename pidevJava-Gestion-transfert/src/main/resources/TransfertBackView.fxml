@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.backTransfertController"
+            prefHeight="500" prefWidth="900"
+            stylesheets="@style.css">
+
+    <children>
+
+        <!-- TITLE -->
+        <Label text="Gestion des Transferts"
+               layoutX="20"
+               layoutY="10"
+               styleClass="form-title"/>
+
+        <!-- TABLE -->
+        <TableView fx:id="tableTransfert"
+                   layoutX="20"
+                   layoutY="50"
+                   prefWidth="860"
+                   prefHeight="360">
+
+            <columns>
+
+                <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                <TableColumn fx:id="colFrom" text="From" prefWidth="120"/>
+                <TableColumn fx:id="colTo" text="To" prefWidth="120"/>
+                <TableColumn fx:id="colQuantite" text="Quantité" prefWidth="100"/>
+                <TableColumn fx:id="colDateEnvoie" text="Date Envoi" prefWidth="120"/>
+                <TableColumn fx:id="colDateReception" text="Date Réception" prefWidth="130"/>
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="colActions" text="Actions" prefWidth="180"/>
+
+            </columns>
+
+        </TableView>
+
+        <!-- BUTTONS -->
+        <HBox spacing="10" layoutX="20" layoutY="430">
+
+            <Button text="Retour"
+                    onAction="#retour"
+                    styleClass="btn-secondary"/>
+
+
+        </HBox>
+
+    </children>
+</AnchorPane>

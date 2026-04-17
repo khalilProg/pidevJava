@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.addTrasnfertController"
+            stylesheets="@style.css"
+            prefHeight="400" prefWidth="500">
+
+    <children>
+
+        <VBox spacing="15" layoutX="50" layoutY="30" prefWidth="400" styleClass="form-card">
+
+            <!-- TITLE -->
+            <Label text="Ajouter un Transfert" styleClass="label-title"/>
+
+            <!-- FROM -->
+            <TextField fx:id="txtFrom"
+                       promptText="ID Organisation Source"/>
+
+            <!-- TO -->
+            <TextField fx:id="txtTo"
+                       promptText="ID Organisation Destination"/>
+
+            <!-- QUANTITE -->
+            <TextField fx:id="txtQuantite"
+                       promptText="Quantité"/>
+
+            <!-- DATES -->
+            <DatePicker fx:id="dateEnvoie"/>
+            <DatePicker fx:id="dateReception"/>
+
+            <!-- STATUS -->
+            <ComboBox fx:id="comboStatus" promptText="Statut">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="EN_ATTENTE"/>
+                        <String fx:value="VALIDE"/>
+                        <String fx:value="REFUSE"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- BUTTONS -->
+            <HBox spacing="10">
+
+                <!-- VALIDER -->
+                <Button text="Valider"
+                        styleClass="btn-primary"
+                        onAction="#ajouterTransfert"/>
+
+                <!-- RETOUR -->
+                <Button text="Fermer"
+                        styleClass="btn-secondary"
+                        onAction="#fermer"/>
+
+            </HBox>
+
+        </VBox>
+
+    </children>
+</AnchorPane>

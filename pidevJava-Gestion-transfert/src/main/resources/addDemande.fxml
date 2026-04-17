@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.addDemandeController"
+            prefWidth="600" prefHeight="400"
+            style="-fx-background-color:#0a0a0a;">
+
+    <children>
+
+        <!-- FORM CONTAINER -->
+        <VBox spacing="15"
+              layoutX="80"
+              layoutY="60"
+              style="-fx-background-color:#111;
+                     -fx-padding:20;
+                     -fx-background-radius:10;
+                     -fx-border-color:#222;
+                     -fx-border-radius:10;">
+
+            <!-- BANQUE -->
+            <TextField fx:id="txtBanque"
+                       promptText="ID Banque"
+                       style="-fx-background-color:#1a1a1a;
+                              -fx-text-fill:white;
+                              -fx-prompt-text-fill:gray;
+                              -fx-background-radius:6;"/>
+
+            <!-- TYPE SANG -->
+            <ComboBox fx:id="comboType"
+                      promptText="Type de sang"
+                      style="-fx-background-color:#1a1a1a;
+                             -fx-text-fill:white;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="A+"/>
+                        <String fx:value="A-"/>
+                        <String fx:value="B+"/>
+                        <String fx:value="B-"/>
+                        <String fx:value="O+"/>
+                        <String fx:value="O-"/>
+                        <String fx:value="AB+"/>
+                        <String fx:value="AB-"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- QUANTITE -->
+            <TextField fx:id="txtQuantite"
+                       promptText="Quantité"
+                       style="-fx-background-color:#1a1a1a;
+                              -fx-text-fill:white;
+                              -fx-prompt-text-fill:gray;
+                              -fx-background-radius:6;"/>
+
+            <!-- URGENCE -->
+            <ComboBox fx:id="comboUrgence"
+                      promptText="Urgence"
+                      style="-fx-background-color:#1a1a1a;
+                             -fx-text-fill:white;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="FAIBLE"/>
+                        <String fx:value="MOYENNE"/>
+                        <String fx:value="ELEVEE"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- BUTTON -->
+            <Button text="Ajouter Demande"
+                    onAction="#ajouterDemande"
+                    style="-fx-background-color:#2ecc71;
+                           -fx-text-fill:white;
+                           -fx-font-weight:bold;
+                           -fx-background-radius:6;
+                           -fx-padding:8 15;"/>
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>

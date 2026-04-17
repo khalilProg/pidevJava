@@ -1,0 +1,87 @@
+package tn.esprit.services;
+
+import tn.esprit.entities.Questionnaire;
+import tn.esprit.entities.RendezVous;
+import tn.esprit.tools.MyDatabase;
+
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RendezVousService implements IGeneralService<RendezVous> {
+    Connection cn;
+    public RendezVousService() {
+        cn = MyDatabase.getInstance().getCnx();
+    }
+    @Override
+    public void ajouter(RendezVous rendezVous) throws SQLException {
+        int questionnaireId=52;
+        int entiteId=2;
+        String sql = "insert into rendez_vous(date_don, status, questionnaire_id, entite_id) values(?,?,?,?)";
+        PreparedStatement rdv = cn.prepareStatement(sql);
+        rdv.setTimestamp(1,Timestamp.valueOf(rendezVous.getDateDon()));
+        rdv.setString(2,rendezVous.getStatus());
+        rdv.setInt(3,questionnaireId);
+        rdv.setInt(4,entiteId);
+//        rdv.setInt(3, rendezVous.getQuestionnaire().getId());
+//        rdv.setInt(4, rendezVous.getEntiteDeCollecte().getId());
+        System.out.println("executing insert...");
+        rdv.executeUpdate();
+    }
+
+    @Override
+    public void supprimer(RendezVous rendezVous) throws SQLException {
+        String rdv = "DELETE FROM rendez_vous WHERE id = ?";
+        PreparedStatement pstRV = cn.prepareStatement(rdv);
+        pstRV.setInt(1, rendezVous.getId());
+        pstRV.executeUpdate();
+    }
+
+    public int chercher(RendezVous rendezVous) throws SQLException {
+        String sql = "SELECT 1 FROM rendez_vous WHERE id = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setInt(1, rendezVous.getId());
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()){
+            System.out.println("ce rendez vous existe avec l'id "+rendezVous.getId());
+        }else{
+            System.out.println("ce rendez vous n'existe pas");
+        }
+        return rendezVous.getId();
+    }
+
+    @Override
+    public void modifier(RendezVous rendezVous) throws SQLException {
+        if(chercher(rendezVous)== rendezVous.getId()){
+            String sql = "UPDATE rendez_vous SET date_don = ?, status = ? WHERE id=?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setTimestamp(1, Timestamp.valueOf(rendezVous.getDateDon()));
+            pst.setString(2, rendezVous.getStatus());
+            pst.setInt(3, rendezVous.getId());
+            pst.executeUpdate();
+        }
+        else {
+            System.out.println("ce rendez vous n'existe pas");
+        }
+    }
+
+    @Override
+    public List<RendezVous> recuperer() throws SQLException {
+        String sql = "select * from rendez_vous";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        List<RendezVous> rendezvouet = new ArrayList<>();
+        while(rs.next()){
+            RendezVous rdv = new RendezVous(
+                    rs.getInt("id"),
+                    rs.getString("status"),
+                    rs.getTimestamp("date_don").toLocalDateTime()
+            );
+            rendezvouet.add(rdv);
+        }
+
+        return rendezvouet;
+    }
+
+}
