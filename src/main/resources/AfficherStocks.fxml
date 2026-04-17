@@ -19,7 +19,7 @@
         <VBox styleClass="sidebar">
             <!-- Brand -->
             <HBox styleClass="sidebar-brand" alignment="CENTER_LEFT" spacing="8">
-                <Label text="❤" styleClass="sidebar-brand-icon"/>
+                <Region styleClass="logo-icon"/>
                 <Label text="BLOODLINK" styleClass="sidebar-brand-text"/>
                 <Label text="ADMIN" styleClass="sidebar-admin-badge"/>
             </HBox>
@@ -50,7 +50,7 @@
             <VBox styleClass="sidebar-user-section" spacing="12">
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <StackPane styleClass="sidebar-user-avatar">
-                        <Label text="❤"/>
+                        <Region styleClass="logo-icon"/>
                     </StackPane>
                     <VBox spacing="2">
                         <Label text="admin@bloodlink.tn" styleClass="sidebar-user-email"/>

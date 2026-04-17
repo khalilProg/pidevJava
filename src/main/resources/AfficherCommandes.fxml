@@ -17,7 +17,7 @@
     <top>
         <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
             <HBox alignment="CENTER_LEFT" spacing="6">
-                <Label styleClass="brand-icon" text="❤" />
+                <Region styleClass="logo-icon" />
                 <Label styleClass="brand-label" text="BLOODLINK" />
             </HBox>
             <Region HBox.hgrow="ALWAYS" />

@@ -8,53 +8,24 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainFX extends Application {
-
-    private static Stage primaryStage;
-    private static Stage secondaryStage;
-
     @Override
-    public void start(Stage stage) throws Exception {
-        primaryStage = stage;
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminAfficherCommandes.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("BLOODLINK — BackOffice");
+        primaryStage.setScene(scene);
+        Platform.runLater(() -> primaryStage.setMaximized(true));
+        primaryStage.show();;
 
-        loadScene(primaryStage, "/AdminAfficherCommandes.fxml", "BLOODLINK — BackOffice");
-
-        secondaryStage = new Stage();
-        loadScene(secondaryStage, "/AfficherCommandes.fxml", "BLOODLINK — FrontOffice");
-    }
-
-    public static void loadScene(Stage stage, String fxmlPath, String title) {
-        try {
-            FXMLLoader loader = new FXMLLoader(MainFX.class.getResource(fxmlPath));
-            Parent root = loader.load();
-
-            boolean wasMaximized = stage.isMaximized();
-
-            Scene scene = new Scene(root);
-            stage.setTitle(title);
-            stage.setScene(scene);
-
-            if (!stage.isShowing()) {
-                stage.show();
-            }
-
-            Platform.runLater(() -> {
-                if (wasMaximized || !stage.equals(secondaryStage)) {
-                    stage.setMaximized(true);
-                }
-                stage.centerOnScreen();
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    public static Stage getSecondaryStage() {
-        return secondaryStage;
+        Stage secondaryStage = new Stage();
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/AfficherCommandes.fxml"));
+        Parent root2 = loader2.load();
+        Scene scene2 = new Scene(root2);
+        secondaryStage.setTitle("BLOODLINK — FrontOffice");
+        secondaryStage.setScene(scene2);
+        Platform.runLater(() -> secondaryStage.setMaximized(true));
+        secondaryStage.show();
     }
 
     public static void main(String[] args) {
