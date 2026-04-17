@@ -2,18 +2,20 @@ package tn.esprit.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tn.esprit.entities.Demande;
 import tn.esprit.entities.Transfert;
-import tn.esprit.services.DemandeService;
 import tn.esprit.services.TransfertService;
 
 public class addTrasnfertController {
-    private Demande demande;
+    
     @FXML private TextField txtFrom;
     @FXML private TextField txtTo;
     @FXML private TextField txtQuantite;
@@ -22,64 +24,102 @@ public class addTrasnfertController {
     @FXML private DatePicker dateReception;
 
     @FXML private ComboBox<String> comboStatus;
-    private TransfertService service = new TransfertService();
+    
+    private final TransfertService service = new TransfertService();
 
-    public void setDemande(Demande demande) {
-        this.demande = demande;
-    }
     @FXML
-    private void ajouterTransfert() {
+    public void initialize() {
+        comboStatus.getItems().addAll(
+            "EN COURS",
+            "REÇU",
+            "ANNULÉ"
+        );
+    }
+
+    @FXML
+    private void ajouterTransfert(ActionEvent event) {
+        if (!validateForm()) return;
 
         try {
             Transfert t = new Transfert();
 
-            t.setDemande(demande);
-
-            if (txtFrom.getText().isEmpty() || txtTo.getText().isEmpty()) {
-                System.out.println("IDs obligatoires !");
-                return;
-            }
-
-            t.setFromOrgId(1);
-            t.setToOrgId(demande.getIdBanque());
-
-            // 🔥 AJOUT IMPORTANT
-            t.setFromOrg("BloodLink Central");
-            t.setToOrg("Charle nicole");
-
-            if (txtQuantite.getText().isEmpty()) {
-                System.out.println("Quantité obligatoire !");
-                return;
-            }
-
+            t.setFromOrgId(Integer.parseInt(txtFrom.getText()));
+            t.setToOrgId(Integer.parseInt(txtTo.getText()));
             t.setQuantite(Integer.parseInt(txtQuantite.getText()));
 
-            if (dateEnvoie.getValue() != null) {
-                t.setDateEnvoie(dateEnvoie.getValue());
-            }
+            // Optional or hardcoded display strings for organizations
+            t.setFromOrg("BloodLink Central"); 
+            t.setToOrg("Banque " + txtTo.getText());
 
-            if (dateReception.getValue() != null) {
-                t.setDateReception(dateReception.getValue());
-            }
+            if (dateEnvoie.getValue() != null) t.setDateEnvoie(dateEnvoie.getValue());
+            if (dateReception.getValue() != null) t.setDateReception(dateReception.getValue());
 
-            t.setStatus(
-                comboStatus.getValue() != null ? comboStatus.getValue() : "EN_ATTENTE"
-            );
+            // Convert back to DB format
+            String status = comboStatus.getValue();
+            if (status != null) {
+                if (status.equals("EN COURS")) status = "EN_COURS";
+                if (status.equals("REÇU")) status = "RECU";
+                if (status.equals("ANNULÉ")) status = "ANNULE";
+            } else {
+                status = "EN_COURS";
+            }
+            t.setStatus(status);
 
             service.ajouter(t);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Transfert ajouté !");
-            alert.show();
+            // Go back directly instead of alerting to save clicks
+            retour(event);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private boolean validateForm() {
+        StringBuilder errors = new StringBuilder();
+
+        if (txtFrom.getText() == null || txtFrom.getText().trim().isEmpty()) errors.append("- ID Origine obligatoire\n");
+        if (txtTo.getText() == null || txtTo.getText().trim().isEmpty()) errors.append("- ID Destination obligatoire\n");
+        
+        if (txtQuantite.getText() == null || txtQuantite.getText().trim().isEmpty()) {
+            errors.append("- Quantité obligatoire\n");
+        } else {
+            try {
+                if (Integer.parseInt(txtQuantite.getText()) <= 0) {
+                    errors.append("- Quantité doit être > 0\n");
+                }
+            } catch (NumberFormatException e) {
+                errors.append("- Quantité invalide\n");
+            }
+        }
+        
+        if (dateEnvoie.getValue() == null) errors.append("- Date d'envoi obligatoire\n");
+        if (dateReception.getValue() == null) errors.append("- Date de réception obligatoire\n");
+        if (comboStatus.getValue() == null) errors.append("- Statut obligatoire\n");
+
+        if (errors.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Erreur de validation");
+            alert.setContentText(errors.toString());
+            alert.show();
+            return false;
+        }
+        return true;
+    }
+
     @FXML
-    private void fermer() {
-        Stage stage = (Stage) txtFrom.getScene().getWindow();
-        stage.close();
+    private void fermer(ActionEvent event) {
+        retour(event);
+    }
+    
+    private void retour(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TransfertBackView.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

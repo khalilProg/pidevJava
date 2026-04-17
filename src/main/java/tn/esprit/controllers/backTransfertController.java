@@ -222,6 +222,11 @@ public class backTransfertController {
     }
 
     @FXML
+    private void addTransfert(javafx.event.ActionEvent event) {
+        navigateTo(event, "/addTransfert.fxml");
+    }
+
+    @FXML
     void handleNavigateDashboard(javafx.event.ActionEvent event) {
         navigateTo(event, "/admin_dashboard.fxml");
     }
