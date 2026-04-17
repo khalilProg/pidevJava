@@ -96,14 +96,14 @@ public class QuestionnaireService implements IGeneralService<Questionnaire> {
         while(rs.next()){
             Questionnaire q = new Questionnaire(
                     rs.getInt("id"),
+                    rs.getInt("age"),
                     rs.getString("nom"),
                     rs.getString("prenom"),
-                    rs.getInt("age"),
                     rs.getString("sexe"),
-                    rs.getDouble("poids"),
                     rs.getString("autres"),
-                    rs.getTimestamp("date").toLocalDateTime(),
-                    rs.getString("group_sanguin"));
+                    rs.getString("group_sanguin"),
+                    rs.getDouble("poids"),
+                    rs.getTimestamp("date").toLocalDateTime());
             questionnaires.add(q);
         }
 
