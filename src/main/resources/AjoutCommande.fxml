@@ -3,7 +3,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -11,11 +10,10 @@
             styleClass="main-container"
             stylesheets="@commande.css">
 
-    <!-- ═══ TOP NAV BAR ═══ -->
     <top>
         <HBox styleClass="nav-bar" alignment="CENTER_LEFT">
             <HBox alignment="CENTER_LEFT" spacing="6">
-                <Label text="🩸" styleClass="brand-icon"/>
+                <Label text="❤" styleClass="brand-icon"/>
                 <Label text="BLOODLINK" styleClass="brand-label"/>
             </HBox>
             <Region HBox.hgrow="ALWAYS"/>
@@ -23,14 +21,12 @@
         </HBox>
     </top>
 
-    <!-- ═══ MAIN CONTENT ═══ -->
     <center>
         <ScrollPane fitToWidth="true" styleClass="edge-to-edge-scroll"
                     hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
             <VBox spacing="0" style="-fx-background-color: #121212;">
                 <padding><Insets top="0" right="32" bottom="40" left="32"/></padding>
 
-                <!-- Page Header -->
                 <VBox styleClass="page-header" spacing="0">
                     <Label text="BLOODLINK" styleClass="breadcrumb-label"/>
                     <HBox alignment="CENTER_LEFT" spacing="8">
@@ -44,24 +40,8 @@
 
                 <Region prefHeight="24"/>
 
-                <!-- ═══ FORM CARD ═══ -->
-                <VBox styleClass="form-card" spacing="20"
-                      maxWidth="900">
-                    <VBox.margin><Insets left="0" right="0"/></VBox.margin>
-
-                    <!-- Form Header -->
-                    <HBox alignment="CENTER_LEFT" spacing="14">
-                        <StackPane styleClass="form-header-icon">
-                            <Label text="📋"/>
-                        </StackPane>
-                        <VBox spacing="2">
-                            <Label text="FORMULAIRE DE COMMANDE" styleClass="form-title"/>
-                            <Label text="Veuillez vérifier les quantités avant de sauvegarder."
-                                   styleClass="form-description"/>
-                        </VBox>
-                    </HBox>
-
-                    <Separator styleClass="dark-separator"/>
+                <VBox styleClass="form-card" spacing="20" maxWidth="1.7976931348623157E308">
+                    <Label text="DÉTAILS DE LA COMMANDE" styleClass="form-section-title"/>
 
                     <!-- Row 1: Reference + Quantité -->
                     <HBox spacing="20">
@@ -69,11 +49,13 @@
                             <Label text="REFERENCE" styleClass="field-label"/>
                             <TextField fx:id="tfReference" promptText="Ex: 2024001"
                                        styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorReference" text="" styleClass="field-error"/>
                         </VBox>
                         <VBox HBox.hgrow="ALWAYS" spacing="0">
                             <Label text="QUANTITÉ" styleClass="field-label"/>
                             <TextField fx:id="tfQuantite" promptText="Quantité"
                                        styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorQuantite" text="" styleClass="field-error"/>
                         </VBox>
                     </HBox>
 
@@ -83,11 +65,13 @@
                             <Label text="TYPE SANG" styleClass="field-label"/>
                             <ComboBox fx:id="cbTypeSang" promptText="Choisir un type de sang"
                                       styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorTypeSang" text="" styleClass="field-error"/>
                         </VBox>
                         <VBox HBox.hgrow="ALWAYS" spacing="0">
                             <Label text="PRIORITÉ" styleClass="field-label"/>
                             <ComboBox fx:id="cbPriorite" promptText="Choisir une priorité"
                                       styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorPriorite" text="" styleClass="field-error"/>
                         </VBox>
                     </HBox>
 
@@ -95,24 +79,19 @@
                     <VBox spacing="0">
                         <Label text="BANQUE" styleClass="field-label"/>
                         <ComboBox fx:id="cbBanque" promptText="Choisir une banque"
-                                  styleClass="dark-combo" maxWidth="500"/>
+                                  styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                        <Label fx:id="lblErrorBanque" text="" styleClass="field-error"/>
                     </VBox>
 
                     <Region prefHeight="8"/>
                     <Separator styleClass="dark-separator"/>
-
-                    <!-- Status label for feedback -->
                     <Label fx:id="lblStatus" text="" styleClass="status-success"/>
 
-                    <!-- Action Buttons -->
                     <HBox alignment="CENTER_RIGHT" spacing="16">
-                        <Button text="Annuler" styleClass="cancel-button"
-                                onAction="#handleCancel"/>
-                        <Button text="🚀  ENVOYER LA COMMANDE" styleClass="submit-button"
-                                onAction="#handleSubmit"/>
+                        <Button text="Annuler" styleClass="cancel-button" onAction="#handleCancel"/>
+                        <Button text="🚀  ENVOYER LA COMMANDE" styleClass="submit-button" onAction="#handleSubmit"/>
                     </HBox>
                 </VBox>
-
             </VBox>
         </ScrollPane>
     </center>

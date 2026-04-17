@@ -11,7 +11,6 @@ public class Commande {
     private String typeSang;
     private String status;
 
-    // Constructor without id (for INSERT)
     public Commande(int banqueId, int clientId, int stockId, int reference, int quantite,
                     String priorite, String typeSang, String status) {
         this.banqueId = banqueId;
@@ -24,7 +23,6 @@ public class Commande {
         this.status = status;
     }
 
-    // Full constructor (for SELECT)
     public Commande(int id, int banqueId, int clientId, int stockId, int reference, int quantite,
                     String priorite, String typeSang, String status) {
         this.id = id;
@@ -38,7 +36,6 @@ public class Commande {
         this.status = status;
     }
 
-    // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

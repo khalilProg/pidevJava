@@ -1,5 +1,5 @@
 /* ============================================
-   BLOODLINK — Commande Dark Theme
+   BLOODLINK — Admin + Front Dark Theme
    ============================================ */
 
 /* === ROOT VARIABLES === */
@@ -14,7 +14,136 @@
     -fx-padding: 0;
 }
 
-/* === TOP NAV BAR === */
+/* ==========================================
+   SIDEBAR NAVIGATION (Admin)
+   ========================================== */
+.sidebar {
+    -fx-background-color: #1a1a1a;
+    -fx-pref-width: 230;
+    -fx-min-width: 230;
+    -fx-max-width: 230;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 1 0 0;
+}
+
+.sidebar-brand {
+    -fx-padding: 20;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 0 1 0;
+}
+
+.sidebar-brand-icon {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 18px;
+}
+
+.sidebar-brand-text {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-admin-badge {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.sidebar-section-label {
+    -fx-text-fill: #555555;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 20 20 8 20;
+}
+
+.sidebar-nav-list {
+    -fx-padding: 0 10 0 10;
+}
+
+.sidebar-nav-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #777777;
+    -fx-font-size: 13px;
+    -fx-padding: 10 14 10 14;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+    -fx-border-width: 0;
+}
+
+.sidebar-nav-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-text-fill: #bbbbbb;
+}
+
+.sidebar-nav-item-active {
+    -fx-background-color: rgba(231, 76, 60, 0.12);
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 14 10 14;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+    -fx-border-width: 0;
+}
+
+.sidebar-user-section {
+    -fx-padding: 16;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 1 0 0 0;
+}
+
+.sidebar-user-avatar {
+    -fx-background-color: #e74c3c;
+    -fx-background-radius: 50;
+    -fx-pref-width: 36;
+    -fx-pref-height: 36;
+    -fx-min-width: 36;
+    -fx-min-height: 36;
+    -fx-alignment: center;
+}
+
+.sidebar-user-avatar .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.sidebar-user-email {
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-user-role {
+    -fx-text-fill: #666666;
+    -fx-font-size: 10px;
+}
+
+.sidebar-disconnect-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12px;
+    -fx-padding: 8 16 8 16;
+    -fx-border-color: rgba(231, 76, 60, 0.5);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER;
+}
+
+.sidebar-disconnect-btn:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.1);
+    -fx-border-color: #e74c3c;
+}
+
+/* ==========================================
+   TOP NAV BAR (Front-Office)
+   ========================================== */
 .nav-bar {
     -fx-background-color: #1a1a1a;
     -fx-padding: 12 24 12 24;
@@ -45,7 +174,9 @@
     -fx-cursor: hand;
 }
 
-/* === PAGE HEADER === */
+/* ==========================================
+   PAGE HEADER
+   ========================================== */
 .page-header {
     -fx-padding: 28 32 8 32;
 }
@@ -78,7 +209,9 @@
     -fx-padding: 6 0 0 0;
 }
 
-/* === FORM CARD === */
+/* ==========================================
+   FORM CARD
+   ========================================== */
 .form-card {
     -fx-background-color: #1e1e1e;
     -fx-background-radius: 12;
@@ -114,7 +247,9 @@
     -fx-font-size: 12px;
 }
 
-/* === FIELD LABELS === */
+/* ==========================================
+   FIELD LABELS
+   ========================================== */
 .field-label {
     -fx-text-fill: #aaaaaa;
     -fx-font-size: 11px;
@@ -122,7 +257,9 @@
     -fx-padding: 0 0 6 2;
 }
 
-/* === TEXT FIELDS === */
+/* ==========================================
+   TEXT FIELDS
+   ========================================== */
 .dark-field {
     -fx-background-color: #2a2a2a;
     -fx-border-color: #3a3a3a;
@@ -142,7 +279,9 @@
     -fx-effect: dropshadow(gaussian, rgba(231,76,60,0.2), 6, 0, 0, 0);
 }
 
-/* === COMBO BOXES === */
+/* ==========================================
+   COMBO BOXES
+   ========================================== */
 .dark-combo {
     -fx-background-color: #2a2a2a;
     -fx-border-color: #3a3a3a;
@@ -199,13 +338,17 @@
     -fx-text-fill: white;
 }
 
-/* === SEPARATOR === */
+/* ==========================================
+   SEPARATOR
+   ========================================== */
 .dark-separator {
     -fx-border-color: #2a2a2a;
     -fx-border-width: 1 0 0 0;
 }
 
-/* === BUTTONS === */
+/* ==========================================
+   BUTTONS
+   ========================================== */
 .cancel-button {
     -fx-background-color: transparent;
     -fx-text-fill: #cccccc;
@@ -244,7 +387,67 @@
     -fx-background-color: #a93226;
 }
 
-/* === SCROLLPANE === */
+/* === RETOUR BUTTON === */
+.retour-button {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 20;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-cursor: hand;
+}
+
+.retour-button:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: #555555;
+}
+
+/* ==========================================
+   TABLE ACTION BUTTONS (MODIFIER / SUPPRIMER)
+   ========================================== */
+.action-btn-edit {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 14 6 14;
+    -fx-background-radius: 6;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+}
+
+.action-btn-edit:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: #555555;
+}
+
+.action-btn-delete {
+    -fx-background-color: rgba(231, 76, 60, 0.15);
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 14 6 14;
+    -fx-background-radius: 6;
+    -fx-border-color: rgba(231, 76, 60, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+}
+
+.action-btn-delete:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.25);
+    -fx-border-color: rgba(231, 76, 60, 0.6);
+}
+
+/* ==========================================
+   SCROLLPANE
+   ========================================== */
 .edge-to-edge-scroll {
     -fx-background-color: #121212;
     -fx-background: #121212;
@@ -272,7 +475,9 @@
     -fx-background-color: #555555;
 }
 
-/* === STATUS LABEL (success/error feedback) === */
+/* ==========================================
+   STATUS LABEL (success/error feedback)
+   ========================================== */
 .status-success {
     -fx-text-fill: #2ecc71;
     -fx-font-size: 13px;
@@ -285,7 +490,9 @@
     -fx-font-weight: bold;
 }
 
-/* === TABLE VIEW === */
+/* ==========================================
+   TABLE VIEW
+   ========================================== */
 .dark-table {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -303,7 +510,7 @@
 }
 
 .dark-table .column-header .label {
-    -fx-text-fill: #cccccc;
+    -fx-text-fill: #888888;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
     -fx-alignment: center-left;
@@ -313,7 +520,7 @@
     -fx-background-color: transparent;
     -fx-border-color: #2a2a2a;
     -fx-border-width: 0 0 1 0;
-    -fx-cell-size: 50px;
+    -fx-cell-size: 52px;
 }
 
 .dark-table .table-row-cell:odd {
@@ -321,11 +528,11 @@
 }
 
 .dark-table .table-row-cell:hover {
-    -fx-background-color: rgba(231, 76, 60, 0.1);
+    -fx-background-color: rgba(231, 76, 60, 0.08);
 }
 
 .dark-table .table-row-cell:selected {
-    -fx-background-color: rgba(231, 76, 60, 0.2);
+    -fx-background-color: rgba(231, 76, 60, 0.15);
 }
 
 .dark-table .table-cell {
@@ -344,7 +551,9 @@
     -fx-background-radius: 4;
 }
 
-/* === BADGES === */
+/* ==========================================
+   BADGES
+   ========================================== */
 .badge {
     -fx-padding: 4 12 4 12;
     -fx-background-radius: 12;
@@ -362,7 +571,29 @@
     -fx-text-fill: #1a1a1a;
 }
 
-/* === ICON BUTTON (Edit) === */
+.badge-blue {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+.badge-cyan {
+    -fx-background-color: #1abc9c;
+    -fx-text-fill: white;
+}
+
+.badge-green {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+}
+
+.badge-orange {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+}
+
+/* ==========================================
+   ICON BUTTONS (Legacy - Front-Office)
+   ========================================== */
 .icon-button {
     -fx-background-color: transparent;
     -fx-text-fill: white;
@@ -389,4 +620,60 @@
 }
 .icon-button-danger:hover {
     -fx-background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* ==========================================
+   NOUVEAU STOCK BUTTON (Red with + icon)
+   ========================================== */
+.nouveau-btn {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 24 10 24;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(231,76,60,0.35), 8, 0, 0, 2);
+}
+
+.nouveau-btn:hover {
+    -fx-background-color: #c0392b;
+    -fx-effect: dropshadow(gaussian, rgba(231,76,60,0.5), 12, 0, 0, 3);
+}
+
+/* ==========================================
+   FILTER BUTTONS
+   ========================================== */
+.filter-btn {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18 8 18;
+    -fx-background-radius: 8;
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.filter-btn:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: white;
+}
+
+/* ==========================================
+   INLINE FIELD VALIDATION ERRORS
+   ========================================== */
+.field-error {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 11px;
+    -fx-padding: 4 0 0 2;
+}
+
+.form-section-title {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 8 0;
 }

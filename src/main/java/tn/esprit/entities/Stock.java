@@ -11,10 +11,8 @@ public class Stock {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    // Default constructor
     public Stock() {}
 
-    // Constructor without ID, createdAt, updatedAt (for Insert)
     public Stock(int typeOrgid, String typeOrg, String typeSang, int quantite) {
         this.typeOrgid = typeOrgid;
         this.typeOrg = typeOrg;
@@ -22,7 +20,6 @@ public class Stock {
         this.quantite = quantite;
     }
 
-    // Full constructor
     public Stock(int id, int typeOrgid, String typeOrg, String typeSang, int quantite, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.typeOrgid = typeOrgid;
@@ -32,8 +29,6 @@ public class Stock {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
-
-    // Getters
     public int getId() { return id; }
     public int getTypeOrgid() { return typeOrgid; }
     public String getTypeOrg() { return typeOrg; }
@@ -42,7 +37,6 @@ public class Stock {
     public Timestamp getCreatedAt() { return createdAt; }
     public Timestamp getUpdatedAt() { return updatedAt; }
 
-    // Setters
     public void setId(int id) { this.id = id; }
     public void setTypeOrgid(int typeOrgid) { this.typeOrgid = typeOrgid; }
     public void setTypeOrg(String typeOrg) { this.typeOrg = typeOrg; }

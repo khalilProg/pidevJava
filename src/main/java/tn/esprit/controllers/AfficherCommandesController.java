@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.application.Platform;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -199,7 +200,7 @@ public class AfficherCommandesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
             Stage stage = (Stage) tfSearch.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 700));
+            stage.getScene().setRoot(root);
             stage.setTitle(title);
         } catch (IOException e) {
             System.out.println("❌ Erreur de navigation: " + e.getMessage());

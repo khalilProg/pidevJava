@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.application.Platform;
 import javafx.scene.control.*;
 import tn.esprit.entities.Commande;
 import tn.esprit.services.CommandeService;
@@ -25,9 +26,15 @@ public class AjoutCommandeController implements Initializable {
     @FXML private ComboBox<String> cbBanque;
     @FXML private Label lblStatus;
 
+    // Inline error labels
+    @FXML private Label lblErrorReference;
+    @FXML private Label lblErrorQuantite;
+    @FXML private Label lblErrorTypeSang;
+    @FXML private Label lblErrorPriorite;
+    @FXML private Label lblErrorBanque;
+
     private final CommandeService commandeService = new CommandeService();
 
-    // Maps banque display name -> actual DB id
     private final Map<String, Integer> banqueIdMap = new HashMap<>();
 
     @Override
@@ -63,47 +70,91 @@ public class AjoutCommandeController implements Initializable {
         cbBanque.setItems(banqueNames);
     }
 
-    @FXML
-    private void handleSubmit() {
-        // Clear previous status
+    private void clearErrors() {
+        lblErrorReference.setText("");
+        lblErrorQuantite.setText("");
+        lblErrorTypeSang.setText("");
+        lblErrorPriorite.setText("");
+        lblErrorBanque.setText("");
         lblStatus.setText("");
         lblStatus.getStyleClass().removeAll("status-success", "status-error");
+    }
 
-        // Validate fields
-        if (tfReference.getText().isEmpty() || tfQuantite.getText().isEmpty()
-                || cbTypeSang.getValue() == null || cbPriorite.getValue() == null
-                || cbBanque.getValue() == null) {
-            showError("⚠ Veuillez remplir tous les champs.");
+    private boolean validateForm() {
+        boolean valid = true;
+
+        // Reference
+        if (tfReference.getText() == null || tfReference.getText().trim().isEmpty()) {
+            lblErrorReference.setText("La référence est obligatoire.");
+            valid = false;
+        } else {
+            try {
+                Integer.parseInt(tfReference.getText().trim());
+            } catch (NumberFormatException e) {
+                lblErrorReference.setText("La référence doit être un nombre.");
+                valid = false;
+            }
+        }
+
+        // Quantité
+        if (tfQuantite.getText() == null || tfQuantite.getText().trim().isEmpty()) {
+            lblErrorQuantite.setText("La quantité est obligatoire.");
+            valid = false;
+        } else {
+            try {
+                int q = Integer.parseInt(tfQuantite.getText().trim());
+                if (q <= 0) {
+                    lblErrorQuantite.setText("La quantité doit être supérieure à 0.");
+                    valid = false;
+                }
+            } catch (NumberFormatException e) {
+                lblErrorQuantite.setText("La quantité doit être un nombre.");
+                valid = false;
+            }
+        }
+
+        // Type Sang
+        if (cbTypeSang.getValue() == null) {
+            lblErrorTypeSang.setText("Veuillez sélectionner un type de sang.");
+            valid = false;
+        }
+
+        // Priorité
+        if (cbPriorite.getValue() == null) {
+            lblErrorPriorite.setText("Veuillez sélectionner une priorité.");
+            valid = false;
+        }
+
+        // Banque
+        if (cbBanque.getValue() == null) {
+            lblErrorBanque.setText("Veuillez sélectionner une banque.");
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    @FXML
+    private void handleSubmit() {
+        clearErrors();
+
+        if (!validateForm()) {
             return;
         }
 
-        int reference;
-        int quantite;
-        try {
-            reference = Integer.parseInt(tfReference.getText().trim());
-            quantite = Integer.parseInt(tfQuantite.getText().trim());
-        } catch (NumberFormatException e) {
-            showError("⚠ Référence et quantité doivent être des nombres.");
-            return;
-        }
-
-        if (quantite <= 0) {
-            showError("⚠ La quantité doit être supérieure à 0.");
-            return;
-        }
-
-        // Get real banque ID from the map
+        int reference = Integer.parseInt(tfReference.getText().trim());
+        int quantite = Integer.parseInt(tfQuantite.getText().trim());
         int banqueId = banqueIdMap.getOrDefault(cbBanque.getValue(), 0);
+
         if (banqueId == 0) {
-            showError("⚠ Banque invalide.");
+            lblErrorBanque.setText("Banque invalide.");
             return;
         }
 
-        // Create commande (client_id=1, stock_id=1 as defaults)
         Commande commande = new Commande(
                 banqueId,
-                1, // client_id
-                1, // stock_id
+                1,
+                1,
                 reference,
                 quantite,
                 cbPriorite.getValue(),
@@ -130,8 +181,8 @@ public class AjoutCommandeController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherCommandes.fxml"));
             javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) tfReference.getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(root, 1000, 700));
-            stage.setTitle("BLOODLINK — Mes Commandes");
+            stage.getScene().setRoot(root);
+            stage.setTitle("BLOODLINK — BackOffice");
         } catch (java.io.IOException e) {
             showError("❌ Error returning to list: " + e.getMessage());
         }

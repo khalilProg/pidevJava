@@ -1,110 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.ModifierStockController"
-            styleClass="main-container"
-            stylesheets="@commande.css">
+<BorderPane styleClass="main-container" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ModifierStockController">
 
-    <!-- ═══ TOP NAV BAR ═══ -->
-    <top>
-        <HBox styleClass="nav-bar" alignment="CENTER_LEFT">
-            <HBox alignment="CENTER_LEFT" spacing="6">
-                <Label text="🩸" styleClass="brand-icon"/>
-                <Label text="BLOODLINK" styleClass="brand-label"/>
+    <left>
+        <VBox styleClass="sidebar">
+            <HBox styleClass="sidebar-brand" alignment="CENTER_LEFT" spacing="8">
+                <Label text="❤" styleClass="sidebar-brand-icon"/>
+                <Label text="BLOODLINK" styleClass="sidebar-brand-text"/>
+                <Label text="ADMIN" styleClass="sidebar-admin-badge"/>
             </HBox>
-            <Region HBox.hgrow="ALWAYS"/>
-            <!-- Optional user badge from Commande -->
-            <Button text="👤  Admin UI" styleClass="user-badge"/>
-        </HBox>
-    </top>
+            <Label text="GESTION" styleClass="sidebar-section-label"/>
+            <VBox styleClass="sidebar-nav-list" spacing="2">
+                <Button text="📊  Dashboard" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="👥  Utilisateurs" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="📦  Commandes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#goToCommandes"/>
+                <Button text="🏢  Stocks" styleClass="sidebar-nav-item-active" maxWidth="1.7976931348623157E308" onAction="#goToStocks"/>
+                <Button text="📋  Demandes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="🔄  Transferts" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="❓  Questionnaires" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="📅  Rendez-vous" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="📢  Campagnes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="🏥  Collectes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="💉  Dons" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+                <Button text="📁  Dossiers" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+            </VBox>
+            <Region VBox.vgrow="ALWAYS"/>
+            <VBox styleClass="sidebar-user-section" spacing="12">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <StackPane styleClass="sidebar-user-avatar"><Label text="❤"/></StackPane>
+                    <VBox spacing="2">
+                        <Label text="admin@bloodlink.tn" styleClass="sidebar-user-email"/>
+                        <Label text="Administrateur" styleClass="sidebar-user-role"/>
+                    </VBox>
+                </HBox>
+                <Button text="⏻  Déconnexion" styleClass="sidebar-disconnect-btn" maxWidth="1.7976931348623157E308"/>
+            </VBox>
+        </VBox>
+    </left>
 
-    <!-- ═══ MAIN CONTENT ═══ -->
     <center>
-        <ScrollPane fitToWidth="true" styleClass="edge-to-edge-scroll"
-                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge-scroll" vbarPolicy="AS_NEEDED">
             <VBox spacing="0" style="-fx-background-color: #121212;">
-                <padding><Insets top="0" right="32" bottom="40" left="32"/></padding>
+                <padding><Insets bottom="40" left="32" right="32" top="28"/></padding>
 
-                <!-- Page Header -->
-                <VBox styleClass="page-header" spacing="0">
-                    <Label text="BLOODLINK" styleClass="breadcrumb-label"/>
-                    <HBox alignment="CENTER_LEFT" spacing="8">
-                        <Label text="🖋" style="-fx-font-size: 24px;"/>
-                        <Label text="Modifier un " styleClass="page-title"/>
-                        <Label text="Stock Existant" styleClass="page-title-highlight"/>
+                <VBox spacing="4">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label styleClass="page-title" text="MODIFIER LE STOCK"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button onAction="#handleRetour" styleClass="retour-button" text="← RETOUR"/>
                     </HBox>
-                    <Label text="Mettez à jour les informations de l'inventaire sanguin."
-                           styleClass="page-subtitle"/>
+                    <Label styleClass="page-subtitle" text="Mettez à jour les informations de l'inventaire sanguin."/>
                 </VBox>
 
                 <Region prefHeight="24"/>
 
-                <!-- ═══ FORM CARD ═══ -->
-                <VBox styleClass="form-card" spacing="20" maxWidth="900">
-                    <VBox.margin><Insets left="0" right="0"/></VBox.margin>
-
-                    <!-- Form Header -->
-                    <HBox alignment="CENTER_LEFT" spacing="14">
-                        <StackPane styleClass="form-header-icon">
-                            <Label text="📋"/>
-                        </StackPane>
-                        <VBox spacing="2">
-                            <Label text="MODIFICATION DE STOCK" styleClass="form-title"/>
-                            <Label text="Veuillez remplir les champs obligatoires avant de valider."
-                                   styleClass="form-description"/>
-                        </VBox>
-                    </HBox>
-
-                    <Separator styleClass="dark-separator"/>
+                <VBox maxWidth="1.7976931348623157E308" spacing="20" styleClass="form-card">
+                    <Label text="DÉTAILS DU STOCK" styleClass="form-section-title"/>
 
                     <HBox spacing="20">
-                        <!-- TYPE ORGANISATION -->
                         <VBox HBox.hgrow="ALWAYS" spacing="0">
                             <Label text="TYPE ORGANISATION" styleClass="field-label"/>
-                            <ComboBox fx:id="cbTypeOrg" promptText="Choisir un type"
-                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <ComboBox fx:id="cbTypeOrg" promptText="Choisir un type" styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorTypeOrg" text="" styleClass="field-error"/>
                         </VBox>
-
-                        <!-- ORGANISATION -->
                         <VBox HBox.hgrow="ALWAYS" spacing="0">
                             <Label text="ORGANISATION" styleClass="field-label"/>
-                            <ComboBox fx:id="cbOrganisation" promptText="Sélectionnez un type d'abord"
-                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <ComboBox fx:id="cbOrganisation" promptText="Sélectionnez un type d'abord" styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorOrganisation" text="" styleClass="field-error"/>
                         </VBox>
                     </HBox>
 
                     <HBox spacing="20">
-                        <!-- TYPE SANG -->
                         <VBox HBox.hgrow="ALWAYS" spacing="0">
                             <Label text="TYPE SANG" styleClass="field-label"/>
-                            <ComboBox fx:id="cbTypeSang" promptText="Choisir un type de sang"
-                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <ComboBox fx:id="cbTypeSang" promptText="Choisir un type de sang" styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorTypeSang" text="" styleClass="field-error"/>
                         </VBox>
-
-                        <!-- QUANTITÉ -->
                         <VBox HBox.hgrow="ALWAYS" spacing="0">
                             <Label text="QUANTITÉ (UNITÉS)" styleClass="field-label"/>
-                            <TextField fx:id="txtQuantite" promptText="Ex: 50"
-                                       styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                            <TextField fx:id="txtQuantite" promptText="Ex: 50" styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorQuantite" text="" styleClass="field-error"/>
                         </VBox>
                     </HBox>
 
                     <Region prefHeight="8"/>
                     <Separator styleClass="dark-separator"/>
 
-                    <!-- Action Buttons -->
                     <HBox alignment="CENTER_RIGHT" spacing="16">
-                        <Button fx:id="btnAnnuler" text="Annuler" styleClass="cancel-button"/>
-                        <Button fx:id="btnEnregistrer" text="🔒  METTRE À JOUR" styleClass="submit-button"/>
+                        <Button fx:id="btnAnnuler" text="ANNULER" styleClass="cancel-button"/>
+                        <Button fx:id="btnEnregistrer" text="🔴  METTRE À JOUR" styleClass="submit-button"/>
                     </HBox>
                 </VBox>
-
             </VBox>
         </ScrollPane>
     </center>

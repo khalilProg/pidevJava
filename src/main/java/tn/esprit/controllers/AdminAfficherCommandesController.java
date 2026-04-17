@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import tn.esprit.entities.Commande;
@@ -71,7 +72,7 @@ public class AdminAfficherCommandesController implements Initializable {
                     setText(null);
                 } else {
                     Label lbl = new Label("#" + item);
-                    lbl.setStyle("-fx-text-fill: #cccccc; -fx-font-weight: bold;");
+                    lbl.setStyle("-fx-background-color: #2a2a2a; -fx-text-fill: #cccccc; -fx-font-weight: bold; -fx-padding: 4 10 4 10; -fx-background-radius: 12;");
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -118,10 +119,14 @@ public class AdminAfficherCommandesController implements Initializable {
                 if (empty || item == null) {
                     setGraphic(null);
                 } else {
-                    Label lbl = new Label(item);
-                    lbl.getStyleClass().addAll("badge", "badge-yellow");
-                    if ("Haute".equals(item)) {
+                    Label lbl = new Label(item.toUpperCase());
+                    lbl.getStyleClass().add("badge");
+                    if ("Haute".equalsIgnoreCase(item)) {
                         lbl.getStyleClass().add("badge-red");
+                    } else if ("Moyenne".equalsIgnoreCase(item)) {
+                        lbl.getStyleClass().add("badge-blue");
+                    } else {
+                        lbl.getStyleClass().add("badge-cyan");
                     }
                     setGraphic(lbl);
                 }
@@ -136,13 +141,13 @@ public class AdminAfficherCommandesController implements Initializable {
                 if (empty || item == null) {
                     setGraphic(null);
                 } else {
-                    Label lbl = new Label("🕘 " + item);
-                    lbl.setStyle("-fx-text-fill: #f1c40f; -fx-font-weight: bold; -fx-font-size: 12px;");
-                    // Can color depending on status
+                    Label lbl = new Label("● " + item.toUpperCase());
                     if ("Validée".equalsIgnoreCase(item) || "Approuvé".equalsIgnoreCase(item)) {
                         lbl.setStyle("-fx-text-fill: #2ecc71; -fx-font-weight: bold; -fx-font-size: 12px;");
                     } else if ("Annulée".equalsIgnoreCase(item) || "Refusé".equalsIgnoreCase(item)) {
-                         lbl.setStyle("-fx-text-fill: #e74c3c; -fx-font-weight: bold; -fx-font-size: 12px;");
+                        lbl.setStyle("-fx-text-fill: #e74c3c; -fx-font-weight: bold; -fx-font-size: 12px;");
+                    } else {
+                        lbl.setStyle("-fx-text-fill: #f1c40f; -fx-font-weight: bold; -fx-font-size: 12px;");
                     }
                     setGraphic(lbl);
                 }
@@ -155,17 +160,17 @@ public class AdminAfficherCommandesController implements Initializable {
             @Override
             public TableCell<Commande, Commande> call(TableColumn<Commande, Commande> param) {
                 return new TableCell<Commande, Commande>() {
-                    private final Button btnEdit = new Button("🖍 ");
-                    private final Button btnDelete = new Button("🗑 ");
+                    private final Button btnEdit = new Button("✏  MODIFIER");
+                    private final Button btnDelete = new Button("🗑  SUPPRIMER");
 
                     {
-                        btnEdit.getStyleClass().add("icon-button");
+                        btnEdit.getStyleClass().add("action-btn-edit");
                         btnEdit.setOnAction(event -> {
                             Commande c = getTableView().getItems().get(getIndex());
                             handleEdit(c);
                         });
 
-                        btnDelete.getStyleClass().add("icon-button-danger");
+                        btnDelete.getStyleClass().add("action-btn-delete");
                         btnDelete.setOnAction(event -> {
                             Commande c = getTableView().getItems().get(getIndex());
                             handleDelete(c);
@@ -243,7 +248,7 @@ public class AdminAfficherCommandesController implements Initializable {
             controller.initData(commande);
 
             Stage stage = (Stage) tableCommandes.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 700));
+            stage.getScene().setRoot(root);
             stage.setTitle("BLOODLINK — Gérer la Commande");
         } catch (IOException e) {
             e.printStackTrace();
@@ -283,7 +288,7 @@ public class AdminAfficherCommandesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherStocks.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) tfSearch.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 700));
+            stage.getScene().setRoot(root);
             stage.setTitle("BLOODLINK — Inventaire des Stocks");
         } catch (IOException e) {
             e.printStackTrace();

@@ -17,7 +17,7 @@
     <top>
         <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
             <HBox alignment="CENTER_LEFT" spacing="6">
-                <Label styleClass="brand-icon" text="🩸" />
+                <Label styleClass="brand-icon" text="❤" />
                 <Label styleClass="brand-label" text="BLOODLINK" />
             </HBox>
             <Region HBox.hgrow="ALWAYS" />
@@ -47,8 +47,8 @@
             <!-- Filters Bar -->
             <HBox spacing="16">
                 <TextField fx:id="tfSearch" prefWidth="350" promptText="🔍  Référence, groupe sanguin..." styleClass="dark-field" HBox.hgrow="ALWAYS"/>
-                <ComboBox fx:id="cbStatutFiltre" prefWidth="250" promptText="Tous les statuts" styleClass="dark-combo" />
-                <ComboBox fx:id="cbPrioriteFiltre" prefWidth="250" promptText="Toutes priorités" styleClass="dark-combo" />
+                <ComboBox fx:id="cbStatutFiltre" prefWidth="250" promptText="Statuts" styleClass="dark-combo" />
+                <ComboBox fx:id="cbPrioriteFiltre" prefWidth="250" promptText="Priorités" styleClass="dark-combo" />
             </HBox>
 
             <!-- Table Card -->

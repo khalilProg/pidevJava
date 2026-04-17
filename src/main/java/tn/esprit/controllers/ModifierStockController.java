@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import tn.esprit.entities.Stock;
 import tn.esprit.services.StockService;
@@ -28,6 +29,12 @@ public class ModifierStockController {
     @FXML private TextField txtQuantite;
     @FXML private Button btnAnnuler;
     @FXML private Button btnEnregistrer;
+
+    // Inline error labels
+    @FXML private Label lblErrorTypeOrg;
+    @FXML private Label lblErrorOrganisation;
+    @FXML private Label lblErrorTypeSang;
+    @FXML private Label lblErrorQuantite;
 
     private StockService stockService = new StockService();
     private Connection cnx = MyDatabase.getInstance().getCnx();
@@ -115,19 +122,57 @@ public class ModifierStockController {
             cbOrganisation.setPromptText("Choisir une organisation");
         } catch (SQLException e) {
             System.out.println("❌ Erreur de chargement des organisations: " + e.getMessage());
-            showError("Erreur lors du chargement des " + typeOrgDb + "s.");
         }
     }
 
-    private void updateStock() {
-        // Validation
-        if (cbTypeOrg.getValue() == null || cbTypeSang.getValue() == null || cbOrganisation.getValue() == null) {
-            showError("Veuillez remplir tous les champs de sélection.");
-            return;
+    private void clearErrors() {
+        lblErrorTypeOrg.setText("");
+        lblErrorOrganisation.setText("");
+        lblErrorTypeSang.setText("");
+        lblErrorQuantite.setText("");
+    }
+
+    private boolean validateForm() {
+        boolean valid = true;
+
+        if (cbTypeOrg.getValue() == null) {
+            lblErrorTypeOrg.setText("Veuillez sélectionner un type d'organisation.");
+            valid = false;
         }
 
-        if (txtQuantite.getText() == null || txtQuantite.getText().isEmpty()) {
-            showError("Veuillez saisir une quantité.");
+        if (cbOrganisation.getValue() == null) {
+            lblErrorOrganisation.setText("Veuillez sélectionner une organisation.");
+            valid = false;
+        }
+
+        if (cbTypeSang.getValue() == null) {
+            lblErrorTypeSang.setText("Veuillez sélectionner un type de sang.");
+            valid = false;
+        }
+
+        if (txtQuantite.getText() == null || txtQuantite.getText().trim().isEmpty()) {
+            lblErrorQuantite.setText("La quantité est obligatoire.");
+            valid = false;
+        } else {
+            try {
+                int q = Integer.parseInt(txtQuantite.getText().trim());
+                if (q <= 0) {
+                    lblErrorQuantite.setText("La quantité doit être supérieure à 0.");
+                    valid = false;
+                }
+            } catch (NumberFormatException e) {
+                lblErrorQuantite.setText("La quantité doit être un nombre.");
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
+
+    private void updateStock() {
+        clearErrors();
+
+        if (!validateForm()) {
             return;
         }
 
@@ -136,13 +181,8 @@ public class ModifierStockController {
         String typeSang = cbTypeSang.getValue();
         int quantite = Integer.parseInt(txtQuantite.getText());
 
-        if (quantite <= 0) {
-            showError("Veuillez saisir une quantité valide (> 0).");
-            return;
-        }
-
         if (orgId == 0) {
-            showError("Veuillez choisir une organisation valide.");
+            lblErrorOrganisation.setText("Organisation invalide.");
             return;
         }
 
@@ -158,7 +198,7 @@ public class ModifierStockController {
             navigateToAffichage();
         } catch (SQLException e) {
             System.out.println("❌ Erreur: " + e.getMessage());
-            showError("Une erreur est survenue lors de l'enregistrement de la modification.");
+            lblErrorQuantite.setText("Erreur lors de la mise à jour.");
         }
     }
 
@@ -167,7 +207,7 @@ public class ModifierStockController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherStocks.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) btnAnnuler.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 700));
+            stage.getScene().setRoot(root);
             stage.setTitle("BLOODLINK — Inventaire des Stocks");
         } catch (IOException e) {
             e.printStackTrace();
@@ -175,14 +215,26 @@ public class ModifierStockController {
         }
     }
 
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Avertissement");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white;");
-        dialogPane.lookupAll(".label").forEach(node -> node.setStyle("-fx-text-fill: white;"));
-        alert.show();
+    @FXML
+    private void handleRetour() {
+        navigateToAffichage();
+    }
+
+    @FXML
+    private void goToCommandes() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminAfficherCommandes.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnAnnuler.getScene().getWindow();
+            stage.getScene().setRoot(root);
+            stage.setTitle("BLOODLINK — Gestion des Commandes");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void goToStocks() {
+        navigateToAffichage();
     }
 }
