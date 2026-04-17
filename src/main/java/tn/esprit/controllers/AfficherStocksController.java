@@ -15,6 +15,7 @@ import javafx.util.Callback;
 import tn.esprit.entities.Stock;
 import tn.esprit.services.StockService;
 import tn.esprit.tools.MyDatabase;
+import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,6 +31,7 @@ public class AfficherStocksController {
 
     @FXML private Label lblTotalCount;
     @FXML private Button btnNouvelleStock;
+    @FXML private Button btnThemeToggle;
     @FXML private TextField tfSearch;
     @FXML private TableView<Stock> tableStocks;
     @FXML private TableColumn<Stock, Integer> colId;
@@ -40,6 +42,7 @@ public class AfficherStocksController {
     @FXML private TableColumn<Stock, Stock> colActions;
 
     private StockService stockService = new StockService();
+    private final ThemeManager themeManager = ThemeManager.getInstance();
     private ObservableList<Stock> stockList = FXCollections.observableArrayList();
     private Connection cnx = MyDatabase.getInstance().getCnx();
 
@@ -53,6 +56,31 @@ public class AfficherStocksController {
         loadOrganisationNames();
         setupTableColumns();
         loadStocks();
+
+        // Apply theme
+        javafx.application.Platform.runLater(() -> {
+            themeManager.applyTheme(tfSearch.getScene());
+            themeManager.updateToggleButton(btnThemeToggle);
+            refreshInlineStyles();
+        });
+
+        // Add animations
+        tn.esprit.tools.AnimationUtils.animateNode(btnNouvelleStock, 100);
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnNouvelleStock);
+        tn.esprit.tools.AnimationUtils.animateNode(tfSearch, 200);
+        tn.esprit.tools.AnimationUtils.animateNode(tableStocks, 300);
+    }
+
+    @FXML
+    private void handleThemeToggle() {
+        themeManager.toggleTheme(btnThemeToggle.getScene());
+        themeManager.updateToggleButton(btnThemeToggle);
+        refreshInlineStyles();
+        tableStocks.refresh();
+    }
+
+    private void refreshInlineStyles() {
+        lblTotalCount.setStyle(themeManager.getCountLabelStyle());
     }
 
     private void loadOrganisationNames() {
@@ -91,7 +119,7 @@ public class AfficherStocksController {
                     setText(null);
                 } else {
                     Label lbl = new Label("#" + item);
-                    lbl.setStyle("-fx-background-color: #2a2a2a; -fx-text-fill: #cccccc; -fx-font-weight: bold; -fx-padding: 4 10 4 10; -fx-background-radius: 12;");
+                    lbl.setStyle(themeManager.getReferenceChipStyle());
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -127,7 +155,7 @@ public class AfficherStocksController {
                     setText(null);
                 } else {
                     Label lbl = new Label(item + " Unités");
-                    lbl.setStyle("-fx-text-fill: #cccccc; -fx-font-weight: bold;");
+                    lbl.setStyle(themeManager.getTableBoldStyle());
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -146,7 +174,7 @@ public class AfficherStocksController {
                 } else {
                     String display = item.getTypeOrg().equalsIgnoreCase("banque") ? "BANQUE" : "ENTITÉ COLLECTE";
                     Label lbl = new Label(display);
-                    lbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                    lbl.setStyle(themeManager.getOrgLabelStyle());
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -165,7 +193,7 @@ public class AfficherStocksController {
                     setText(null);
                 } else {
                     Label lbl = new Label(sdf.format(item));
-                    lbl.setStyle("-fx-text-fill: #888888;");
+                    lbl.setStyle(themeManager.getDateLabelStyle());
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -183,12 +211,14 @@ public class AfficherStocksController {
 
                     {
                         btnEdit.getStyleClass().add("action-btn-edit");
+                        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnEdit);
                         btnEdit.setOnAction(event -> {
                             Stock s = getTableView().getItems().get(getIndex());
                             handleEdit(s);
                         });
 
                         btnDelete.getStyleClass().add("action-btn-delete");
+                        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnDelete);
                         btnDelete.setOnAction(event -> {
                             Stock s = getTableView().getItems().get(getIndex());
                             handleDelete(s);
@@ -251,8 +281,7 @@ public class AfficherStocksController {
 
         // Motif Dark Theme
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white;");
-        dialogPane.lookupAll(".label").forEach(node -> node.setStyle("-fx-text-fill: white;"));
+        themeManager.styleDialog(dialogPane);
 
         if (alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
             try {

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import tn.esprit.entities.Commande;
 import tn.esprit.services.CommandeService;
+import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +30,7 @@ public class AdminAfficherCommandesController implements Initializable {
     @FXML private ComboBox<String> cbStatutFiltre;
     @FXML private ComboBox<String> cbPrioriteFiltre;
     @FXML private Label lblCount;
+    @FXML private Button btnThemeToggle;
     
     @FXML private TableView<Commande> tableCommandes;
     @FXML private TableColumn<Commande, Integer> colReference;
@@ -39,6 +41,7 @@ public class AdminAfficherCommandesController implements Initializable {
     @FXML private TableColumn<Commande, Commande> colActions;
 
     private final CommandeService commandeService = new CommandeService();
+    private final ThemeManager themeManager = ThemeManager.getInstance();
     private ObservableList<Commande> commandesList;
     private FilteredList<Commande> filteredData;
 
@@ -47,6 +50,31 @@ public class AdminAfficherCommandesController implements Initializable {
         setupFilters();
         setupTableColumns();
         loadDonnees();
+
+        // Apply theme
+        javafx.application.Platform.runLater(() -> {
+            themeManager.applyTheme(tfSearch.getScene());
+            themeManager.updateToggleButton(btnThemeToggle);
+            refreshInlineStyles();
+        });
+
+        // Add animations
+        tn.esprit.tools.AnimationUtils.animateNode(tfSearch, 100);
+        tn.esprit.tools.AnimationUtils.animateNode(cbStatutFiltre, 200);
+        tn.esprit.tools.AnimationUtils.animateNode(cbPrioriteFiltre, 300);
+        tn.esprit.tools.AnimationUtils.animateNode(tableCommandes, 400);
+    }
+
+    @FXML
+    private void handleThemeToggle() {
+        themeManager.toggleTheme(btnThemeToggle.getScene());
+        themeManager.updateToggleButton(btnThemeToggle);
+        refreshInlineStyles();
+        tableCommandes.refresh();
+    }
+
+    private void refreshInlineStyles() {
+        lblCount.setStyle(themeManager.getCountLabelStyle());
     }
 
     private void setupFilters() {
@@ -72,7 +100,7 @@ public class AdminAfficherCommandesController implements Initializable {
                     setText(null);
                 } else {
                     Label lbl = new Label("#" + item);
-                    lbl.setStyle("-fx-background-color: #2a2a2a; -fx-text-fill: #cccccc; -fx-font-weight: bold; -fx-padding: 4 10 4 10; -fx-background-radius: 12;");
+                    lbl.setStyle(themeManager.getReferenceChipStyle());
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -89,7 +117,7 @@ public class AdminAfficherCommandesController implements Initializable {
                     setText(null);
                 } else {
                     Label lbl = new Label(String.valueOf(item));
-                    lbl.setStyle("-fx-text-fill: #cccccc; -fx-font-weight: bold;");
+                    lbl.setStyle(themeManager.getTableBoldStyle());
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -165,12 +193,14 @@ public class AdminAfficherCommandesController implements Initializable {
 
                     {
                         btnEdit.getStyleClass().add("action-btn-edit");
+                        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnEdit);
                         btnEdit.setOnAction(event -> {
                             Commande c = getTableView().getItems().get(getIndex());
                             handleEdit(c);
                         });
 
                         btnDelete.getStyleClass().add("action-btn-delete");
+                        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnDelete);
                         btnDelete.setOnAction(event -> {
                             Commande c = getTableView().getItems().get(getIndex());
                             handleDelete(c);
@@ -263,8 +293,7 @@ public class AdminAfficherCommandesController implements Initializable {
 
         // Apply dark theme motif to alert
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white;");
-        dialogPane.lookupAll(".label").forEach(node -> node.setStyle("-fx-text-fill: white;"));
+        themeManager.styleDialog(dialogPane);
 
         if (alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
             try {

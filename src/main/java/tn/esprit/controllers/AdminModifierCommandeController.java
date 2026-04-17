@@ -9,11 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import tn.esprit.entities.Commande;
 import tn.esprit.services.CommandeService;
 import tn.esprit.tools.MyDatabase;
+import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -31,6 +33,9 @@ public class AdminModifierCommandeController {
     @FXML private ComboBox<String> cbStatut;
     @FXML private ComboBox<String> cbBanque;
     @FXML private Label lblStatus;
+    @FXML private Button btnAnnuler;
+    @FXML private Button btnEnregistrer;
+    @FXML private Button btnThemeToggle;
 
     // Inline error labels
     @FXML private Label lblErrorReference;
@@ -41,6 +46,7 @@ public class AdminModifierCommandeController {
     @FXML private Label lblErrorBanque;
 
     private final CommandeService commandeService = new CommandeService();
+    private final ThemeManager themeManager = ThemeManager.getInstance();
     private Commande currentCommande;
     private final Connection cnx = MyDatabase.getInstance().getCnx();
     private final Map<String, Integer> banqueIdMap = new HashMap<>();
@@ -57,6 +63,29 @@ public class AdminModifierCommandeController {
                 "En attente", "Validée", "Refusée", "Annulée"
         ));
         loadBanques();
+
+        // Apply theme
+        javafx.application.Platform.runLater(() -> {
+            themeManager.applyTheme(tfReference.getScene());
+            themeManager.updateToggleButton(btnThemeToggle);
+        });
+
+        // Add animations
+        tn.esprit.tools.AnimationUtils.animateNode(tfReference, 100);
+        tn.esprit.tools.AnimationUtils.animateNode(tfQuantite, 200);
+        tn.esprit.tools.AnimationUtils.animateNode(cbTypeSang, 300);
+        tn.esprit.tools.AnimationUtils.animateNode(cbPriorite, 400);
+        tn.esprit.tools.AnimationUtils.animateNode(cbStatut, 500);
+        tn.esprit.tools.AnimationUtils.animateNode(cbBanque, 600);
+
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnAnnuler);
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnEnregistrer);
+    }
+
+    @FXML
+    private void handleThemeToggle() {
+        themeManager.toggleTheme(btnThemeToggle.getScene());
+        themeManager.updateToggleButton(btnThemeToggle);
     }
 
     private void loadBanques() {

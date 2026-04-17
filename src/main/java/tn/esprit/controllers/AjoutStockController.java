@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import tn.esprit.entities.Stock;
 import tn.esprit.services.StockService;
 import tn.esprit.tools.MyDatabase;
+import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,6 +30,7 @@ public class AjoutStockController {
     @FXML private TextField txtQuantite;
     @FXML private Button btnAnnuler;
     @FXML private Button btnEnregistrer;
+    @FXML private Button btnThemeToggle;
 
     // Inline error labels
     @FXML private Label lblErrorTypeOrg;
@@ -37,6 +39,7 @@ public class AjoutStockController {
     @FXML private Label lblErrorQuantite;
 
     private StockService stockService = new StockService();
+    private final ThemeManager themeManager = ThemeManager.getInstance();
     private Connection cnx = MyDatabase.getInstance().getCnx();
     
     // Maps UI names to IDs for organisations and types
@@ -76,6 +79,27 @@ public class AjoutStockController {
         // Set up action listeners
         btnAnnuler.setOnAction(e -> navigateToAffichage());
         btnEnregistrer.setOnAction(e -> addStock());
+
+        // Add animations
+        tn.esprit.tools.AnimationUtils.animateNode(cbTypeOrg, 100);
+        tn.esprit.tools.AnimationUtils.animateNode(cbOrganisation, 200);
+        tn.esprit.tools.AnimationUtils.animateNode(cbTypeSang, 300);
+        tn.esprit.tools.AnimationUtils.animateNode(txtQuantite, 400);
+
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnAnnuler);
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnEnregistrer);
+
+        // Apply theme
+        javafx.application.Platform.runLater(() -> {
+            themeManager.applyTheme(btnAnnuler.getScene());
+            themeManager.updateToggleButton(btnThemeToggle);
+        });
+    }
+
+    @FXML
+    private void handleThemeToggle() {
+        themeManager.toggleTheme(btnThemeToggle.getScene());
+        themeManager.updateToggleButton(btnThemeToggle);
     }
 
     private void loadOrganisations(String typeOrgDb) {

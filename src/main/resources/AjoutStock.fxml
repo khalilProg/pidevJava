@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane styleClass="main-container" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjoutStockController">
+<BorderPane styleClass="main-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjoutStockController">
 
     <left>
         <VBox styleClass="sidebar">
@@ -46,6 +46,7 @@
                         <Label text="Administrateur" styleClass="sidebar-user-role"/>
                     </VBox>
                 </HBox>
+                <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" maxWidth="1.7976931348623157E308" onAction="#handleThemeToggle"/>
                 <Button text="⏻  Déconnexion" styleClass="sidebar-disconnect-btn" maxWidth="1.7976931348623157E308"/>
             </VBox>
         </VBox>
@@ -53,7 +54,7 @@
 
     <center>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge-scroll" vbarPolicy="AS_NEEDED">
-            <VBox spacing="0" style="-fx-background-color: #121212;">
+            <VBox spacing="0" styleClass="content-area">
                 <padding><Insets bottom="40" left="32" right="32" top="28"/></padding>
 
                 <VBox spacing="4">

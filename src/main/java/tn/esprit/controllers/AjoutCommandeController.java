@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import tn.esprit.entities.Commande;
 import tn.esprit.services.CommandeService;
 import tn.esprit.tools.MyDatabase;
+import tn.esprit.tools.ThemeManager;
 
 import java.net.URL;
 import java.sql.*;
@@ -19,21 +20,21 @@ import java.util.ResourceBundle;
 
 public class AjoutCommandeController implements Initializable {
 
-    @FXML private TextField tfReference;
     @FXML private TextField tfQuantite;
     @FXML private ComboBox<String> cbTypeSang;
     @FXML private ComboBox<String> cbPriorite;
     @FXML private ComboBox<String> cbBanque;
     @FXML private Label lblStatus;
+    @FXML private Button btnThemeToggle;
 
     // Inline error labels
-    @FXML private Label lblErrorReference;
     @FXML private Label lblErrorQuantite;
     @FXML private Label lblErrorTypeSang;
     @FXML private Label lblErrorPriorite;
     @FXML private Label lblErrorBanque;
 
     private final CommandeService commandeService = new CommandeService();
+    private final ThemeManager themeManager = ThemeManager.getInstance();
 
     private final Map<String, Integer> banqueIdMap = new HashMap<>();
 
@@ -51,6 +52,24 @@ public class AjoutCommandeController implements Initializable {
 
         // Load Banques from DB
         loadBanques();
+
+        // Add animations
+        tn.esprit.tools.AnimationUtils.animateNode(tfQuantite, 200);
+        tn.esprit.tools.AnimationUtils.animateNode(cbTypeSang, 300);
+        tn.esprit.tools.AnimationUtils.animateNode(cbPriorite, 400);
+        tn.esprit.tools.AnimationUtils.animateNode(cbBanque, 500);
+
+        // Apply theme
+        javafx.application.Platform.runLater(() -> {
+            themeManager.applyTheme(tfQuantite.getScene());
+            themeManager.updateToggleButton(btnThemeToggle);
+        });
+    }
+
+    @FXML
+    private void handleThemeToggle() {
+        themeManager.toggleTheme(btnThemeToggle.getScene());
+        themeManager.updateToggleButton(btnThemeToggle);
     }
 
     private void loadBanques() {
@@ -71,7 +90,6 @@ public class AjoutCommandeController implements Initializable {
     }
 
     private void clearErrors() {
-        lblErrorReference.setText("");
         lblErrorQuantite.setText("");
         lblErrorTypeSang.setText("");
         lblErrorPriorite.setText("");
@@ -82,19 +100,6 @@ public class AjoutCommandeController implements Initializable {
 
     private boolean validateForm() {
         boolean valid = true;
-
-        // Reference
-        if (tfReference.getText() == null || tfReference.getText().trim().isEmpty()) {
-            lblErrorReference.setText("La référence est obligatoire.");
-            valid = false;
-        } else {
-            try {
-                Integer.parseInt(tfReference.getText().trim());
-            } catch (NumberFormatException e) {
-                lblErrorReference.setText("La référence doit être un nombre.");
-                valid = false;
-            }
-        }
 
         // Quantité
         if (tfQuantite.getText() == null || tfQuantite.getText().trim().isEmpty()) {
@@ -142,7 +147,7 @@ public class AjoutCommandeController implements Initializable {
             return;
         }
 
-        int reference = Integer.parseInt(tfReference.getText().trim());
+        int reference = new java.util.Random().nextInt(900000) + 100000; // Generate 6-digit reference Auto
         int quantite = Integer.parseInt(tfQuantite.getText().trim());
         int banqueId = banqueIdMap.getOrDefault(cbBanque.getValue(), 0);
 
@@ -180,7 +185,7 @@ public class AjoutCommandeController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherCommandes.fxml"));
             javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = (javafx.stage.Stage) tfReference.getScene().getWindow();
+            javafx.stage.Stage stage = (javafx.stage.Stage) tfQuantite.getScene().getWindow();
             stage.getScene().setRoot(root);
             stage.setTitle("BLOODLINK — BackOffice");
         } catch (java.io.IOException e) {

@@ -7,8 +7,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.controllers.AjoutCommandeController"
-            styleClass="main-container"
-            stylesheets="@commande.css">
+            styleClass="main-container">
 
     <top>
         <HBox styleClass="nav-bar" alignment="CENTER_LEFT">
@@ -17,6 +16,8 @@
                 <Label text="BLOODLINK" styleClass="brand-label"/>
             </HBox>
             <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" onAction="#handleThemeToggle"/>
+            <Region prefWidth="12"/>
             <Button text="👤  chaffai yassine" styleClass="user-badge"/>
         </HBox>
     </top>
@@ -24,7 +25,7 @@
     <center>
         <ScrollPane fitToWidth="true" styleClass="edge-to-edge-scroll"
                     hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-            <VBox spacing="0" style="-fx-background-color: #121212;">
+            <VBox spacing="0" styleClass="content-area">
                 <padding><Insets top="0" right="32" bottom="40" left="32"/></padding>
 
                 <VBox styleClass="page-header" spacing="0">
@@ -45,12 +46,7 @@
 
                     <!-- Row 1: Reference + Quantité -->
                     <HBox spacing="20">
-                        <VBox HBox.hgrow="ALWAYS" spacing="0">
-                            <Label text="REFERENCE" styleClass="field-label"/>
-                            <TextField fx:id="tfReference" promptText="Ex: 2024001"
-                                       styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
-                            <Label fx:id="lblErrorReference" text="" styleClass="field-error"/>
-                        </VBox>
+
                         <VBox HBox.hgrow="ALWAYS" spacing="0">
                             <Label text="QUANTITÉ" styleClass="field-label"/>
                             <TextField fx:id="tfQuantite" promptText="Quantité"

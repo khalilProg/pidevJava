@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane styleClass="main-container" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AfficherCommandesController">
+<BorderPane styleClass="main-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AfficherCommandesController">
     <!-- TOP NAV BAR -->
     <top>
         <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
@@ -21,13 +21,15 @@
                 <Label styleClass="brand-label" text="BLOODLINK" />
             </HBox>
             <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" onAction="#handleThemeToggle"/>
+            <Region prefWidth="12"/>
             <Button styleClass="user-badge" text="👤  chaffai yassine" />
         </HBox>
     </top>
 
     <!-- MAIN CONTENT -->
     <center>
-        <VBox spacing="20" style="-fx-background-color: #121212;">
+        <VBox spacing="20" styleClass="content-area">
             <padding>
                 <Insets bottom="32" left="32" right="32" top="28" />
             </padding>
@@ -54,9 +56,9 @@
             <!-- Table Card -->
             <VBox spacing="10" styleClass="form-card" VBox.vgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT">
-                    <Label style="-fx-text-fill: #777777; -fx-font-size: 11px; -fx-font-weight: bold;" text="HISTORIQUE DES COMMANDES" />
+                    <Label styleClass="field-label" text="HISTORIQUE DES COMMANDES" />
                     <Region HBox.hgrow="ALWAYS" />
-                    <Label fx:id="lblCount" style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;" text="0 commande(s)" />
+                    <Label fx:id="lblCount" text="0 commande(s)" />
                 </HBox>
                 
                 <TableView fx:id="tableCommandes" styleClass="dark-table" VBox.vgrow="ALWAYS">
@@ -65,7 +67,8 @@
                         <TableColumn fx:id="colTypeSang" prefWidth="150" text="TYPE SANG" />
                         <TableColumn fx:id="colQuantite" prefWidth="120" text="QUANTITÉ" />
                         <TableColumn fx:id="colPriorite" prefWidth="150" text="PRIORITÉ" />
-                        <TableColumn fx:id="colStatut" prefWidth="180" text="STATUT" />
+                        <TableColumn fx:id="colStatut" prefWidth="150" text="STATUT" />
+                        <TableColumn fx:id="colActions" prefWidth="180" text="ACTIONS" style="-fx-alignment: center;" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
