@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.SVGPath?>
+<AnchorPane maxWidth="400.0" prefWidth="380.0" styleClass="card" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneCard">
+   <children>
+      <VBox spacing="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox spacing="4.0">
+               <children>
+                  <Text fx:id="campaignName" styleClass="card-title" text="Nom de la Campagne" />
+                  <Text text="" />
+               </children>
+            </VBox>
+            <Text fx:id="campaignDates" fill="#888888" text="Dates" />
+            <HBox spacing="10" alignment="CENTER_LEFT">
+               <Text fx:id="text" text="Besoins: " />
+               <Text fx:id="bloodTypes" fill="#FF3E3E" style="-fx-font-weight: 800; -fx-font-size: 14px;" text="Groupes sanguins attendus" />
+            </HBox>
+
+            <Text fx:id="campaignDescription" fill="#CCCCCC" style="-fx-font-size: 14px;" wrappingWidth="340.0" text="Description de la campagne..." />
+
+            <Button fx:id="participateButton" maxWidth="Infinity" mnemonicParsing="false"
+                    onAction="#openQuestionnaire" styleClass="btn-participate-full" text="PARTICIPER →" />
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

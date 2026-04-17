@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.ListeQuestAdmin">
+
+    <!-- Navbar -->
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude"
+                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+    <!-- Page Title -->
+
+    <Text fill="WHITE" layoutX="300" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Liste questionnaires" styleClass="hero-title">
+        <font><Font size="32.0"/></font>
+    </Text>
+    <Text fill="#888888" layoutX="300" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Consultez la liste des questionnaires soumis." >
+        <font><Font size="16.0"/></font>
+    </Text>
+        <Button text="+ Ajouter Questionnaire" layoutX="70" layoutY="120" fx:id="addBtn" onAction="#handleAjouter" styleClass="btn-primary-modern" AnchorPane.topAnchor="130" AnchorPane.rightAnchor="55"/>
+
+
+    <TableView fx:id="tableView" prefWidth="1400" prefHeight="520" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30" >
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="nomColumn" text="Nom" prefWidth="100"/>
+            <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="100"/>
+            <TableColumn fx:id="ageColumn" text="Age" prefWidth="50"/>
+            <TableColumn fx:id="sexeColumn" text="Sexe" prefWidth="60"/>
+            <TableColumn fx:id="poidsColumn" text="Poids" prefWidth="60"/>
+            <TableColumn fx:id="autresColumn" text="Autres" prefWidth="120"/>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
+            <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="120"/>
+            <TableColumn fx:id="typeSangColumn" text="Groupe Sanguin" prefWidth="80"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0"/>
+        </columns>
+    </TableView>
+</AnchorPane>

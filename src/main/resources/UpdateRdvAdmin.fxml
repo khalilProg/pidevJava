@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.UpdateRdvAdmin">
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+
+    <children>
+        <VBox layoutX="70.0" layoutY="130.0" spacing="30.0" AnchorPane.leftAnchor="670.0">
+            <children>
+                <VBox spacing="8.0">
+                    <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier le Rendez-vous" styleClass="hero-title">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Text>
+                        <Text fill="#888888" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajustement administratif de la date et de l'entité de collecte.">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+
+                <VBox prefWidth="500.0" spacing="20.0">
+                    <children>
+                        <VBox spacing="10.0">
+                            <children>
+                                <Label text="Date du rendez-vous" styleClass="stat-card-subtitle" />
+                                <DatePicker fx:id="dateRdvPicker" prefWidth="500.0"/>
+                                <Text fx:id="dateError" fill="#FF3E3E" visible="false" styleClass="error-text"/>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="10.0">
+                            <children>
+                                <Label text="Heure" styleClass="stat-card-subtitle" />
+                                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Spinner fx:id="hourSpinner" prefWidth="80.0"/>
+                                        <Label text="h" styleClass="stat-card-subtitle" />
+                                        <Spinner fx:id="minuteSpinner" prefWidth="80.0"/>
+                                        <Label text="m" styleClass="stat-card-subtitle" />
+                                    </children>
+                                </HBox>
+                                <Text fx:id="timeError" fill="#FF3E3E" visible="false" styleClass="error-text"/>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="10.0">
+                            <children>
+                                <Label text="Entité de collecte" styleClass="stat-card-subtitle" />
+                                <ComboBox fx:id="entiteCombo" prefWidth="500.0"/>
+                            </children>
+                        </VBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                           <padding>
+                               <Insets top="10.0"/>
+                           </padding>
+                           <children>
+                               <Button fx:id="confirmerBtn" text="Confirmer" onAction="#handleConfirmer" styleClass="btn-primary-modern" />
+                               <Button fx:id="annulerBtn" text="Annuler" onAction="#handleAnnuler" styleClass="btn-outline"/>
+                           </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

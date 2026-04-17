@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.ListeRdvAdmin">
+
+    <!-- Navbar -->
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+    <Text fill="WHITE" layoutX="300" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Liste rendez vous" styleClass="hero-title">
+        <font><Font size="32.0"/></font>
+    </Text>
+    <Text fill="#888888" layoutX="300" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Consultez la liste des rendez vous soumis.">
+        <font><Font size="16.0"/></font>
+    </Text>
+    <TableView fx:id="tableView" prefWidth="1400" prefHeight="520" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30" >
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="100"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+            <TableColumn fx:id="qIdColumn" text="Questionnaire id" prefWidth="100"/>
+            <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="120"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0"/>
+        </columns>
+    </TableView>
+
+</AnchorPane>
