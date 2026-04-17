@@ -1,28 +1,26 @@
 package tn.esprit.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Demande {
 
     private int id;
+    private int banque;
+    private int client;
     private int quantite;
     private String typeSang, urgence, status;
     private LocalDateTime createdAt, updatedAt;
-    private List<Transfert> transferts;
+
 
     public Demande(){}
 
-    public List<Transfert> getTransferts() {
-        return transferts;
-    }
 
-    public void setTransferts(List<Transfert> transferts) {
-        this.transferts = transferts;
-    }
-
-    public Demande(int id, int quantite, String typeSang, String urgence, String status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Demande(int id, int banque, int client, int quantite,
+                   String typeSang, String urgence, String status,
+                   LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
+        this.banque = banque;
+        this.client = client;
         this.quantite = quantite;
         this.typeSang = typeSang;
         this.urgence = urgence;
@@ -31,18 +29,7 @@ public class Demande {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public String toString() {
-        return "Demande{" +
-                "id=" + id +
-                ", quantite=" + quantite +
-                ", typeSang='" + typeSang + '\'' +
-                ", urgence='" + urgence + '\'' +
-                ", status='" + status + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
+
 
     public int getId() {
         return id;
@@ -50,6 +37,27 @@ public class Demande {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getBanque() {
+        return banque;
+    }
+
+    public void setBanque(int banque) {
+        this.banque = banque;
+    }
+
+    // 👉 utile pour SQL
+    public int getIdBanque() {
+        return banque;
+    }
+
+    public int getClientId() {
+        return client;
+    }
+
+    public void setClientId(int client) {
+        this.client = client;
     }
 
     public int getQuantite() {
@@ -100,4 +108,19 @@ public class Demande {
         this.updatedAt = updatedAt;
     }
 
+    // 🔹 toString
+    @Override
+    public String toString() {
+        return "Demande{" +
+            "id=" + id +
+            ", banque=" + banque +
+            ", clientId=" + client +
+            ", quantite=" + quantite +
+            ", typeSang='" + typeSang + '\'' +
+            ", urgence='" + urgence + '\'' +
+            ", status='" + status + '\'' +
+            ", createdAt=" + createdAt +
+            ", updatedAt=" + updatedAt +
+            '}';
+    }
 }
