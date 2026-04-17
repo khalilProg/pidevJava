@@ -6,75 +6,115 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 import tn.esprit.entities.User;
 import tn.esprit.services.UserService;
-import javafx.scene.control.Label;
 
 public class register {
 
     @FXML
     private TextField prenomF;
-
     @FXML
     private TextField nomF;
-
     @FXML
     private TextField emailF;
-
     @FXML
     private TextField telF;
-
     @FXML
     private PasswordField passF;
 
     @FXML
-    private Label errorLabel;
+    private Label prenomError;
+    @FXML
+    private Label nomError;
+    @FXML
+    private Label emailError;
+    @FXML
+    private Label telError;
+    @FXML
+    private Label passError;
 
     @FXML
     void handleRegister(ActionEvent event) {
-        String nom = nomF.getText();
-        String prenom = prenomF.getText();
-        String email = emailF.getText();
-        String tel = telF.getText();
-        String password = passF.getText();
-        errorLabel.setVisible(false);
+        clearErrors();
 
-        if(nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            displayError("Veuillez remplir tous les champs obligatoires.");
+        String prenom = prenomF.getText().trim();
+        String nom = nomF.getText().trim();
+        String email = emailF.getText().trim();
+        String tel = telF.getText().trim();
+        String password = passF.getText();
+
+        boolean valid = true;
+
+        if (prenom.isEmpty()) {
+            showFieldError(prenomError, "Le prénom est obligatoire.");
+            valid = false;
+        }
+
+        if (nom.isEmpty()) {
+            showFieldError(nomError, "Le nom est obligatoire.");
+            valid = false;
+        }
+
+        if (email.isEmpty()) {
+            showFieldError(emailError, "L'email est obligatoire.");
+            valid = false;
+        } else if (!email.contains("@") || !email.contains(".")) {
+            showFieldError(emailError, "Format d'email invalide.");
+            valid = false;
+        }
+
+        if (!tel.isEmpty()) {
+            String digitsOnly = tel.replaceAll("[^0-9]", "");
+            if (digitsOnly.length() < 8) {
+                showFieldError(telError, "Le numéro doit contenir au moins 8 chiffres.");
+                valid = false;
+            }
+        }
+
+        if (password.isEmpty()) {
+            showFieldError(passError, "Le mot de passe est obligatoire.");
+            valid = false;
+        } else if (password.length() < 6) {
+            showFieldError(passError, "Le mot de passe doit contenir au moins 6 caractères.");
+            valid = false;
+        }
+
+        if (!valid) {
             return;
         }
 
-        // Default constraints for newly created users matching web architecture
         User newUser = new User(email, nom, prenom, password, "client", tel);
         UserService userService = new UserService();
-        
+
         try {
             userService.ajouter(newUser);
-            showAlert(Alert.AlertType.INFORMATION, "Succès", "Inscription réussie ! Vous pouvez maintenant vous connecter.");
-            handleGoToLogin(event); // Navigate to login
+            handleGoToLogin(event);
         } catch (Exception e) {
             e.printStackTrace();
-            displayError("Erreur lors de l'inscription: " + e.getMessage());
+            showFieldError(emailError, "Erreur lors de l'inscription: " + e.getMessage());
         }
     }
-    
-    private void displayError(String message) {
-        errorLabel.setText(message);
-        errorLabel.setVisible(true);
+
+    private void showFieldError(Label label, String message) {
+        label.setText(message);
+        label.setVisible(true);
+        label.setManaged(true);
     }
 
-    private void showAlert(Alert.AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.show();
+    private void clearErrors() {
+        Label[] errors = { prenomError, nomError, emailError, telError, passError };
+        for (Label lbl : errors) {
+            lbl.setText("");
+            lbl.setVisible(false);
+            lbl.setManaged(false);
+        }
     }
 
     @FXML

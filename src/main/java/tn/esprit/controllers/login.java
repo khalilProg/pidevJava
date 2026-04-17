@@ -6,17 +6,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import tn.esprit.entities.User;
 import tn.esprit.services.UserService;
-import javafx.scene.control.Label;
 
 public class login {
 
@@ -54,6 +55,8 @@ public class login {
                     if (hash != null && hash.startsWith("$2y$")) {
                         hash = "$2a$" + hash.substring(4);
                         passMatch = BCrypt.checkpw(password, hash);
+                    } else if (hash != null && hash.startsWith("$2a$")) {
+                        passMatch = BCrypt.checkpw(password, hash);
                     } else if (password.equals(hash)) {
                         passMatch = true; // Support pure plain-text registrations from the desktop app
                     }
@@ -65,7 +68,7 @@ public class login {
                         if ("admin".equalsIgnoreCase(u.getRole())) {
                             navigateToDashboard(event);
                         } else {
-                            showAlert(Alert.AlertType.INFORMATION, "Connexion Réussie", "Bienvenue " + u.getPrenom() + " !");
+                            navigateToClientHome(event, u);
                         }
                         break;
                     }
@@ -93,18 +96,24 @@ public class login {
         }
     }
 
+    private void navigateToClientHome(ActionEvent event, User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client_home.fxml"));
+            Parent root = loader.load();
+            ClientHomeController controller = loader.getController();
+            controller.initData(user);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("BloodLink - Accueil");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void displayError(String message) {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
-    }
-
-
-    private void showAlert(Alert.AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.show();
     }
 
     @FXML

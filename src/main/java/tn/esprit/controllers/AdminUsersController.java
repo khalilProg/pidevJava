@@ -132,12 +132,11 @@ public class AdminUsersController implements Initializable {
 
         // Role Badge
         Label roleLbl = new Label(u.getRole() != null ? u.getRole().toUpperCase() : "UNKNOWN");
-        String roleColor = "rgba(255,255,255,0.1)";
-        String textColor = "white";
         if ("admin".equalsIgnoreCase(u.getRole())) {
-            roleColor = "-primary"; // Red
+            roleLbl.setStyle("-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 10px; -fx-padding: 5 12; -fx-background-radius: 12;");
+        } else {
+            roleLbl.setStyle("-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 12; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 10px; -fx-padding: 4 12;");
         }
-        roleLbl.setStyle("-fx-background-color: " + roleColor + "; -fx-text-fill: " + textColor + "; -fx-font-weight: bold; -fx-font-size: 10px; -fx-padding: 5 12; -fx-background-radius: 12;");
         HBox roleBox = new HBox(roleLbl);
         roleBox.setPrefWidth(150.0);
         roleBox.setStyle("-fx-alignment: center-left;");
@@ -155,10 +154,70 @@ public class AdminUsersController implements Initializable {
         btnVoir.setStyle(btnStyle);
         btnModif.setStyle(btnStyle);
         btnSuppr.setStyle(btnSupprStyle);
+        
+        btnVoir.setOnAction(e -> handleViewUser(e, u));
+        btnModif.setOnAction(e -> handleModifyUser(e, u));
+        btnSuppr.setOnAction(e -> handleDeleteUser(u));
+
         actionsBox.getChildren().addAll(btnVoir, btnModif, btnSuppr);
 
         row.getChildren().addAll(userInfoBox, emailLbl, roleBox, actionsBox);
         return row;
+    }
+
+    private void handleViewUser(ActionEvent event, User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_view.fxml"));
+            Parent root = loader.load();
+            AdminUsersViewController controller = loader.getController();
+            controller.initData(user);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to navigate to user profile: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void handleModifyUser(ActionEvent event, User user) {
+        try {
+            if ("client".equalsIgnoreCase(user.getRole())) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit_client.fxml"));
+                Parent root = loader.load();
+                AdminUsersEditClientController controller = loader.getController();
+                controller.initData(user, null);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } else if ("agent banque".equalsIgnoreCase(user.getRole())) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit_banque.fxml"));
+                Parent root = loader.load();
+                AdminUsersEditBanqueController controller = loader.getController();
+                controller.initData(user, null);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit.fxml"));
+                Parent root = loader.load();
+                AdminUsersEditController controller = loader.getController();
+                controller.initData(user);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+        } catch (IOException e) {
+            System.err.println("Failed to navigate to user edit: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void handleDeleteUser(User user) {
+        UserService userService = new UserService();
+        userService.supprimer(user);
+        allUsers.remove(user);
+        filterAndDisplay();
     }
 
     @FXML
