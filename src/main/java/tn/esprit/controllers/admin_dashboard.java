@@ -27,6 +27,11 @@ public class admin_dashboard {
         navigateTo(event, "/admin_users.fxml");
     }
 
+    @FXML
+    void handleNavigateTransferts(ActionEvent event) {
+        navigateTo(event, "/TransfertBackView.fxml");
+    }
+
     private void navigateTo(ActionEvent event, String path) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));

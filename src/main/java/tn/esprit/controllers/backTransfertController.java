@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,27 +8,29 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 
 import tn.esprit.entities.Transfert;
 import tn.esprit.services.TransfertService;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class backTransfertController {
 
     @FXML private TableView<Transfert> tableTransfert;
 
-    @FXML private TableColumn<Transfert, Integer> colId;
+    @FXML private TableColumn<Transfert, String> colId;
+    @FXML private TableColumn<Transfert, String> colDemande;
     @FXML private TableColumn<Transfert, String> colFrom;
     @FXML private TableColumn<Transfert, String> colTo;
-    @FXML private TableColumn<Transfert, Integer> colQuantite;
-    @FXML private TableColumn<Transfert, LocalDate> colDateEnvoie;
-    @FXML private TableColumn<Transfert, LocalDate> colDateReception;
+    @FXML private TableColumn<Transfert, String> colQuantite;
+    @FXML private TableColumn<Transfert, String> colDateEnvoie;
     @FXML private TableColumn<Transfert, String> colStatus;
     @FXML private TableColumn<Transfert, Void> colActions;
 
@@ -38,16 +41,111 @@ public class backTransfertController {
     @FXML
     public void initialize() {
 
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colFrom.setCellValueFactory(new PropertyValueFactory<>("fromOrg"));
-        colTo.setCellValueFactory(new PropertyValueFactory<>("toOrg"));
-        colQuantite.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        colDateEnvoie.setCellValueFactory(new PropertyValueFactory<>("dateEnvoie"));
-        colDateReception.setCellValueFactory(new PropertyValueFactory<>("dateReception"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        // ID Formatting ("#6")
+        colId.setCellValueFactory(param -> 
+            new SimpleStringProperty("#" + param.getValue().getId())
+        );
+        colId.setStyle("-fx-font-weight: bold; -fx-alignment: center;");
+
+        // Demande Formatting ("DEM-12")
+        colDemande.setCellValueFactory(param -> {
+            Transfert t = param.getValue();
+            if (t.getDemande() != null) {
+                return new SimpleStringProperty("DEM-" + t.getDemande().getId());
+            } else {
+                return new SimpleStringProperty("N/A");
+            }
+        });
+        colDemande.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
+
+        // From Org formatting (Multiline)
+        colFrom.setCellFactory(column -> createMultilineCell("fromOrg"));
+
+        // To Org formatting (Multiline)
+        colTo.setCellFactory(column -> createMultilineCell("toOrg"));
+
+        // Quantite format ("50 UNITÉS")
+        colQuantite.setCellValueFactory(param -> 
+            new SimpleStringProperty(param.getValue().getQuantite() + " UNITÉS")
+        );
+        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
+
+        // Date Envoie
+        colDateEnvoie.setCellValueFactory(param -> {
+            LocalDate date = param.getValue().getDateEnvoie();
+            if (date == null) return new SimpleStringProperty("--/--/----");
+            return new SimpleStringProperty(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        });
+
+        // Status Badges
+        colStatus.setCellFactory(column -> {
+            return new TableCell<Transfert, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        Transfert t = getTableRow().getItem();
+                        Label badge = new Label();
+                        badge.setStyle("-fx-padding: 4 12; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 11px;");
+                        
+                        String statusStr = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "INCONNU";
+                        
+                        if (statusStr.equals("EN_COURS") || statusStr.equals("EN COURS")) {
+                            badge.setText("🚚  EN COURS");
+                            badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(241, 196, 15, 0.2); -fx-text-fill: #f1c40f; -fx-border-color: #f1c40f; -fx-border-radius: 12;");
+                        } else if (statusStr.equals("RECU") || statusStr.equals("REÇU")) {
+                            badge.setText("✔  REÇU");
+                            badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(46, 204, 113, 0.2); -fx-text-fill: #2ecc71; -fx-border-color: #2ecc71; -fx-border-radius: 12;");
+                        } else {
+                            badge.setText("✖  " + statusStr);
+                            badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(231, 76, 60, 0.2); -fx-text-fill: #e74c3c; -fx-border-color: #e74c3c; -fx-border-radius: 12;");
+                        }
+
+                        setGraphic(badge);
+                        setAlignment(Pos.CENTER_LEFT);
+                    }
+                }
+            };
+        });
 
         loadData();
         addActions();
+    }
+
+    private TableCell<Transfert, String> createMultilineCell(String field) {
+        return new TableCell<Transfert, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                    setGraphic(null);
+                } else {
+                    Transfert t = getTableRow().getItem();
+                    VBox box = new VBox(2);
+                    box.setAlignment(Pos.CENTER_LEFT);
+                    
+                    Label nameLbl = new Label();
+                    nameLbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                    
+                    Label idLbl = new Label();
+                    idLbl.setStyle("-fx-text-fill: -muted; -fx-font-size: 10px;");
+                    
+                    if (field.equals("fromOrg")) {
+                        nameLbl.setText(t.getFromOrg() != null ? t.getFromOrg().toUpperCase() : "INCONNU");
+                        idLbl.setText("ID: " + t.getFromOrgId());
+                    } else {
+                        nameLbl.setText(t.getToOrg() != null ? t.getToOrg().toUpperCase() : "INCONNU");
+                        idLbl.setText("ID: " + t.getToOrgId());
+                    }
+                    
+                    box.getChildren().addAll(nameLbl, idLbl);
+                    setGraphic(box);
+                }
+            }
+        };
     }
 
     // ================= LOAD =================
@@ -62,59 +160,27 @@ public class backTransfertController {
 
     // ================= ACTIONS =================
     private void addActions() {
-
         colActions.setCellFactory(param -> new TableCell<>() {
 
-            private final Button btnConfirm = new Button("✔");
-            private final Button btnCancel = new Button("✖");
-            private final Button btnEdit = new Button("✏");
-            private final Button btnDelete = new Button("🗑");
+            private final Button btnEdit = new Button("✏ MODIFIER");
+            private final Button btnDelete = new Button("🗑 SUPPRIMER");
 
             {
-                // 🎨 STYLE
-                btnConfirm.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                btnCancel.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                btnEdit.setStyle("-fx-background-color: #f1c40f; -fx-text-fill: black;");
-                btnDelete.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+                // 🎨 STYLES BASED ON MOCKUP
+                btnEdit.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;");
+                btnEdit.setOnMouseEntered(e -> btnEdit.setStyle("-fx-background-color: rgba(255,255,255,0.1); -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px; -fx-background-radius: 15;"));
+                btnEdit.setOnMouseExited(e -> btnEdit.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;"));
 
-                // ================= CONFIRM =================
-                btnConfirm.setOnAction(e -> {
-                    Transfert t = getTableView().getItems().get(getIndex());
-
-                    try {
-                        t.setStatus("RECU");
-                        t.setDateReception(LocalDate.now());
-
-                        service.modifier(t);
-                        tableTransfert.refresh();
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                });
-
-                // ================= CANCEL =================
-                btnCancel.setOnAction(e -> {
-                    Transfert t = getTableView().getItems().get(getIndex());
-
-                    try {
-                        t.setStatus("ANNULE");
-                        service.modifier(t);
-                        tableTransfert.refresh();
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                btnDelete.setStyle("-fx-background-color: transparent; -fx-text-fill: #e63939; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;");
+                btnDelete.setOnMouseEntered(e -> btnDelete.setStyle("-fx-background-color: rgba(230, 57, 57, 0.1); -fx-text-fill: #e63939; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px; -fx-background-radius: 15;"));
+                btnDelete.setOnMouseExited(e -> btnDelete.setStyle("-fx-background-color: transparent; -fx-text-fill: #e63939; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 11px;"));
 
                 // ================= DELETE =================
                 btnDelete.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
-
                     try {
                         service.supprimer(t);
                         tableTransfert.getItems().remove(t);
-
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -123,7 +189,6 @@ public class backTransfertController {
                 // ================= EDIT =================
                 btnEdit.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
-
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/editBackTransfert.fxml"));
                         Parent root = loader.load();
@@ -144,44 +209,16 @@ public class backTransfertController {
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty) {
                     setGraphic(null);
                     return;
                 }
-
-                Transfert t = getTableView().getItems().get(getIndex());
-
-                HBox actions = new HBox(8);
-                actions.setAlignment(Pos.CENTER);
-
-                // 🔥 toujours visibles
+                HBox actions = new HBox(15);
+                actions.setAlignment(Pos.CENTER_LEFT);
                 actions.getChildren().addAll(btnEdit, btnDelete);
-
-                // 🔥 seulement si EN_COURS
-                if ("EN_COURS".equals(t.getStatus())) {
-                    actions.getChildren().add(0, btnConfirm);
-                    actions.getChildren().add(1, btnCancel);
-                }
-
                 setGraphic(actions);
             }
         });
-    }
-
-    // ================= NAVIGATION =================
-    @FXML
-    private void retour() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DemandeBackView.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) tableTransfert.getScene().getWindow();
-            stage.setScene(new Scene(root));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -202,6 +239,19 @@ public class backTransfertController {
     @FXML
     void handleLogout(javafx.event.ActionEvent event) {
         navigateTo(event, "/login.fxml");
+    }
+    
+    @FXML
+    private void retour() {
+        // Safe navigation logic depending on flow
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_dashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) tableTransfert.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void navigateTo(javafx.event.ActionEvent event, String path) {

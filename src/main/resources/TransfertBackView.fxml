@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -60,26 +61,32 @@
             <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
          </padding>
          
-         <HBox alignment="CENTER_LEFT">
-            <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="GESTION DES TRANSFERTS" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les transferts de produits sanguins entre établissements." />
-            </VBox>
-            <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" text="← RETOUR" onAction="#retour" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" />
-         </HBox>
+         <VBox spacing="5.0">
+             <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="TRANSFERTS DE SANG" />
+             <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Suivez les transferts entre organisations et leur statut." />
+         </VBox>
 
          <VBox styleClass="glass-card" spacing="20.0" VBox.vgrow="ALWAYS">
+            
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+                <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="text-field-custom" prefWidth="400.0">
+                    <Label text="🔍" style="-fx-text-fill: -muted;" />
+                    <TextField promptText="Rechercher par destination, statut..." styleClass="transparent-input" HBox.hgrow="ALWAYS" />
+                </HBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20px; -fx-text-fill: white; -fx-padding: 8 20;" text="Tous statuts" />
+            </HBox>
+
             <TableView fx:id="tableTransfert" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
                <columns>
                   <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
-                  <TableColumn fx:id="colFrom" text="De" prefWidth="150"/>
-                  <TableColumn fx:id="colTo" text="À" prefWidth="150"/>
-                  <TableColumn fx:id="colQuantite" text="Quantité" prefWidth="100"/>
-                  <TableColumn fx:id="colDateEnvoie" text="Date Envoi" prefWidth="120"/>
-                  <TableColumn fx:id="colDateReception" text="Date Réception" prefWidth="120"/>
-                  <TableColumn fx:id="colStatus" text="Statut" prefWidth="120"/>
-                  <TableColumn fx:id="colActions" text="Actions" prefWidth="180"/>
+                  <TableColumn text="DEMANDE" prefWidth="120"/>
+                  <TableColumn fx:id="colFrom" text="ORIGINE" prefWidth="180"/>
+                  <TableColumn fx:id="colTo" text="DESTINATION" prefWidth="180"/>
+                  <TableColumn fx:id="colQuantite" text="QUANTITÉ" prefWidth="100"/>
+                  <TableColumn fx:id="colDateEnvoie" text="DATE ENVOI" prefWidth="120"/>
+                  <TableColumn fx:id="colStatus" text="STATUT" prefWidth="120"/>
+                  <TableColumn fx:id="colActions" text="ACTIONS" prefWidth="200"/>
                </columns>
             </TableView>
          </VBox>

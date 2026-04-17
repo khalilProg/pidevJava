@@ -10,9 +10,9 @@ import javafx.stage.Stage;
 import tn.esprit.entities.Transfert;
 import tn.esprit.services.TransfertService;
 
-import java.time.LocalDate;
-
 public class EditTransfertController {
+
+    @FXML private Label titleLabel; // Added to match mockup dynamic title
 
     @FXML private TextField txtFrom;
     @FXML private TextField txtTo;
@@ -26,20 +26,22 @@ public class EditTransfertController {
     private Transfert transfert;
     private final TransfertService service = new TransfertService();
 
-    // ================= INIT =================
     @FXML
     public void initialize() {
-
         comboStatus.getItems().addAll(
-            "EN_COURS",
-            "RECU",
-            "ANNULE"
+            "EN COURS",
+            "REÇU",
+            "ANNULÉ"
         );
     }
 
-    // ================= SET DATA =================
     public void setTransfert(Transfert t) {
         this.transfert = t;
+
+        // Dynamic title matching mockup
+        if (titleLabel != null) {
+            titleLabel.setText("MODIFIER TRANSFERT #" + t.getId());
+        }
 
         txtFrom.setText(String.valueOf(t.getFromOrgId()));
         txtTo.setText(String.valueOf(t.getToOrgId()));
@@ -48,13 +50,21 @@ public class EditTransfertController {
         dateEnvoie.setValue(t.getDateEnvoie());
         dateReception.setValue(t.getDateReception());
 
-        comboStatus.setValue(t.getStatus());
+        // Map status cleanly to combo
+        String status = t.getStatus();
+        if (status != null) {
+            status = status.toUpperCase();
+            if (status.equals("EN_COURS")) status = "EN COURS";
+            if (status.equals("RECU")) status = "REÇU";
+            if (status.equals("ANNULE")) status = "ANNULÉ";
+        } else {
+            status = "EN COURS";
+        }
+        comboStatus.setValue(status);
     }
 
-    // ================= UPDATE =================
     @FXML
     private void updateTransfert() {
-
         if (!validateForm()) return;
 
         try {
@@ -65,87 +75,61 @@ public class EditTransfertController {
             transfert.setDateEnvoie(dateEnvoie.getValue());
             transfert.setDateReception(dateReception.getValue());
 
-            transfert.setStatus(comboStatus.getValue());
-
-            // 🔥 IMPORTANT pour éviter erreurs SQL
-            transfert.setFromOrg("BloodLink Central");
-            transfert.setToOrg("Banque " + txtTo.getText());
+            // Convert back to DB format
+            String status = comboStatus.getValue();
+            if (status.equals("EN COURS")) status = "EN_COURS";
+            if (status.equals("REÇU")) status = "RECU";
+            if (status.equals("ANNULÉ")) status = "ANNULE";
+            
+            transfert.setStatus(status);
 
             service.modifier(transfert);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Transfert modifié !");
-            alert.show();
+            // Go back directly instead of alerting to save clicks
+            retour();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // ================= VALIDATION =================
     private boolean validateForm() {
-
         StringBuilder errors = new StringBuilder();
 
-        // FROM
-        if (txtFrom.getText().isEmpty()) {
-            errors.append("From ID obligatoire\n");
-        }
-
-        // TO
-        if (txtTo.getText().isEmpty()) {
-            errors.append("To ID obligatoire\n");
-        }
-
-        // QUANTITE
+        if (txtFrom.getText().isEmpty()) errors.append("- ID Origine obligatoire\n");
+        if (txtTo.getText().isEmpty()) errors.append("- ID Destination obligatoire\n");
         if (txtQuantite.getText().isEmpty()) {
-            errors.append("Quantité obligatoire\n");
+            errors.append("- Quantité obligatoire\n");
         } else {
             try {
-                int q = Integer.parseInt(txtQuantite.getText());
-                if (q <= 0) {
-                    errors.append("Quantité doit être > 0\n");
+                if (Integer.parseInt(txtQuantite.getText()) <= 0) {
+                    errors.append("- Quantité doit être > 0\n");
                 }
             } catch (NumberFormatException e) {
-                errors.append("Quantité invalide\n");
+                errors.append("- Quantité invalide\n");
             }
         }
-
-        // DATES
-        if (dateEnvoie.getValue() == null) {
-            errors.append("Date envoi obligatoire\n");
-        }
-
-        if (dateReception.getValue() == null) {
-            errors.append("Date réception obligatoire\n");
-        }
-
-        // STATUS
-        if (comboStatus.getValue() == null) {
-            errors.append("Status obligatoire\n");
-        }
+        if (dateEnvoie.getValue() == null) errors.append("- Date d'envoi obligatoire\n");
+        if (dateReception.getValue() == null) errors.append("- Date de réception obligatoire\n");
+        if (comboStatus.getValue() == null) errors.append("- Statut obligatoire\n");
 
         if (errors.length() > 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Erreur validation");
+            alert.setHeaderText("Erreur de validation");
             alert.setContentText(errors.toString());
             alert.show();
             return false;
         }
-
         return true;
     }
 
-    // ================= RETOUR =================
     @FXML
     private void retour() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/TransfertBackView.fxml"));
             Parent root = loader.load();
-
             Stage stage = (Stage) txtFrom.getScene().getWindow();
             stage.setScene(new Scene(root));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
