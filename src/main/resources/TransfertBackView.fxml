@@ -1,53 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.backTransfertController"
-            prefHeight="500" prefWidth="900"
-            stylesheets="@style.css">
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.backTransfertController">
+   <!-- Sidebar -->
+   <left>
+      <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 20px;" />
+            <Label styleClass="logo-text" style="-fx-font-size: 18px;" text="BLOODLINK" />
+            <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 10px; -fx-font-weight: bold;" text="ADMIN" />
+         </HBox>
+         
+         <Region prefHeight="30.0" />
+         <Label styleClass="sidebar-category" text="GESTION" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="    Dashboard" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item" text="👥  Utilisateurs" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="📄  Demandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item, sidebar-item-active" text="🚚  Transferts" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📝  Questionnaires" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📅  Rendez-vous" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📢  Campagnes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🏥  Collectes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
+         
+         <Region VBox.vgrow="ALWAYS" />
+         <VBox spacing="10.0">
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8px; -fx-background-radius: 20px;" text="👤" />
+                <VBox>
+                    <Label style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;" text="Admin Utilisateur" />
+                    <Label style="-fx-text-fill: -muted; -fx-font-size: 10px;" text="Administrateur" />
+                </VBox>
+            </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: transparent; -fx-border-color: -primary; -fx-border-radius: 20px; -fx-text-fill: -primary; -fx-cursor: hand; -fx-padding: 8;" text="⏻ Déconnexion" />
+         </VBox>
+      </VBox>
+   </left>
 
-    <children>
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="GESTION DES TRANSFERTS" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les transferts de produits sanguins entre établissements." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="← RETOUR" onAction="#retour" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" />
+         </HBox>
 
-        <!-- TITLE -->
-        <Label text="Gestion des Transferts"
-               layoutX="20"
-               layoutY="10"
-               styleClass="form-title"/>
+         <VBox styleClass="glass-card" spacing="20.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tableTransfert" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
+               <columns>
+                  <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                  <TableColumn fx:id="colFrom" text="De" prefWidth="150"/>
+                  <TableColumn fx:id="colTo" text="À" prefWidth="150"/>
+                  <TableColumn fx:id="colQuantite" text="Quantité" prefWidth="100"/>
+                  <TableColumn fx:id="colDateEnvoie" text="Date Envoi" prefWidth="120"/>
+                  <TableColumn fx:id="colDateReception" text="Date Réception" prefWidth="120"/>
+                  <TableColumn fx:id="colStatus" text="Statut" prefWidth="120"/>
+                  <TableColumn fx:id="colActions" text="Actions" prefWidth="180"/>
+               </columns>
+            </TableView>
+         </VBox>
 
-        <!-- TABLE -->
-        <TableView fx:id="tableTransfert"
-                   layoutX="20"
-                   layoutY="50"
-                   prefWidth="860"
-                   prefHeight="360">
-
-            <columns>
-
-                <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
-                <TableColumn fx:id="colFrom" text="From" prefWidth="120"/>
-                <TableColumn fx:id="colTo" text="To" prefWidth="120"/>
-                <TableColumn fx:id="colQuantite" text="Quantité" prefWidth="100"/>
-                <TableColumn fx:id="colDateEnvoie" text="Date Envoi" prefWidth="120"/>
-                <TableColumn fx:id="colDateReception" text="Date Réception" prefWidth="130"/>
-                <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
-                <TableColumn fx:id="colActions" text="Actions" prefWidth="180"/>
-
-            </columns>
-
-        </TableView>
-
-        <!-- BUTTONS -->
-        <HBox spacing="10" layoutX="20" layoutY="430">
-
-            <Button text="Retour"
-                    onAction="#retour"
-                    styleClass="btn-secondary"/>
-
-
-        </HBox>
-
-    </children>
-</AnchorPane>
+      </VBox>
+   </center>
+</BorderPane>

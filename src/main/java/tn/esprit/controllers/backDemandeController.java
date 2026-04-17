@@ -252,4 +252,30 @@ public class backDemandeController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void handleNavigateDashboard(javafx.event.ActionEvent event) {
+        navigateTo(event, "/admin_dashboard.fxml");
+    }
+
+    @FXML
+    void handleNavigateUsers(javafx.event.ActionEvent event) {
+        navigateTo(event, "/admin_users.fxml");
+    }
+
+    @FXML
+    void handleLogout(javafx.event.ActionEvent event) {
+        navigateTo(event, "/login.fxml");
+    }
+
+    private void navigateTo(javafx.event.ActionEvent event, String path) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(path));
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,58 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.EditTransfertController"
-            prefHeight="450" prefWidth="500"
-            stylesheets="@style.css">
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.EditTransfertController">
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <!-- HEADER -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER TRANSFERT" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Mettez à jour les informations du transfert." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="← RETOUR" onAction="#retour" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" />
+         </HBox>
 
-    <children>
-
-        <VBox spacing="12" layoutX="40" layoutY="30" prefWidth="420">
-
-            <!-- TITLE -->
-            <Label text="Modifier Transfert"
-                   styleClass="form-title"/>
-
+         <!-- FORM CARD -->
+         <VBox styleClass="glass-card" spacing="25.0" maxWidth="600">
+             
             <!-- FROM -->
-            <TextField fx:id="txtFrom"
-                       promptText="From Org ID"/>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="ORIGINE DU TRANSFERT (ID ORG)" />
+                <TextField fx:id="txtFrom" promptText="From Org ID" styleClass="text-field-custom" />
+            </VBox>
 
             <!-- TO -->
-            <TextField fx:id="txtTo"
-                       promptText="To Org ID"/>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="DESTINATION DU TRANSFERT (ID ORG)" />
+                <TextField fx:id="txtTo" promptText="To Org ID" styleClass="text-field-custom" />
+            </VBox>
 
             <!-- QUANTITE -->
-            <TextField fx:id="txtQuantite"
-                       promptText="Quantité"/>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="QUANTITÉ" />
+                <TextField fx:id="txtQuantite" promptText="Quantité" styleClass="text-field-custom" />
+            </VBox>
 
-            <!-- DATE ENVOIE -->
-            <DatePicker fx:id="dateEnvoie"/>
-
-            <!-- DATE RECEPTION -->
-            <DatePicker fx:id="dateReception"/>
-
-            <!-- STATUS -->
-            <ComboBox fx:id="comboStatus"
-                      promptText="Status"/>
-
-            <!-- BUTTONS -->
-            <HBox spacing="10">
-
-                <Button text="Modifier"
-                        onAction="#updateTransfert"
-                        styleClass="btn-primary"/>
-
-                <Button text="Retour"
-                        onAction="#retour"
-                        styleClass="btn-secondary"/>
-
+            <!-- DATES -->
+            <HBox spacing="20.0">
+                <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                    <Label styleClass="form-label" text="DATE D'ENVOI" />
+                    <DatePicker fx:id="dateEnvoie" styleClass="text-field-custom" maxWidth="1.7976931348623157E308"/>
+                </VBox>
+                <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                    <Label styleClass="form-label" text="DATE DE RÉCEPTION" />
+                    <DatePicker fx:id="dateReception" styleClass="text-field-custom" maxWidth="1.7976931348623157E308"/>
+                </VBox>
             </HBox>
 
-        </VBox>
+            <!-- STATUS -->
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="STATUT" />
+                <ComboBox fx:id="comboStatus" promptText="Statut" styleClass="text-field-custom" prefWidth="600" />
+            </VBox>
 
-    </children>
-</AnchorPane>
+            <Region prefHeight="10" />
+
+            <Button mnemonicParsing="false" onAction="#updateTransfert" styleClass="button-primary" text="SAUVEGARDER" prefWidth="600" />
+            
+         </VBox>
+
+      </VBox>
+   </center>
+</BorderPane>

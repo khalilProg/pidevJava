@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -178,6 +179,37 @@ public class backTransfertController {
             Stage stage = (Stage) tableTransfert.getScene().getWindow();
             stage.setScene(new Scene(root));
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handleNavigateDashboard(javafx.event.ActionEvent event) {
+        navigateTo(event, "/admin_dashboard.fxml");
+    }
+
+    @FXML
+    void handleNavigateUsers(javafx.event.ActionEvent event) {
+        navigateTo(event, "/admin_users.fxml");
+    }
+
+    @FXML
+    void handleNavigateDemandes(javafx.event.ActionEvent event) {
+        navigateTo(event, "/DemandeBackView.fxml");
+    }
+
+    @FXML
+    void handleLogout(javafx.event.ActionEvent event) {
+        navigateTo(event, "/login.fxml");
+    }
+
+    private void navigateTo(javafx.event.ActionEvent event, String path) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(path));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

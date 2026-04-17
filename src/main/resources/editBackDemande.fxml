@@ -1,48 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.EditDemandeController"
-            prefHeight="350" prefWidth="450"
-            stylesheets="@style.css">
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.EditDemandeController">
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <!-- HEADER -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER DEMANDE" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Mettez à jour les informations de la demande de produits sanguins." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="← RETOUR" onAction="#retour" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" />
+         </HBox>
 
-    <children>
-
-        <VBox spacing="12" layoutX="30" layoutY="30" prefWidth="390">
-
-            <!-- TITLE -->
-            <Label text="Modifier Demande"
-                   styleClass="form-title"/>
-
-            <!-- TYPE -->
-            <TextField fx:id="txtType"
-                       promptText="Type de sang"/>
+         <!-- FORM CARD -->
+         <VBox styleClass="glass-card" spacing="25.0" maxWidth="600" alignment="CENTER_LEFT">
+             
+            <!-- TYPE DE SANG -->
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="TYPE DE SANG" />
+                <TextField fx:id="txtType" promptText="Type de sang" styleClass="text-field-custom" />
+            </VBox>
 
             <!-- QUANTITE -->
-            <TextField fx:id="txtQuantite"
-                       promptText="Quantité"/>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="QUANTITÉ" />
+                <TextField fx:id="txtQuantite" promptText="Quantité" styleClass="text-field-custom" />
+            </VBox>
 
             <!-- STATUS -->
-            <ComboBox fx:id="comboStatus"
-                      promptText="Status"/>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="STATUT" />
+                <ComboBox fx:id="comboStatus" promptText="Statut" styleClass="text-field-custom" prefWidth="600" />
+            </VBox>
 
-            <!-- BUTTONS -->
-            <HBox spacing="10">
+            <Region prefHeight="10" />
 
-                <Button text="Save"
-                        onAction="#updateDemande"
-                        styleClass="btn-primary"/>
+            <Button mnemonicParsing="false" onAction="#updateDemande" styleClass="button-primary" text="SAUVEGARDER" prefWidth="600" />
+            
+         </VBox>
 
-                <Button text="Retour"
-                        onAction="#retour"
-                        styleClass="btn-secondary"/>
-
-            </HBox>
-
-        </VBox>
-
-    </children>
-</AnchorPane>
+      </VBox>
+   </center>
+</BorderPane>

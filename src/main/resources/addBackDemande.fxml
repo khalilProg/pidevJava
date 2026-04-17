@@ -1,110 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.addDemandeController"
-            prefHeight="500" prefWidth="800"
-            style="-fx-background-color:#0a0a0a;">
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.addDemandeController">
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <!-- HEADER -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="NOUVELLE DEMANDE" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Créer une nouvelle demande de transfert sanguin." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="← RETOUR" onAction="#goBack" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" />
+         </HBox>
 
-    <children>
-
-        <!-- TITLE -->
-        <Label text="Ajouter / Modifier Demande"
-               layoutX="250" layoutY="20"
-               style="-fx-text-fill:white;
-                      -fx-font-size:22px;
-                      -fx-font-weight:bold;"/>
-
-        <!-- FORM -->
-        <VBox spacing="15"
-              layoutX="220" layoutY="100"
-              style="-fx-padding:20;
-                     -fx-background-color:#111;
-                     -fx-background-radius:10;
-                     -fx-border-color:#222;
-                     -fx-border-radius:10;">
-
-            <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
-            </padding>
-
+         <!-- FORM CARD -->
+         <VBox styleClass="glass-card" spacing="25.0" maxWidth="600">
+             
             <!-- BANQUE -->
-            <TextField fx:id="txtBanque"
-                       promptText="ID Banque"
-                       style="-fx-background-color:#1a1a1a;
-                              -fx-text-fill:white;
-                              -fx-prompt-text-fill:gray;
-                              -fx-background-radius:6;"/>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="IDENTIFIANT BANQUE" />
+                <TextField fx:id="txtBanque" promptText="ID Banque" styleClass="text-field-custom" />
+            </VBox>
 
-            <!-- TYPE SANG -->
-            <ComboBox fx:id="comboType"
-                      promptText="Type de sang"
-                      style="-fx-background-color:#1a1a1a;
-                             -fx-text-fill:white;">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="A+" />
-                        <String fx:value="A-" />
-                        <String fx:value="B+" />
-                        <String fx:value="B-" />
-                        <String fx:value="O+" />
-                        <String fx:value="O-" />
-                        <String fx:value="AB+" />
-                        <String fx:value="AB-" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
+            <!-- TYPE DE SANG -->
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="TYPE DE SANG" />
+                <ComboBox fx:id="comboType" promptText="Type de sang" styleClass="text-field-custom" prefWidth="600">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="A+" />
+                            <String fx:value="A-" />
+                            <String fx:value="B+" />
+                            <String fx:value="B-" />
+                            <String fx:value="O+" />
+                            <String fx:value="O-" />
+                            <String fx:value="AB+" />
+                            <String fx:value="AB-" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </VBox>
 
             <!-- QUANTITE -->
-            <TextField fx:id="txtQuantite"
-                       promptText="Quantité"
-                       style="-fx-background-color:#1a1a1a;
-                              -fx-text-fill:white;
-                              -fx-prompt-text-fill:gray;
-                              -fx-background-radius:6;"/>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="QUANTITÉ" />
+                <TextField fx:id="txtQuantite" promptText="Quantité" styleClass="text-field-custom" />
+            </VBox>
 
             <!-- URGENCE -->
-            <ComboBox fx:id="comboUrgence"
-                      promptText="Urgence"
-                      style="-fx-background-color:#1a1a1a;
-                             -fx-text-fill:white;">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="FAIBLE" />
-                        <String fx:value="MOYENNE" />
-                        <String fx:value="ELEVEE" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
+            <VBox spacing="8.0">
+                <Label styleClass="form-label" text="NIVEAU D'URGENCE" />
+                <ComboBox fx:id="comboUrgence" promptText="Urgence" styleClass="text-field-custom" prefWidth="600">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="FAIBLE" />
+                            <String fx:value="MOYENNE" />
+                            <String fx:value="ELEVEE" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </VBox>
 
-            <!-- BUTTONS -->
-            <HBox spacing="10">
+            <Region prefHeight="10" />
 
-                <Button text="Enregistrer"
-                        onAction="#ajouterDemande"
-                        style="-fx-background-color:#e63939;
-                               -fx-text-fill:white;
-                               -fx-font-weight:bold;
-                               -fx-background-radius:6;
-                               -fx-padding:8 15;"/>
+            <Button mnemonicParsing="false" onAction="#ajouterDemande" styleClass="button-primary" text="ENREGISTRER LA DEMANDE" prefWidth="600" />
+            
+         </VBox>
 
-                <Button text="Annuler"
-                        onAction="#goBack"
-                        style="-fx-background-color:#333;
-                               -fx-text-fill:white;
-                               -fx-background-radius:6;
-                               -fx-padding:8 15;"/>
-
-            </HBox>
-
-        </VBox>
-
-    </children>
-
-</AnchorPane>
+      </VBox>
+   </center>
+</BorderPane>
