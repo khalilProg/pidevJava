@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import tn.esprit.entities.Demande;
 import tn.esprit.entities.Transfert;
 import tn.esprit.services.TransfertService;
 
@@ -24,6 +25,7 @@ public class addTrasnfertController {
     @FXML private DatePicker dateReception;
 
     @FXML private ComboBox<String> comboStatus;
+    private Demande demande;
     
     private final TransfertService service = new TransfertService();
 
@@ -121,5 +123,8 @@ public class addTrasnfertController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void setDemande(Demande demande) {
+        this.demande = demande;
     }
 }

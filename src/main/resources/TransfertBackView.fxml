@@ -84,7 +84,7 @@
             <TableView fx:id="tableTransfert" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
                <columns>
                   <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
-                  <TableColumn text="DEMANDE" prefWidth="120"/>
+                  <TableColumn fx:id="colDemande" text="DEMANDE" prefWidth="120"/>
                   <TableColumn fx:id="colFrom" text="ORIGINE" prefWidth="180"/>
                   <TableColumn fx:id="colTo" text="DESTINATION" prefWidth="180"/>
                   <TableColumn fx:id="colQuantite" text="QUANTITÉ" prefWidth="100"/>
