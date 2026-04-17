@@ -153,45 +153,41 @@ public class backTransfertController {
 
     private void addActions() {
         colActions.setCellFactory(param -> new TableCell<>() {
-
-            private final Button btnAccept = new Button("ACCEPTER");
-            private final Button btnReject = new Button("REFUSER");
-            private final Button btnEdit = new Button("✏");
             private final Button btnDelete = new Button("🗑");
+            private final Button btnAccept = new Button("🗸");
+            private final Button btnReject = new Button("✖");
 
             {
-                String baseStyle = "-fx-background-color: transparent; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 10px; -fx-padding: 4 8; -fx-border-radius: 15; -fx-background-radius: 15;";
-                
-                btnAccept.setStyle(baseStyle + "-fx-text-fill: #2ecc71; -fx-border-color: #2ecc71;");
-                btnReject.setStyle(baseStyle + "-fx-text-fill: #e74c3c; -fx-border-color: #e74c3c;");
-                btnEdit.setStyle(baseStyle + "-fx-text-fill: white; -fx-border-color: #555;");
-                btnDelete.setStyle(baseStyle + "-fx-text-fill: #e63939; -fx-border-color: #555;");
+                btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;");
+                btnDelete.setOnMouseEntered(e -> btnDelete.setStyle("-fx-background-color: rgba(230, 57, 57, 0.1); -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
+                btnDelete.setOnMouseExited(e -> btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
 
-                btnAccept.setOnAction(e -> handleAccept(getTableView().getItems().get(getIndex())));
-                btnReject.setOnAction(e -> handleReject(getTableView().getItems().get(getIndex())));
-                
+                btnAccept.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
+                btnAccept.setOnMouseEntered(e -> btnAccept.setStyle("-fx-background-color: rgba(46, 204, 113, 0.1); -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
+                btnAccept.setOnMouseExited(e -> btnAccept.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
+
+                btnReject.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e67e22; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
+                btnReject.setOnMouseEntered(e -> btnReject.setStyle("-fx-background-color: rgba(230, 126, 34, 0.1); -fx-border-color: #e67e22; -fx-border-radius: 20; -fx-text-fill: #e67e22; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
+                btnReject.setOnMouseExited(e -> btnReject.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e67e22; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
+
                 btnDelete.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
                     try {
                         service.supprimer(t);
-                        tableTransfert.getItems().remove(t);
+                        loadData();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 });
 
-                btnEdit.setOnAction(e -> {
+                btnAccept.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/editBackTransfert.fxml"));
-                        Parent root = loader.load();
-                        EditTransfertController controller = loader.getController();
-                        controller.setTransfert(t);
-                        Stage stage = (Stage) tableTransfert.getScene().getWindow();
-                        stage.setScene(new Scene(root));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                    handleUpdateStatus(t, "RECU");
+                });
+
+                btnReject.setOnAction(e -> {
+                    Transfert t = getTableView().getItems().get(getIndex());
+                    handleUpdateStatus(t, "REFUSE");
                 });
             }
 
@@ -202,59 +198,26 @@ public class backTransfertController {
                     setGraphic(null);
                     return;
                 }
+                
                 Transfert t = getTableRow().getItem();
                 HBox actions = new HBox(8);
                 actions.setAlignment(Pos.CENTER_LEFT);
 
-                if ("EN_ATTENTE".equals(t.getStatus())) {
+                // Only show Accept/Reject if status is EN_COURS
+                String status = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "";
+                if (status.equals("EN_COURS") || status.equals("EN COURS")) {
                     actions.getChildren().addAll(btnAccept, btnReject);
-                } else {
-                    actions.getChildren().addAll(btnEdit, btnDelete);
                 }
                 
+                actions.getChildren().add(btnDelete);
                 setGraphic(actions);
             }
         });
     }
 
-    private void handleAccept(Transfert t) {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Planifier le transfert");
-        dialog.setHeaderText("Veuillez choisir les dates pour le transfert #" + t.getId());
-
-        DatePicker dateEnv = new DatePicker(LocalDate.now());
-        DatePicker dateRec = new DatePicker(LocalDate.now().plusDays(1));
-
-        VBox content = new VBox(15, 
-            new Label("Date d'envoi :"), dateEnv,
-            new Label("Date de réception prévue :"), dateRec
-        );
-        content.setPadding(new Insets(20));
-        content.setStyle("-fx-background-color: #1a1a1a;");
-        
-        dialog.getDialogPane().setContent(content);
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        dialog.getDialogPane().getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-        dialog.getDialogPane().setStyle("-fx-background-color: #1a1a1a;");
-
-        dialog.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    t.setDateEnvoie(dateEnv.getValue());
-                    t.setDateReception(dateRec.getValue());
-                    t.setStatus("EN_COURS");
-                    service.modifier(t);
-                    tableTransfert.refresh();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    private void handleReject(Transfert t) {
+    private void handleUpdateStatus(Transfert t, String newStatus) {
         try {
-            t.setStatus("ANNULÉ");
+            t.setStatus(newStatus);
             service.modifier(t);
             tableTransfert.refresh();
         } catch (Exception e) {
@@ -278,26 +241,19 @@ public class backTransfertController {
     }
 
     @FXML
+    void handleNavigateTransferts(javafx.event.ActionEvent event) {
+        // Already here
+    }
+
+    @FXML
     void handleLogout(javafx.event.ActionEvent event) {
         navigateTo(event, "/login.fxml");
-    }
-    
-    @FXML
-    private void retour() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_dashboard.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) tableTransfert.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void navigateTo(javafx.event.ActionEvent event, String path) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {

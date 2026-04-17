@@ -180,40 +180,58 @@ public class backDemandeController {
     private void addActions() {
         colActions.setCellFactory(param -> new TableCell<>() {
 
-            private final Button btnEdit = new Button("✏");
+            private final Button btnValider = new Button("✔");
+            private final Button btnRefuser = new Button("✖");
             private final Button btnDelete = new Button("🗑");
 
             {
-                // Round transparent icon buttons mimicking Figma mockup
-                btnEdit.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 4 12;");
-                btnEdit.setOnMouseEntered(e -> btnEdit.setStyle("-fx-background-color: rgba(255,255,255,0.1); -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 4 12;"));
-                btnEdit.setOnMouseExited(e -> btnEdit.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 4 12;"));
+                // Style Valider (Green)
+                btnValider.setStyle("-fx-background-color: transparent; -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
+                btnValider.setOnMouseEntered(e -> btnValider.setStyle("-fx-background-color: rgba(46, 204, 113, 0.1); -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12;"));
+                btnValider.setOnMouseExited(e -> btnValider.setStyle("-fx-background-color: transparent; -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12;"));
 
-                btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;");
-                btnDelete.setOnMouseEntered(e -> btnDelete.setStyle("-fx-background-color: rgba(230, 57, 57, 0.1); -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
-                btnDelete.setOnMouseExited(e -> btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
+                // Style Refuser (Red)
+                btnRefuser.setStyle("-fx-background-color: transparent; -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
+                btnRefuser.setOnMouseEntered(e -> btnRefuser.setStyle("-fx-background-color: rgba(230, 57, 57, 0.1); -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
+                btnRefuser.setOnMouseExited(e -> btnRefuser.setStyle("-fx-background-color: transparent; -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
 
-                btnDelete.setOnAction(e -> {
+                // Style Delete
+                btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #888; -fx-cursor: hand; -fx-padding: 4 12;");
+                btnDelete.setOnMouseEntered(e -> btnDelete.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-color: #666; -fx-border-radius: 20; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 4 12;"));
+                btnDelete.setOnMouseExited(e -> btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #888; -fx-cursor: hand; -fx-padding: 4 12;"));
+
+                btnValider.setOnAction(e -> {
                     Demande d = getTableView().getItems().get(getIndex());
                     try {
-                        demandeService.supprimer(d);
-                        tableDemande.getItems().remove(d);
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/validateDemande.fxml"));
+                        Parent root = loader.load();
+
+                        ValidateDemandeController controller = loader.getController();
+                        controller.setDemandeData(d);
+
+                        Stage stage = (Stage) tableDemande.getScene().getWindow();
+                        stage.setScene(new Scene(root));
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 });
 
-                btnEdit.setOnAction(e -> {
+                btnRefuser.setOnAction(e -> {
                     Demande d = getTableView().getItems().get(getIndex());
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/editBackDemande.fxml"));
-                        Parent root = loader.load();
+                        d.setStatus("REFUSEE");
+                        demandeService.modifier(d);
+                        loadData();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
 
-                        EditDemandeController controller = loader.getController();
-                        controller.setDemande(d);
-
-                        Stage stage = (Stage) tableDemande.getScene().getWindow();
-                        stage.setScene(new Scene(root));
+                btnDelete.setOnAction(e -> {
+                    Demande d = getTableView().getItems().get(getIndex());
+                    try {
+                        demandeService.supprimer(d);
+                        loadData();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -223,13 +241,21 @@ public class backDemandeController {
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty) {
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                     setGraphic(null);
                     return;
                 }
+                
+                Demande d = getTableRow().getItem();
                 HBox actions = new HBox(8);
                 actions.setAlignment(Pos.CENTER_LEFT);
-                actions.getChildren().addAll(btnEdit, btnDelete);
+                
+                if ("EN_ATTENTE".equalsIgnoreCase(d.getStatus())) {
+                    actions.getChildren().addAll(btnValider, btnRefuser);
+                } else {
+                    actions.getChildren().addAll(btnDelete);
+                }
+                
                 setGraphic(actions);
             }
         });
@@ -271,6 +297,16 @@ public class backDemandeController {
     @FXML
     void handleNavigateUsers(javafx.event.ActionEvent event) {
         navigateTo(event, "/admin_users.fxml");
+    }
+
+    @FXML
+    void handleNavigateDemandes(javafx.event.ActionEvent event) {
+        // Already here
+    }
+
+    @FXML
+    void handleNavigateTransferts(javafx.event.ActionEvent event) {
+        navigateTo(event, "/TransfertBackView.fxml");
     }
 
     @FXML

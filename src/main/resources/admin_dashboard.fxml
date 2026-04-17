@@ -34,7 +34,7 @@
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item" text="👥  Utilisateurs" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📄  Demandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="📄  Demandes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item" text="🚚  Transferts" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📝  Questionnaires" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📅  Rendez-vous" />

@@ -209,6 +209,16 @@ public class AdminUsersViewController {
         navigateTo(event, "/admin_dashboard.fxml");
     }
 
+    @FXML
+    void handleNavigateDemandes(ActionEvent event) {
+        navigateTo(event, "/DemandeBackView.fxml");
+    }
+
+    @FXML
+    void handleNavigateTransferts(ActionEvent event) {
+        navigateTo(event, "/TransfertBackView.fxml");
+    }
+
     private void navigateTo(ActionEvent event, String path) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));

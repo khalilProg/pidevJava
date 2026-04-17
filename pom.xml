@@ -66,7 +66,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <!-- Replace with your actual main class -->
-                    <mainClass>tn.esprit.mains.MainFx</mainClass>
+                    <mainClass>tn.esprit.mains.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -236,6 +236,16 @@ public class AdminUsersController implements Initializable {
     }
 
     @FXML
+    void handleNavigateDemandes(ActionEvent event) {
+        navigateTo(event, "/DemandeBackView.fxml");
+    }
+
+    @FXML
+    void handleNavigateTransferts(ActionEvent event) {
+        navigateTo(event, "/TransfertBackView.fxml");
+    }
+
+    @FXML
     void handleNavigateAddUser(ActionEvent event) {
         navigateTo(event, "/admin_users_add.fxml");
     }

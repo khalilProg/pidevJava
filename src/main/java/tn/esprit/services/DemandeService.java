@@ -21,10 +21,10 @@ public class DemandeService implements IGeneralService<Demande>{
     public void ajouter(Demande demande) throws SQLException {
 
         String sql = "INSERT INTO demande " +
-            "(id_banque, type_sang, quantite, urgence, status, created_at, updated_at, client_id) " +
+            "(banque_id, type_sang, quantite, urgence, status, created_at, updated_at, client_id) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement q = cn.prepareStatement(sql);
+        PreparedStatement q = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         q.setInt(1, demande.getIdBanque());
         q.setString(2, demande.getTypeSang());
@@ -50,6 +50,11 @@ public class DemandeService implements IGeneralService<Demande>{
         q.setInt(8, 1);
 
         q.executeUpdate();
+
+        ResultSet rs = q.getGeneratedKeys();
+        if (rs.next()) {
+            demande.setId(rs.getInt(1));
+        }
     }
 
     @Override
@@ -86,7 +91,7 @@ public class DemandeService implements IGeneralService<Demande>{
     @Override
     public void modifier(Demande d) throws SQLException {
         if (chercher(d) == d.getId()) {
-            String sql = "UPDATE demande SET id_banque = ?, client_id = ?, quantite = ?, type_sang = ?, urgence = ?, status = ?, updated_at = ? WHERE id = ?";
+            String sql = "UPDATE demande SET banque_id = ?, client_id = ?, quantite = ?, type_sang = ?, urgence = ?, status = ?, updated_at = ? WHERE id = ?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setInt(1, d.getIdBanque());
             pst.setInt(2, d.getClientId());
@@ -116,7 +121,7 @@ public class DemandeService implements IGeneralService<Demande>{
 
             Demande d = new Demande(
                 rs.getInt("id"),
-                rs.getInt("id_banque"),
+                rs.getInt("banque_id"),
                 rs.getInt("client_id"),
                 rs.getInt("quantite"),
                 rs.getString("type_sang"),

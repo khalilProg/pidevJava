@@ -28,6 +28,11 @@ public class admin_dashboard {
     }
 
     @FXML
+    void handleNavigateDemandes(ActionEvent event) {
+        navigateTo(event, "/DemandeBackView.fxml");
+    }
+
+    @FXML
     void handleNavigateTransferts(ActionEvent event) {
         navigateTo(event, "/TransfertBackView.fxml");
     }

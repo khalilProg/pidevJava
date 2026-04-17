@@ -16,6 +16,7 @@ import tn.esprit.services.BanqueService;
 import tn.esprit.services.StockService;
 import tn.esprit.services.TransfertService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,6 +34,10 @@ public class addDemandeController {
     @FXML private ComboBox<String> comboUrgence;
     @FXML private Label urgenceError;
 
+    private DemandeController mainController;
+    private Demande demandeToEdit;
+    private boolean isEditMode = false;
+
     private final DemandeService demandeService = new DemandeService();
     private final BanqueService banqueService = new BanqueService();
     private final StockService stockService = new StockService();
@@ -42,6 +47,28 @@ public class addDemandeController {
     public void initialize() {
         populateBanques();
         setupBanqueComboBox();
+    }
+
+    public void setMainController(DemandeController controller) {
+        this.mainController = controller;
+    }
+
+    public void setEditData(Demande d) {
+        this.demandeToEdit = d;
+        this.isEditMode = true;
+
+        if (d != null) {
+            // Trouver la banque correspondante dans la combo
+            for (Banque b : cbBanque.getItems()) {
+                if (b.getId() == d.getBanque()) {
+                    cbBanque.setValue(b);
+                    break;
+                }
+            }
+            comboType.setValue(d.getTypeSang());
+            txtQuantite.setText(String.valueOf(d.getQuantite()));
+            comboUrgence.setValue(d.getUrgence());
+        }
     }
 
     private void populateBanques() {
@@ -72,39 +99,26 @@ public class addDemandeController {
         if (!validateForm()) return;
 
         try {
-            // 1. Créer la Demande
-            Demande d = new Demande();
+            Demande d = isEditMode ? demandeToEdit : new Demande();
             Banque selectedBanque = cbBanque.getValue();
             
             d.setBanque(selectedBanque.getId());
             d.setTypeSang(comboType.getValue());
             d.setQuantite(Integer.parseInt(txtQuantite.getText()));
             d.setUrgence(comboUrgence.getValue());
-            d.setStatus("CONFIRME"); // Automatiquement confirmée car stock vérifié
-            d.setCreatedAt(LocalDateTime.now());
             d.setUpdatedAt(LocalDateTime.now());
 
-            demandeService.ajouter(d);
+            if (isEditMode) {
+                demandeService.modifier(d);
+                System.out.println("Demande modifiée avec succès");
+            } else {
+                d.setStatus("EN_ATTENTE"); 
+                d.setCreatedAt(LocalDateTime.now());
+                demandeService.ajouter(d);
+                System.out.println("Demande créée avec succès (En Attente)");
+            }
 
-            // 2. Créer le Transfert associé (EN_ATTENTE de validation de dates)
-            Transfert t = new Transfert();
-            t.setDemande(d);
-            t.setFromOrgId(1); // BloodLink Central
-            t.setFromOrg("BloodLink Central");
-            t.setToOrgId(selectedBanque.getId());
-            t.setToOrg(selectedBanque.getNom());
-            t.setQuantite(d.getQuantite());
-            t.setStatus("EN_ATTENTE");
-            t.setCreatedAt(LocalDateTime.now());
-            t.setUpdatedAt(LocalDateTime.now());
-            
-            // On peut mettre un stock_id par défaut ou chercher le premier stock du type
-            // Pour l'instant on laisse à 1 (ou 0) car le choix final se fera à l'acceptation
-            t.setStock(1); 
-
-            transfertService.ajouter(t);
-
-            System.out.println("Demande et Transfert créés avec succès");
+            if (mainController != null) mainController.loadData();
             goBack();
 
         } catch (Exception e) {
