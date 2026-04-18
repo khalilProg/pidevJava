@@ -408,3 +408,23 @@
 .action-icon-delete:hover {
     -fx-background-color: rgba(230, 57, 57, 0.3);
 }
+
+/* ==========================================================
+ * ADD/EDIT MODAL TOGGLE BUTTONS
+ * ========================================================== */
+
+.toggle-blood-type {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: white;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+
+.toggle-blood-type:selected {
+    -fx-background-color: #e63939;
+    -fx-text-fill: white;
+    -fx-border-color: #e63939;
+}

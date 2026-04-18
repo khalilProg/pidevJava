@@ -281,6 +281,17 @@ public class ListeRdvAdmin {
         // Already here
     }
 
+    @FXML
+    void handleNavigateCampagnes(ActionEvent event) {
+        navigateTo(event, "/ListeCampagnesAdmin.fxml");
+    }
+
+    @FXML
+    void handleNavigateCollectes(ActionEvent event) {
+        navigateTo(event, "/ListeEntitesAdmin.fxml");
+    }
+
+
     private void navigateTo(ActionEvent event, String path) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));

@@ -3,15 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.backTransfertController">
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterEntiteAdmin">
    <!-- Sidebar -->
    <left>
       <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
@@ -19,6 +17,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          
+         <!-- Logo -->
          <HBox alignment="CENTER_LEFT" spacing="10.0">
             <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 20px;" />
             <Label styleClass="logo-text" style="-fx-font-size: 18px;" text="BLOODLINK" />
@@ -32,11 +31,11 @@
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="📄  Demandes" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item, sidebar-item-active" text="🚚  Transferts" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item" text="🚚  Transferts" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateQuestionnaires" styleClass="sidebar-item" text="📝  Questionnaires" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateRendezVous" styleClass="sidebar-item" text="📅  Rendez-vous" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCampagnes" styleClass="sidebar-item" text="📢  Campagnes" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCollectes" styleClass="sidebar-item" text="🏥  Collectes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCollectes" styleClass="sidebar-item, sidebar-item-active" text="🏥  Collectes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
          
@@ -56,44 +55,52 @@
 
    <!-- Main Content -->
    <center>
-      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+      <VBox styleClass="main-content" spacing="35.0" BorderPane.alignment="CENTER">
          <padding>
-            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+            <Insets bottom="40.0" left="80.0" right="80.0" top="40.0" />
          </padding>
-         
+
+         <!-- Header -->
          <HBox alignment="CENTER_LEFT">
-             <VBox spacing="5.0">
-                 <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="TRANSFERTS DE SANG" />
-                 <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Suivez les transferts entre organisations et leur statut." />
-             </VBox>
-             <Region HBox.hgrow="ALWAYS" />
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="Nouvelle Entité" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Interface d'administration" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="← Retour à la liste" onAction="#handleRetour" style="-fx-background-color: transparent; -fx-text-fill: -muted; -fx-font-weight: bold; -fx-cursor: hand;" />
          </HBox>
 
-         <VBox styleClass="glass-card" spacing="20.0" VBox.vgrow="ALWAYS">
+         <VBox styleClass="glass-card" spacing="25.0" VBox.vgrow="ALWAYS">
             
-            <HBox spacing="15.0" alignment="CENTER_LEFT">
-                <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="text-field-custom" prefWidth="400.0">
-                    <Label text="🔍" style="-fx-text-fill: -muted;" />
-                    <TextField promptText="Rechercher par destination, statut..." styleClass="transparent-input" HBox.hgrow="ALWAYS" />
-                </HBox>
-                <Region HBox.hgrow="ALWAYS" />
-                <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20px; -fx-text-fill: white; -fx-padding: 8 20;" text="Tous statuts" />
-            </HBox>
+            <VBox spacing="5.0">
+               <Label text="Nom de l'entité" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField fx:id="nomInput" promptText="Ex: Hôpital Charles Nicolle" style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8;" />
+               <Label fx:id="nomError" text="Le nom officiel de l'entité de collecte (ex: Hôpital X)." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
 
-            <TableView fx:id="tableTransfert" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
-               <columns>
-                  <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
-                  <TableColumn fx:id="colDemande" text="DEMANDE" prefWidth="120"/>
-                  <TableColumn fx:id="colFrom" text="ORIGINE" prefWidth="180"/>
-                  <TableColumn fx:id="colTo" text="DESTINATION" prefWidth="180"/>
-                  <TableColumn fx:id="colQuantite" text="QUANTITÉ" prefWidth="100"/>
-                  <TableColumn fx:id="colDateEnvoie" text="DATE ENVOI" prefWidth="120"/>
-                  <TableColumn fx:id="colStatus" text="STATUT" prefWidth="120"/>
-                  <TableColumn fx:id="colActions" text="ACTIONS" prefWidth="200"/>
-               </columns>
-            </TableView>
+            <VBox spacing="5.0">
+               <Label text="Adresse" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField fx:id="adresseInput" promptText="Ex: 12 Rue de la République" style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8;" />
+               <Label fx:id="adresseError" text="Adresse complète de l'entité." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
+
+            <VBox spacing="5.0">
+               <Label text="Ville" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField fx:id="villeInput" promptText="Ex: Tunis" style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8;" />
+               <Label fx:id="villeError" text="Ville de l'entité." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
+
+            <VBox spacing="5.0">
+               <Label text="Numéro de téléphone" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField fx:id="telephoneInput" promptText="Ex: 71234567" style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8;" />
+               <Label fx:id="telephoneError" text="Exactement 8 chiffres." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Button mnemonicParsing="false" text="Créer l'entité" onAction="#handleCreer" styleClass="button-primary" style="-fx-font-size: 16px; -fx-padding: 15px; -fx-background-radius: 8px;" maxWidth="1.7976931348623157E308"/>
+            
          </VBox>
-
       </VBox>
    </center>
 </BorderPane>

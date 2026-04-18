@@ -1,4 +1,6 @@
 package tn.esprit.controllers;
+import javafx.event.ActionEvent;
+
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -254,6 +256,17 @@ public class backTransfertController {
     void handleNavigateRendezVous(javafx.event.ActionEvent event) {
         navigateTo(event, "/ListeRdvAdmin.fxml");
     }
+
+    @FXML
+    void handleNavigateCampagnes(ActionEvent event) {
+        navigateTo(event, "/ListeCampagnesAdmin.fxml");
+    }
+
+    @FXML
+    void handleNavigateCollectes(ActionEvent event) {
+        navigateTo(event, "/ListeEntitesAdmin.fxml");
+    }
+
 
     @FXML
     void handleLogout(javafx.event.ActionEvent event) {

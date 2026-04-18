@@ -320,6 +320,17 @@ public class backDemandeController {
     }
 
     @FXML
+    void handleNavigateCampagnes(ActionEvent event) {
+        navigateTo(event, "/ListeCampagnesAdmin.fxml");
+    }
+
+    @FXML
+    void handleNavigateCollectes(ActionEvent event) {
+        navigateTo(event, "/ListeEntitesAdmin.fxml");
+    }
+
+
+    @FXML
     void handleLogout(javafx.event.ActionEvent event) {
         navigateTo(event, "/login.fxml");
     }

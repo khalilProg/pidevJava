@@ -256,6 +256,17 @@ public class AdminUsersController implements Initializable {
     }
 
     @FXML
+    void handleNavigateCampagnes(ActionEvent event) {
+        navigateTo(event, "/ListeCampagnesAdmin.fxml");
+    }
+
+    @FXML
+    void handleNavigateCollectes(ActionEvent event) {
+        navigateTo(event, "/ListeEntitesAdmin.fxml");
+    }
+
+
+    @FXML
     void handleNavigateAddUser(ActionEvent event) {
         navigateTo(event, "/admin_users_add.fxml");
     }

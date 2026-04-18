@@ -37,8 +37,8 @@
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item, sidebar-item-active" text="🚚  Transferts" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📝  Questionnaires" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📅  Rendez-vous" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📢  Campagnes" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🏥  Collectes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCampagnes" styleClass="sidebar-item" text="📢  Campagnes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCollectes" styleClass="sidebar-item" text="🏥  Collectes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
          
