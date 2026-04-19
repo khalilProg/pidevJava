@@ -12,19 +12,39 @@
     <fx:include source="BaseFront.fxml" fx:id="headerInclude"
                 AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
 
-    <!-- Page Title -->
-    <Text fill="WHITE" layoutX="70" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Historique des dons" styleClass="hero-title">
-        <font><Font size="32.0"/></font>
-    </Text>
-    <Text fill="#888888" layoutX="70" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Consultez l'historique de vos participations aux campagnes.">
-        <font><Font size="16.0"/></font>
-    </Text>
+    <!-- Page Title and Search -->
+    <HBox spacing="20" layoutX="70" layoutY="100" alignment="CENTER_LEFT" prefWidth="1410">
+        <!-- Title -->
+        <VBox HBox.hgrow="ALWAYS" alignment="TOP_LEFT" spacing="5">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Historique des dons" styleClass="hero-title">
+                <font><Font size="32.0"/></font>
+            </Text>
+            <Text fill="#888888" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Consultez l'historique de vos participations aux campagnes.">
+                <font><Font size="16.0"/></font>
+            </Text>
+        </VBox>
+
+        <!-- Search Field -->
+        <TextField fx:id="searchField" promptText="Chercher..." HBox.hgrow="ALWAYS" prefWidth="300"/>
+    </HBox>
 
     <children>
-        <TableView fx:id="tableView" prefWidth="1400" prefHeight="520"
-                   AnchorPane.topAnchor="200" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70" AnchorPane.bottomAnchor="30">
+        <HBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="210" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70">
+            <!-- Card 1: Nombre de campagnes -->
+            <VBox fx:id="cardCampagnes" styleClass="card" alignment="CENTER" HBox.hgrow="ALWAYS" prefHeight="150">
+                <Text text="Campagnes participées" styleClass="card-title" wrappingWidth="300"/>
+                <Text fx:id="campagnesCountText" text="0" styleClass="card-value" wrappingWidth="300"/>
+            </VBox>
+
+            <!-- Card 2: Prochain don possible -->
+            <VBox fx:id="cardNextDon" styleClass="card" alignment="CENTER" HBox.hgrow="ALWAYS" prefHeight="150">
+                <Text text="Prochain don possible" styleClass="card-title" wrappingWidth="300"/>
+                <Text fx:id="nextDonText" text="-" styleClass="card-value" wrappingWidth="300"/>
+            </VBox>
+        </HBox>
+        <TableView fx:id="tableView" prefWidth="1400" prefHeight="400" AnchorPane.topAnchor="370" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70" AnchorPane.bottomAnchor="30">
             <columns>
                 <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="100"/>
                 <TableColumn fx:id="dateRdvColumn" text="Date Rendez-vous" prefWidth="150"/>

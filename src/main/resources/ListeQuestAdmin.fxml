@@ -25,12 +25,15 @@
           text="Consultez la liste des questionnaires soumis." >
         <font><Font size="16.0"/></font>
     </Text>
-        <Button text="+ Ajouter Questionnaire" layoutX="70" layoutY="120" fx:id="addBtn" onAction="#handleAjouter" styleClass="btn-primary-modern" AnchorPane.topAnchor="130" AnchorPane.rightAnchor="55"/>
+    <HBox layoutX="70" layoutY="120" spacing="10" AnchorPane.topAnchor="130" AnchorPane.rightAnchor="55">
+        <TextField fx:id="searchField" promptText="Chercher..." HBox.hgrow="ALWAYS" prefWidth="300"/>
+        <Button text="+ Ajouter Questionnaire" fx:id="addBtn" onAction="#handleAjouter" styleClass="btn-primary-modern" prefWidth="300"/>
+    </HBox>
 
 
     <TableView fx:id="tableView" prefWidth="1400" prefHeight="520" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30" >
         <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+<!--            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>-->
             <TableColumn fx:id="nomColumn" text="Nom" prefWidth="100"/>
             <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="100"/>
             <TableColumn fx:id="ageColumn" text="Age" prefWidth="50"/>

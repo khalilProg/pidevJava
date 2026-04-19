@@ -892,3 +892,39 @@ navbar top  right profile
     -fx-font-weight: 600;
     -fx-font-size: 15px;
 }
+
+.card-value {
+    -fx-fill: white;       /* Keep text white */
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;   /* Bigger value font */
+}
+
+/* calendar-dark.css */
+.calendar-view {
+    -fx-base: #202020; /* dark background */
+    -fx-background-color: #202020;
+    -fx-text-fill: white;
+}
+
+/* Day cells background */
+.calendar-grid-pane .day-cell {
+    -fx-background-color: #202020;
+    -fx-border-color: #444; /* optional: grid borders */
+}
+
+/* Month/Week/Day headers */
+.calendar-grid-pane .day-header {
+    -fx-background-color: #333;
+    -fx-text-fill: black;
+}
+
+/* Entries color */
+.calendar-entry {
+    -fx-background-color: #FF3E3E; /* your red */
+    -fx-text-fill: black;
+}
+
+/* Current time line */
+.current-time-line {
+    -fx-stroke: red;
+}

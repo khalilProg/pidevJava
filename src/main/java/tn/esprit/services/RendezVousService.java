@@ -18,7 +18,7 @@ public class RendezVousService implements IGeneralService<RendezVous> {
     public void ajouter(RendezVous rendezVous) throws SQLException {
         String sql = "insert into rendez_vous(date_don, status, questionnaire_id, entite_id) values(?,?,?,?)";
         PreparedStatement rdv = cn.prepareStatement(sql);
-        rdv.setTimestamp(1,Timestamp.valueOf(rendezVous.getDateDon().plusHours(1)));
+        rdv.setTimestamp(1,Timestamp.valueOf(rendezVous.getDateDon()));
         rdv.setString(2,rendezVous.getStatus());
         rdv.setInt(3,rendezVous.getQuestionnaire_id());
         rdv.setInt(4,rendezVous.getEntite_id());

@@ -8,13 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import tn.esprit.entities.Campagne;
-import tn.esprit.entities.EntiteDeCollecte;
-import tn.esprit.entities.Questionnaire;
-import tn.esprit.entities.RendezVous;
-import tn.esprit.services.EntiteCollecteService;
-import tn.esprit.services.QuestionnaireService;
-import tn.esprit.services.RendezVousService;
+import tn.esprit.entities.*;
+import tn.esprit.services.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -35,6 +30,9 @@ public class AjouterRendezVous {
     @FXML private Text timeError;
     @FXML private ComboBox<EntiteDeCollecte> entiteCombo;
     private ObservableList<EntiteDeCollecte> entites = FXCollections.observableArrayList();
+    User u = new User(9,"chaffai", "yassine", "wajdbenhajyahia23@gmail.com");
+    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
+    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
 
     public void setCampagne(Campagne campagne) {
         this.campagne=campagne;
@@ -85,7 +83,7 @@ public class AjouterRendezVous {
             valid = false;
         }
 
-        if (date == null || date.isBefore(campagne.getDateDebut()) || date.isAfter(campagne.getDateFin())) {
+        if (date == null ||date.isBefore(LocalDate.now()) || date.isBefore(campagne.getDateDebut()) || date.isAfter(campagne.getDateFin())) {
             dateError.setText("La date doit être comprise entre " + campagne.getDateDebut() + " et " + campagne.getDateFin());
             dateError.setVisible(true);
             valid = false;
@@ -180,6 +178,26 @@ public class AjouterRendezVous {
         int questionnaireId = questionnaire.getId();
         RendezVous rdv = new RendezVous("confirmé", rdvDateTime, questionnaireId, selectedId);
         new RendezVousService().ajouter(rdv);
+
+
+//        // ✅ Step 1 — send email BEFORE switching scene
+//        String entiteDeCollecte = new EntiteCollecteService().getEntiteById(rdv.getEntite_id()).getNom();
+//        String titreCampagne    = new CampagneService().getCampagneById(campagneId).getTitre();
+
+        MailService mailService = new MailService();
+        boolean emailSent = mailService.sendConfirmation(
+                currentClient.getUser().getEmail(),
+                currentClient.getUser().getNom(),
+                campagne.getTitre(),
+                rdv.getDateDon(),
+                entiteCombo.getValue().getNom()
+        );
+
+        if (emailSent) {
+            System.out.println("Confirmation email sent successfully!");
+        } else {
+            System.out.println("Failed to send email.");
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeRdvAdmin.fxml"));
         Parent root = loader.load();

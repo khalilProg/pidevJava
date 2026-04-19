@@ -2,17 +2,17 @@ package tn.esprit.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import tn.esprit.entities.*;
-import tn.esprit.services.CampagneService;
-import tn.esprit.services.EntiteCollecteService;
-import tn.esprit.services.QuestionnaireService;
-import tn.esprit.services.RendezVousService;
+import tn.esprit.services.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,64 +28,80 @@ public class Liste {
     @FXML private TableColumn<RendezVous, LocalDateTime> dateRdvColumn;
     @FXML private TableColumn<RendezVous, String> statusColumn;
     @FXML private TableColumn<RendezVous, Void> actionsColumn;
+    @FXML private Text campagnesCountText;
+    @FXML private Text nextDonText;
+    @FXML private TextField searchField;
+
     User u = new User(9,"chaffai", "yassine", "yassinechaffai4@gmail.com");
     private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
     private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
-
     @FXML
     public void initialize() {
         try {
-            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            // --- Cards ---
+            CampagneService campagneService = new CampagneService();
+            DonService donService = new DonService();
             RendezVousService rdvService = new RendezVousService();
             QuestionnaireService qsService = new QuestionnaireService();
-            CampagneService campagneService = new CampagneService();
             EntiteCollecteService entiteService = new EntiteCollecteService();
 
-            List<RendezVous> rendezvous = rdvService.recuperer();
-            ObservableList<RendezVous> data = FXCollections.observableArrayList();
+            // Card 1: Nombre de campagnes
+            int campagnesCount = donService.countDonByClient(currentClient.getId());
+            campagnesCountText.setText(String.valueOf(campagnesCount));
 
-            // Only keep non-annulé
-            for (RendezVous rdv : rendezvous) {
-                Questionnaire q = qsService.getQuestionnaireById(rdv.getQuestionnaire_id());
-                if (q.getClientId() == currentClient.getId() && !"annulé".equalsIgnoreCase(rdv.getStatus())) {
-                    data.add(rdv);
+            // Card 2: Prochain don possible
+            LocalDate prochainDon = currentClient.getDernierDon().plusWeeks(3);
+            LocalDate today = LocalDate.now();
+            nextDonText.setText(!prochainDon.isAfter(today) ? "Eligible to donate" : "Not eligible to donate");
+
+            // --- TableView setup ---
+            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+            // Fetch all RendezVous for the current client (non-annulé)
+            List<RendezVous> allRdvs = rdvService.recuperer();
+            ObservableList<RendezVous> clientRdvs = FXCollections.observableArrayList();
+            for (RendezVous rdv : allRdvs) {
+                if (!"annulé".equalsIgnoreCase(rdv.getStatus()) &&
+                        qsService.getQuestionnaireById(rdv.getQuestionnaire_id()).getClientId() == currentClient.getId()) {
+                    clientRdvs.add(rdv);
                 }
             }
+            tableView.setItems(clientRdvs);
 
-            tableView.setItems(data);
-
-            // Map columns
+            // --- Column mappings ---
             campagneColumn.setCellValueFactory(cell -> {
                 try {
                     Questionnaire q = qsService.getQuestionnaireById(cell.getValue().getQuestionnaire_id());
                     String titre = campagneService.getCampagneById(q.getCampagneId()).getTitre();
                     return new javafx.beans.property.SimpleStringProperty(titre);
                 } catch (SQLException e) {
-                    e.printStackTrace();
                     return new javafx.beans.property.SimpleStringProperty("error");
                 }
             });
 
             entiteColumn.setCellValueFactory(cell -> {
                 try {
-                    String entiteNom = entiteService.getEntiteById(cell.getValue().getEntite_id()).getNom();
-                    return new javafx.beans.property.SimpleStringProperty(entiteNom);
+                    return new javafx.beans.property.SimpleStringProperty(
+                            entiteService.getEntiteById(cell.getValue().getEntite_id()).getNom());
                 } catch (SQLException e) {
-                    e.printStackTrace();
                     return new javafx.beans.property.SimpleStringProperty("error");
                 }
             });
 
-            dateRdvColumn.setCellValueFactory(cell -> new javafx.beans.property.SimpleObjectProperty<>(cell.getValue().getDateDon().minusHours(1)));
-            statusColumn.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getStatus()));
+            dateRdvColumn.setCellValueFactory(cell ->
+                    new javafx.beans.property.SimpleObjectProperty<>(cell.getValue().getDateDon().minusHours(1)));
+            statusColumn.setCellValueFactory(cell ->
+                    new javafx.beans.property.SimpleStringProperty(cell.getValue().getStatus()));
 
-            // Actions column
+            // --- Actions column ---
             actionsColumn.setCellFactory(col -> new TableCell<>() {
                 private final Button updateBtn = new Button("Update");
                 private final Button deleteBtn = new Button("Delete");
                 private final HBox container = new HBox(5, updateBtn, deleteBtn);
 
-                {   container.setAlignment(Pos.CENTER);
+                {
+                    container.setAlignment(Pos.CENTER);
+
                     deleteBtn.setOnAction(e -> {
                         RendezVous rdv = getTableView().getItems().get(getIndex());
                         try {
@@ -126,13 +142,34 @@ public class Liste {
                         updateBtn.setVisible(rdv.getDateDon().isAfter(LocalDateTime.now()));
                         setGraphic(container);
                         setAlignment(Pos.CENTER);
-
                     }
                 }
             });
+
+            // Optional: Add search filtering
+            FilteredList<RendezVous> filteredData = new FilteredList<>(clientRdvs, p -> true);
+            searchField.textProperty().addListener((obs, oldVal, newVal) -> {
+                String lower = newVal.toLowerCase();
+                filteredData.setPredicate(rdv -> {
+                    try {
+                        Questionnaire q = qsService.getQuestionnaireById(rdv.getQuestionnaire_id());
+                        String campagneTitre = campagneService.getCampagneById(q.getCampagneId()).getTitre().toLowerCase();
+                        String entiteNom = entiteService.getEntiteById(rdv.getEntite_id()).getNom().toLowerCase();
+                        String dateStr = rdv.getDateDon().toLocalDate().toString();
+                        String status = rdv.getStatus().toLowerCase();
+                        return campagneTitre.contains(lower) || entiteNom.contains(lower) || dateStr.contains(lower) || status.contains(lower);
+                    } catch (SQLException e) {
+                        return false;
+                    }
+                });
+            });
+            SortedList<RendezVous> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+            tableView.setItems(sortedData);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }

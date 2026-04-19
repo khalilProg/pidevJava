@@ -8,6 +8,7 @@
 
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import com.calendarfx.view.CalendarView?>
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css"
             xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.controllers.ListeRdvAdmin">
@@ -18,19 +19,31 @@
           text="Liste rendez vous" styleClass="hero-title">
         <font><Font size="32.0"/></font>
     </Text>
+    <Button fx:id="exportBtn" text="Export Excel" layoutX="700" layoutY="130"
+            styleClass="btn-primary-modern" onAction="#handleExport" AnchorPane.leftAnchor="1300"/>
     <Text fill="#888888" layoutX="300" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
           text="Consultez la liste des rendez vous soumis.">
         <font><Font size="16.0"/></font>
     </Text>
-    <TableView fx:id="tableView" prefWidth="1400" prefHeight="520" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30" >
-        <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
-            <TableColumn fx:id="dateColumn" text="Date" prefWidth="100"/>
-            <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
-            <TableColumn fx:id="qIdColumn" text="Questionnaire id" prefWidth="100"/>
-            <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="120"/>
-            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0"/>
-        </columns>
-    </TableView>
+    <HBox spacing="20" layoutX="300" layoutY="200" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30">
 
+        <!-- Calendar VBox -->
+
+        <!-- Table VBox -->
+        <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <CalendarView fx:id="calendarView" layoutX="20" layoutY="200" prefWidth="100" prefHeight="520"/>
+
+            <TableView fx:id="tableView" prefWidth="900" prefHeight="520">
+                <columns>
+<!--                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>-->
+                    <TableColumn fx:id="dateColumn" text="Date" prefWidth="150"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="150"/>
+                    <!--                    <TableColumn fx:id="qIdColumn" text="Questionnaire id" prefWidth="150"/>-->
+                    <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="150"/>
+                    <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+    </HBox>
 </AnchorPane>
