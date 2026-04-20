@@ -30,7 +30,7 @@ public class AjouterRendezVous {
     @FXML private Text timeError;
     @FXML private ComboBox<EntiteDeCollecte> entiteCombo;
     private ObservableList<EntiteDeCollecte> entites = FXCollections.observableArrayList();
-    User u = new User(9,"chaffai", "yassine", "wajdbenhajyahia23@gmail.com");
+    User u = new User(9,"chaffai", "yassine", "wajdbenhajyahia18@gmail.com");
     private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
     private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
 
@@ -118,6 +118,20 @@ public class AjouterRendezVous {
         RendezVous rdv = new RendezVous("confirmé", rdvDateTime, questionnaireId, selectedId);
         new RendezVousService().ajouter(rdv);
 
+        MailService mailService = new MailService();
+        boolean emailSent = mailService.sendConfirmation(
+                currentClient.getUser().getEmail(),
+                currentClient.getUser().getNom(),
+                campagne.getTitre(),
+                rdv.getDateDon(),
+                entiteCombo.getValue().getNom()
+        );
+
+        if (emailSent) {
+            System.out.println("Confirmation email sent successfully!");
+        } else {
+            System.out.println("Failed to send email.");
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Liste.fxml"));
         Parent root = loader.load();
         confirmerRdv.getScene().setRoot(root);

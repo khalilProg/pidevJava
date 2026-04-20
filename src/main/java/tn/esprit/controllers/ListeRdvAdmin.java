@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -39,8 +40,10 @@ public class ListeRdvAdmin {
     @FXML private TableColumn<RendezVous, String> entiteColumn;
     @FXML private TableColumn<RendezVous, Void> actionsColumn;
     private final RendezVousService rdvService = new RendezVousService();
-    @FXML
-    private Button exportBtn;
+    @FXML private Button exportBtn;
+    @FXML private BarChart<String, Integer> rdvChart;
+    @FXML private TableView<RendezVous> rdvTable;
+
     @FXML public void initialize() {
         try {
             setupTableColumns();
@@ -262,4 +265,33 @@ public class ListeRdvAdmin {
             new Alert(Alert.AlertType.ERROR, "Erreur : " + e.getMessage()).showAndWait();
         }
     }
+
+//    public void updateChart() {
+//        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+//        series.setName("Rendez-vous");
+//
+//        // 1. Initialize a Map for the 7 days of the week
+//        Map<String, Integer> stats = new LinkedHashMap<>();
+//        String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+//        for (String day : days) stats.put(day, 0);
+//
+//        // 2. Optimized: One pass through the existing table data
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE", Locale.ENGLISH);
+//
+//        for (RendezVous rdv : rdvTable.getItems()) {
+//            // Only count if it's within the current week (optional logic)
+//            String dayName = rdv.getDate().format(formatter); // e.g. "Mon"
+//            if (stats.containsKey(dayName)) {
+//                stats.put(dayName, stats.get(dayName) + 1);
+//            }
+//        }
+//
+//        // 3. Populate the series
+//        stats.forEach((day, count) -> {
+//            series.getData().add(new XYChart.Data<>(day, count));
+//        });
+//
+//        rdvChart.getData().clear();
+//        rdvChart.getData().add(series);
+//    }
 }
