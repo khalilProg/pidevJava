@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.Liste">
+
+    <!-- Navbar -->
+    <fx:include source="BaseFront.fxml" fx:id="headerInclude"
+                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+
+    <!-- Page Title -->
+    <Text fill="WHITE" layoutX="70" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Historique des dons" styleClass="hero-title">
+        <font><Font size="32.0"/></font>
+    </Text>
+    <Text fill="#888888" layoutX="70" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Consultez l'historique de vos participations aux campagnes.">
+        <font><Font size="16.0"/></font>
+    </Text>
+
+    <children>
+        <TableView fx:id="tableView" prefWidth="1400" prefHeight="520"
+                   AnchorPane.topAnchor="200" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70" AnchorPane.bottomAnchor="30">
+            <columns>
+                <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="100"/>
+                <TableColumn fx:id="dateRdvColumn" text="Date Rendez-vous" prefWidth="150"/>
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="150"/>
+                <TableColumn fx:id="entiteColumn" text="Entite" prefWidth="150"/>
+                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
+

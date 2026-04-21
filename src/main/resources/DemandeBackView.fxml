@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.backDemandeController">
+   
+   <left>
+      <VBox prefWidth="260.0" styleClass="sidebar" spacing="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 20px;" />
+            <Label styleClass="logo-text" style="-fx-font-size: 18px;" text="BLOODLINK" />
+            <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 10px; -fx-font-weight: bold;" text="ADMIN" />
+         </HBox>
+         
+         <Region prefHeight="30.0" />
+         <Label styleClass="sidebar-category" text="GESTION" />
+          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="    Dashboard" />
+          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item" text="👥  Utilisateurs" />
+          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
+          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
+          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item, sidebar-item-active" text="📄  Demandes" />
+          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item" text="🚚  Transferts" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateQuestionnaires" styleClass="sidebar-item" text="📝  Questionnaires" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateRendezVous" styleClass="sidebar-item" text="📅  Rendez-vous" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCampagnes" styleClass="sidebar-item" text="📢  Campagnes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCollectes" styleClass="sidebar-item" text="🏥  Collectes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
+         
+         <Region VBox.vgrow="ALWAYS" />
+         <VBox spacing="10.0">
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8px; -fx-background-radius: 20px;" text="👤" />
+                <VBox>
+                    <Label style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;" text="Admin Utilisateur" />
+                    <Label style="-fx-text-fill: -muted; -fx-font-size: 10px;" text="Administrateur" />
+                </VBox>
+            </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: transparent; -fx-border-color: -primary; -fx-border-radius: 20px; -fx-text-fill: -primary; -fx-cursor: hand; -fx-padding: 8;" text="⏻ Déconnexion" />
+         </VBox>
+      </VBox>
+   </left>
+
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="DEMANDES DE SANG" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les demandes de sang et validez ou refusez les requêtes." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="+ NOUVELLE DEMANDE" onAction="#goToAddDemande" styleClass="button-primary" style="-fx-padding: 8 20; -fx-background-radius: 20;" />
+         </HBox>
+
+         <VBox styleClass="glass-card" spacing="20.0" VBox.vgrow="ALWAYS">
+            
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+                <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="text-field-custom" prefWidth="400.0">
+                    <Label text="🔍" style="-fx-text-fill: -muted;" />
+                    <TextField promptText="Rechercher par type, statut, banque..." styleClass="transparent-input" HBox.hgrow="ALWAYS" />
+                </HBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20px; -fx-text-fill: white; -fx-padding: 8 20;" text="Toutes urgenc" />
+                <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20px; -fx-text-fill: white; -fx-padding: 8 20;" text="Tous statuts" />
+            </HBox>
+
+            <TableView fx:id="tableDemande" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
+               <columns>
+                  <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                  <TableColumn fx:id="colBanque" text="BANQUE" prefWidth="250"/>
+                  <TableColumn fx:id="colType" text="TYPE SANG" prefWidth="100"/>
+                  <TableColumn fx:id="colQuantite" text="QUANTITÉ" prefWidth="100"/>
+                  <TableColumn fx:id="colUrgence" text="URGENCE" prefWidth="120"/>
+                  <TableColumn fx:id="colStatus" text="STATUT" prefWidth="120"/>
+                  <TableColumn fx:id="colDate" text="DATE" prefWidth="120"/>
+                  <TableColumn fx:id="colActions" text="ACTIONS" prefWidth="150"/>
+               </columns>
+            </TableView>
+         </VBox>
+
+      </VBox>
+   </center>
+</BorderPane>
