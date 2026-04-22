@@ -1,14 +1,14 @@
 package tn.esprit.services;
 
 import tn.esprit.entities.User;
-import tn.esprit.entities.client;
+import tn.esprit.entities.Client;
 import tn.esprit.tools.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientService implements IGeneralService<client> {
+public class ClientService implements IGeneralService<Client> {
     Connection cn;
 
     public ClientService() {
@@ -16,7 +16,7 @@ public class ClientService implements IGeneralService<client> {
     }
 
     @Override
-    public void ajouter(client c) throws SQLException {
+    public void ajouter(Client c) throws SQLException {
         String sql = "INSERT INTO client(type_sang, dernier_don, user_id) VALUES(?,?,?)";
         PreparedStatement pst = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         pst.setString(1, c.getTypeSang());
@@ -32,7 +32,7 @@ public class ClientService implements IGeneralService<client> {
     }
 
     @Override
-    public void supprimer(client c) {
+    public void supprimer(Client c) {
         try {
             String sql = "DELETE FROM client WHERE id = ?";
             PreparedStatement pst = cn.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class ClientService implements IGeneralService<client> {
     }
 
     @Override
-    public int chercher(client c) {
+    public int chercher(Client c) {
         try {
             String sql = "SELECT 1 FROM client WHERE id = ?";
             PreparedStatement pst = cn.prepareStatement(sql);
@@ -63,7 +63,7 @@ public class ClientService implements IGeneralService<client> {
     }
 
     @Override
-    public void modifier(client c) {
+    public void modifier(Client c) {
         try {
             if (chercher(c) == c.getId()) {
                 String sql = "UPDATE client SET type_sang=?, dernier_don=? WHERE id=?";
@@ -82,13 +82,13 @@ public class ClientService implements IGeneralService<client> {
     }
 
     @Override
-    public List<client> recuperer() throws SQLException {
+    public List<Client> recuperer() throws SQLException {
         String sql = "SELECT c.id, c.type_sang, c.dernier_don, c.user_id, " +
                 "u.nom, u.prenom, u.email, u.password, u.role, u.telephone " +
                 "FROM client c JOIN user u ON c.user_id = u.id";
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(sql);
-        List<client> clients = new ArrayList<>();
+        List<Client> clients = new ArrayList<>();
         while (rs.next()) {
             User u = new User(
                     rs.getInt("user_id"),
@@ -99,7 +99,7 @@ public class ClientService implements IGeneralService<client> {
                     rs.getString("role"),
                     rs.getString("telephone")
             );
-            client cl = new client(
+            Client cl = new Client(
                     rs.getInt("id"),
                     rs.getString("type_sang"),
                     rs.getDate("dernier_don").toLocalDate(),
@@ -110,7 +110,7 @@ public class ClientService implements IGeneralService<client> {
         return clients;
     }
 
-    public client getByPhone(String phone) throws SQLException {
+    public Client getByPhone(String phone) throws SQLException {
         String sql = "SELECT c.id, c.type_sang, c.dernier_don, c.user_id, " +
                 "u.nom, u.prenom, u.email, u.password, u.role, u.telephone " +
                 "FROM client c JOIN user u ON c.user_id = u.id WHERE u.telephone = ?";
@@ -127,7 +127,7 @@ public class ClientService implements IGeneralService<client> {
                     rs.getString("role"),
                     rs.getString("telephone")
             );
-            return new client(
+            return new Client(
                     rs.getInt("id"),
                     rs.getString("type_sang"),
                     rs.getDate("dernier_don").toLocalDate(),

@@ -35,7 +35,7 @@ public class AjouterQuestAdmin {
     @FXML private Text phoneError;
 
     private Campagne selectedCampagne;
-    private client client;
+    private Client client;
 
     @FXML
     public void initialize() throws SQLException {

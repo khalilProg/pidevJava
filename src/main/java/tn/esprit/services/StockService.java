@@ -94,4 +94,23 @@ public class StockService implements IGeneralService<Stock> {
         }
         return total;
     }
+
+    public java.util.Map<String, Integer> getStockStats() throws SQLException {
+        java.util.Map<String, Integer> stats = new java.util.HashMap<>();
+        String sql = "SELECT type_sang, SUM(quantite) as total FROM stock GROUP BY type_sang";
+        Statement st = cnx.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            stats.put(rs.getString("type_sang"), rs.getInt("total"));
+        }
+        return stats;
+    }
+
+    public int getTotalQuantity() throws SQLException {
+        String sql = "SELECT SUM(quantite) FROM stock";
+        Statement st = cnx.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) return rs.getInt(1);
+        return 0;
+    }
 }

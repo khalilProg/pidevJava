@@ -105,4 +105,22 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         return rendezvouet;
     }
 
+    public java.util.Map<String, Integer> getStatusStats() throws SQLException {
+        java.util.Map<String, Integer> stats = new java.util.HashMap<>();
+        String sql = "SELECT status, COUNT(*) as nb FROM rendez_vous GROUP BY status";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            stats.put(rs.getString("status"), rs.getInt("nb"));
+        }
+        return stats;
+    }
+
+    public int getTotalRendezVous() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM rendez_vous";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) return rs.getInt(1);
+        return 0;
+    }
 }

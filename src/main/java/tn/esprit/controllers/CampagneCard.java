@@ -5,9 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 import tn.esprit.entities.Campagne;
-import tn.esprit.entities.client;
+import tn.esprit.entities.Client;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.services.QuestionnaireService;
 import tn.esprit.services.RendezVousService;
@@ -17,14 +17,14 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class CampagneCard {
-    @FXML private Text campaignName;
-    @FXML private Text campaignDates;
-    @FXML private Text bloodTypes;
-    @FXML private Text campaignDescription;
+    @FXML private Label campaignName;
+    @FXML private Label campaignDates;
+    @FXML private Label bloodTypes;
+    @FXML private Label campaignDescription;
     @FXML private Button participateButton;
     private Campagne campagne;
-    private client currentClient1 = new client(2, "A-", LocalDate.of(2003, 10, 17));
-    private client currentClient = new client(1, "O+", LocalDate.of(2023, 1, 1));
+    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17));
+    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1));
 
     public void setData(Campagne c) {
         this.campagne = c;

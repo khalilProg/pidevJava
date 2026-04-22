@@ -39,6 +39,13 @@
             <version>${javafx.version}</version>
         </dependency>
 
+        <!-- JavaFX Web for reCAPTCHA -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
         <!-- jBCrypt for Symfony Hash Support -->
         <dependency>
             <groupId>org.mindrot</groupId>
@@ -51,6 +58,20 @@
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.5.13.3</version>
+        </dependency>
+
+        <!-- JavaMail API for Email Sending -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+        <!-- JSON for parsing reCAPTCHA response -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
         </dependency>
     </dependencies>
 

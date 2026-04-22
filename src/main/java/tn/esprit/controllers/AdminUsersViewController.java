@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tn.esprit.entities.Banque;
 import tn.esprit.entities.User;
-import tn.esprit.entities.client;
+import tn.esprit.entities.Client;
 import tn.esprit.services.BanqueService;
 import tn.esprit.services.ClientService;
 
@@ -36,7 +36,7 @@ public class AdminUsersViewController {
     private VBox roleDetailsContainer;
 
     private User currentUser;
-    private client currentClient;
+    private Client currentClient;
     private Banque currentBanque;
 
     public void initData(User user) {
@@ -79,8 +79,8 @@ public class AdminUsersViewController {
     private void loadClientDetails(User user) {
         try {
             ClientService clientService = new ClientService();
-            List<client> clients = clientService.recuperer();
-            for (client c : clients) {
+            List<Client> clients = clientService.recuperer();
+            for (Client c : clients) {
                 if (c.getUser() != null && c.getUser().getId() == user.getId()) {
                     currentClient = c;
                     break;

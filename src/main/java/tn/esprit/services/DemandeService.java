@@ -135,4 +135,23 @@ public class DemandeService implements IGeneralService<Demande>{
 
         return demandes;
     }
+
+    public java.util.Map<String, Integer> getStatusStats() throws SQLException {
+        java.util.Map<String, Integer> stats = new java.util.HashMap<>();
+        String sql = "SELECT status, COUNT(*) as nb FROM demande GROUP BY status";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            stats.put(rs.getString("status"), rs.getInt("nb"));
+        }
+        return stats;
+    }
+
+    public int getTotalDemandes() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM demande";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) return rs.getInt(1);
+        return 0;
+    }
 }

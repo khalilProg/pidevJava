@@ -6,6 +6,13 @@
    ROOT & GLOBAL
    ============================== */
 .root {
+    -primary: #e63939;
+    -bg: #0a0a0a;
+    -surface: #111111;
+    -text: #f8f8f8;
+    -muted: rgba(255, 255, 255, 0.65);
+    -border-color: rgba(255, 255, 255, 0.08);
+
     -fx-background-color: #0A0A0A;
     -fx-font-family: "Segoe UI Semibold", "Segoe UI", "system-ui", sans-serif;
     -fx-text-fill: #FFFFFF;
@@ -14,15 +21,87 @@
 /* ==============================
    NAVBAR
    ============================== */
-.navbar-container {
-    -fx-background-color: rgba(18, 18, 18, 0.96);
-    -fx-min-width: 1550px;
-    -fx-pref-height: 85px;
-    -fx-padding: 0 40 0 40;
-    -fx-alignment: CENTER_LEFT;
-    -fx-border-color: #1E1E1E;
+.navbar-top {
+    -fx-background-color: #0A0A0A;
+    -fx-padding: 0 50;
+    -fx-min-height: 85;
+    -fx-border-color: transparent transparent #222222 transparent;
     -fx-border-width: 0 0 1 0;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0, 0, 4);
+}
+
+.nav-link-alt {
+    -fx-background-color: transparent;
+    -fx-text-fill: #A0A0A0;
+    -fx-font-family: "Segoe UI", system-ui;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-padding: 10 15;
+}
+
+.nav-link-alt:hover {
+    -fx-text-fill: #FFFFFF;
+}
+
+.brand-section {
+    -fx-alignment: CENTER_LEFT;
+    -fx-spacing: 12;
+}
+
+.brand-text {
+    -fx-font-family: "Segoe UI Black", sans-serif;
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.hero-section-alt {
+    -fx-padding: 40 50 20 50;
+    -fx-spacing: 5;
+}
+
+.hero-label-small {
+    -fx-text-fill: #666666;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-transform: uppercase;
+}
+
+.hero-title-large {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 42px;
+    -fx-font-weight: 900;
+}
+
+.hero-subtitle-alt {
+    -fx-text-fill: #888888;
+    -fx-font-size: 16px;
+}
+
+.grid-container {
+    -fx-padding: 20 50 40 50;
+}
+
+.empty-state-vbox {
+    -fx-alignment: CENTER;
+    -fx-spacing: 20;
+    -fx-padding: 40;
+    -fx-background-color: #111111;
+    -fx-background-radius: 20;
+    -fx-min-height: 300;
+}
+
+.empty-state-icon {
+    -fx-fill: #333333;
+}
+
+.empty-state-text {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+}
+
+.empty-state-subtext {
+    -fx-text-fill: #888888;
+    -fx-font-size: 14px;
 }
 
 .brand-section {
@@ -174,7 +253,7 @@
     -fx-border-color: rgba(60, 60, 60, 0.4);
     -fx-border-width: 1px;
     -fx-border-radius: 16px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0, 0, 6);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 6);
     -fx-min-width: 350;
 }
 
@@ -228,7 +307,7 @@
     -fx-spacing: 14;
     -fx-border-color: #222222;
     -fx-border-width: 1px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 12, 0, 0, 5);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 12, 0, 0, 5);
 }
 
 .card:hover {
@@ -237,7 +316,8 @@
     -fx-effect: dropshadow(gaussian, rgba(255, 62, 62, 0.1), 18, 0, 0, 6);
 }
 
-.card .text, .card .label {
+.card .text,
+.card .label {
     -fx-text-fill: #FFFFFF;
 }
 
@@ -245,14 +325,17 @@
 #campaignName {
     -fx-font-size: 31px !important;
     -fx-font-weight: 800 !important;
-    -fx-fill: #FFFFFF !important; /* White provides better contrast on dark */
+    -fx-fill: #FFFFFF !important;
+    /* White provides better contrast on dark */
     -fx-font-family: "Segoe UI Black", "System", sans-serif;
 
     /* Remove the translate that was causing overlap */
     -fx-translate-x: 0 !important;
 }
 
-#campaignDates, #campaignDescription, #text {
+#campaignDates,
+#campaignDescription,
+#text {
     -fx-fill: #CCCCCC;
     -fx-font-size: 14px;
 }
@@ -266,7 +349,9 @@
 /* ==============================
    BUTTONS (General)
    ============================== */
-.btn-primary-modern, .card .button, #participateButton {
+.btn-primary-modern,
+.card .button,
+#participateButton {
     -fx-background-color: #C62828;
     -fx-text-fill: white;
     -fx-font-weight: 800;
@@ -277,7 +362,9 @@
     -fx-effect: dropshadow(gaussian, rgba(198, 40, 40, 0.35), 10, 0, 0, 4);
 }
 
-.btn-primary-modern:hover, .card .button:hover, #participateButton:hover {
+.btn-primary-modern:hover,
+.card .button:hover,
+#participateButton:hover {
     -fx-background-color: #E53935;
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
@@ -301,7 +388,9 @@
 /* ==============================
    FORM FIELDS
    ============================== */
-.text-field, .text-area, .combo-box {
+.text-field,
+.text-area,
+.combo-box {
     -fx-background-color: #1A1A1A;
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 10px;
@@ -313,7 +402,9 @@
     -fx-font-size: 14px;
 }
 
-.text-field:focused, .text-area:focused, .combo-box:focused {
+.text-field:focused,
+.text-area:focused,
+.combo-box:focused {
     -fx-border-color: #FF3E3E;
     -fx-background-color: #141414;
     -fx-effect: dropshadow(gaussian, rgba(255, 62, 62, 0.15), 10, 0, 0, 0);
@@ -325,6 +416,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 12px;
 }
+
 /* ==============================
    MODERN TABLEVIEW (SaaS STYLE)
    ============================== */
@@ -351,20 +443,25 @@
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-size: 45px;
-    -fx-alignment: CENTER;       /* Centers the title container */
-    -fx-border-color: transparent; /* Removes white vertical lines between headers */
+    -fx-alignment: CENTER;
+    /* Centers the title container */
+    -fx-border-color: transparent;
+    /* Removes white vertical lines between headers */
 }
 
 .table-view .column-header .label {
     -fx-text-fill: #A0A0A0;
     -fx-font-weight: 800;
     -fx-font-size: 16px;
-    -fx-alignment: CENTER;       /* Centers text inside the label */
-    -fx-max-width: Infinity;     /* Allows label to span full header width */
+    -fx-alignment: CENTER;
+    /* Centers text inside the label */
+    -fx-max-width: Infinity;
+    /* Allows label to span full header width */
 }
 
 /* Removes the white background in the extra space to the right of the columns */
-.table-view .filler, .table-view .corner {
+.table-view .filler,
+.table-view .corner {
     -fx-background-color: transparent;
 }
 
@@ -392,7 +489,8 @@
 }
 
 /* Prevents the 'void' area from having a default background */
-.table-view .virtual-flow, .table-view .placeholder {
+.table-view .virtual-flow,
+.table-view .placeholder {
     -fx-background-color: transparent;
 }
 
@@ -400,8 +498,10 @@
 .table-view .table-cell {
     -fx-text-fill: #FFFFFF !important;
     -fx-font-size: 14px;
-    -fx-alignment: CENTER;       /* Centers all text and buttons in cells */
-    -fx-border-color: transparent; /* Removes white vertical lines between cells */
+    -fx-alignment: CENTER;
+    /* Centers all text and buttons in cells */
+    -fx-border-color: transparent;
+    /* Removes white vertical lines between cells */
 }
 
 /* 4. SELECTION & HOVER STATES */
@@ -447,7 +547,8 @@
     -fx-background-color: #E63939;
 }
 
-.scroll-bar .increment-button, .scroll-bar .decrement-button {
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
     -fx-background-color: transparent;
     -fx-padding: 0;
 }
@@ -474,7 +575,9 @@
     -fx-fill: #c3c0c0;
 }
 
-#campaignDates, #campaignDescription, #text{
+#campaignDates,
+#campaignDescription,
+#text {
     -fx-fill: #838282;
     -fx-font-size: 12px;
 }
@@ -485,7 +588,8 @@
     -fx-font-size: 14px;
 }
 
-.card .button, #participateButton {
+.card .button,
+#participateButton {
     -fx-background-color: #C62828;
     -fx-text-fill: white;
     -fx-font-weight: 800;
@@ -537,23 +641,30 @@ navbar top  right profile
     -fx-background-radius: 40px;
     -fx-border-radius: 40px;
     -fx-border-color: #E63939;
-    -fx-border-width: 2.0px; /* Kept the thick border you liked */
+    -fx-border-width: 2.0px;
+    /* Kept the thick border you liked */
     -fx-cursor: hand;
 
     /* --- SIZE CONSTRAINTS --- */
-    -fx-min-height: 40px;         /* Ensures it doesn't get too small */
-    -fx-max-height: 42px;         /* Hard limit to prevent navbar overlap */
+    -fx-min-height: 40px;
+    /* Ensures it doesn't get too small */
+    -fx-max-height: 42px;
+    /* Hard limit to prevent navbar overlap */
     -fx-pref-height: 42px;
 
     /* --- SPACING ADJUSTMENT --- */
-    -fx-padding: 0 15 0 5;        /* Removed top/bottom padding to allow centering */
-    -fx-alignment: CENTER_LEFT;   /* Keeps the icon and text aligned inside */
-    -fx-spacing: 10;              /* Gap between the red circle and the name */
+    -fx-padding: 0 15 0 5;
+    /* Removed top/bottom padding to allow centering */
+    -fx-alignment: CENTER_LEFT;
+    /* Keeps the icon and text aligned inside */
+    -fx-spacing: 10;
+    /* Gap between the red circle and the name */
 }
 
 .user-name-label {
     -fx-text-fill: #FFFFFF !important;
-    -fx-font-size: 13px;          /* Slightly smaller to fit the new height */
+    -fx-font-size: 13px;
+    /* Slightly smaller to fit the new height */
     -fx-font-weight: 800;
 }
 
@@ -567,7 +678,7 @@ navbar top  right profile
 
 .user-icon-container {
     /* Optional: subtle shadow for the red circle inside */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
 }
 
 /* Card Container */
@@ -614,7 +725,8 @@ navbar top  right profile
 /* Removes the white background from the ScrollPane itself */
 .scroll-pane {
     -fx-background-color: transparent;
-    -fx-background: transparent; /* This targets the viewport background */
+    -fx-background: transparent;
+    /* This targets the viewport background */
     -fx-border-color: transparent;
     -fx-padding: 0;
 }
@@ -642,7 +754,8 @@ navbar top  right profile
 .btn-participate-full {
     -fx-background-color: #E63939;
     -fx-text-fill: white;
-    -fx-background-radius: 50px; /* Makes it a pill */
+    -fx-background-radius: 50px;
+    /* Makes it a pill */
     -fx-font-weight: 900;
     -fx-padding: 15 0;
     -fx-cursor: hand;
@@ -665,8 +778,11 @@ navbar top  right profile
 }
 
 /* 2. Fix the Inputs (Background & Text) */
-.text-field, .combo-box, .text-area {
-    -fx-background-color: #161616 !important; /* Dark charcoal */
+.text-field,
+.combo-box,
+.text-area {
+    -fx-background-color: #161616 !important;
+    /* Dark charcoal */
     -fx-text-fill: white !important;
     -fx-prompt-text-fill: #555555 !important;
     -fx-background-radius: 10px !important;
@@ -679,6 +795,7 @@ navbar top  right profile
 .text-area .content {
     -fx-background-color: transparent !important;
 }
+
 .text-area {
     -fx-text-fill: white !important;
 }
@@ -707,12 +824,13 @@ navbar top  right profile
 
 /* The Card Container */
 .form-card {
-    -fx-background-color: #121212; /* Slightly lighter than root background */
+    -fx-background-color: #121212;
+    /* Slightly lighter than root background */
     -fx-background-radius: 20px;
     -fx-border-color: #222222;
     -fx-border-radius: 20px;
     -fx-border-width: 1px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 8);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0, 0, 8);
 }
 
 /* Input Styles to match the dark theme */
@@ -772,14 +890,16 @@ navbar top  right profile
 .hero-title-main {
     -fx-fill: #FFFFFF;
     -fx-font-size: 68px;
-    -fx-font-weight: 200; /* Light weight for elegance */
+    -fx-font-weight: 200;
+    /* Light weight for elegance */
     -fx-font-family: "Segoe UI Light", "Segoe UI", sans-serif;
 }
 
 .hero-title-sub {
     -fx-fill: #FF3E3E;
     -fx-font-size: 68px;
-    -fx-font-weight: 900; /* Extra bold for impact */
+    -fx-font-weight: 900;
+    /* Extra bold for impact */
     -fx-font-family: "Segoe UI Black", "Segoe UI", sans-serif;
 }
 
@@ -829,10 +949,10 @@ navbar top  right profile
 .glass-card {
     -fx-background-color: rgba(35, 35, 35, 0.4);
     -fx-background-radius: 20px;
-    -fx-border-color: linear-gradient(to bottom right, rgba(255,255,255,0.15), rgba(255,255,255,0.02));
+    -fx-border-color: linear-gradient(to bottom right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
     -fx-border-width: 1.2;
     -fx-border-radius: 20px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 20, 0, 0, 10);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 20, 0, 0, 10);
 }
 
 .glass-card:hover {
@@ -891,4 +1011,157 @@ navbar top  right profile
     -fx-text-fill: #888888;
     -fx-font-weight: 600;
     -fx-font-size: 15px;
+}
+
+/* ==============================
+   DATEPICKER DARK THEME
+   ============================== */
+.dark-datepicker {
+    -fx-background-color: #1A1A1A;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #2A2A2A;
+}
+
+.dark-datepicker>.arrow-button {
+    -fx-background-color: transparent;
+}
+
+.dark-datepicker>.arrow-button>.arrow {
+    -fx-background-color: #FF3E3E;
+}
+
+.dark-datepicker .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup {
+    -fx-background-color: #1A1A1A;
+    -fx-border-color: #2D2D2D;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #111111;
+}
+
+.date-picker-popup .calendar-grid {
+    -fx-background-color: #1A1A1A;
+}
+
+.date-picker-popup .day-cell {
+    -fx-text-fill: #CCCCCC;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: rgba(255, 62, 62, 0.2);
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: #FF3E3E;
+    -fx-text-fill: white;
+}
+
+.btn-outline-red {
+    -fx-background-color: transparent;
+    -fx-border-color: #FF3E3E;
+    -fx-border-width: 2px;
+    -fx-border-radius: 40px;
+    -fx-text-fill: #FF3E3E;
+    -fx-font-weight: 800;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+}
+
+.btn-outline-red:hover {
+    -fx-background-color: rgba(255, 62, 62, 0.15);
+    -fx-border-color: #FF5252;
+}
+
+/* ==============================
+   CALENDAR SPECIFIC STYLES
+   ============================== */
+.calendar-day-box {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 12px;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-radius: 12px;
+    -fx-min-height: 120px;
+    -fx-padding: 10;
+}
+
+.calendar-day-box:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-border-color: rgba(255, 62, 62, 0.3);
+}
+
+.calendar-day-today {
+    -fx-border-color: #FF3E3E;
+    -fx-border-width: 2px;
+    -fx-background-color: rgba(255, 62, 62, 0.05);
+}
+
+.calendar-day-number {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: 900;
+    -fx-font-size: 16px;
+}
+
+.calendar-event-tag {
+    -fx-background-color: #E63939;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-padding: 4 8;
+    -fx-background-radius: 6px;
+    -fx-wrap-text: false;
+}
+
+/* ==========================================================
+ * HEADER & SIDE MENU (Standardized)
+ * ========================================================== */
+.header-bar {
+    -fx-background-color: rgba(10, 10, 10, 0.75);
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.08) transparent;
+    -fx-border-width: 1px;
+    -fx-padding: 18px 30px;
+}
+
+.logo-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+    -fx-text-fill: white;
+}
+
+.menu-toggle {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-cursor: hand;
+}
+
+.menu-toggle:hover {
+    -fx-text-fill: #e63939;
+}
+
+.menu-panel {
+    -fx-background-color: #111111;
+    -fx-border-color: transparent transparent transparent rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1px;
+    -fx-padding: 44px;
+}
+
+.menu-link {
+    -fx-font-size: 36px;
+    -fx-font-weight: 900;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.menu-link:hover {
+    -fx-text-fill: #e63939;
 }

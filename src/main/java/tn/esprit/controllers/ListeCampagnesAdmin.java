@@ -10,15 +10,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.EntiteDeCollecte;
 import tn.esprit.services.CampagneService;
@@ -27,12 +33,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ListeCampagnesAdmin {
 
     @FXML private TableView<Campagne> tableView;
-    @FXML private TableColumn<Campagne, Integer> idColumn;
     @FXML private TableColumn<Campagne, String> titreColumn;
     @FXML private TableColumn<Campagne, String> descColumn;
     @FXML private TableColumn<Campagne, Campagne> entiteColumn;
@@ -40,25 +50,26 @@ public class ListeCampagnesAdmin {
     @FXML private TableColumn<Campagne, Campagne> datesColumn;
     @FXML private TableColumn<Campagne, Void> actionsColumn;
     @FXML private Button addBtn;
+    @FXML private TextField searchField;
+    @FXML private ComboBox<String> sortComboBox;
+    
+    @FXML private BarChart<String, Integer> campagneChart;
+    @FXML private VBox topMonthsList;
 
+    private final CampagneService campagneService = new CampagneService();
+
+    private List<Campagne> baseList = new ArrayList<>();
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @FXML public void initialize() {
+        sortComboBox.setItems(FXCollections.observableArrayList(
+            "Titre (A-Z)", "Titre (Z-A)", "Date Début (Le plus récent)", "Date Début (Le plus ancien)"
+        ));
+
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        idColumn.setCellFactory(col -> new TableCell<>() {
-            @Override
-            protected void updateItem(Integer item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText("#" + item);
-                    setStyle("-fx-font-weight: 800; -fx-text-fill: white; -fx-font-size: 12px;");
-                }
-            }
-        });
+        searchField.textProperty().addListener((obs, old, val) -> appliquerFiltresEtTri());
+        sortComboBox.valueProperty().addListener((obs, old, val) -> appliquerFiltresEtTri());
 
         titreColumn.setCellValueFactory(new PropertyValueFactory<>("titre"));
         titreColumn.setCellFactory(col -> new TableCell<>() {
@@ -225,12 +236,73 @@ public class ListeCampagnesAdmin {
 
         // Load data
         try {
-            List<Campagne> campagnes = new CampagneService().recuperer();
-            ObservableList<Campagne> data = FXCollections.observableArrayList(campagnes);
-            tableView.setItems(data);
+            baseList = campagneService.recuperer();
+            appliquerFiltresEtTri();
+            loadStatistics();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadStatistics() {
+        try {
+            campagneChart.setAnimated(false); // Fixes invisible bar rendering bug in JavaFX
+            // 1. BarChart Data
+            Map<String, Integer> statsMois = campagneService.getCampagnesParMois();
+            XYChart.Series<String, Integer> series = new XYChart.Series<>();
+            series.setName("Campagnes");
+
+            for (Map.Entry<String, Integer> entry : statsMois.entrySet()) {
+                if (entry.getKey() != null) {
+                    series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+                }
+            }
+            campagneChart.getData().clear();
+            campagneChart.getData().add(series);
+
+            // 2. Top 3 Months Data
+            List<String> top3 = campagneService.getTop3MoinsCampagnes();
+            topMonthsList.getChildren().clear();
+            for (String mois : top3) {
+                Label lbl = new Label("⭐ " + mois);
+                lbl.setStyle("-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 8; -fx-background-color: rgba(230, 57, 57, 0.1); -fx-background-radius: 5;");
+                lbl.setMaxWidth(Double.MAX_VALUE);
+                topMonthsList.getChildren().add(lbl);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erreur chargement stats: " + e.getMessage());
+        }
+    }
+
+    private void appliquerFiltresEtTri() {
+        String search = searchField.getText() == null ? "" : searchField.getText().toLowerCase().trim();
+        String sortType = sortComboBox.getValue();
+
+        List<Campagne> filteredList = baseList.stream()
+            .filter(c -> c.getTitre().toLowerCase().contains(search) || 
+                         c.getDescription().toLowerCase().contains(search) ||
+                         (c.getTypeSang() != null && c.getTypeSang().toLowerCase().contains(search)))
+            .collect(Collectors.toList());
+
+        if (sortType != null) {
+            switch (sortType) {
+                case "Titre (A-Z)":
+                    filteredList.sort(Comparator.comparing(Campagne::getTitre, String.CASE_INSENSITIVE_ORDER));
+                    break;
+                case "Titre (Z-A)":
+                    filteredList.sort(Comparator.comparing(Campagne::getTitre, String.CASE_INSENSITIVE_ORDER).reversed());
+                    break;
+                case "Date Début (Le plus récent)":
+                    filteredList.sort(Comparator.comparing(Campagne::getDateDebut, Comparator.nullsLast(Comparator.reverseOrder())));
+                    break;
+                case "Date Début (Le plus ancien)":
+                    filteredList.sort(Comparator.comparing(Campagne::getDateDebut, Comparator.nullsLast(Comparator.naturalOrder())));
+                    break;
+            }
+        }
+
+        tableView.setItems(FXCollections.observableArrayList(filteredList));
     }
 
 

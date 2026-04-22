@@ -6,13 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class BaseFront {
 
-    private void switchScene(ActionEvent event, String fxmlPath) {
+    @FXML protected HBox menuOverlay;
+    @FXML protected Button menuToggleBtn;
+    @FXML protected Label sessionEmailLabel;
+    @FXML protected Button userNameBtn;
+
+    protected void switchScene(javafx.event.Event event, String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -26,27 +33,50 @@ public class BaseFront {
     }
 
     @FXML
-    public void goToAccueil(ActionEvent event) {
-        switchScene(event, "/Home.fxml");
+    void handleMenuToggle(ActionEvent event) {
+        if (menuOverlay != null) {
+            boolean isVisible = menuOverlay.isVisible();
+            menuOverlay.setVisible(!isVisible);
+            menuOverlay.setManaged(!isVisible);
+            if (menuToggleBtn != null) {
+                menuToggleBtn.setText(isVisible ? "MENU ☰" : "FERMER ✕");
+            }
+        }
     }
 
     @FXML
-    public void goToHistorique(ActionEvent event) {
+    void handleMenuClose(javafx.scene.input.MouseEvent event) {
+        if (menuOverlay != null) {
+            menuOverlay.setVisible(false);
+            menuOverlay.setManaged(false);
+            if (menuToggleBtn != null) {
+                menuToggleBtn.setText("MENU ☰");
+            }
+        }
+    }
+
+    @FXML
+    void handleLogout(ActionEvent event) {
+        switchScene(event, "/login.fxml");
+    }
+
+    @FXML
+    public void goToAccueil(javafx.event.Event event) {
+        switchScene(event, "/client_home.fxml");
+    }
+
+    @FXML
+    public void goToCampagnes(javafx.event.Event event) {
+        switchScene(event, "/CampagneFront.fxml");
+    }
+
+    @FXML
+    public void goToCalendar(javafx.event.Event event) {
+        switchScene(event, "/CampagneCalendar.fxml");
+    }
+
+    @FXML
+    public void goToHistorique(javafx.event.Event event) {
         switchScene(event, "/Liste.fxml");
-    }
-
-    @FXML
-    public void goToCampagnes(ActionEvent event) {
-        switchScene(event, "/ListeCampagnes.fxml");
-    }
-
-    @FXML
-    public void goToQuestionnaires(ActionEvent event) {
-        switchScene(event, "/ListeQuestAdmin.fxml");
-    }
-
-    @FXML
-    public void goToRendezVous(ActionEvent event) {
-        switchScene(event, "/ListeRdvAdmin.fxml");
     }
 }

@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.entities.User;
-import tn.esprit.entities.client;
+import tn.esprit.entities.Client;
 import tn.esprit.services.ClientService;
 import tn.esprit.services.UserService;
 
@@ -62,9 +62,9 @@ public class AdminUsersEditClientController {
     private Label dernierDonError;
 
     private User currentUser;
-    private client currentClient;
+    private Client currentClient;
 
-    public void initData(User user, client clientData) {
+    public void initData(User user, Client clientData) {
         this.currentUser = user;
         this.currentClient = clientData;
 
@@ -89,8 +89,8 @@ public class AdminUsersEditClientController {
         if (clientData == null && user != null) {
             try {
                 ClientService cs = new ClientService();
-                List<client> clients = cs.recuperer();
-                for (client c : clients) {
+                List<Client> clients = cs.recuperer();
+                for (Client c : clients) {
                     if (c.getUser() != null && c.getUser().getId() == user.getId()) {
                         this.currentClient = c;
                         break;

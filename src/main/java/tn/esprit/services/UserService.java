@@ -119,4 +119,12 @@ public class UserService implements IGeneralService<User> {
         }
         return users;
     }
+
+    public int getTotalUsers() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM user";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) return rs.getInt(1);
+        return 0;
+    }
 }

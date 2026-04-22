@@ -14,7 +14,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import tn.esprit.entities.User;
-import tn.esprit.entities.client;
+import tn.esprit.entities.Client;
 import tn.esprit.services.ClientService;
 
 import java.io.IOException;
@@ -81,7 +81,7 @@ public class AdminUsersCompleteClientController implements Initializable {
             return;
         }
 
-        client nouveauClient = new client(groupeSanguin, dernierDon, currentUser);
+        Client nouveauClient = new Client(groupeSanguin, dernierDon, currentUser);
         ClientService clientService = new ClientService();
 
         try {
