@@ -148,12 +148,12 @@ public class AdminUsersController implements Initializable {
         Button btnModif = new Button("✎ MODIFIER");
         Button btnSuppr = new Button("🗑 SUPPRIMER");
         
-        String btnStyle = "-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 15; -fx-padding: 4 12; -fx-font-size: 10px; -fx-font-weight: bold; -fx-cursor: hand;";
-        String btnSupprStyle = "-fx-background-color: transparent; -fx-text-fill: -primary; -fx-border-color: rgba(230,57,57,0.3); -fx-border-radius: 15; -fx-padding: 4 12; -fx-font-size: 10px; -fx-font-weight: bold; -fx-cursor: hand;";
-        
-        btnVoir.setStyle(btnStyle);
-        btnModif.setStyle(btnStyle);
-        btnSuppr.setStyle(btnSupprStyle);
+        btnVoir.getStyleClass().add("action-btn-edit");
+        btnModif.getStyleClass().add("action-btn-edit");
+        btnSuppr.getStyleClass().add("action-btn-delete");
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnVoir);
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnModif);
+        tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnSuppr);
         
         btnVoir.setOnAction(e -> handleViewUser(e, u));
         btnModif.setOnAction(e -> handleModifyUser(e, u));
@@ -172,7 +172,7 @@ public class AdminUsersController implements Initializable {
             AdminUsersViewController controller = loader.getController();
             controller.initData(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to user profile: " + e.getMessage());
@@ -188,7 +188,7 @@ public class AdminUsersController implements Initializable {
                 AdminUsersEditClientController controller = loader.getController();
                 controller.initData(user, null);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
+                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
                 stage.show();
             } else if ("agent banque".equalsIgnoreCase(user.getRole())) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit_banque.fxml"));
@@ -196,7 +196,7 @@ public class AdminUsersController implements Initializable {
                 AdminUsersEditBanqueController controller = loader.getController();
                 controller.initData(user, null);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
+                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
                 stage.show();
             } else {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit.fxml"));
@@ -204,7 +204,7 @@ public class AdminUsersController implements Initializable {
                 AdminUsersEditController controller = loader.getController();
                 controller.initData(user);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
+                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
                 stage.show();
             }
         } catch (IOException e) {
@@ -275,7 +275,7 @@ public class AdminUsersController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());

@@ -162,13 +162,13 @@ public class ListeCampagnesAdmin {
 
             {   
                 actViewBtn.getStyleClass().add("action-icon-btn");
-                actViewBtn.setStyle("-fx-min-width: 32px; -fx-min-height: 32px; -fx-font-size: 14px; -fx-text-fill: #3498db;");
 
                 actEditBtn.getStyleClass().add("action-icon-btn");
-                actEditBtn.setStyle("-fx-min-width: 32px; -fx-min-height: 32px; -fx-font-size: 14px;");
 
                 actDeleteBtn.getStyleClass().addAll("action-icon-btn", "action-icon-delete");
-                actDeleteBtn.setStyle("-fx-min-width: 32px; -fx-min-height: 32px; -fx-font-size: 14px;");
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(actViewBtn);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(actEditBtn);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(actDeleteBtn);
 
                 container.setAlignment(Pos.CENTER_LEFT);
 
@@ -181,7 +181,7 @@ public class ListeCampagnesAdmin {
                         controller.setCampagne(c);
                         
                         Stage stage = (Stage) actViewBtn.getScene().getWindow();
-                        stage.setScene(new Scene(root));
+                        stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
                         stage.show();
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -207,7 +207,7 @@ public class ListeCampagnesAdmin {
                         controller.setCampagneToEdit(c);
                         
                         Stage stage = (Stage) actEditBtn.getScene().getWindow();
-                        stage.setScene(new Scene(root));
+                        stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
                         stage.show();
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -289,7 +289,7 @@ public class ListeCampagnesAdmin {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());

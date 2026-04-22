@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -87,11 +86,11 @@ public class CampagneFrontController implements Initializable {
     @FXML
     void handleAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/AjouterCampagne.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterCampagne.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Ajouter une Campagne");
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             chargerDonnees(txtRechercheFront.getText());
@@ -107,13 +106,13 @@ public class CampagneFrontController implements Initializable {
             return;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/ModifierCampagne.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierCampagne.fxml"));
             Parent root = loader.load();
             ModifierCampagneController ctrl = loader.getController();
             ctrl.setCampagne(selectedCampagne);
             Stage stage = new Stage();
             stage.setTitle("Modifier la Campagne");
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             chargerDonnees(txtRechercheFront.getText());

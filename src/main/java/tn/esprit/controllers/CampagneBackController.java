@@ -117,12 +117,12 @@ public class CampagneBackController implements Initializable {
     @FXML
     void handleAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/AjouterCampagne.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterCampagne.fxml"));
             Parent root = loader.load();
             
             Stage stage = new Stage();
             stage.setTitle("Ajouter une Campagne");
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             
@@ -141,7 +141,7 @@ public class CampagneBackController implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/ModifierCampagne.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierCampagne.fxml"));
             Parent root = loader.load();
             
             ModifierCampagneController modifierController = loader.getController();
@@ -149,7 +149,7 @@ public class CampagneBackController implements Initializable {
             
             Stage stage = new Stage();
             stage.setTitle("Modifier la Campagne");
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             

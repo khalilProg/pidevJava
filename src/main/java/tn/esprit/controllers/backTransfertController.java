@@ -160,17 +160,12 @@ public class backTransfertController {
             private final Button btnReject = new Button("✖");
 
             {
-                btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;");
-                btnDelete.setOnMouseEntered(e -> btnDelete.setStyle("-fx-background-color: rgba(230, 57, 57, 0.1); -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
-                btnDelete.setOnMouseExited(e -> btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
-
-                btnAccept.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
-                btnAccept.setOnMouseEntered(e -> btnAccept.setStyle("-fx-background-color: rgba(46, 204, 113, 0.1); -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
-                btnAccept.setOnMouseExited(e -> btnAccept.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
-
-                btnReject.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e67e22; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
-                btnReject.setOnMouseEntered(e -> btnReject.setStyle("-fx-background-color: rgba(230, 126, 34, 0.1); -fx-border-color: #e67e22; -fx-border-radius: 20; -fx-text-fill: #e67e22; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
-                btnReject.setOnMouseExited(e -> btnReject.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #e67e22; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;"));
+                btnDelete.getStyleClass().add("action-btn-delete");
+                btnAccept.getStyleClass().add("action-btn-edit");
+                btnReject.getStyleClass().add("action-btn-delete");
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnDelete);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnAccept);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnReject);
 
                 btnDelete.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
@@ -277,7 +272,7 @@ public class backTransfertController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

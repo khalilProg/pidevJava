@@ -185,20 +185,12 @@ public class backDemandeController {
             private final Button btnDelete = new Button("🗑");
 
             {
-                // Style Valider (Green)
-                btnValider.setStyle("-fx-background-color: transparent; -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
-                btnValider.setOnMouseEntered(e -> btnValider.setStyle("-fx-background-color: rgba(46, 204, 113, 0.1); -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12;"));
-                btnValider.setOnMouseExited(e -> btnValider.setStyle("-fx-background-color: transparent; -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-text-fill: #2ecc71; -fx-cursor: hand; -fx-padding: 4 12;"));
-
-                // Style Refuser (Red)
-                btnRefuser.setStyle("-fx-background-color: transparent; -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12; -fx-font-weight: bold;");
-                btnRefuser.setOnMouseEntered(e -> btnRefuser.setStyle("-fx-background-color: rgba(230, 57, 57, 0.1); -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
-                btnRefuser.setOnMouseExited(e -> btnRefuser.setStyle("-fx-background-color: transparent; -fx-border-color: #e63939; -fx-border-radius: 20; -fx-text-fill: #e63939; -fx-cursor: hand; -fx-padding: 4 12;"));
-
-                // Style Delete
-                btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #888; -fx-cursor: hand; -fx-padding: 4 12;");
-                btnDelete.setOnMouseEntered(e -> btnDelete.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-color: #666; -fx-border-radius: 20; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 4 12;"));
-                btnDelete.setOnMouseExited(e -> btnDelete.setStyle("-fx-background-color: transparent; -fx-border-color: #333; -fx-border-radius: 20; -fx-text-fill: #888; -fx-cursor: hand; -fx-padding: 4 12;"));
+                btnValider.getStyleClass().add("action-btn-edit");
+                btnRefuser.getStyleClass().add("action-btn-delete");
+                btnDelete.getStyleClass().add("action-btn-delete");
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnValider);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnRefuser);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnDelete);
 
                 btnValider.setOnAction(e -> {
                     Demande d = getTableView().getItems().get(getIndex());
@@ -210,7 +202,7 @@ public class backDemandeController {
                         controller.setDemandeData(d);
 
                         Stage stage = (Stage) tableDemande.getScene().getWindow();
-                        stage.setScene(new Scene(root));
+                        stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -268,7 +260,7 @@ public class backDemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableDemande.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -282,7 +274,7 @@ public class backDemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableDemande.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -339,7 +331,7 @@ public class backDemandeController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

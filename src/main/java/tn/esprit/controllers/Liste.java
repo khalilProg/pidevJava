@@ -85,7 +85,12 @@ public class Liste {
                 private final Button deleteBtn = new Button("Delete");
                 private final HBox container = new HBox(5, updateBtn, deleteBtn);
 
-                {   container.setAlignment(Pos.CENTER);
+                {
+                    updateBtn.getStyleClass().add("action-btn-edit");
+                    deleteBtn.getStyleClass().add("action-btn-delete");
+                    tn.esprit.tools.AnimationUtils.applyHoverAnimation(updateBtn);
+                    tn.esprit.tools.AnimationUtils.applyHoverAnimation(deleteBtn);
+                    container.setAlignment(Pos.CENTER);
                     deleteBtn.setOnAction(e -> {
                         RendezVous rdv = getTableView().getItems().get(getIndex());
                         try {

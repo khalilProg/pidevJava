@@ -90,8 +90,10 @@ public class DemandeController {
             private final Button btnDelete = new Button("🗑");
 
             {
-                btnEdit.setStyle("-fx-background-color: #e63939; -fx-text-fill: white;");
-                btnDelete.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+                btnEdit.getStyleClass().add("action-btn-edit");
+                btnDelete.getStyleClass().add("action-btn-delete");
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnEdit);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnDelete);
 
                 btnEdit.setOnAction(e -> {
 
@@ -141,7 +143,7 @@ public class DemandeController {
             controller.setMainController(this);
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
 
         } catch (Exception e) {
@@ -157,7 +159,7 @@ public class DemandeController {
             controller.setEditData(d); // 🔥 on envoie les données
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
 
         } catch (Exception e) {
@@ -186,7 +188,7 @@ public class DemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableDemande.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,7 +201,7 @@ public class DemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
 
         } catch (Exception e) {
             e.printStackTrace();

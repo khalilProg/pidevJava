@@ -1,8 +1,14 @@
 package tn.esprit.tools;
 
 import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * Singleton utility for managing Light/Dark theme switching across the application.
@@ -19,6 +25,8 @@ public class ThemeManager {
     private static final String DARK_CSS = "/commande.css";
     private static final String LIGHT_CSS = "/commande-light.css";
 
+    private final Set<Scene> observedScenes = Collections.newSetFromMap(new WeakHashMap<>());
+
     private ThemeManager() {}
 
     public static ThemeManager getInstance() {
@@ -27,14 +35,50 @@ public class ThemeManager {
 
     // ─── Core Methods ──────────────────────────────────────────────
 
+    public Scene createScene(Parent root) {
+        Scene scene = new Scene(root);
+        applyTheme(scene);
+        return scene;
+    }
+
     /**
      * Apply the current theme to the given scene (swap stylesheets).
      */
     public void applyTheme(Scene scene) {
         if (scene == null) return;
-        scene.getStylesheets().clear();
+        observeScene(scene);
+
         String css = (currentTheme == Theme.DARK) ? DARK_CSS : LIGHT_CSS;
-        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+        String cssUrl = getClass().getResource(css).toExternalForm();
+        String darkUrl = getClass().getResource(DARK_CSS).toExternalForm();
+        String lightUrl = getClass().getResource(LIGHT_CSS).toExternalForm();
+
+        scene.getStylesheets().removeIf(stylesheet -> stylesheet.equals(darkUrl) || stylesheet.equals(lightUrl));
+        scene.getStylesheets().add(cssUrl);
+
+        if (scene.getRoot() != null) {
+            applyThemeToParent(scene.getRoot(), cssUrl, darkUrl, lightUrl);
+            AnimationUtils.applyReferenceAnimations(scene.getRoot());
+        }
+    }
+
+    private void observeScene(Scene scene) {
+        if (observedScenes.add(scene)) {
+            scene.rootProperty().addListener((observable, oldRoot, newRoot) -> applyTheme(scene));
+        }
+    }
+
+    private void applyThemeToParent(Parent parent, String cssUrl, String darkUrl, String lightUrl) {
+        parent.getStylesheets().removeIf(stylesheet -> stylesheet.equals(darkUrl) || stylesheet.equals(lightUrl));
+        if (!parent.getStylesheets().contains(cssUrl)) {
+            parent.getStylesheets().add(cssUrl);
+        }
+
+        for (Node child : parent.getChildrenUnmodifiable()) {
+            if (child instanceof Parent childParent) {
+                applyThemeToParent(childParent, cssUrl, darkUrl, lightUrl);
+            }
+        }
     }
 
     /**

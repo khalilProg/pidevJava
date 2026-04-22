@@ -198,7 +198,6 @@ public class AfficherCommandesController implements Initializable {
 
             {
                 btnPdf.getStyleClass().add("submit-button");
-                btnPdf.setStyle("-fx-padding: 5 10 5 10; -fx-font-size: 11px; -fx-cursor: hand;");
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnPdf);
                 btnPdf.setOnAction(event -> {
                     Commande commande = getTableView().getItems().get(getIndex());

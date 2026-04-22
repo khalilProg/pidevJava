@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ public class MainFx extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = ThemeManager.getInstance().createScene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("BloodLink - Connexion");
             primaryStage.show();

@@ -78,4 +78,20 @@ public class StockService implements IGeneralService<Stock> {
         }
         return stocks;
     }
+
+    public int getAvailableQuantity(String typeSang) {
+        int total = 0;
+        try {
+            String sql = "SELECT SUM(quantite) as total FROM stock WHERE type_sang=?";
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ps.setString(1, typeSang);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
 }

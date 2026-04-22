@@ -180,11 +180,13 @@ public class ListeRdvAdmin {
 
             {   
                 actFileBtn.getStyleClass().add("action-icon-btn");
-                actFileBtn.setStyle("-fx-text-fill: #3b82f6; -fx-background-color: rgba(59, 130, 246, 0.1);");
                 
                 actEditBtn.getStyleClass().add("action-icon-btn");
                 
                 actDeleteBtn.getStyleClass().addAll("action-icon-btn", "action-icon-delete");
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(actFileBtn);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(actEditBtn);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(actDeleteBtn);
 
                 container.setAlignment(Pos.CENTER_LEFT);
 
@@ -296,7 +298,7 @@ public class ListeRdvAdmin {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());

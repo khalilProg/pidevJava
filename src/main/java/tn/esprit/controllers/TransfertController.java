@@ -139,9 +139,12 @@ public class TransfertController {
                 });
 
                 // styles
-                btnDelete.getStyleClass().add("btn-delete");
-                btnValidate.getStyleClass().add("btn-edit");
-                btnReject.getStyleClass().add("btn-delete");
+                btnDelete.getStyleClass().add("action-btn-delete");
+                btnValidate.getStyleClass().add("action-btn-edit");
+                btnReject.getStyleClass().add("action-btn-delete");
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnDelete);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnValidate);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnReject);
             }
 
             private final HBox pane = new HBox(8, btnValidate, btnReject, btnDelete);
@@ -183,7 +186,7 @@ public class TransfertController {
             controller.setDemande(demande);
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
 
         } catch (Exception e) {
@@ -199,7 +202,7 @@ public class TransfertController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableTransfert.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
 
         } catch (Exception e) {
             e.printStackTrace();

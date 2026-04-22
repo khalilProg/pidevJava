@@ -181,7 +181,7 @@ public class EditTransfertController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/TransfertBackView.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) txtFrom.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
         } catch (Exception e) {
             e.printStackTrace();
         }
