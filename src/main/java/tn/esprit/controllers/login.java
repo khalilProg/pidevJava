@@ -89,6 +89,8 @@ public class login {
                         // Check if the user is an admin
                         if ("admin".equalsIgnoreCase(u.getRole())) {
                             navigateToDashboard(event);
+                        } else if (u.getRole() != null && u.getRole().toLowerCase().contains("banque")) {
+                            navigateToAgentBanque(event, u);
                         } else {
                             navigateToClientHome(event, u);
                         }
@@ -111,6 +113,24 @@ public class login {
             Parent root = FXMLLoader.load(getClass().getResource("/admin_dashboard.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Dashboard Administration");
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void navigateToAgentBanque(ActionEvent event, User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AgentBanqueBase.fxml"));
+            Parent root = loader.load();
+            
+            // Pass user to controller
+            AgentBanqueBaseController controller = loader.getController();
+            controller.initData(user);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("BloodLink - Espace Banque");
             stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (IOException e) {

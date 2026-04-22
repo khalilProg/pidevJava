@@ -5,76 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneBackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneBackController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneFrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneFrontController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteBackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteBackController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteFrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteFrontController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/admin_dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/admin_dashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/entities/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/tests/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/tests/MainFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AdminAfficherCommandes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AdminAfficherCommandes.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AdminModifierCommande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AdminModifierCommande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherStocks.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherStocks.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjoutStock.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjoutStock.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterCampagneAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterCampagneAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterEntiteAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterEntiteAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterQuestAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterQuestAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterQuestionnaire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterQuestionnaire.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterRendezVous.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterRendezVous.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterRendezVousAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterRendezVousAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/BaseBack.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/BaseBack.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/BaseFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/BaseFront.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneCard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/HomeAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HomeAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Liste.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Liste.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeCampagnes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeCampagnes.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeCampagnesAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeCampagnesAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeEntitesAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeEntitesAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeQuestAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeQuestAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeRdvAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeRdvAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ModifierCampagneAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierCampagneAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ModifierEntiteAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierEntiteAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ModifierStock.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierStock.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Update.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Update.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/UpdateRdvAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UpdateRdvAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ViewCampagneAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ViewCampagneAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ViewEntiteAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ViewEntiteAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/addBackDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/addBackDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/addTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/addTransfert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_add.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_add.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_complete_banque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_complete_banque.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_complete_client.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_complete_client.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit_banque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit_banque.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit_client.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit_client.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/client_home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/client_home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/commande-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/commande-light.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/commande.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/commande.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/custom_menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/custom_menu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/editBackDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/editBackDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/editBackTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/editBackTransfert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/register.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/AjouterCampagne.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterCampagne.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/AjouterEntiteCollecte.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterEntiteCollecte.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/CampagneBack.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneBack.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/CampagneFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneFront.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/EntiteCollecteBack.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/EntiteCollecteBack.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/EntiteCollecteFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/EntiteCollecteFront.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/ModifierCampagne.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierCampagne.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/ModifierEntiteCollecte.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ModifierEntiteCollecte.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/styleBack.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styleBack.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/styleFront.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styleFront.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/validateDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/validateDemande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/mains/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/mains/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,40 +172,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MainFx.executor&quot;: &quot;Run&quot;,
-    &quot;Application.UserMain.executor&quot;: &quot;Run&quot;,
-    &quot;Application.banqueMain.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.bloodlink [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Gestion-commande&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/khalil/projects/study/bloodlink&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.MainFx.executor": "Run",
+    "Application.UserMain.executor": "Run",
+    "Application.banqueMain.executor": "Run",
+    "Maven.bloodlink [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/khalil/projects/study/bloodlink",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\rabii\Desktop\Pidev\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainFx">
+  <component name="RunManager" selected="Application.Main">
     <configuration type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-24.0.2+12-54" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -315,8 +249,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainFx" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MainFx" />
       </list>
     </recent_temporary>
   </component>
@@ -324,6 +258,7 @@
     <attachedChunks>
       <set>
         <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -356,22 +291,12 @@
       <workItem from="1776440265617" duration="2163000" />
       <workItem from="1776848561012" duration="11088000" />
       <workItem from="1776867199095" duration="4509000" />
+      <workItem from="1776882364885" duration="4410000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tn/esprit/mains/Main.java</url>
-          <line>2</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/bloodlink$MainFx.ic" NAME="MainFx Coverage Results" MODIFIED="1776098931207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

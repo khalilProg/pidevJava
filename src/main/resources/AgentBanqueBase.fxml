@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.geometry.Insets?>
+
+<StackPane stylesheets="@agent_banque.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="tn.esprit.controllers.AgentBanqueBaseController" prefWidth="1550" prefHeight="900" style="-fx-background-color: #0A0A0A;">
+    
+    <VBox>
+        <!-- Custom Top Navigation -->
+        <HBox alignment="CENTER_LEFT" spacing="0" styleClass="navbar-container" prefHeight="85">
+            <!-- Brand -->
+            <HBox alignment="CENTER_LEFT" spacing="12" HBox.hgrow="NEVER">
+                <padding><Insets left="25" right="25"/></padding>
+                <SVGPath content="M 12 2 C 12 2 4 10 4 16 C 4 20.418 7.582 24 12 24 C 16.418 24 20 20.418 20 16 C 20 10 12 2 12 2 Z" fill="#E53935"/>
+                <Label text="BLOODLINK" styleClass="nav-logo-text"/>
+            </HBox>
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <!-- User Section & Menu Button -->
+            <HBox alignment="CENTER_RIGHT" spacing="20">
+                <padding><Insets left="25" right="25"/></padding>
+                
+                <HBox alignment="CENTER_LEFT" spacing="12" styleClass="user-pill">
+                    <StackPane>
+                        <Circle fill="#E53935" radius="15.0" />
+                        <SVGPath content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                                 fill="WHITE" scaleX="0.9" scaleY="0.9" />
+                    </StackPane>
+                    <Label text="mohsen ahmed" styleClass="user-name-label" />
+                </HBox>
+                
+                <Button text="MENU ☰" styleClass="nav-link" onAction="#handleMenuToggle" style="-fx-font-size: 13px; -fx-text-fill: white;"/>
+            </HBox>
+        </HBox>
+
+        <!-- Main Content Injected Here -->
+        <StackPane fx:id="contentArea" VBox.vgrow="ALWAYS" />
+    </VBox>
+
+    <!-- Side Menu Overlay -->
+    <HBox fx:id="menuOverlay" visible="false" managed="false" StackPane.alignment="TOP_RIGHT" 
+          style="-fx-background-color: rgba(0,0,0,0.5);" onMouseClicked="#handleMenuClose">
+        <HBox HBox.hgrow="ALWAYS" /> <!-- Filler left space -->
+        
+        <VBox styleClass="menu-drawer" prefWidth="400" spacing="20" onMouseClicked="#handleMenuToggle">
+            <!-- Close Header -->
+            <HBox alignment="CENTER_RIGHT" prefHeight="60">
+                <Button text="FERMER ✕" styleClass="nav-link" style="-fx-text-fill: white;" onAction="#handleMenuClose"/>
+            </HBox>
+            
+            <!-- Links -->
+            <VBox spacing="10">
+                <Button text="ACCUEIL" styleClass="menu-btn" onAction="#goToAccueil" maxWidth="Infinity" alignment="CENTER_LEFT" />
+                <Button text="DEMANDES" styleClass="menu-btn, menu-btn-active" onAction="#goToDemandes" maxWidth="Infinity" alignment="CENTER_LEFT"/>
+                <Button text="TRANSFERTS" styleClass="menu-btn" onAction="#goToTransferts" maxWidth="Infinity" alignment="CENTER_LEFT"/>
+                <Button text="MON PROFIL" styleClass="menu-btn" onAction="#goToProfil" maxWidth="Infinity" alignment="CENTER_LEFT"/>
+            </VBox>
+            
+            <Region VBox.vgrow="ALWAYS" />
+            
+            <!-- Session Footer -->
+            <VBox spacing="15">
+                <Label text="Session: " style="-fx-text-fill: #777777; -fx-font-size: 13px;" />
+                <Label fx:id="sessionEmailLabel" text="email@example.com" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px;" />
+                <Button text="[➜] Déconnexion" styleClass="logout-btn" maxWidth="Infinity" onAction="#handleLogout"/>
+            </VBox>
+        </VBox>
+    </HBox>
+
+</StackPane>
