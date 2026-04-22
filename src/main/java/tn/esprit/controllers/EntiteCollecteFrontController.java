@@ -88,7 +88,7 @@ public class EntiteCollecteFrontController implements Initializable {
     @FXML
     void handleAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/AjouterEntiteCollecte.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEntiteCollecte.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Ajouter une Entité de Collecte");
@@ -108,7 +108,7 @@ public class EntiteCollecteFrontController implements Initializable {
             return;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/ModifierEntiteCollecte.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierEntiteCollecte.fxml"));
             Parent root = loader.load();
             ModifierEntiteCollecteController ctrl = loader.getController();
             ctrl.setEntite(selectedEntite);

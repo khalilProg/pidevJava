@@ -5,38 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/GUI/CampagneFx.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AdminUsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AdminUsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterQuestAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterQuestAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeQuestAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeQuestAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeRdvAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeRdvAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/UpdateRdvAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/UpdateRdvAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterQuestionnaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterQuestionnaire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneBackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneBackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneFrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneFrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ClientHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ClientHomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteBackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteBackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteFrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/EntiteCollecteFrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnesAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnesAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeEntitesAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeEntitesAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/admin_dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/admin_dashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backDemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backTransfertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/mains/MainApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterQuestAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterQuestAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterRendezVousAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterRendezVousAdmin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CampagneService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CampagneService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/DemandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/DemandeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/RendezVousService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/RendezVousService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneCard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeCampagnesAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeCampagnesAdmin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeEntitesAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeEntitesAdmin.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ListeQuestAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeQuestAdmin.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ListeRdvAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeRdvAdmin.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/UpdateRdvAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UpdateRdvAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/addBackDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/addBackDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/addTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/addTransfert.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/admin_dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_add.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_add.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_complete_banque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_complete_banque.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_complete_client.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_complete_client.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit_banque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit_banque.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit_client.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit_client.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/editBackTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/editBackTransfert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/client_home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/client_home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/AjouterCampagne.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/AjouterEntiteCollecte.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/CampagneBack.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/CampagneFront.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/EntiteCollecteBack.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/EntiteCollecteFront.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/ModifierCampagne.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/ModifierEntiteCollecte.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/styleBack.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/tn/esprit/GUI/styleFront.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,6 +185,10 @@
       <workItem from="1776433928856" duration="337000" />
       <workItem from="1776434276636" duration="5827000" />
       <workItem from="1776440265617" duration="2163000" />
+      <workItem from="1776860334999" duration="2850000" />
+      <workItem from="1776863470542" duration="3546000" />
+      <workItem from="1776867025971" duration="7029000" />
+      <workItem from="1776874544255" duration="1995000" />
     </task>
     <servers />
   </component>

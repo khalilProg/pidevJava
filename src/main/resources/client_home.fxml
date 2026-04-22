@@ -15,14 +15,14 @@
    <AnchorPane styleClass="main-content">
       <children>
          <!-- Header Bar -->
-         <HBox alignment="CENTER_LEFT" prefHeight="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="header-bar">
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-               <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 24px;">
+               <Label style="-fx-text-fill: #e63939; -fx-font-size: 24px;" text="🩸">
                   <HBox.margin>
                      <Insets right="10.0" />
                   </HBox.margin>
                </Label>
-               <Label text="BLOODLINK" styleClass="logo-text" />
+               <Label styleClass="logo-text" text="BLOODLINK" />
                <Region HBox.hgrow="ALWAYS" />
                <Button fx:id="userNameBtn" mnemonicParsing="false" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 20; -fx-padding: 8 20; -fx-font-size: 13px;" text="👤 Utilisateur">
                   <HBox.margin>
@@ -106,7 +106,7 @@
                <HBox spacing="20.0" alignment="CENTER_LEFT">
                   <children>
                      <!-- Campagnes -->
-                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25;">
+                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25; -fx-cursor: hand;" onMouseClicked="#goToCampagnes">
                         <children>
                            <Label style="-fx-text-fill: -primary; -fx-font-size: 28px;" text="📢" />
                            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 800;" text="Campagnes" />
@@ -145,36 +145,42 @@
    </AnchorPane>
 
    <!-- Right Side Menu Overlay (hidden by default) -->
-   <HBox fx:id="menuOverlay" visible="false" managed="false" alignment="CENTER_RIGHT">
-      <!-- Clickable background to close -->
-      <Region HBox.hgrow="ALWAYS" onMouseClicked="#handleMenuClose" style="-fx-background-color: rgba(0,0,0,0.6);" />
-      <!-- Menu Panel -->
-      <VBox fx:id="menuPanel" prefWidth="380.0" styleClass="menu-panel" spacing="15.0" alignment="TOP_LEFT">
-         <padding>
-            <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
-         </padding>
-         <children>
-            <!-- Close -->
-            <HBox alignment="CENTER_RIGHT">
-               <Button mnemonicParsing="false" onAction="#handleMenuToggle" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 800; -fx-cursor: hand;" text="FERMER ✕" />
-            </HBox>
-            <Region prefHeight="20.0" />
-            <!-- Menu Links -->
-            <Button mnemonicParsing="false" styleClass="menu-link" style="-fx-text-fill: -primary;" text="ACCUEIL" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="CAMPAGNES" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="COMMANDES" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="QUESTIONNAIRE" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="RENDEZ VOUS" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
-            <Button mnemonicParsing="false" styleClass="menu-link" style="-fx-text-fill: -primary;" text="MON PROFIL" />
-            <Region VBox.vgrow="ALWAYS" />
-            <!-- Session Info -->
-            <VBox spacing="15.0">
-               <Label fx:id="sessionEmailLabel" style="-fx-text-fill: -muted; -fx-font-size: 13px;" text="Session: utilisateur@email.com" />
-               <Button mnemonicParsing="false" onAction="#handleLogout" maxWidth="1.7976931348623157E308" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 20; -fx-cursor: hand;" text="⏻ Déconnexion" />
-            </VBox>
-         </children>
-      </VBox>
+   <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+      <children>
+         <!-- Clickable background to close -->
+         <Region onMouseClicked="#handleMenuClose" style="-fx-background-color: rgba(0,0,0,0.6);" HBox.hgrow="ALWAYS" />
+         <!-- Menu Panel -->
+         <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+            <padding>
+               <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+            <children>
+               <!-- Close -->
+               <HBox alignment="CENTER_RIGHT">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#handleMenuToggle" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 800; -fx-cursor: hand;" text="FERMER ✕" />
+                  </children>
+               </HBox>
+               <Region prefHeight="20.0" />
+               <!-- Menu Links -->
+               <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" style="-fx-text-fill: -primary;" text="ACCUEIL" />
+               <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="COMMANDES" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="QUESTIONNAIRE" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="RENDEZ VOUS" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
+               <Button mnemonicParsing="false" styleClass="menu-link" style="-fx-text-fill: -primary;" text="MON PROFIL" />
+               <Region VBox.vgrow="ALWAYS" />
+               <!-- Session Info -->
+               <VBox spacing="15.0">
+                  <children>
+                     <Label fx:id="sessionEmailLabel" style="-fx-text-fill: -muted; -fx-font-size: 13px;" text="BloodLink Session" />
+                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 20; -fx-cursor: hand;" text="⏻ Déconnexion" />
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+      </children>
    </HBox>
 </StackPane>

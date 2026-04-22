@@ -293,4 +293,26 @@ public class CampagneService implements IGeneralService<Campagne> {
         }
         return list;
     }
+
+    public java.util.Map<String, Integer> getCampagnesParMois() throws SQLException {
+        java.util.Map<String, Integer> stats = new java.util.LinkedHashMap<>();
+        String sql = "SELECT MONTHNAME(date_debut) as mois, COUNT(*) as nb FROM compagne GROUP BY MONTH(date_debut) ORDER BY MONTH(date_debut)";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            stats.put(rs.getString("mois"), rs.getInt("nb"));
+        }
+        return stats;
+    }
+
+    public List<String> getTop3MoinsCampagnes() throws SQLException {
+        List<String> top3 = new ArrayList<>();
+        String sql = "SELECT MONTHNAME(date_debut) as mois, COUNT(*) as nb FROM compagne GROUP BY MONTH(date_debut) ORDER BY nb DESC LIMIT 3";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            top3.add(rs.getString("mois") + " (" + rs.getInt("nb") + " campagnes)");
+        }
+        return top3;
+    }
 }

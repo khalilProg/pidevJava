@@ -187,7 +187,7 @@ public class AjouterRendezVous {
 
     }
     @FXML public void handleAnnuler(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CampagneFront.fxml"));
         Parent root = loader.load();
         annulerRdv.getScene().setRoot(root);
     }

@@ -11,6 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 
 <BorderPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeCampagnesAdmin">
    <!-- Sidebar -->
@@ -31,16 +34,16 @@
          <Label styleClass="sidebar-category" text="GESTION" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="    Dashboard" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item" text="👥  Utilisateurs" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="🛒  Commandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="📦  Stocks" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="📄  Demandes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item" text="🚚  Transferts" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateQuestionnaires" styleClass="sidebar-item" text="📝  Questionnaires" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateRendezVous" styleClass="sidebar-item" text="📅  Rendez-vous" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCampagnes" styleClass="sidebar-item, sidebar-item-active" text="📢  Campagnes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCollectes" styleClass="sidebar-item" text="🏥  Collectes" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="🩸  Dons" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="📁  Dossiers" />
          
          <Region VBox.vgrow="ALWAYS" />
          <VBox spacing="10.0">
@@ -70,7 +73,33 @@
                 <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Interface d'administration" />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="addBtn" mnemonicParsing="false" text="+ Nouvelle Campagne" onAction="#handleAjouter" styleClass="button-primary" style="-fx-background-radius: 20px; -fx-padding: 10px 25px; -fx-font-weight: 800;" />
+            <Button fx:id="addBtn" mnemonicParsing="false" onAction="#handleAjouter" style="-fx-background-radius: 20px; -fx-padding: 10px 25px; -fx-font-weight: 800;" styleClass="button-primary" text="+ Nouvelle Campagne" />
+         </HBox>
+
+         <!-- Statistiques Section -->
+         <HBox prefHeight="350.0" spacing="20.0">
+            <children>
+               <!-- BarChart -->
+               <VBox spacing="15.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
+                  <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
+                  <children>
+                     <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 16px;" text="Aperçu des Campagnes" />
+                     <BarChart fx:id="campagneChart" legendVisible="false" style="-fx-text-fill: white;" verticalGridLinesVisible="false">
+                        <xAxis><CategoryAxis side="BOTTOM" tickLabelFill="WHITE" /></xAxis>
+                        <yAxis><NumberAxis side="LEFT" tickLabelFill="WHITE" /></yAxis>
+                     </BarChart>
+                  </children>
+               </VBox>
+               
+               <!-- Top 3 Months -->
+               <VBox fx:id="topMonthsContainer" prefWidth="300.0" spacing="15.0" styleClass="glass-card">
+                  <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
+                  <children>
+                     <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 16px;" text="Top Mois Actifs" />
+                     <VBox fx:id="topMonthsList" spacing="10.0" />
+                  </children>
+               </VBox>
+            </children>
          </HBox>
 
          <VBox styleClass="glass-card" spacing="30.0" VBox.vgrow="ALWAYS">
@@ -79,15 +108,14 @@
             <HBox spacing="20.0" alignment="CENTER_LEFT">
                <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-padding: 5px 15px;">
                    <Label text="🔍" style="-fx-text-fill: -muted;" />
-                   <TextField promptText="Rechercher une campagne..." style="-fx-background-color: transparent; -fx-text-fill: white;" HBox.hgrow="ALWAYS" />
+                   <TextField fx:id="searchField" promptText="Rechercher une campagne..." style="-fx-background-color: transparent; -fx-text-fill: white;" HBox.hgrow="ALWAYS" />
                </HBox>
-               <ComboBox promptText="ID" prefWidth="250.0" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
+               <ComboBox fx:id="sortComboBox" promptText="Trier par..." prefWidth="250.0" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
             </HBox>
 
             <!-- Table -->
             <TableView fx:id="tableView" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
                <columns>
-                  <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
                   <TableColumn fx:id="titreColumn" text="TITRE" prefWidth="180" />
                   <TableColumn fx:id="descColumn" text="DESCRIPTION" prefWidth="200" />
                   <TableColumn fx:id="entiteColumn" text="ENTITÉS" prefWidth="220" />

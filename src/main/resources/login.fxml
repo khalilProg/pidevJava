@@ -66,9 +66,9 @@
                   <!-- Remember Me & Forgot Password -->
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <CheckBox mnemonicParsing="false" text="Se souvenir de moi" style="-fx-text-fill: -muted;" />
+                        <CheckBox fx:id="rememberMeCheckbox" mnemonicParsing="false" text="Se souvenir de moi" style="-fx-text-fill: -muted;" />
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" styleClass="button-link" text="Mot de passe oublié ?" />
+                        <Button mnemonicParsing="false" onAction="#handleForgotPassword" styleClass="button-link" text="Mot de passe oublié ?" />
                      </children>
                   </HBox>
 

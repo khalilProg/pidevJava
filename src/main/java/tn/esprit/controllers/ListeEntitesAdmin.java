@@ -10,10 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -22,34 +24,34 @@ import tn.esprit.services.EntiteCollecteService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListeEntitesAdmin {
 
     @FXML private TableView<EntiteDeCollecte> tableView;
-    @FXML private TableColumn<EntiteDeCollecte, Integer> idColumn;
     @FXML private TableColumn<EntiteDeCollecte, String> nomColumn;
     @FXML private TableColumn<EntiteDeCollecte, String> adresseColumn;
     @FXML private TableColumn<EntiteDeCollecte, String> villeColumn;
     @FXML private TableColumn<EntiteDeCollecte, String> telephoneColumn;
     @FXML private TableColumn<EntiteDeCollecte, Void> actionsColumn;
+    @FXML private TextField searchField;
+    @FXML private ComboBox<String> sortComboBox;
+
+    private List<EntiteDeCollecte> baseList = new ArrayList<>();
 
     @FXML public void initialize() {
+        sortComboBox.setItems(FXCollections.observableArrayList(
+            "Nom (A-Z)", "Nom (Z-A)", "Ville"
+        ));
+
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        idColumn.setCellFactory(col -> new TableCell<>() {
-            @Override
-            protected void updateItem(Integer item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText("#" + item);
-                    setStyle("-fx-font-weight: 800; -fx-text-fill: white; -fx-font-size: 12px;");
-                }
-            }
-        });
+        searchField.textProperty().addListener((obs, old, val) -> appliquerFiltresEtTri());
+        sortComboBox.valueProperty().addListener((obs, old, val) -> appliquerFiltresEtTri());
+
 
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         nomColumn.setCellFactory(col -> new TableCell<>() {
@@ -171,12 +173,38 @@ public class ListeEntitesAdmin {
 
         // Load Data
         try {
-            List<EntiteDeCollecte> entites = new EntiteCollecteService().recuperer();
-            ObservableList<EntiteDeCollecte> data = FXCollections.observableArrayList(entites);
-            tableView.setItems(data);
+            baseList = new EntiteCollecteService().recuperer();
+            appliquerFiltresEtTri();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void appliquerFiltresEtTri() {
+        String search = searchField.getText() == null ? "" : searchField.getText().toLowerCase().trim();
+        String sortType = sortComboBox.getValue();
+
+        List<EntiteDeCollecte> filteredList = baseList.stream()
+            .filter(e -> e.getNom().toLowerCase().contains(search) || 
+                         e.getAdresse().toLowerCase().contains(search) ||
+                         e.getVille().toLowerCase().contains(search))
+            .collect(Collectors.toList());
+
+        if (sortType != null) {
+            switch (sortType) {
+                case "Nom (A-Z)":
+                    filteredList.sort(Comparator.comparing(EntiteDeCollecte::getNom, String.CASE_INSENSITIVE_ORDER));
+                    break;
+                case "Nom (Z-A)":
+                    filteredList.sort(Comparator.comparing(EntiteDeCollecte::getNom, String.CASE_INSENSITIVE_ORDER).reversed());
+                    break;
+                case "Ville":
+                    filteredList.sort(Comparator.comparing(EntiteDeCollecte::getVille, String.CASE_INSENSITIVE_ORDER));
+                    break;
+            }
+        }
+
+        tableView.setItems(FXCollections.observableArrayList(filteredList));
     }
 
     @FXML private void handleAjouter(ActionEvent event) {

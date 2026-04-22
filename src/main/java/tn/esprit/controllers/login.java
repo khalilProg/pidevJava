@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -25,10 +27,23 @@ public class login {
     private TextField emailF;
 
     @FXML
+    private CheckBox rememberMeCheckbox;
+
+    @FXML
     private PasswordField passF;
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    public void initialize() {
+        Preferences prefs = Preferences.userNodeForPackage(login.class);
+        String savedEmail = prefs.get("saved_email", "");
+        if (!savedEmail.isEmpty()) {
+            emailF.setText(savedEmail);
+            rememberMeCheckbox.setSelected(true);
+        }
+    }
 
     @FXML
     void handleLogin(ActionEvent event) {
@@ -64,6 +79,13 @@ public class login {
                     if (passMatch) {
                         found = true;
                         
+                        Preferences prefs = Preferences.userNodeForPackage(login.class);
+                        if (rememberMeCheckbox.isSelected()) {
+                            prefs.put("saved_email", email);
+                        } else {
+                            prefs.remove("saved_email");
+                        }
+
                         // Check if the user is an admin
                         if ("admin".equalsIgnoreCase(u.getRole())) {
                             navigateToDashboard(event);
@@ -134,6 +156,18 @@ public class login {
             Parent root = FXMLLoader.load(getClass().getResource("/custom_menu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Menu");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handleForgotPassword(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/forgot_password.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

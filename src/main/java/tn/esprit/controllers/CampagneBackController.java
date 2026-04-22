@@ -117,7 +117,7 @@ public class CampagneBackController implements Initializable {
     @FXML
     void handleAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/AjouterCampagne.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterCampagne.fxml"));
             Parent root = loader.load();
             
             Stage stage = new Stage();
@@ -141,7 +141,7 @@ public class CampagneBackController implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/GUI/ModifierCampagne.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierCampagne.fxml"));
             Parent root = loader.load();
             
             ModifierCampagneController modifierController = loader.getController();

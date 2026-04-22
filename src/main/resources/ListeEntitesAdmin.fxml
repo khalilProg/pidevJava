@@ -31,16 +31,16 @@
          <Label styleClass="sidebar-category" text="GESTION" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="    Dashboard" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateUsers" styleClass="sidebar-item" text="👥  Utilisateurs" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🛒  Commandes" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📦  Stocks" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="🛒  Commandes" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="📦  Stocks" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDemandes" styleClass="sidebar-item" text="📄  Demandes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateTransferts" styleClass="sidebar-item" text="🚚  Transferts" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateQuestionnaires" styleClass="sidebar-item" text="📝  Questionnaires" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateRendezVous" styleClass="sidebar-item" text="📅  Rendez-vous" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCampagnes" styleClass="sidebar-item" text="📢  Campagnes" />
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateCollectes" styleClass="sidebar-item, sidebar-item-active" text="🏥  Collectes" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="🩸  Dons" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebar-item" text="📁  Dossiers" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="🩸  Dons" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNavigateDashboard" styleClass="sidebar-item" text="📁  Dossiers" />
          
          <Region VBox.vgrow="ALWAYS" />
          <VBox spacing="10.0">
@@ -79,15 +79,14 @@
             <HBox spacing="20.0" alignment="CENTER_LEFT">
                <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-padding: 5px 15px;">
                    <Label text="🔍" style="-fx-text-fill: -muted;" />
-                   <TextField promptText="Rechercher une entité..." style="-fx-background-color: transparent; -fx-text-fill: white;" HBox.hgrow="ALWAYS" />
+                   <TextField fx:id="searchField" promptText="Rechercher une entité..." style="-fx-background-color: transparent; -fx-text-fill: white;" HBox.hgrow="ALWAYS" />
                </HBox>
-               <ComboBox promptText="ID" prefWidth="250.0" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
+               <ComboBox fx:id="sortComboBox" promptText="Trier par..." prefWidth="250.0" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-text-fill: white; -fx-padding: 5px;" />
             </HBox>
 
             <!-- Table -->
             <TableView fx:id="tableView" VBox.vgrow="ALWAYS" stylesheets="@styles.css">
                <columns>
-                  <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
                   <TableColumn fx:id="nomColumn" text="NOM" prefWidth="220" />
                   <TableColumn fx:id="adresseColumn" text="ADRESSE" prefWidth="250" />
                   <TableColumn fx:id="villeColumn" text="VILLE" prefWidth="180" />
