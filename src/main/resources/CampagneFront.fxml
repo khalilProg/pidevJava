@@ -104,7 +104,7 @@
                <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" style="-fx-text-fill: -primary;" text="ACCUEIL" />
                <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
-               <Button mnemonicParsing="false" styleClass="menu-link" text="COMMANDES" />
+               <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="QUESTIONNAIRE" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="RENDEZ VOUS" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />

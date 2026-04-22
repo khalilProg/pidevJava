@@ -26,7 +26,7 @@
             <Button mnemonicParsing="false" styleClass="menu-link" onAction="#goToAccueil" text="ACCUEIL" />
             <Button mnemonicParsing="false" styleClass="menu-link" onAction="#goToCampagnes" text="CAMPAGNES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="COMMANDES" />
+            <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="QUESTIONNAIRE" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="RENDEZ VOUS" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
