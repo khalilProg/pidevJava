@@ -106,7 +106,7 @@
                <HBox spacing="20.0" alignment="CENTER_LEFT">
                   <children>
                      <!-- Campagnes -->
-                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25;">
+                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25; -fx-cursor: hand;" onMouseClicked="#goToCampagnes">
                         <children>
                            <Label style="-fx-text-fill: -primary; -fx-font-size: 28px;" text="📢" />
                            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 800;" text="Campagnes" />
@@ -161,7 +161,7 @@
             <Region prefHeight="20.0" />
             <!-- Menu Links -->
             <Button mnemonicParsing="false" styleClass="menu-link" text="ACCUEIL" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="CAMPAGNES" />
+            <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="COMMANDES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="QUESTIONNAIRE" />
