@@ -93,7 +93,8 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>tn.esprit.tests.MainFX</mainClass>
+                    <mainClass>tn.esprit.mains.Launcher</mainClass>
+                    <launcher>bloodlink</launcher>
                 </configuration>
             </plugin>
         </plugins>

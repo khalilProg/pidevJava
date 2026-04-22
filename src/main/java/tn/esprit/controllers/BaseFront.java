@@ -67,7 +67,7 @@ public class BaseFront {
 
     @FXML
     public void goToCampagnes(javafx.event.Event event) {
-        switchScene(event, "/CampagneFront.fxml");
+        switchScene(event, "/ListeCampagnes.fxml");
     }
 
     @FXML

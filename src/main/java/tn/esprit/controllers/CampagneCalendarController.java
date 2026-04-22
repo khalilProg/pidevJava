@@ -111,6 +111,18 @@ public class CampagneCalendarController extends BaseFront implements Initializab
 
     @FXML
     void goToGrid(ActionEvent event) {
-        switchScene(event, "/CampagneFront.fxml");
+        switchScene(event, "/cnts_agent_home.fxml");
+    }
+
+    @FXML
+    @Override
+    public void goToAccueil(javafx.event.Event event) {
+        switchScene(event, "/cnts_agent_home.fxml");
+    }
+
+    @FXML
+    @Override
+    public void goToCampagnes(javafx.event.Event event) {
+        switchScene(event, "/cnts_agent_home.fxml");
     }
 }

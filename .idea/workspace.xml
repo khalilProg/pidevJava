@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterQuestionnaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterQuestionnaire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/CampagneCalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/mains/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/mains/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneFront.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeCampagnes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeCampagnes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/OverlayMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/OverlayMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/client_home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/client_home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +29,9 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="209" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -28,6 +43,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="$PROJECT_DIR$/../../../../xampp/php/php.exe">
     <include_path>
@@ -174,16 +193,20 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Launcher.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.MainFx.executor": "Run",
     "Application.UserMain.executor": "Run",
     "Application.banqueMain.executor": "Run",
     "Maven.bloodlink [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -205,7 +228,7 @@
       <recent name="C:\Users\rabii\Desktop\Pidev\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Launcher">
     <configuration type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-24.0.2+12-54" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -232,7 +255,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="jbr-17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="tn.esprit.mains.MainFx" />
-      <module name="Pidev" />
+      <module name="bloodlink" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="tn.esprit.mains.*" />
@@ -244,13 +267,15 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Launcher" />
       <item itemvalue="Application.MainFx" />
       <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="Application.MainFx" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -292,6 +317,7 @@
       <workItem from="1776848561012" duration="11088000" />
       <workItem from="1776867199095" duration="4509000" />
       <workItem from="1776882364885" duration="4410000" />
+      <workItem from="1776892859383" duration="3046000" />
     </task>
     <servers />
   </component>

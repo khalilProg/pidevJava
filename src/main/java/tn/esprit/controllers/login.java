@@ -89,6 +89,8 @@ public class login {
                         // Check if the user is an admin
                         if ("admin".equalsIgnoreCase(u.getRole())) {
                             navigateToDashboard(event);
+                        } else if (u.getRole() != null && u.getRole().toLowerCase().contains("cnts")) {
+                            navigateToCntsAgentHome(event, u);
                         } else if (u.getRole() != null && u.getRole().toLowerCase().contains("banque")) {
                             navigateToAgentBanque(event, u);
                         } else {
@@ -131,6 +133,21 @@ public class login {
             
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Espace Banque");
+            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void navigateToCntsAgentHome(ActionEvent event, User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cnts_agent_home.fxml"));
+            Parent root = loader.load();
+            CntsAgentHomeController controller = loader.getController();
+            controller.initData(user);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("BloodLink - Espace CNTS");
             stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
             stage.show();
         } catch (IOException e) {

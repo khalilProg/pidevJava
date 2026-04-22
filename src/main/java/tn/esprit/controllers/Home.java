@@ -27,7 +27,7 @@ public class Home implements Initializable {
 
     @FXML
     public void goToCampagnes(ActionEvent event) {
-        loadPage(event, "/CampagneFront.fxml");
+        loadPage(event, "/ListeCampagnes.fxml");
     }
 
     private void loadPage(ActionEvent event, String fxmlPath) {

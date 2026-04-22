@@ -1,0 +1,268 @@
+.root {
+    -primary: #e63939;
+    -muted: rgba(255, 255, 255, 0.65);
+    -fx-background-color: linear-gradient(to bottom, #090909 0%, #101010 45%, #161616 100%);
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.client-campaign-root {
+    -fx-background-color: radial-gradient(center 12% 8%, radius 45%, rgba(230, 57, 57, 0.16), transparent 65%),
+    radial-gradient(center 88% 18%, radius 40%, rgba(230, 57, 57, 0.07), transparent 60%),
+    linear-gradient(to bottom, #090909 0%, #101010 45%, #161616 100%);
+}
+
+.header-bar {
+    -fx-background-color: rgba(10, 10, 10, 0.78);
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.08) transparent;
+    -fx-border-width: 1px;
+    -fx-padding: 18px 30px;
+}
+
+.logo-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+    -fx-text-fill: white;
+}
+
+.menu-toggle {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-cursor: hand;
+}
+
+.menu-toggle:hover {
+    -fx-text-fill: #e63939;
+}
+
+.submit-button {
+    -fx-background-color: #e63939;
+    -fx-text-fill: white;
+    -fx-font-weight: 800;
+    -fx-font-size: 14px;
+    -fx-padding: 12 20;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+}
+
+.submit-button:hover {
+    -fx-background-color: #ff4d4d;
+}
+
+.menu-panel {
+    -fx-background-color: #111111;
+    -fx-border-color: transparent transparent transparent rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1px;
+}
+
+.menu-link {
+    -fx-font-size: 36px;
+    -fx-font-weight: 900;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.menu-link:hover {
+    -fx-text-fill: #e63939;
+}
+
+.campaign-hero {
+    -fx-background-color: rgba(14, 14, 14, 0.92);
+    -fx-background-radius: 28px;
+    -fx-border-color: rgba(255, 255, 255, 0.09);
+    -fx-border-radius: 28px;
+    -fx-border-width: 1px;
+    -fx-padding: 28px;
+}
+
+.eyebrow {
+    -fx-text-fill: #ff6b57;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 1px;
+}
+
+.hero-title {
+    -fx-text-fill: white;
+    -fx-font-size: 36px;
+    -fx-font-weight: 900;
+}
+
+.hero-subtitle {
+    -fx-text-fill: #a6a6a6;
+    -fx-font-size: 15px;
+    -fx-line-spacing: 4px;
+}
+
+.hero-side-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(230, 57, 57, 0.18), rgba(255, 255, 255, 0.03));
+    -fx-background-radius: 22px;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-radius: 22px;
+    -fx-padding: 22px;
+    -fx-pref-width: 280px;
+}
+
+.hero-side-title {
+    -fx-text-fill: #ffb3a7;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+
+.hero-side-count {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: 900;
+}
+
+.hero-side-copy {
+    -fx-text-fill: #c0b7b7;
+    -fx-font-size: 13px;
+}
+
+.toolbar-shell {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 18px;
+    -fx-border-color: rgba(255, 255, 255, 0.06);
+    -fx-border-radius: 18px;
+    -fx-padding: 18px 20px;
+}
+
+.search-field {
+    -fx-background-color: rgba(8, 8, 8, 0.95);
+    -fx-background-radius: 16px;
+    -fx-border-color: rgba(255, 255, 255, 0.07);
+    -fx-border-radius: 16px;
+    -fx-border-width: 1px;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #7a7a7a;
+    -fx-font-size: 14px;
+    -fx-padding: 12px 18px;
+}
+
+.search-field:focused {
+    -fx-border-color: #ff6b57;
+    -fx-effect: dropshadow(gaussian, rgba(255, 107, 87, 0.2), 12, 0, 0, 0);
+}
+
+.toolbar-note {
+    -fx-text-fill: #ffb0a3;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+    -fx-background-color: rgba(230, 57, 57, 0.08);
+    -fx-background-radius: 999px;
+    -fx-padding: 10px 14px;
+}
+
+.campaign-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.campaign-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.campaign-flow {
+    -fx-padding: 4px 2px 24px 2px;
+}
+
+.client-campaign-card {
+    -fx-background-color: linear-gradient(to bottom, rgba(18, 18, 18, 0.98), rgba(27, 27, 27, 0.98));
+    -fx-background-radius: 24px;
+    -fx-border-color: rgba(255, 255, 255, 0.07);
+    -fx-border-radius: 24px;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 18, 0, 0, 8);
+}
+
+.client-campaign-card:hover {
+    -fx-border-color: rgba(255, 107, 87, 0.5);
+    -fx-effect: dropshadow(gaussian, rgba(255, 107, 87, 0.18), 24, 0, 0, 8);
+    -fx-translate-y: -3px;
+}
+
+.card-chip {
+    -fx-background-color: rgba(255, 107, 87, 0.14);
+    -fx-text-fill: #ff8c7c;
+    -fx-background-radius: 999px;
+    -fx-padding: 7px 12px;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+}
+
+.client-date {
+    -fx-text-fill: #99a5b3;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.client-card-title {
+    -fx-text-fill: white;
+    -fx-font-size: 23px;
+    -fx-font-weight: 900;
+}
+
+.client-card-copy {
+    -fx-text-fill: #b8b8b8;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 4px;
+}
+
+.meta-band {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-background-radius: 18px;
+    -fx-padding: 16px;
+}
+
+.meta-label {
+    -fx-text-fill: #8f8f8f;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+}
+
+.meta-value {
+    -fx-text-fill: #ffd28a;
+    -fx-font-size: 15px;
+    -fx-font-weight: 800;
+}
+
+.client-cta {
+    -fx-background-color: linear-gradient(to right, #e63939, #ff7b54);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: 900;
+    -fx-background-radius: 16px;
+    -fx-padding: 13px 18px;
+    -fx-cursor: hand;
+}
+
+.client-cta:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 107, 87, 0.35), 16, 0, 0, 5);
+}
+
+.empty-state {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 24px;
+    -fx-border-color: rgba(255, 255, 255, 0.07);
+    -fx-border-radius: 24px;
+    -fx-padding: 34px;
+    -fx-max-width: 520px;
+}
+
+.empty-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+}
+
+.empty-copy {
+    -fx-text-fill: #b8b8b8;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}

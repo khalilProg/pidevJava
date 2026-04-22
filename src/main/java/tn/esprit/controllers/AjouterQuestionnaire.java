@@ -106,7 +106,7 @@ public class AjouterQuestionnaire {
         }
     }
     @FXML public void handleAnnuler(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CampagneFront.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
         Parent root = loader.load();
         annuler.getScene().setRoot(root);
     }

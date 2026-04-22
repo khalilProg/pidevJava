@@ -164,8 +164,6 @@
             <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
             <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="QUESTIONNAIRE" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="RENDEZ VOUS" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
             <Region VBox.vgrow="ALWAYS" />
