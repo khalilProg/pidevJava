@@ -25,6 +25,36 @@
     -fx-padding: 30px;
 }
 
+/* ScrollPane Customization */
+.scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(230, 57, 57, 0.2);
+    -fx-background-radius: 10px;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(230, 57, 57, 0.4);
+}
+
 .title-text {
     -fx-font-size: 24px;
     -fx-font-weight: 900;
@@ -235,6 +265,82 @@
 /* Invalid field border highlight */
 .text-field-error {
     -fx-border-color: #e63939;
+}
+
+/* ==========================================================
+ * PREMIUM CHART STYLING
+ * ========================================================== */
+
+/* Pie Chart Colors (Red Theme) */
+.default-color0.chart-pie {
+    -fx-pie-color: #e63939;
+}
+
+/* Primary */
+.default-color1.chart-pie {
+    -fx-pie-color: #f25c5c;
+}
+
+/* Lighter */
+.default-color2.chart-pie {
+    -fx-pie-color: #ab2a2a;
+}
+
+/* Darker */
+.default-color3.chart-pie {
+    -fx-pie-color: #ff8a8a;
+}
+
+/* Soft */
+.default-color4.chart-pie {
+    -fx-pie-color: #7a1c1c;
+}
+
+/* Deep Dark */
+.default-color5.chart-pie {
+    -fx-pie-color: #ff4d4d;
+}
+
+.default-color6.chart-pie {
+    -fx-pie-color: #d12e2e;
+}
+
+.default-color7.chart-pie {
+    -fx-pie-color: #9c1f1f;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-size: 11px;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: rgba(255, 255, 255, 0.2);
+}
+
+/* Bar Chart Styling */
+.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #ab2a2a, #e63939);
+    -fx-background-radius: 4px 4px 0 0;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: rgba(255, 255, 255, 0.05);
+}
+
+.axis {
+    -fx-tick-label-fill: -muted;
+    -fx-font-size: 10px;
+}
+
+.axis-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
 }
 
 /* Combo Box Popup Styling */

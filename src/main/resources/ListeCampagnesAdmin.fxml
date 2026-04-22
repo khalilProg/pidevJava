@@ -7,6 +7,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -39,9 +42,29 @@
             <HBox spacing="20.0" alignment="CENTER_LEFT">
                <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-padding: 5px 15px;">
                    <Label text="🔍" style="-fx-text-fill: -muted;" />
-                   <TextField styleClass="dark-field" promptText="Rechercher une campagne..." HBox.hgrow="ALWAYS" />
+                   <TextField fx:id="searchField" styleClass="dark-field" promptText="Rechercher une campagne..." HBox.hgrow="ALWAYS" />
                </HBox>
-               <ComboBox styleClass="dark-combo" promptText="ID" prefWidth="250.0" />
+               <ComboBox fx:id="sortComboBox" styleClass="dark-combo" promptText="Trier" prefWidth="250.0" />
+            </HBox>
+
+            <!-- Statistics Section -->
+            <HBox prefHeight="260.0" spacing="20.0">
+               <VBox prefWidth="650.0" spacing="12.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
+                  <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 16px;" text="Campagnes par Mois" />
+                  <BarChart fx:id="campagneChart" legendVisible="false" animated="false" VBox.vgrow="ALWAYS">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                     </yAxis>
+                  </BarChart>
+               </VBox>
+
+               <VBox prefWidth="300.0" spacing="12.0" styleClass="glass-card">
+                  <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 16px;" text="Top Mois" />
+                  <VBox fx:id="topMonthsList" spacing="8.0" VBox.vgrow="ALWAYS" />
+               </VBox>
             </HBox>
 
             <!-- Table -->

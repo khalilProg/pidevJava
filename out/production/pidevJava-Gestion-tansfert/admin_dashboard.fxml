@@ -4,6 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -42,6 +46,7 @@
                         </VBox>
                         <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 20px;" text="Utilisateurs" />
                     </HBox>
+                    <Label fx:id="totalUsersLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="0" />
                     <Label style="-fx-text-fill: #888888; -fx-font-size: 12px; -fx-wrap-text: true;" text="Gérez les comptes, les rôles et accédez aux profils détaillés des donneurs et banques." />
                     <Region VBox.vgrow="ALWAYS" minHeight="20.0" />
                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="card-btn-outline" text="Ouvrir la liste" onAction="#handleNavigateUsers" />
@@ -54,6 +59,7 @@
                         </VBox>
                         <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 20px;" text="Commandes" />
                     </HBox>
+                    <Label fx:id="totalDemandesLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="0" />
                     <Label style="-fx-text-fill: #888888; -fx-font-size: 12px; -fx-wrap-text: true;" text="Surveillez l'état des demandes de sang et gérez les validations en temps réel." />
                     <Region VBox.vgrow="ALWAYS" minHeight="20.0" />
                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="card-btn-outline" text="Voir commandes" onAction="#handleNavigateCommandes" />
@@ -66,10 +72,62 @@
                         </VBox>
                         <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 20px;" text="Stocks" />
                     </HBox>
+                    <Label fx:id="totalStockLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="0 L" />
                     <Label style="-fx-text-fill: #888888; -fx-font-size: 12px; -fx-wrap-text: true;" text="Vérifiez les niveaux de sang disponibles par type et par organisation." />
                     <Region VBox.vgrow="ALWAYS" minHeight="20.0" />
                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="card-btn-outline" text="Gérer les stocks" onAction="#handleNavigateStocks" />
                 </VBox>
+            </HBox>
+
+            <!-- Dashboard Charts -->
+            <HBox prefHeight="420.0" spacing="20.0">
+               <VBox prefWidth="600.0" spacing="15.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 18px;" text="Distribution du Stock" />
+                  <PieChart fx:id="stockPieChart" animated="false" />
+               </VBox>
+
+               <VBox prefWidth="480.0" spacing="15.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 18px;" text="Etat des Demandes" />
+                  <BarChart fx:id="demandeBarChart" legendVisible="false" animated="false">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                     </yAxis>
+                  </BarChart>
+               </VBox>
+            </HBox>
+
+            <HBox prefHeight="420.0" spacing="20.0">
+               <VBox prefWidth="600.0" spacing="15.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 18px;" text="Campagnes par Mois" />
+                  <BarChart fx:id="campagneBarChart" legendVisible="false" animated="false">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                     </yAxis>
+                  </BarChart>
+               </VBox>
+
+               <VBox prefWidth="480.0" spacing="15.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 18px;" text="Rendez-vous par Statut" />
+                  <PieChart fx:id="rdvPieChart" animated="false" />
+               </VBox>
             </HBox>
 
             <!-- Actions Rapides -->
