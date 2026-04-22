@@ -22,7 +22,7 @@ public class MainFX extends Application {
         primaryStage.show();
 
         Stage secondaryStage = new Stage();
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/AfficherCommandes.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/CampagneFront.fxml"));
         Parent root2 = loader2.load();
         Scene scene2 = tn.esprit.tools.ThemeManager.getInstance().createScene(root2);
         ThemeManager.getInstance().applyTheme(scene2);

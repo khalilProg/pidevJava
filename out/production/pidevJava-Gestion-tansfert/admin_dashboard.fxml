@@ -78,7 +78,31 @@
                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="card-btn-outline" text="Gérer les stocks" onAction="#handleNavigateStocks" />
                 </VBox>
             </HBox>
-
+             <!-- Actions Rapides -->
+             <VBox spacing="15.0">
+                 <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <Label style="-fx-text-fill: #e74c3c;" text="≡" />
+                     <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 14px;" text="ACTIONS RAPIDES" />
+                 </HBox>
+                 <HBox spacing="15.0">
+                     <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateRendezVousClick">
+                         <Label text="📅" style="-fx-font-size: 24px;" />
+                         <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Rendez-vous" />
+                     </VBox>
+                     <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateQuestionnairesClick">
+                         <Label text="📝" style="-fx-font-size: 24px;" />
+                         <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Questionnaires" />
+                     </VBox>
+                     <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateCollectesClick">
+                         <Label text="🏥" style="-fx-font-size: 24px;" />
+                         <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Collectes" />
+                     </VBox>
+                     <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateCampagnesClick">
+                         <Label text="📢" style="-fx-font-size: 24px;" />
+                         <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Campagnes" />
+                     </VBox>
+                 </HBox>
+             </VBox>
             <!-- Dashboard Charts -->
             <HBox prefHeight="420.0" spacing="20.0">
                <VBox prefWidth="600.0" spacing="15.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
@@ -129,32 +153,6 @@
                   <PieChart fx:id="rdvPieChart" animated="false" />
                </VBox>
             </HBox>
-
-            <!-- Actions Rapides -->
-            <VBox spacing="15.0">
-               <HBox alignment="CENTER_LEFT" spacing="10.0">
-                   <Label style="-fx-text-fill: #e74c3c;" text="≡" />
-                   <Label style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 14px;" text="ACTIONS RAPIDES" />
-               </HBox>
-               <HBox spacing="15.0">
-                   <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateRendezVousClick">
-                       <Label text="📅" style="-fx-font-size: 24px;" />
-                       <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Rendez-vous" />
-                   </VBox>
-                   <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateQuestionnairesClick">
-                       <Label text="📝" style="-fx-font-size: 24px;" />
-                       <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Questionnaires" />
-                   </VBox>
-                   <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateCollectesClick">
-                       <Label text="🏥" style="-fx-font-size: 24px;" />
-                       <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Collectes" />
-                   </VBox>
-                   <VBox alignment="CENTER" prefWidth="250.0" styleClass="glass-card" style="-fx-padding: 20; -fx-cursor: hand;" HBox.hgrow="ALWAYS" spacing="10.0" onMouseClicked="#handleNavigateCampagnesClick">
-                       <Label text="📢" style="-fx-font-size: 24px;" />
-                       <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Campagnes" />
-                   </VBox>
-               </HBox>
-            </VBox>
          </VBox>
       </ScrollPane>
    </center>
