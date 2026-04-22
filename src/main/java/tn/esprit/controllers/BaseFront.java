@@ -71,6 +71,11 @@ public class BaseFront {
     }
 
     @FXML
+    public void goToCommandes(javafx.event.Event event) {
+        switchScene(event, "/AfficherCommandes.fxml");
+    }
+
+    @FXML
     public void goToCalendar(javafx.event.Event event) {
         switchScene(event, "/CampagneCalendar.fxml");
     }

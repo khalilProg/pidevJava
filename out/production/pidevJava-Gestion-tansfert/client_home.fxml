@@ -122,7 +122,7 @@
                         </children>
                      </VBox>
                      <!-- Commandes -->
-                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25;">
+                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25; -fx-cursor: hand;" onMouseClicked="#goToCommandes">
                         <children>
                            <Label style="-fx-text-fill: -primary; -fx-font-size: 28px;" text="📦" />
                            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 800;" text="Commandes" />
@@ -163,7 +163,7 @@
             <Button mnemonicParsing="false" styleClass="menu-link" text="ACCUEIL" />
             <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="COMMANDES" />
+            <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="QUESTIONNAIRE" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="RENDEZ VOUS" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
