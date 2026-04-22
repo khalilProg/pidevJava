@@ -106,7 +106,7 @@ public class Liste {
                         RendezVous rdv = getTableView().getItems().get(getIndex());
                         try {
                             if (rdvService.supprimerForClient(rdv.getId())) {
-                                getTableView().getItems().remove(rdv);
+                                clientRdvs.remove(rdv);
                             }
                         } catch (SQLException ex) {
                             ex.printStackTrace();

@@ -9,6 +9,8 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root"
             stylesheets="@styles.css"
             xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
@@ -99,4 +101,5 @@
             </VBox>
         </HBox>
     </StackPane>
+
 </AnchorPane>

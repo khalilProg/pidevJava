@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public class AjouterRendezVous {
     private Campagne campagne;
@@ -118,6 +119,13 @@ public class AjouterRendezVous {
         RendezVous rdv = new RendezVous("confirmé", rdvDateTime, questionnaireId, selectedId);
         new RendezVousService().ajouter(rdv);
 
+        // Prompt user to add to Google Calendar
+        askAddToGoogleCalendar(
+                currentClient.getUser().getNom() + " " + currentClient.getUser().getPrenom(),
+                campagne.getTitre(),
+                rdvDateTime,
+                selectedEntity.getNom()
+        );
         MailService mailService = new MailService();
         boolean emailSent = mailService.sendConfirmation(
                 currentClient.getUser().getEmail(),
@@ -132,6 +140,7 @@ public class AjouterRendezVous {
         } else {
             System.out.println("Failed to send email.");
         }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Liste.fxml"));
         Parent root = loader.load();
         confirmerRdv.getScene().setRoot(root);
@@ -193,11 +202,6 @@ public class AjouterRendezVous {
         RendezVous rdv = new RendezVous("confirmé", rdvDateTime, questionnaireId, selectedId);
         new RendezVousService().ajouter(rdv);
 
-
-//        // ✅ Step 1 — send email BEFORE switching scene
-//        String entiteDeCollecte = new EntiteCollecteService().getEntiteById(rdv.getEntite_id()).getNom();
-//        String titreCampagne    = new CampagneService().getCampagneById(campagneId).getTitre();
-
         MailService mailService = new MailService();
         boolean emailSent = mailService.sendConfirmation(
                 currentClient.getUser().getEmail(),
@@ -230,4 +234,32 @@ public class AjouterRendezVous {
     }
 
 
+    private void askAddToGoogleCalendar(String patientName, String campagne, LocalDateTime dateTime, String entite) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Ajouter à Google Calendar");
+        alert.setHeaderText("Voulez-vous ajouter ce rendez-vous à votre calendrier Google ?");
+        alert.setContentText("Campagne: " + campagne + "\nDate & Heure: " + dateTime + "\nEntité: " + entite);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    GoogleCalendarOAuthService service = new GoogleCalendarOAuthService();
+                    String link = service.addRendezVous(patientName, campagne, dateTime, entite);
+                    // Optional: show confirmation dialog with link
+                    Alert confirm = new Alert(Alert.AlertType.INFORMATION);
+                    confirm.setTitle("Rendez-vous ajouté");
+                    confirm.setHeaderText("Rendez-vous ajouté à Google Calendar !");
+                    confirm.setContentText("Vous pouvez voir votre événement ici:\n" + link);
+                    confirm.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Alert error = new Alert(Alert.AlertType.ERROR);
+                    error.setTitle("Erreur Google Calendar");
+                    error.setHeaderText("Impossible d'ajouter l'événement");
+                    error.setContentText(e.getMessage());
+                    error.show();
+                }
+            }
+        });
+    }
 }

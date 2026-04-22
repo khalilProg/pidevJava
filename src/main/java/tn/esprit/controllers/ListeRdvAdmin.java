@@ -18,10 +18,7 @@ import javafx.stage.FileChooser;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.entities.RendezVous;
 import tn.esprit.entities.User;
-import tn.esprit.services.CampagneService;
-import tn.esprit.services.EntiteCollecteService;
-import tn.esprit.services.QuestionnaireService;
-import tn.esprit.services.RendezVousService;
+import tn.esprit.services.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -263,6 +260,29 @@ public class ListeRdvAdmin {
         } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Erreur : " + e.getMessage()).showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleGenerateReport() {
+        ObservableList<RendezVous> filteredRdvs = tableView.getItems(); // filtered based on selected date
+        if (filteredRdvs.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Aucune donnée disponible pour le rapport !").showAndWait();
+            return;
+        }
+
+        try {
+            // Map each rendez-vous to include Questionnaire data
+            List<RendezVous> rdvWithQuestionnaire = filteredRdvs.stream().toList();
+
+            // Generate PDF report
+            String filePath = System.getProperty("user.home") + "/Desktop/RendezVousReport.pdf";
+            new AiReportService().generatePdfReport(rdvWithQuestionnaire, filePath);
+
+            new Alert(Alert.AlertType.INFORMATION, "Rapport généré avec succès à : " + filePath).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Erreur lors de la génération du rapport : " + e.getMessage()).show();
         }
     }
 

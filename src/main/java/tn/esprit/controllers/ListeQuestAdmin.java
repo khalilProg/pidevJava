@@ -70,7 +70,7 @@ public class ListeQuestAdmin {
                     Questionnaire q = getTableView().getItems().get(getIndex());
                     try {
                         new QuestionnaireService().supprimer(q);
-                        getTableView().getItems().remove(q);
+                        questionnairesData.remove(q);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }

@@ -6,12 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class BaseFront {
-
     private void switchScene(ActionEvent event, String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -24,6 +28,7 @@ public class BaseFront {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     public void goToAccueil(ActionEvent event) {
@@ -49,4 +54,5 @@ public class BaseFront {
     public void goToRendezVous(ActionEvent event) {
         switchScene(event, "/ListeRdvAdmin.fxml");
     }
+
 }
