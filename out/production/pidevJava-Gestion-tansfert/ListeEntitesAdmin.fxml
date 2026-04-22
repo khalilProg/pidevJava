@@ -39,9 +39,9 @@
             <HBox spacing="20.0" alignment="CENTER_LEFT">
                <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-padding: 5px 15px;">
                    <Label text="🔍" style="-fx-text-fill: -muted;" />
-                   <TextField styleClass="dark-field" promptText="Rechercher une entité..." HBox.hgrow="ALWAYS" />
+                   <TextField fx:id="searchField" styleClass="dark-field" promptText="Rechercher une entité..." HBox.hgrow="ALWAYS" />
                </HBox>
-               <ComboBox styleClass="dark-combo" promptText="ID" prefWidth="250.0" />
+               <ComboBox fx:id="sortComboBox" styleClass="dark-combo" promptText="Trier" prefWidth="250.0" />
             </HBox>
 
             <!-- Table -->
