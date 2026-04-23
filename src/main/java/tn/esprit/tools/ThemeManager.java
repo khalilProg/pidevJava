@@ -1,5 +1,8 @@
 package tn.esprit.tools;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -7,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Collections;
 import java.util.Set;
@@ -118,12 +122,30 @@ public class ThemeManager {
     }
 
     /**
-     * Update a toggle button's text to reflect the current theme.
-     * Shows ☀ for switching to light, 🌙 for switching to dark.
+     * Update a toggle button's icon to reflect the current theme.
      */
     public void updateToggleButton(Button btn) {
         if (btn == null) return;
-        btn.setText(currentTheme == Theme.DARK ? "☀  Light" : "🌙  Dark");
+        btn.setText(currentTheme == Theme.DARK ? "\u2600" : "\u263E");
+        btn.setAccessibleText(currentTheme == Theme.DARK ? "Passer au mode clair" : "Passer au mode sombre");
+        btn.getStyleClass().removeAll("theme-toggle-sun", "theme-toggle-moon");
+        btn.getStyleClass().add(currentTheme == Theme.DARK ? "theme-toggle-sun" : "theme-toggle-moon");
+        animateThemeToggle(btn);
+    }
+
+    private void animateThemeToggle(Button btn) {
+        btn.setOpacity(0.72);
+        btn.setScaleX(0.92);
+        btn.setScaleY(0.92);
+
+        FadeTransition fade = new FadeTransition(Duration.millis(180), btn);
+        fade.setToValue(1.0);
+
+        ScaleTransition scale = new ScaleTransition(Duration.millis(180), btn);
+        scale.setToX(1.0);
+        scale.setToY(1.0);
+
+        new ParallelTransition(fade, scale).play();
     }
 
     // ─── Theme Queries ─────────────────────────────────────────────

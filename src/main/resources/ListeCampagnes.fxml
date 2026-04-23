@@ -16,20 +16,17 @@
    <children>
       <AnchorPane styleClass="client-campaign-root">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="header-bar">
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="nav-bar">
                <children>
-                  <Label style="-fx-text-fill: #e63939; -fx-font-size: 24px;" text="BL">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label styleClass="logo-text" text="BLOODLINK" />
+                  <HBox alignment="CENTER_LEFT" spacing="6">
+                     <Region styleClass="logo-icon" />
+                     <Label styleClass="brand-label" text="BLOODLINK" />
+                  </HBox>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="submit-button" text="Utilisateur">
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+                  <Region prefWidth="12.0" />
+                  <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Utilisateur" />
+                  <Region prefWidth="12.0" />
                   <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU ☰" />
                </children>
             </HBox>
@@ -105,7 +102,7 @@
                   <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
                   <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
                   <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
-                  <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
+                  <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
                   <Region VBox.vgrow="ALWAYS" />
                   <VBox spacing="15.0">
                      <children>

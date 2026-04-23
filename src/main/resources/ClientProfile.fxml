@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@commande.css"
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="tn.esprit.controllers.ClientProfileController">
+    <children>
+        <BorderPane styleClass="main-container">
+            <top>
+                <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <Region styleClass="logo-icon" />
+                        <Label styleClass="brand-label" text="BLOODLINK" />
+                    </HBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button fx:id="btnThemeToggle" mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+                    <Region prefWidth="12" />
+                    <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Utilisateur" />
+                    <Region prefWidth="12" />
+                    <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU &#9776;" />
+                </HBox>
+            </top>
+            <center>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge-scroll">
+                    <VBox spacing="24.0" styleClass="content-area">
+                        <padding>
+                            <Insets bottom="44.0" left="48.0" right="48.0" top="40.0" />
+                        </padding>
+                        <children>
+                            <VBox spacing="8.0">
+                                <Label styleClass="breadcrumb-label" text="BLOODLINK" />
+                                <Label styleClass="page-title" text="Mon Profil" />
+                                <Label styleClass="page-subtitle" text="Consultez et modifiez vos informations personnelles." />
+                            </VBox>
+                            <HBox alignment="CENTER_LEFT" spacing="24.0">
+                                <VBox minWidth="310.0" prefWidth="330.0" spacing="16.0" styleClass="form-card">
+                                    <children>
+                                        <Label styleClass="form-section-title" text="APERCU" />
+                                        <Label styleClass="profile-avatar" text="BL" />
+                                        <VBox spacing="5.0">
+                                            <Label fx:id="lblProfileName" styleClass="profile-name" text="Utilisateur" />
+                                            <Label fx:id="lblProfileEmail" styleClass="profile-email" text="utilisateur@email.com" />
+                                        </VBox>
+                                        <Separator styleClass="dark-separator" />
+                                        <Label styleClass="home-feature-copy" text="Ces informations sont utilisees pour vos commandes, campagnes et notifications BloodLink." wrapText="true" />
+                                    </children>
+                                </VBox>
+                                <VBox spacing="20.0" styleClass="form-card" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label styleClass="form-section-title" text="INFORMATIONS DU COMPTE" />
+                                        <HBox spacing="20.0">
+                                            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="field-label" text="NOM" />
+                                                <TextField fx:id="tfNom" maxWidth="1.7976931348623157E308" promptText="Nom" styleClass="dark-field" />
+                                            </VBox>
+                                            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="field-label" text="PRENOM" />
+                                                <TextField fx:id="tfPrenom" maxWidth="1.7976931348623157E308" promptText="Prenom" styleClass="dark-field" />
+                                            </VBox>
+                                        </HBox>
+                                        <HBox spacing="20.0">
+                                            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="field-label" text="EMAIL" />
+                                                <TextField fx:id="tfEmail" maxWidth="1.7976931348623157E308" promptText="Email" styleClass="dark-field" />
+                                            </VBox>
+                                            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="field-label" text="TELEPHONE" />
+                                                <TextField fx:id="tfTelephone" maxWidth="1.7976931348623157E308" promptText="Telephone" styleClass="dark-field" />
+                                            </VBox>
+                                        </HBox>
+                                        <Separator styleClass="dark-separator" />
+                                        <Label styleClass="form-section-title" text="INFORMATIONS CLIENT" />
+                                        <HBox spacing="20.0">
+                                            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="field-label" text="TYPE SANGUIN" />
+                                                <ComboBox fx:id="cbTypeSang" maxWidth="1.7976931348623157E308" promptText="Choisir un type" styleClass="dark-combo" />
+                                            </VBox>
+                                            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="field-label" text="DERNIER DON" />
+                                                <DatePicker fx:id="dpDernierDon" maxWidth="1.7976931348623157E308" promptText="Date du dernier don" styleClass="dark-field" />
+                                            </VBox>
+                                        </HBox>
+                                        <Label fx:id="lblStatus" text="" />
+                                        <HBox alignment="CENTER_RIGHT" spacing="14.0">
+                                            <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="cancel-button" text="Annuler" />
+                                            <Button mnemonicParsing="false" onAction="#handleSaveProfile" styleClass="submit-button" text="Enregistrer" />
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </HBox>
+                        </children>
+                    </VBox>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+        <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+            <children>
+                <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+                <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_RIGHT">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER &#10005;" />
+                            </children>
+                        </HBox>
+                        <Region prefHeight="20.0" />
+                        <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+                        <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
+                        <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
+                        <Button mnemonicParsing="false" onAction="#goToProfile" style="-fx-text-fill: -primary; -fx-background-color: transparent; -fx-border-width: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" styleClass="menu-link" text="MON PROFIL" />
+                        <Region VBox.vgrow="ALWAYS" />
+                        <VBox spacing="15.0">
+                            <children>
+                                <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
+                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="Deconnexion" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</StackPane>

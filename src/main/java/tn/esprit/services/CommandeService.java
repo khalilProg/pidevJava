@@ -87,6 +87,27 @@ public class CommandeService implements IGeneralService<Commande> {
         return mapCommandes(rs);
     }
 
+    public Commande findByIdOrReference(String idOrReference, Integer clientId) throws SQLException {
+        if (idOrReference == null || !idOrReference.matches("\\d+")) {
+            return null;
+        }
+
+        String sql = "SELECT * FROM commande WHERE (id = ? OR reference = ?)"
+                + (clientId == null ? "" : " AND client_id = ?")
+                + " ORDER BY id DESC LIMIT 1";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        int numericValue = Integer.parseInt(idOrReference);
+        ps.setInt(1, numericValue);
+        ps.setInt(2, numericValue);
+        if (clientId != null) {
+            ps.setInt(3, clientId);
+        }
+
+        ResultSet rs = ps.executeQuery();
+        List<Commande> commandes = mapCommandes(rs);
+        return commandes.isEmpty() ? null : commandes.get(0);
+    }
+
     private List<Commande> mapCommandes(ResultSet rs) throws SQLException {
         List<Commande> commandes = new ArrayList<>();
         while (rs.next()) {

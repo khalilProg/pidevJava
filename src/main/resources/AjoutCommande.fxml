@@ -96,6 +96,43 @@
     </center>
         </BorderPane>
 
+        <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" spacing="14.0" StackPane.alignment="BOTTOM_RIGHT">
+            <StackPane.margin>
+                <Insets bottom="30.0" right="30.0" />
+            </StackPane.margin>
+            <children>
+                <VBox fx:id="chatbotWindow" managed="false" maxHeight="550.0" maxWidth="380.0" prefHeight="550.0" prefWidth="380.0" spacing="0.0" styleClass="chatbot-window" visible="false">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="chatbot-header">
+                            <children>
+                                <Label styleClass="chatbot-header-avatar" text="AI" />
+                                <VBox spacing="1.0">
+                                    <children>
+                                        <Label styleClass="chatbot-title" text="BloodLink Assistant" />
+                                        <Label styleClass="chatbot-status" text="Online" />
+                                    </children>
+                                </VBox>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button mnemonicParsing="false" onAction="#handleChatbotClose" styleClass="chatbot-close" text="X" />
+                            </children>
+                        </HBox>
+                        <ScrollPane fx:id="chatbotScroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="chatbot-scroll" VBox.vgrow="ALWAYS">
+                            <content>
+                                <VBox fx:id="chatbotMessages" spacing="12.0" styleClass="chatbot-messages" />
+                            </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" spacing="10.0" styleClass="chatbot-input-bar">
+                            <children>
+                                <TextField fx:id="chatbotInput" onAction="#handleChatbotSubmit" promptText="Ask me a question..." styleClass="chatbot-input" HBox.hgrow="ALWAYS" />
+                                <Button mnemonicParsing="false" onAction="#handleChatbotSubmit" styleClass="chatbot-send" text="&gt;" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Button fx:id="chatbotToggleBtn" mnemonicParsing="false" onAction="#handleChatbotToggle" styleClass="chatbot-toggle" text="MSG" />
+            </children>
+        </VBox>
+
         <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
             <children>
                 <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
@@ -115,7 +152,7 @@
                         <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
                         <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" style="-fx-text-fill: -primary;" text="COMMANDES" />
                         <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
-                        <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
+                        <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
                         <Region VBox.vgrow="ALWAYS" />
                         <VBox spacing="15.0">
                             <children>

@@ -4,8 +4,10 @@ import tn.esprit.entities.Commande;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 import java.time.Year;
 import java.util.Properties;
 import javax.mail.Message;
@@ -22,6 +24,7 @@ public class EmailService {
     private static final String DEFAULT_SMTP_PORT = "587";
     private static final String DEFAULT_FROM_EMAIL = "khalilboujemaa2@gmail.com";
     private static final Properties LOCAL_CONFIG = loadLocalConfig();
+    private static final MailerConfig MAILER_CONFIG = loadMailerConfig();
 
     public boolean sendPasswordResetEmail(String toEmail, String userName, String resetCode) {
         String htmlContent = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #0a0a0a; color: white; border-radius: 12px; overflow: hidden;'>"
@@ -65,10 +68,10 @@ public class EmailService {
             return false;
         }
 
-        String smtpUser = getConfig("BLOODLINK_SMTP_USER", "bloodlink.smtp.user", getFromEmail());
-        String smtpPassword = getConfig("BLOODLINK_SMTP_PASSWORD", "bloodlink.smtp.password", "");
+        String smtpUser = getConfig("BLOODLINK_SMTP_USER", "bloodlink.smtp.user", MAILER_CONFIG.user);
+        String smtpPassword = getConfig("BLOODLINK_SMTP_PASSWORD", "bloodlink.smtp.password", MAILER_CONFIG.password);
         if (smtpPassword.isBlank()) {
-            System.err.println("Email could not be sent: missing BLOODLINK_SMTP_PASSWORD or -Dbloodlink.smtp.password.");
+            System.err.println("Email could not be sent: missing BLOODLINK_SMTP_PASSWORD, -Dbloodlink.smtp.password, or MAILER_DSN.");
             return false;
         }
 
@@ -100,9 +103,9 @@ public class EmailService {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", getConfig("BLOODLINK_SMTP_HOST", "bloodlink.smtp.host", DEFAULT_SMTP_HOST));
-        props.put("mail.smtp.port", getConfig("BLOODLINK_SMTP_PORT", "bloodlink.smtp.port", DEFAULT_SMTP_PORT));
-        props.put("mail.smtp.ssl.trust", getConfig("BLOODLINK_SMTP_HOST", "bloodlink.smtp.host", DEFAULT_SMTP_HOST));
+        props.put("mail.smtp.host", getConfig("BLOODLINK_SMTP_HOST", "bloodlink.smtp.host", MAILER_CONFIG.host));
+        props.put("mail.smtp.port", getConfig("BLOODLINK_SMTP_PORT", "bloodlink.smtp.port", MAILER_CONFIG.port));
+        props.put("mail.smtp.ssl.trust", getConfig("BLOODLINK_SMTP_HOST", "bloodlink.smtp.host", MAILER_CONFIG.host));
         props.put("mail.smtp.connectiontimeout", "10000");
         props.put("mail.smtp.timeout", "10000");
         props.put("mail.smtp.writetimeout", "10000");
@@ -110,7 +113,7 @@ public class EmailService {
     }
 
     private String getFromEmail() {
-        return getConfig("BLOODLINK_SMTP_FROM", "bloodlink.smtp.from", DEFAULT_FROM_EMAIL);
+        return getConfig("BLOODLINK_SMTP_FROM", "bloodlink.smtp.from", MAILER_CONFIG.from);
     }
 
     private String getConfig(String envName, String propertyName, String defaultValue) {
@@ -154,6 +157,93 @@ public class EmailService {
         }
 
         return properties;
+    }
+
+    private static MailerConfig loadMailerConfig() {
+        String dsn = System.getProperty("MAILER_DSN");
+        if (dsn == null || dsn.isBlank()) {
+            dsn = System.getProperty("mailer.dsn");
+        }
+        if (dsn == null || dsn.isBlank()) {
+            dsn = System.getenv("MAILER_DSN");
+        }
+        if (dsn == null || dsn.isBlank()) {
+            dsn = LOCAL_CONFIG.getProperty("MAILER_DSN");
+        }
+        if (dsn == null || dsn.isBlank()) {
+            dsn = LOCAL_CONFIG.getProperty("mailer.dsn");
+        }
+
+        MailerConfig defaults = new MailerConfig(DEFAULT_SMTP_HOST, DEFAULT_SMTP_PORT, DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL, "");
+        if (dsn == null || dsn.isBlank()) {
+            return defaults;
+        }
+
+        try {
+            return parseMailerDsn(dsn.trim(), defaults);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Could not parse MAILER_DSN: " + e.getMessage());
+            return defaults;
+        }
+    }
+
+    private static MailerConfig parseMailerDsn(String dsn, MailerConfig defaults) {
+        String prefix = "smtp://";
+        if (!dsn.regionMatches(true, 0, prefix, 0, prefix.length())) {
+            throw new IllegalArgumentException("only smtp:// DSN is supported.");
+        }
+
+        String rest = dsn.substring(prefix.length());
+        int atIndex = rest.lastIndexOf('@');
+        if (atIndex < 0) {
+            throw new IllegalArgumentException("missing SMTP credentials.");
+        }
+
+        String userInfo = rest.substring(0, atIndex);
+        String serverInfo = rest.substring(atIndex + 1);
+        int separatorIndex = userInfo.indexOf(':');
+        if (separatorIndex < 0) {
+            throw new IllegalArgumentException("missing SMTP password.");
+        }
+
+        String user = decodeDsnPart(userInfo.substring(0, separatorIndex));
+        String password = decodeDsnPart(userInfo.substring(separatorIndex + 1));
+        String host = serverInfo;
+        String port = defaults.port;
+        int portIndex = serverInfo.lastIndexOf(':');
+        if (portIndex >= 0 && portIndex < serverInfo.length() - 1) {
+            host = serverInfo.substring(0, portIndex);
+            port = serverInfo.substring(portIndex + 1);
+        }
+
+        String from = user.isBlank() ? defaults.from : user;
+        return new MailerConfig(
+                host.isBlank() ? defaults.host : host,
+                port.isBlank() ? defaults.port : port,
+                from,
+                user.isBlank() ? defaults.user : user,
+                password
+        );
+    }
+
+    private static String decodeDsnPart(String value) {
+        return URLDecoder.decode(value, StandardCharsets.UTF_8);
+    }
+
+    private static final class MailerConfig {
+        private final String host;
+        private final String port;
+        private final String from;
+        private final String user;
+        private final String password;
+
+        private MailerConfig(String host, String port, String from, String user, String password) {
+            this.host = host;
+            this.port = port;
+            this.from = from;
+            this.user = user;
+            this.password = password;
+        }
     }
 
     private String buildCommandeCreatedHtml(String clientName, Commande commande, String banqueName) {

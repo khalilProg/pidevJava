@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -15,21 +17,18 @@
 
    <AnchorPane styleClass="main-content">
       <children>
-         <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar"
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="nav-bar"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-               <Label style="-fx-text-fill: #e63939; -fx-font-size: 24px;" text="BL">
-                  <HBox.margin>
-                     <Insets right="10.0" />
-                  </HBox.margin>
-               </Label>
-               <Label styleClass="logo-text" text="BLOODLINK" />
+               <HBox alignment="CENTER_LEFT" spacing="6">
+                  <Region styleClass="logo-icon" />
+                  <Label styleClass="brand-label" text="BLOODLINK" />
+               </HBox>
                <Region HBox.hgrow="ALWAYS" />
-               <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="submit-button" text="Utilisateur">
-                  <HBox.margin>
-                     <Insets right="15.0" />
-                  </HBox.margin>
-               </Button>
+               <Button mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+               <Region prefWidth="12.0" />
+               <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Utilisateur" />
+               <Region prefWidth="12.0" />
                <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU &#9776;" />
             </children>
          </HBox>
@@ -101,28 +100,44 @@
                   <children>
                      <VBox onMouseClicked="#goToCampagnes" spacing="12.0" style="-fx-padding: 25; -fx-cursor: hand;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label styleClass="home-feature-icon" text="Camp" />
+                           <ImageView fitHeight="118.0" fitWidth="220.0" preserveRatio="false" smooth="true" styleClass="home-feature-image">
+                              <image>
+                                 <Image url="@images/home-campagnes.png" />
+                              </image>
+                           </ImageView>
                            <Label styleClass="home-feature-title" text="Campagnes" />
                            <Label styleClass="home-feature-copy" text="Decouvrez les collectes et inscrivez-vous." wrapText="true" />
                         </children>
                      </VBox>
                      <VBox spacing="12.0" style="-fx-padding: 25;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label styleClass="home-feature-icon" text="Dons" />
+                           <ImageView fitHeight="118.0" fitWidth="220.0" preserveRatio="false" smooth="true" styleClass="home-feature-image">
+                              <image>
+                                 <Image url="@images/home-dons.png" />
+                              </image>
+                           </ImageView>
                            <Label styleClass="home-feature-title" text="Mes Dons" />
                            <Label styleClass="home-feature-copy" text="Historique complet de vos dons et impact." wrapText="true" />
                         </children>
                      </VBox>
                      <VBox onMouseClicked="#goToCommandes" spacing="12.0" style="-fx-padding: 25; -fx-cursor: hand;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label styleClass="home-feature-icon" text="Cmd" />
+                           <ImageView fitHeight="118.0" fitWidth="220.0" preserveRatio="false" smooth="true" styleClass="home-feature-image">
+                              <image>
+                                 <Image url="@images/home-commandes.png" />
+                              </image>
+                           </ImageView>
                            <Label styleClass="home-feature-title" text="Commandes" />
                            <Label styleClass="home-feature-copy" text="Demandez des poches de sang pour vos besoins." wrapText="true" />
                         </children>
                      </VBox>
                      <VBox spacing="12.0" style="-fx-padding: 25;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label styleClass="home-feature-icon" text="Dossier" />
+                           <ImageView fitHeight="118.0" fitWidth="220.0" preserveRatio="false" smooth="true" styleClass="home-feature-image">
+                              <image>
+                                 <Image url="@images/home-dossier.png" />
+                              </image>
+                           </ImageView>
                            <Label styleClass="home-feature-title" text="Dossier Medical" />
                            <Label styleClass="home-feature-copy" text="Acces securise a vos analyses medicales." wrapText="true" />
                         </children>
@@ -145,12 +160,12 @@
                <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER &#10005;" />
             </HBox>
             <Region prefHeight="20.0" />
-            <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link menu-link-active" text="ACCUEIL" />
+            <Button mnemonicParsing="false" onAction="#goToAccueil" style="-fx-text-fill: -primary; -fx-background-color: transparent; -fx-border-width: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" styleClass="menu-link" text="ACCUEIL" />
             <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
             <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
+            <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
             <Region VBox.vgrow="ALWAYS" />
             <VBox spacing="15.0">
                <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />

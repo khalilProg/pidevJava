@@ -39,3 +39,4 @@ build/
 
 # Local SMTP secrets
 email.properties
+chatbot.properties
