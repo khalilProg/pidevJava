@@ -72,7 +72,7 @@ public class EditDemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) txtType.getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (Exception e) {
             e.printStackTrace();

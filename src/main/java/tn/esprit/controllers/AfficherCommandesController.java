@@ -14,8 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import tn.esprit.entities.Client;
 import tn.esprit.entities.Commande;
+import tn.esprit.entities.User;
+import tn.esprit.services.ClientService;
 import tn.esprit.services.CommandeService;
+import tn.esprit.tools.SessionManager;
 import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
@@ -44,7 +48,7 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AfficherCommandesController implements Initializable {
+public class AfficherCommandesController extends BaseFront implements Initializable {
 
     @FXML private TextField tfSearch;
     @FXML private ComboBox<String> cbStatutFiltre;
@@ -61,12 +65,14 @@ public class AfficherCommandesController implements Initializable {
     @FXML private TableColumn<Commande, Commande> colActions;
 
     private final CommandeService commandeService = new CommandeService();
+    private final ClientService clientService = new ClientService();
     private final ThemeManager themeManager = ThemeManager.getInstance();
     private ObservableList<Commande> commandesList;
     private FilteredList<Commande> filteredData;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        applySessionUser();
         setupFilters();
         setupTableColumns();
         loadDonnees();
@@ -222,7 +228,11 @@ public class AfficherCommandesController implements Initializable {
 
     private void loadDonnees() {
         try {
-            List<Commande> list = commandeService.recuperer();
+            User user = SessionManager.getCurrentUser();
+            Client client = user == null ? null : clientService.getByUserId(user.getId());
+            List<Commande> list = client == null
+                    ? List.of()
+                    : commandeService.recupererByClientId(client.getId());
             commandesList = FXCollections.observableArrayList(list);
             filteredData = new FilteredList<>(commandesList, p -> true);
             tableCommandes.setItems(filteredData);
@@ -447,8 +457,12 @@ public class AfficherCommandesController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
+            Object controller = loader.getController();
+            if (controller instanceof BaseFront frontController) {
+                frontController.applySessionUser();
+            }
             Stage stage = (Stage) tfSearch.getScene().getWindow();
-            stage.getScene().setRoot(root);
+            themeManager.setScene(stage, root);
             stage.setTitle(title);
         } catch (IOException e) {
             System.out.println("❌ Erreur de navigation: " + e.getMessage());

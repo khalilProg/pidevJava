@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandeService implements IGeneralService<Commande> {
-    private Connection cnx;
+    private final Connection cnx;
 
     public CommandeService() {
         cnx = MyDatabase.getInstance().getCnx();
@@ -16,8 +16,12 @@ public class CommandeService implements IGeneralService<Commande> {
 
     @Override
     public void ajouter(Commande c) throws SQLException {
+        ajouterAndReturnId(c);
+    }
+
+    public int ajouterAndReturnId(Commande c) throws SQLException {
         String sql = "INSERT INTO commande (banque_id, client_id, stock_id, reference, quantite, priorite, type_sang, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps = cnx.prepareStatement(sql);
+        PreparedStatement ps = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, c.getBanqueId());
         ps.setInt(2, c.getClientId());
         ps.setInt(3, c.getStockId());
@@ -27,7 +31,13 @@ public class CommandeService implements IGeneralService<Commande> {
         ps.setString(7, c.getTypeSang());
         ps.setString(8, c.getStatus());
         ps.executeUpdate();
-        System.out.println("Commande ajoutée avec succès!");
+
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            c.setId(generatedKeys.getInt(1));
+        }
+        System.out.println("Commande ajoutee avec succes!");
+        return c.getId();
     }
 
     @Override
@@ -36,7 +46,7 @@ public class CommandeService implements IGeneralService<Commande> {
         PreparedStatement ps = cnx.prepareStatement(sql);
         ps.setInt(1, c.getId());
         ps.executeUpdate();
-        System.out.println("Commande supprimée!");
+        System.out.println("Commande supprimee!");
     }
 
     @Override
@@ -58,7 +68,7 @@ public class CommandeService implements IGeneralService<Commande> {
         ps.setString(8, c.getStatus());
         ps.setInt(9, c.getId());
         ps.executeUpdate();
-        System.out.println("Commande modifiée!");
+        System.out.println("Commande modifiee!");
     }
 
     @Override
@@ -66,6 +76,18 @@ public class CommandeService implements IGeneralService<Commande> {
         String sql = "SELECT * FROM commande";
         Statement st = cnx.createStatement();
         ResultSet rs = st.executeQuery(sql);
+        return mapCommandes(rs);
+    }
+
+    public List<Commande> recupererByClientId(int clientId) throws SQLException {
+        String sql = "SELECT * FROM commande WHERE client_id = ?";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, clientId);
+        ResultSet rs = ps.executeQuery();
+        return mapCommandes(rs);
+    }
+
+    private List<Commande> mapCommandes(ResultSet rs) throws SQLException {
         List<Commande> commandes = new ArrayList<>();
         while (rs.next()) {
             Commande c = new Commande(

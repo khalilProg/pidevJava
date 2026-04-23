@@ -20,6 +20,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import tn.esprit.entities.User;
 import tn.esprit.services.UserService;
+import tn.esprit.tools.SessionManager;
 
 public class login {
 
@@ -78,6 +79,7 @@ public class login {
 
                     if (passMatch) {
                         found = true;
+                        SessionManager.setCurrentUser(u);
                         
                         Preferences prefs = Preferences.userNodeForPackage(login.class);
                         if (rememberMeCheckbox.isSelected()) {
@@ -115,7 +117,7 @@ public class login {
             Parent root = FXMLLoader.load(getClass().getResource("/admin_dashboard.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Dashboard Administration");
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -133,7 +135,7 @@ public class login {
             
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Espace Banque");
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -148,7 +150,7 @@ public class login {
             controller.initData(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Espace CNTS");
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -163,7 +165,7 @@ public class login {
             controller.initData(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Accueil");
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -180,7 +182,7 @@ public class login {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/register.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -193,7 +195,7 @@ public class login {
             Parent root = FXMLLoader.load(getClass().getResource("/custom_menu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Menu");
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -205,7 +207,7 @@ public class login {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/forgot_password.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

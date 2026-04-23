@@ -192,7 +192,7 @@ public class ListeCampagnesAdmin {
                         controller.setCampagne(c);
                         
                         Stage stage = (Stage) actViewBtn.getScene().getWindow();
-                        stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                        tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                         stage.show();
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -218,7 +218,7 @@ public class ListeCampagnesAdmin {
                         controller.setCampagneToEdit(c);
                         
                         Stage stage = (Stage) actEditBtn.getScene().getWindow();
-                        stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                        tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                         stage.show();
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -361,7 +361,7 @@ public class ListeCampagnesAdmin {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());

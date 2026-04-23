@@ -175,7 +175,7 @@ public class AdminUsersViewController {
                 AdminUsersEditClientController controller = loader.getController();
                 controller.initData(currentUser, currentClient);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             } else if ("agent banque".equalsIgnoreCase(currentUser.getRole())) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit_banque.fxml"));
@@ -183,7 +183,7 @@ public class AdminUsersViewController {
                 AdminUsersEditBanqueController controller = loader.getController();
                 controller.initData(currentUser, currentBanque);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             } else {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit.fxml"));
@@ -191,7 +191,7 @@ public class AdminUsersViewController {
                 AdminUsersEditController controller = loader.getController();
                 controller.initData(currentUser);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             }
         } catch (IOException e) {
@@ -223,7 +223,7 @@ public class AdminUsersViewController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

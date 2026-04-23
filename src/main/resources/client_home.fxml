@@ -9,79 +9,75 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane stylesheets="@commande.css" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ClientHomeController">
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@commande.css"
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="tn.esprit.controllers.ClientHomeController">
 
-   <!-- Main Page Content -->
    <AnchorPane styleClass="main-content">
       <children>
-         <!-- Header Bar -->
-         <HBox alignment="CENTER_LEFT" prefHeight="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="header-bar">
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-               <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 24px;">
+               <Label style="-fx-text-fill: #e63939; -fx-font-size: 24px;" text="BL">
                   <HBox.margin>
                      <Insets right="10.0" />
                   </HBox.margin>
                </Label>
-               <Label text="BLOODLINK" styleClass="logo-text" />
+               <Label styleClass="logo-text" text="BLOODLINK" />
                <Region HBox.hgrow="ALWAYS" />
-               <Button styleClass="submit-button" fx:id="userNameBtn" mnemonicParsing="false" text="👤 Utilisateur">
+               <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="submit-button" text="Utilisateur">
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin>
                </Button>
-               <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU ☰" />
+               <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU &#9776;" />
             </children>
          </HBox>
 
-         <!-- Page Body -->
-         <VBox spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" AnchorPane.bottomAnchor="0.0">
+         <VBox spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
             <padding>
                <Insets bottom="40.0" left="50.0" right="50.0" top="50.0" />
             </padding>
             <children>
-               <!-- Hero Section -->
-               <HBox spacing="40.0" alignment="CENTER_LEFT">
+               <HBox alignment="CENTER_LEFT" spacing="40.0">
                   <children>
-                     <VBox spacing="20.0" HBox.hgrow="ALWAYS" maxWidth="600.0">
+                     <VBox maxWidth="600.0" spacing="20.0" HBox.hgrow="ALWAYS">
                         <children>
-                           <!-- Live Badge -->
                            <HBox alignment="CENTER_LEFT" spacing="8.0">
                               <children>
-                                 <Label style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-size: 10px; -fx-padding: 3 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="LIVE" />
-                                 <Label style="-fx-text-fill: -muted; -fx-font-size: 12px;" text="Chaque don est un nouvel espoir." />
+                                 <Label styleClass="live-badge" text="LIVE" />
+                                 <Label styleClass="home-muted-text" text="Chaque don est un nouvel espoir." />
                               </children>
                            </HBox>
-                           <!-- Hero Text -->
                            <VBox spacing="5.0">
-                              <Label style="-fx-text-fill: white; -fx-font-size: 38px; -fx-font-weight: 900;" text="Sauvez des vies," wrapText="true" />
-                              <Label style="-fx-text-fill: -primary; -fx-font-size: 38px; -fx-font-weight: 900;" text="Une goutte à la fois." wrapText="true" />
+                              <Label styleClass="home-hero-title" text="Sauvez des vies," wrapText="true" />
+                              <Label styleClass="home-hero-title-accent" text="Une goutte a la fois." wrapText="true" />
                            </VBox>
-                           <Label style="-fx-text-fill: -muted; -fx-font-size: 13px; -fx-wrap-text: true;" text="Bienvenue sur votre espace BloodLink. Gérez vos dons, suivez vos commandes de sang et restez informé des campagnes de collecte en temps réel." wrapText="true" />
-                           <!-- CTA Button -->
-                           <Button mnemonicParsing="false" styleClass="button-primary" text="🩸 Faire un don" />
+                           <Label styleClass="home-hero-copy" text="Bienvenue sur votre espace BloodLink. Gerez vos dons, suivez vos commandes de sang et restez informe des campagnes de collecte en temps reel." wrapText="true" />
+                           <Button mnemonicParsing="false" styleClass="button-primary" text="Faire un don" />
                         </children>
                      </VBox>
-                     <!-- Info Cards -->
-                     <VBox spacing="15.0" alignment="CENTER" HBox.hgrow="ALWAYS">
+
+                     <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
                         <children>
-                           <VBox spacing="5.0" style="-fx-background-color: rgba(255,255,255,0.03); -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 14; -fx-background-radius: 14; -fx-padding: 20;">
+                           <VBox spacing="5.0" styleClass="home-info-card">
                               <children>
-                                 <HBox spacing="10.0" alignment="CENTER_LEFT">
-                                    <Label style="-fx-text-fill: -primary; -fx-font-size: 18px;" text="💚" />
+                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                    <Label styleClass="home-card-icon" text="Impact" />
                                     <VBox>
-                                       <Label style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 16px;" text="Direct Impact" />
-                                       <Label style="-fx-text-fill: -muted; -fx-font-size: 11px;" text="1 don = 3 vies sauvées" />
+                                       <Label styleClass="home-card-title" text="Direct Impact" />
+                                       <Label styleClass="home-card-copy" text="1 don = 3 vies sauvees" />
                                     </VBox>
                                  </HBox>
                               </children>
                            </VBox>
-                           <VBox spacing="5.0" style="-fx-background-color: rgba(230,57,57,0.08); -fx-border-color: rgba(230,57,57,0.2); -fx-border-radius: 14; -fx-background-radius: 14; -fx-padding: 20;">
+                           <VBox spacing="5.0" styleClass="home-alert-card">
                               <children>
-                                 <HBox spacing="10.0" alignment="CENTER_LEFT">
-                                    <Label style="-fx-text-fill: -primary; -fx-font-size: 18px;" text="🔥" />
+                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                    <Label styleClass="home-card-icon" text="Urgent" />
                                     <VBox>
-                                       <Label style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 16px;" text="Besoin Urgent" />
-                                       <Label style="-fx-text-fill: -muted; -fx-font-size: 11px;" text="Stocks critiques, O-" />
+                                       <Label styleClass="home-card-title" text="Besoin Urgent" />
+                                       <Label styleClass="home-card-copy" text="Stocks critiques, O-" />
                                     </VBox>
                                  </HBox>
                               </children>
@@ -91,50 +87,44 @@
                   </children>
                </HBox>
 
-               <!-- Section Title -->
                <VBox spacing="5.0">
                   <children>
                      <HBox spacing="5.0">
-                        <Label style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: 900;" text="Explorez " />
-                        <Label style="-fx-text-fill: -primary; -fx-font-size: 22px; -fx-font-weight: 900;" text="votre espace" />
+                        <Label styleClass="home-section-title" text="Explorez " />
+                        <Label styleClass="home-section-title-accent" text="votre espace" />
                      </HBox>
-                     <Label style="-fx-text-fill: -muted; -fx-font-size: 13px;" text="Accédez rapidement à toutes les fonctionnalités clés de BloodLink." />
+                     <Label styleClass="home-section-copy" text="Accedez rapidement a toutes les fonctionnalites cles de BloodLink." />
                   </children>
                </VBox>
 
-               <!-- Feature Cards -->
-               <HBox spacing="20.0" alignment="CENTER_LEFT">
+               <HBox alignment="CENTER_LEFT" spacing="20.0">
                   <children>
-                     <!-- Campagnes -->
-                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25; -fx-cursor: hand;" onMouseClicked="#goToCampagnes">
+                     <VBox onMouseClicked="#goToCampagnes" spacing="12.0" style="-fx-padding: 25; -fx-cursor: hand;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label style="-fx-text-fill: -primary; -fx-font-size: 28px;" text="📢" />
-                           <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 800;" text="Campagnes" />
-                           <Label style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-wrap-text: true;" text="Découvrez les collectes et inscrivez-vous." wrapText="true" />
+                           <Label styleClass="home-feature-icon" text="Camp" />
+                           <Label styleClass="home-feature-title" text="Campagnes" />
+                           <Label styleClass="home-feature-copy" text="Decouvrez les collectes et inscrivez-vous." wrapText="true" />
                         </children>
                      </VBox>
-                     <!-- Mes Dons -->
-                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25;">
+                     <VBox spacing="12.0" style="-fx-padding: 25;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label style="-fx-text-fill: -primary; -fx-font-size: 28px;" text="🩸" />
-                           <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 800;" text="Mes Dons" />
-                           <Label style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-wrap-text: true;" text="Historique complet de vos dons et impact." wrapText="true" />
+                           <Label styleClass="home-feature-icon" text="Dons" />
+                           <Label styleClass="home-feature-title" text="Mes Dons" />
+                           <Label styleClass="home-feature-copy" text="Historique complet de vos dons et impact." wrapText="true" />
                         </children>
                      </VBox>
-                     <!-- Commandes -->
-                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25; -fx-cursor: hand;" onMouseClicked="#goToCommandes">
+                     <VBox onMouseClicked="#goToCommandes" spacing="12.0" style="-fx-padding: 25; -fx-cursor: hand;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label style="-fx-text-fill: -primary; -fx-font-size: 28px;" text="📦" />
-                           <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 800;" text="Commandes" />
-                           <Label style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-wrap-text: true;" text="Demandez des poches de sang pour vos besoins." wrapText="true" />
+                           <Label styleClass="home-feature-icon" text="Cmd" />
+                           <Label styleClass="home-feature-title" text="Commandes" />
+                           <Label styleClass="home-feature-copy" text="Demandez des poches de sang pour vos besoins." wrapText="true" />
                         </children>
                      </VBox>
-                     <!-- Dossier Médical -->
-                     <VBox spacing="12.0" HBox.hgrow="ALWAYS" styleClass="glass-card" style="-fx-padding: 25;">
+                     <VBox spacing="12.0" style="-fx-padding: 25;" styleClass="glass-card" HBox.hgrow="ALWAYS">
                         <children>
-                           <Label style="-fx-text-fill: -primary; -fx-font-size: 28px;" text="📋" />
-                           <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: 800;" text="Dossier Médical" />
-                           <Label style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-wrap-text: true;" text="Accès sécurisé à vos analyses médicales." wrapText="true" />
+                           <Label styleClass="home-feature-icon" text="Dossier" />
+                           <Label styleClass="home-feature-title" text="Dossier Medical" />
+                           <Label styleClass="home-feature-copy" text="Acces securise a vos analyses medicales." wrapText="true" />
                         </children>
                      </VBox>
                   </children>
@@ -144,36 +134,29 @@
       </children>
    </AnchorPane>
 
-   <!-- Right Side Menu Overlay (hidden by default) -->
-   <HBox fx:id="menuOverlay" visible="false" managed="false" alignment="CENTER_RIGHT">
-      <!-- Clickable background to close -->
-      <Region HBox.hgrow="ALWAYS" onMouseClicked="#handleMenuClose" style="-fx-background-color: rgba(0,0,0,0.6);" />
-      <!-- Menu Panel -->
-      <VBox fx:id="menuPanel" prefWidth="380.0" styleClass="menu-panel" spacing="15.0" alignment="TOP_LEFT">
+   <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+      <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+      <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
          <padding>
             <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
          </padding>
          <children>
-            <!-- Close -->
             <HBox alignment="CENTER_RIGHT">
-               <Button styleClass="submit-button" mnemonicParsing="false" onAction="#handleMenuToggle" text="FERMER ✕" />
+               <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER &#10005;" />
             </HBox>
             <Region prefHeight="20.0" />
-            <!-- Menu Links -->
-            <Button mnemonicParsing="false" styleClass="menu-link" text="ACCUEIL" />
+            <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link menu-link-active" text="ACCUEIL" />
             <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
             <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
-            <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
+            <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
             <Region VBox.vgrow="ALWAYS" />
-            <!-- Session Info -->
             <VBox spacing="15.0">
-               <Label fx:id="sessionEmailLabel" style="-fx-text-fill: -muted; -fx-font-size: 13px;" text="Session: utilisateur@email.com" />
-               <Button styleClass="submit-button" mnemonicParsing="false" onAction="#handleLogout" maxWidth="1.7976931348623157E308" text="⏻ Déconnexion" />
+               <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
+               <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="Deconnexion" />
             </VBox>
          </children>
       </VBox>
    </HBox>
 </StackPane>
-

@@ -136,4 +136,31 @@ public class ClientService implements IGeneralService<Client> {
         }
         return null;
     }
+
+    public Client getByUserId(int userId) throws SQLException {
+        String sql = "SELECT c.id, c.type_sang, c.dernier_don, c.user_id, " +
+                "u.nom, u.prenom, u.email, u.password, u.role, u.telephone " +
+                "FROM client c JOIN user u ON c.user_id = u.id WHERE c.user_id = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setInt(1, userId);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            User u = new User(
+                    rs.getInt("user_id"),
+                    rs.getString("email"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("password"),
+                    rs.getString("role"),
+                    rs.getString("telephone")
+            );
+            return new Client(
+                    rs.getInt("id"),
+                    rs.getString("type_sang"),
+                    rs.getDate("dernier_don").toLocalDate(),
+                    u
+            );
+        }
+        return null;
+    }
 }

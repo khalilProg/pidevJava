@@ -82,7 +82,7 @@ public class AgentBanqueBaseController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

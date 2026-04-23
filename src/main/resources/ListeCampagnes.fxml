@@ -30,7 +30,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
+                  <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU ☰" />
                </children>
             </HBox>
 
@@ -88,7 +88,7 @@
 
       <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
          <children>
-            <Region onMouseClicked="#handleMenuClose" style="-fx-background-color: rgba(0,0,0,0.6);" HBox.hgrow="ALWAYS" />
+            <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
             <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
                <padding>
                   <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
@@ -101,12 +101,15 @@
                   </HBox>
                   <Region prefHeight="20.0" />
                   <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
-                  <Button mnemonicParsing="false" onAction="#goToHistorique" styleClass="menu-link" text="HISTORIQUE" />
-                  <Button mnemonicParsing="false" onAction="#goToCampagnes" style="-fx-text-fill: -primary;" styleClass="menu-link" text="CAMPAGNES" />
+                  <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" style="-fx-text-fill: -primary;" text="CAMPAGNES" />
+                  <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
+                  <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
+                  <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
+                  <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
                   <Region VBox.vgrow="ALWAYS" />
                   <VBox spacing="15.0">
                      <children>
-                        <Label fx:id="sessionEmailLabel" style="-fx-text-fill: -muted; -fx-font-size: 13px;" text="Session: utilisateur@email.com" />
+                        <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="DECONNEXION" />
                      </children>
                   </VBox>

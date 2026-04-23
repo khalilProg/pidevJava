@@ -9,7 +9,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.Client;
+import tn.esprit.entities.User;
 import tn.esprit.services.CampagneService;
+import tn.esprit.services.ClientService;
+import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,12 +27,15 @@ public class ListeCampagnes extends BaseFront {
     @FXML private VBox emptyState;
 
     private final CampagneService campagneService = new CampagneService();
-    private final Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1));
+    private final ClientService clientService = new ClientService();
     private List<Campagne> campagnes = new ArrayList<>();
 
     @FXML
     public void initialize() {
+        applySessionUser();
+
         try {
+            Client currentClient = resolveCurrentClient();
             campagnes = campagneService.recupererByClient(currentClient);
             renderCampagnes(campagnes);
         } catch (SQLException e) {
@@ -38,6 +44,12 @@ public class ListeCampagnes extends BaseFront {
         }
 
         searchField.textProperty().addListener((obs, oldValue, newValue) -> applyFilter(newValue));
+    }
+
+    private Client resolveCurrentClient() throws SQLException {
+        User user = SessionManager.getCurrentUser();
+        Client client = user == null ? null : clientService.getByUserId(user.getId());
+        return client == null ? new Client(1, "O+", LocalDate.of(2023, 1, 1)) : client;
     }
 
     private void applyFilter(String query) {

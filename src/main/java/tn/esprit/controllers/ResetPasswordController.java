@@ -105,7 +105,7 @@ public class ResetPasswordController {
             Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Connexion");
-            stage.setScene(new Scene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

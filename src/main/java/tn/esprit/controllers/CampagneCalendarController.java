@@ -37,6 +37,7 @@ public class CampagneCalendarController extends BaseFront implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        applySessionUser();
         currentYearMonth = YearMonth.now();
         try {
             allCampagnes = service.recuperer();

@@ -12,51 +12,48 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeEntitesAdmin">
-   <!-- Sidebar -->
-   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
-   
-   <!-- Main Content -->
+<BorderPane prefHeight="900.0" prefWidth="1400.0" styleClass="main-container" stylesheets="@commande.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.ListeEntitesAdmin">
+   <left>
+      <fx:include fx:id="sidebar" source="admin_sidebar.fxml" />
+   </left>
+
    <center>
-      <VBox styleClass="main-content" spacing="35.0" BorderPane.alignment="CENTER">
+      <VBox spacing="35.0" styleClass="main-content" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
          </padding>
-         
-         <!-- Header -->
+
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="Gestion des Entités" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Interface d'administration" />
+               <Label styleClass="admin-page-title" text="Gestion des Entites" />
+               <Label styleClass="admin-page-subtitle" text="Interface d'administration" />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="addBtn" mnemonicParsing="false" text="+ Nouvelle Entité" onAction="#handleAjouter" styleClass="button-primary" />
+            <Button fx:id="addBtn" mnemonicParsing="false" onAction="#handleAjouter" styleClass="button-primary" text="+ Nouvelle Entite" />
          </HBox>
 
-         <VBox styleClass="glass-card" spacing="30.0" VBox.vgrow="ALWAYS">
-            
-            <!-- Filter Section -->
-            <HBox spacing="20.0" alignment="CENTER_LEFT">
-               <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-padding: 5px 15px;">
-                   <Label text="🔍" style="-fx-text-fill: -muted;" />
-                   <TextField fx:id="searchField" styleClass="dark-field" promptText="Rechercher une entité..." HBox.hgrow="ALWAYS" />
+         <VBox spacing="30.0" styleClass="glass-card" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="search-shell" HBox.hgrow="ALWAYS">
+                  <Label styleClass="search-icon" text="Search" />
+                  <TextField fx:id="searchField" promptText="Rechercher une entite..." styleClass="dark-field" HBox.hgrow="ALWAYS" />
                </HBox>
-               <ComboBox fx:id="sortComboBox" styleClass="dark-combo" promptText="Trier" prefWidth="250.0" />
+               <ComboBox fx:id="sortComboBox" prefWidth="250.0" promptText="Trier" styleClass="dark-combo" />
             </HBox>
 
-            <!-- Table -->
-            <TableView fx:id="tableView" VBox.vgrow="ALWAYS" >
+            <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
-                  <TableColumn fx:id="nomColumn" text="NOM" prefWidth="220" />
-                  <TableColumn fx:id="adresseColumn" text="ADRESSE" prefWidth="250" />
-                  <TableColumn fx:id="villeColumn" text="VILLE" prefWidth="180" />
-                  <TableColumn fx:id="telephoneColumn" text="TÉLÉPHONE" prefWidth="180" />
-                  <TableColumn fx:id="actionsColumn" text="ACTIONS" prefWidth="150" />
+                  <TableColumn fx:id="idColumn" prefWidth="60" text="ID" />
+                  <TableColumn fx:id="nomColumn" prefWidth="220" text="NOM" />
+                  <TableColumn fx:id="adresseColumn" prefWidth="250" text="ADRESSE" />
+                  <TableColumn fx:id="villeColumn" prefWidth="180" text="VILLE" />
+                  <TableColumn fx:id="telephoneColumn" prefWidth="180" text="TELEPHONE" />
+                  <TableColumn fx:id="actionsColumn" prefWidth="150" text="ACTIONS" />
                </columns>
             </TableView>
          </VBox>
-         
       </VBox>
    </center>
 </BorderPane>

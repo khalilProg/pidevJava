@@ -49,6 +49,7 @@ public class CampagneFrontController extends BaseFront implements Initializable 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        applySessionUser();
         chargerToutesLesDonnees();
 
         txtRechercheFront.textProperty().addListener((obs, old, newValue) -> appliquerFiltres());

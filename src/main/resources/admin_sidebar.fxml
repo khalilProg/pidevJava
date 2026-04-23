@@ -44,8 +44,8 @@
                 <Region styleClass="logo-icon"/>
             </StackPane>
             <VBox spacing="2">
-                <Label text="admin@bloodlink.tn" styleClass="sidebar-user-email"/>
-                <Label text="Administrateur" styleClass="sidebar-user-role"/>
+                <Label fx:id="sidebarEmailLabel" text="admin@bloodlink.tn" styleClass="sidebar-user-email"/>
+                <Label fx:id="sidebarRoleLabel" text="Administrateur" styleClass="sidebar-user-role"/>
             </VBox>
         </HBox>
         <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" maxWidth="1.7976931348623157E308" onAction="#handleThemeToggle"/>

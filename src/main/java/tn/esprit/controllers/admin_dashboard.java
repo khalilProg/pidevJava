@@ -13,11 +13,13 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import tn.esprit.entities.User;
 import tn.esprit.services.CampagneService;
 import tn.esprit.services.DemandeService;
 import tn.esprit.services.RendezVousService;
 import tn.esprit.services.StockService;
 import tn.esprit.services.UserService;
+import tn.esprit.tools.SessionManager;
 import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class admin_dashboard {
     @FXML private PieChart rdvPieChart;
     @FXML private BarChart<String, Number> demandeBarChart;
     @FXML private BarChart<String, Number> campagneBarChart;
+    @FXML private Label welcomeAdminLabel;
 
     private final UserService userService = new UserService();
     private final DemandeService demandeService = new DemandeService();
@@ -42,6 +45,7 @@ public class admin_dashboard {
 
     @FXML
     public void initialize() {
+        applySessionUser();
         refreshDashboard();
     }
 
@@ -100,6 +104,7 @@ public class admin_dashboard {
 
     @FXML
     void handleLogout(Event event) {
+        SessionManager.clear();
         navigateTo(event, "/login.fxml");
     }
 
@@ -175,14 +180,26 @@ public class admin_dashboard {
 
     private void navigateTo(Event event, String path) {
         try {
+            AdminSidebarController.setCurrentPath(path);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(root);
-            themeManager.applyTheme(stage.getScene());
+            themeManager.setScene(stage, root);
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void applySessionUser() {
+        User user = SessionManager.getCurrentUser();
+        if (user == null || welcomeAdminLabel == null) {
+            return;
+        }
+
+        String firstName = user.getPrenom() == null ? "" : user.getPrenom().trim();
+        String lastName = user.getNom() == null ? "" : user.getNom().trim();
+        String fullName = (firstName + " " + lastName).trim();
+        welcomeAdminLabel.setText("Bienvenue, " + (fullName.isEmpty() ? "Administrateur" : fullName));
     }
 }

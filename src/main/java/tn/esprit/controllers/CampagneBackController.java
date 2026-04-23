@@ -122,7 +122,7 @@ public class CampagneBackController implements Initializable {
             
             Stage stage = new Stage();
             stage.setTitle("Ajouter une Campagne");
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             
@@ -149,7 +149,7 @@ public class CampagneBackController implements Initializable {
             
             Stage stage = new Stage();
             stage.setTitle("Modifier la Campagne");
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             

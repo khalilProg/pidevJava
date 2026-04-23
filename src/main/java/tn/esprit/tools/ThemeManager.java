@@ -5,6 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 import java.util.Collections;
 import java.util.Set;
@@ -39,6 +41,32 @@ public class ThemeManager {
         Scene scene = new Scene(root);
         applyTheme(scene);
         return scene;
+    }
+
+    public void setScene(Stage stage, Parent root) {
+        if (stage == null || root == null) return;
+
+        Scene scene = stage.getScene();
+        boolean wasMaximized = stage.isMaximized();
+        boolean wasFullScreen = stage.isFullScreen();
+
+        if (scene == null) {
+            stage.setScene(createScene(root));
+        } else {
+            scene.setRoot(root);
+            applyTheme(scene);
+        }
+
+        if (wasMaximized || wasFullScreen) {
+            Platform.runLater(() -> {
+                if (wasMaximized) {
+                    stage.setMaximized(true);
+                }
+                if (wasFullScreen) {
+                    stage.setFullScreen(true);
+                }
+            });
+        }
     }
 
     /**

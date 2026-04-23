@@ -7,7 +7,10 @@ import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import tn.esprit.entities.User;
+import tn.esprit.tools.SessionManager;
 import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
@@ -27,13 +30,20 @@ public class AdminSidebarController {
     @FXML private Button btnRendezVous;
     @FXML private Button btnCampagnes;
     @FXML private Button btnCollectes;
+    @FXML private Label sidebarEmailLabel;
+    @FXML private Label sidebarRoleLabel;
 
     private final ThemeManager themeManager = ThemeManager.getInstance();
     private static String currentPath = "/admin_dashboard.fxml";
 
+    public static void setCurrentPath(String path) {
+        currentPath = path;
+    }
+
     @FXML
     public void initialize() {
         Platform.runLater(() -> {
+            applySessionUser();
             if (btnThemeToggle != null && btnThemeToggle.getScene() != null) {
                 themeManager.applyTheme(btnThemeToggle.getScene());
                 themeManager.updateToggleButton(btnThemeToggle);
@@ -52,6 +62,7 @@ public class AdminSidebarController {
 
     @FXML
     void handleLogout(ActionEvent event) {
+        SessionManager.clear();
         navigateTo(event, "/login.fxml");
     }
 
@@ -107,16 +118,45 @@ public class AdminSidebarController {
 
     private void navigateTo(ActionEvent event, String path) {
         try {
-            currentPath = path;
+            setCurrentPath(path);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(root);
-            themeManager.applyTheme(stage.getScene());
+            themeManager.setScene(stage, root);
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void applySessionUser() {
+        User user = SessionManager.getCurrentUser();
+        if (user == null) {
+            return;
+        }
+
+        if (sidebarEmailLabel != null) {
+            sidebarEmailLabel.setText(user.getEmail() == null || user.getEmail().isBlank()
+                    ? buildDisplayName(user)
+                    : user.getEmail());
+        }
+        if (sidebarRoleLabel != null) {
+            sidebarRoleLabel.setText(formatRole(user.getRole()));
+        }
+    }
+
+    private String buildDisplayName(User user) {
+        String firstName = user.getPrenom() == null ? "" : user.getPrenom().trim();
+        String lastName = user.getNom() == null ? "" : user.getNom().trim();
+        String fullName = (firstName + " " + lastName).trim();
+        return fullName.isEmpty() ? "Administrateur" : fullName;
+    }
+
+    private String formatRole(String role) {
+        if (role == null || role.isBlank()) {
+            return "Administrateur";
+        }
+        return role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase();
     }
 
     private void updateActiveNavigation() {

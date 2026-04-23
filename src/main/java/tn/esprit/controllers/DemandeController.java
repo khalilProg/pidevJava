@@ -143,7 +143,7 @@ public class DemandeController {
             controller.setMainController(this);
 
             Stage stage = new Stage();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
 
         } catch (Exception e) {
@@ -159,7 +159,7 @@ public class DemandeController {
             controller.setEditData(d); // 🔥 on envoie les données
 
             Stage stage = new Stage();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
 
         } catch (Exception e) {
@@ -188,7 +188,7 @@ public class DemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableDemande.getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -201,7 +201,7 @@ public class DemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (Exception e) {
             e.printStackTrace();

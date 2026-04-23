@@ -191,7 +191,7 @@ public class ForgotPasswordController {
             controller.initData(currentUserId, tokenId);
             
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -205,7 +205,7 @@ public class ForgotPasswordController {
             Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Connexion");
-            stage.setScene(new Scene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -121,7 +121,7 @@ public class ValidateDemandeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DemandeBackView.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) lblId.getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,7 +156,7 @@ public class ValidateDemandeController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

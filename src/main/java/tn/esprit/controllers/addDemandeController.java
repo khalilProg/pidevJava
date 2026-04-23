@@ -210,7 +210,7 @@ public class addDemandeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DemandeBackView.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) txtQuantite.getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
         } catch (Exception e) {
             e.printStackTrace();
         }

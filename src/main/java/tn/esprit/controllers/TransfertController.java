@@ -186,7 +186,7 @@ public class TransfertController {
             controller.setDemande(demande);
 
             Stage stage = new Stage();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
 
         } catch (Exception e) {
@@ -202,7 +202,7 @@ public class TransfertController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableTransfert.getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -202,7 +202,7 @@ public class backDemandeController {
                         controller.setDemandeData(d);
 
                         Stage stage = (Stage) tableDemande.getScene().getWindow();
-                        stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                        tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -260,7 +260,7 @@ public class backDemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableDemande.getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -274,7 +274,7 @@ public class backDemandeController {
             Parent root = loader.load();
 
             Stage stage = (Stage) tableDemande.getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -331,7 +331,7 @@ public class backDemandeController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

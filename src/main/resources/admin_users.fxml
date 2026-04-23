@@ -16,7 +16,7 @@
       <VBox styleClass="main-content" spacing="25.0" BorderPane.alignment="CENTER">
          <padding><Insets bottom="40.0" left="40.0" right="40.0" top="40.0" /></padding>
          <HBox alignment="CENTER_LEFT">
-            <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="UTILISATEURS" />
+            <Label styleClass="admin-page-title" text="UTILISATEURS" />
             <Region HBox.hgrow="ALWAYS" />
             <Button text="AJOUTER UTILISATEUR" onAction="#handleNavigateAddUser" styleClass="button-primary" />
          </HBox>

@@ -100,7 +100,7 @@
    <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
       <children>
          <!-- Clickable background to close -->
-         <Region onMouseClicked="#handleMenuClose" style="-fx-background-color: rgba(0,0,0,0.6);" HBox.hgrow="ALWAYS" />
+         <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
          <!-- Menu Panel -->
          <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
             <padding>
@@ -110,22 +110,22 @@
                <!-- Close -->
                <HBox alignment="CENTER_RIGHT">
                   <children>
-                     <Button mnemonicParsing="false" onAction="#handleMenuToggle" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 800; -fx-cursor: hand;" text="FERMER ✕" />
+                     <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
                   </children>
                </HBox>
                <Region prefHeight="20.0" />
                <!-- Menu Links -->
-               <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" style="-fx-text-fill: -primary;" text="ACCUEIL" />
+               <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
                <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
                <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
-               <Button mnemonicParsing="false" styleClass="menu-link" style="-fx-text-fill: -primary;" text="MON PROFIL" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
                <Region VBox.vgrow="ALWAYS" />
                <!-- Session Info -->
                <VBox spacing="15.0">
                   <children>
-                     <Label fx:id="sessionEmailLabel" style="-fx-text-fill: -muted; -fx-font-size: 13px;" text="BloodLink Session" />
+                     <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="BloodLink Session" />
                      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 20; -fx-cursor: hand;" text="⏻ Déconnexion" />
                   </children>
                </VBox>

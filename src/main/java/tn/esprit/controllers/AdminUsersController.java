@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 import tn.esprit.entities.User;
 import tn.esprit.services.UserService;
+import tn.esprit.tools.ThemeManager;
 
 public class AdminUsersController implements Initializable {
 
@@ -40,6 +41,7 @@ public class AdminUsersController implements Initializable {
 
     private List<User> allUsers = new ArrayList<>();
     private boolean sortAscending = true;
+    private final ThemeManager themeManager = ThemeManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -106,7 +108,7 @@ public class AdminUsersController implements Initializable {
 
     private HBox createRow(User u) {
         HBox row = new HBox(20);
-        row.setStyle("-fx-padding: 15 20; -fx-background-color: transparent; -fx-border-color: transparent transparent rgba(255,255,255,0.05) transparent; -fx-border-width: 0 0 1 0; -fx-alignment: center-left;");
+        row.getStyleClass().add("admin-user-row");
 
         // Info: Identifier
         HBox userInfoBox = new HBox(15);
@@ -114,28 +116,28 @@ public class AdminUsersController implements Initializable {
         userInfoBox.setStyle("-fx-alignment: center-left;");
         
         Label initials = new Label(u.getPrenom() != null && !u.getPrenom().isEmpty() ? u.getPrenom().substring(0,1).toUpperCase() : "?");
-        initials.setStyle("-fx-background-color: rgba(255,255,255,0.05); -fx-text-fill: white; -fx-font-weight: bold; -fx-min-width: 40; -fx-min-height: 40; -fx-alignment: center; -fx-background-radius: 20;");
+        initials.getStyleClass().add("admin-user-initials");
         
         VBox namesBox = new VBox(2);
         Label nameLbl = new Label(u.getPrenom() + " " + u.getNom());
-        nameLbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
+        nameLbl.getStyleClass().add("admin-user-name");
         Label idLbl = new Label("ID " + u.getId());
-        idLbl.setStyle("-fx-text-fill: -muted; -fx-font-size: 10px;");
+        idLbl.getStyleClass().add("admin-user-id");
         namesBox.getChildren().addAll(nameLbl, idLbl);
         
         userInfoBox.getChildren().addAll(initials, namesBox);
 
         // Email
         Label emailLbl = new Label(u.getEmail());
-        emailLbl.setStyle("-fx-text-fill: -muted; -fx-font-size: 12px;");
+        emailLbl.getStyleClass().add("admin-user-email");
         emailLbl.setPrefWidth(250.0);
 
         // Role Badge
         Label roleLbl = new Label(u.getRole() != null ? u.getRole().toUpperCase() : "UNKNOWN");
         if ("admin".equalsIgnoreCase(u.getRole())) {
-            roleLbl.setStyle("-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 10px; -fx-padding: 5 12; -fx-background-radius: 12;");
+            roleLbl.getStyleClass().add("role-badge-admin");
         } else {
-            roleLbl.setStyle("-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 12; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 10px; -fx-padding: 4 12;");
+            roleLbl.getStyleClass().add("role-badge-secondary");
         }
         HBox roleBox = new HBox(roleLbl);
         roleBox.setPrefWidth(150.0);
@@ -172,7 +174,7 @@ public class AdminUsersController implements Initializable {
             AdminUsersViewController controller = loader.getController();
             controller.initData(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to user profile: " + e.getMessage());
@@ -188,7 +190,7 @@ public class AdminUsersController implements Initializable {
                 AdminUsersEditClientController controller = loader.getController();
                 controller.initData(user, null);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             } else if ("agent banque".equalsIgnoreCase(user.getRole())) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit_banque.fxml"));
@@ -196,7 +198,7 @@ public class AdminUsersController implements Initializable {
                 AdminUsersEditBanqueController controller = loader.getController();
                 controller.initData(user, null);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             } else {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_edit.fxml"));
@@ -204,7 +206,7 @@ public class AdminUsersController implements Initializable {
                 AdminUsersEditController controller = loader.getController();
                 controller.initData(user);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             }
         } catch (IOException e) {
@@ -273,9 +275,10 @@ public class AdminUsersController implements Initializable {
 
     private void navigateTo(ActionEvent event, String path) {
         try {
+            AdminSidebarController.setCurrentPath(path);
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            themeManager.setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());

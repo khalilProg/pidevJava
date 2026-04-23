@@ -114,7 +114,7 @@ public class AdminUsersAddController implements Initializable {
                 AdminUsersCompleteClientController controller = loader.getController();
                 controller.initData(newUser);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             } else if ("agent banque".equalsIgnoreCase(role)) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/admin_users_complete_banque.fxml"));
@@ -122,7 +122,7 @@ public class AdminUsersAddController implements Initializable {
                 AdminUsersCompleteBanqueController controller = loader.getController();
                 controller.initData(newUser);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+                tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                 stage.show();
             } else {
                 navigateTo(event, "/admin_users.fxml");
@@ -177,7 +177,7 @@ public class AdminUsersAddController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(path));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(tn.esprit.tools.ThemeManager.getInstance().createScene(root));
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
             System.err.println("Failed to navigate to " + path + ": " + e.getMessage());

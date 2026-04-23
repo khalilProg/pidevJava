@@ -4,10 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17"
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tn.esprit.controllers.AjoutCommandeController"
-            styleClass="main-container">
+            fx:controller="tn.esprit.controllers.AjoutCommandeController">
+    <children>
+<BorderPane styleClass="main-container">
 
     <top>
         <HBox styleClass="nav-bar" alignment="CENTER_LEFT">
@@ -17,6 +18,8 @@
             </HBox>
             <Region HBox.hgrow="ALWAYS"/>
             <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" onAction="#handleThemeToggle"/>
+            <Region prefWidth="12"/>
+            <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU &#9776;" />
             <Region prefWidth="12"/>
             <Button text="👤  chaffai yassine" styleClass="user-badge"/>
         </HBox>
@@ -91,4 +94,38 @@
             </VBox>
         </ScrollPane>
     </center>
-</BorderPane>
+        </BorderPane>
+
+        <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+            <children>
+                <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+                <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_RIGHT">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
+                            </children>
+                        </HBox>
+                        <Region prefHeight="20.0" />
+                        <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+                        <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
+                        <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" style="-fx-text-fill: -primary;" text="COMMANDES" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
+                        <Region VBox.vgrow="ALWAYS" />
+                        <VBox spacing="15.0">
+                            <children>
+                                <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
+                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="DECONNEXION" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</StackPane>

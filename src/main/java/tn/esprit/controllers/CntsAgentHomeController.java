@@ -2,6 +2,7 @@ package tn.esprit.controllers;
 
 import javafx.fxml.FXML;
 import tn.esprit.entities.User;
+import tn.esprit.tools.SessionManager;
 
 public class CntsAgentHomeController extends CampagneFrontController {
 
@@ -9,14 +10,8 @@ public class CntsAgentHomeController extends CampagneFrontController {
 
     public void initData(User user) {
         this.currentUser = user;
-        if (user != null) {
-            if (userNameBtn != null) {
-                userNameBtn.setText("User " + user.getPrenom() + " " + user.getNom());
-            }
-            if (sessionEmailLabel != null) {
-                sessionEmailLabel.setText("Session: " + user.getEmail());
-            }
-        }
+        SessionManager.setCurrentUser(user);
+        applySessionUser();
     }
 
     @FXML
