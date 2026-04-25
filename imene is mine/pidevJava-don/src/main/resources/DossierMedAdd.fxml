@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefWidth="600.0" prefHeight="750.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.DossierMedAddController">
+    <stylesheets><URL value="@style.css" /></stylesheets>
+
+    <VBox alignment="CENTER">
+        <VBox styleClass="form-card" maxWidth="500" spacing="20">
+            <padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
+            <VBox alignment="CENTER" spacing="5">
+                <Label styleClass="stat-card-title" style="-fx-font-size:26px;" text="New Medical Profile" />
+                <Label styleClass="hero-description" text="Please ensure patient consents to systemic storage." />
+            </VBox>
+
+            <Separator style="-fx-opacity:0.1;"/>
+
+            <GridPane hgap="15" vgap="18">
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+                    <Label styleClass="form-label" text="1. SELECT PATIENT ID" />
+                    <ComboBox fx:id="clientBox" promptText="Choose existing patient..." styleClass="combo-box" maxWidth="Infinity" />
+                </VBox>
+
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="GIVEN NAME" />
+                    <TextField fx:id="prenomField" promptText="Auto-fills..." styleClass="dark-input" />
+                </VBox>
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="FAMILY NAME" />
+                    <TextField fx:id="nomField" promptText="Auto-fills..." styleClass="dark-input" />
+                </VBox>
+
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label styleClass="form-label" text="BODY MASS (KG)" />
+                    <TextField fx:id="poidField" promptText="75.5" styleClass="dark-input" />
+                </VBox>
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label styleClass="form-label" text="VERTICAL (CM)" />
+                    <TextField fx:id="tailleField" promptText="180.0" styleClass="dark-input" />
+                </VBox>
+
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <Label styleClass="form-label" text="AGE METRIC" />
+                    <TextField fx:id="ageField" promptText="28" styleClass="dark-input" />
+                </VBox>
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <Label styleClass="form-label" text="BIO-TYPE" />
+                    <TextField fx:id="bloodTypeField" promptText="A+" styleClass="dark-input" />
+                </VBox>
+
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2">
+                    <Label styleClass="form-label" text="2. LINKED DONATION LOG" />
+                    <ComboBox fx:id="donBox" promptText="Select Donation..." styleClass="combo-box" maxWidth="Infinity" />
+                </VBox>
+            </GridPane>
+
+            <Region VBox.vgrow="ALWAYS" />
+            <HBox spacing="15">
+                <Button onAction="#closeWindow" styleClass="btn-outline" text="Cancel" minWidth="120" alignment="CENTER"/>
+                <Button onAction="#handleAddFolder" styleClass="btn-prime-home" text="Finalize File" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+            </HBox>
+        </VBox>
+    </VBox>
+</StackPane>

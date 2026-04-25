@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+
+<StackPane fx:id="rootPane" prefHeight="750.0" prefWidth="1250.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.FrontMedicalController">
+    <stylesheets><URL value="@Front.css" /></stylesheets>
+
+    <VBox>
+        <HBox styleClass="navbar-top" alignment="CENTER">
+            <Label styleClass="brand-text" text="BLOODLINK" />
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox spacing="20" alignment="CENTER">
+                <Button styleClass="nav-link-active" text="My Profile" />
+                <Button onAction="#goToMyDonations" styleClass="nav-link" text="Donations" />
+                <HBox styleClass="user-pill" alignment="CENTER">
+                    <Circle radius="12" fill="#e63939" />
+                    <Label styleClass="user-name-label" text="Patient Profile" />
+                </HBox>
+            </HBox>
+        </HBox>
+
+        <VBox alignment="CENTER" spacing="30" VBox.vgrow="ALWAYS">
+            <VBox prefWidth="600" maxWidth="600" styleClass="form-card" spacing="25">
+                <padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
+                <Label styleClass="hero-title" text="Medical Data" style="-fx-font-size: 32px;" />
+
+                <GridPane hgap="20" vgap="20">
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label styleClass="form-label" text="FIRST NAME" />
+                        <TextField fx:id="prenomField" styleClass="dark-input" />
+                    </VBox>
+                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label styleClass="form-label" text="LAST NAME" />
+                        <TextField fx:id="nomField" styleClass="dark-input" />
+                    </VBox>
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Label styleClass="form-label" text="AGE" />
+                        <TextField fx:id="ageField" styleClass="dark-input" />
+                    </VBox>
+                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label styleClass="form-label" text="BLOOD TYPE" />
+                        <TextField fx:id="bloodTypeField" styleClass="dark-input" />
+                    </VBox>
+                </GridPane>
+
+                <Button onAction="#handleUpdateProfile" styleClass="btn-cta" text="Update My Records" maxWidth="Infinity" />
+            </VBox>
+        </VBox>
+    </VBox>
+</StackPane>

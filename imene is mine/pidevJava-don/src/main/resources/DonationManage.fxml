@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+
+<StackPane prefWidth="550.0" prefHeight="650.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.DonationManageController">
+    <stylesheets><URL value="@style.css" /></stylesheets>
+
+    <!-- Aggressive alert style background glow since modifying critical supply chain elements -->
+    <Circle radius="400.0" fill="#FF5252" opacity="0.04" StackPane.alignment="CENTER" />
+
+    <VBox alignment="CENTER">
+        <VBox styleClass="form-card" style="-fx-border-color:#ff3e3e33;" maxWidth="450" spacing="20">
+            <padding><Insets bottom="35" left="35" right="35" top="35" /></padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <VBox styleClass="icon-box-red" alignment="CENTER" minHeight="45" minWidth="45">
+                    <Label style="-fx-font-weight:900; -fx-text-fill:#ff3e3e; -fx-font-size:22;" text="!" />
+                </VBox>
+                <VBox>
+                    <Label styleClass="stat-card-title" text="Modify Protocol" />
+                    <Label fx:id="donHeaderIdInfo" styleClass="hero-description" text="Tracking Number #9880" />
+                </VBox>
+            </HBox>
+            <Separator style="-fx-opacity: 0.1;" />
+
+            <VBox spacing="15">
+                <HBox spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label styleClass="form-label" text="OVERRIDE VOLUME (mL)" />
+                        <TextField fx:id="qteField" styleClass="dark-input" />
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label styleClass="form-label" text="CORRECTED CATEGORY" />
+                        <TextField fx:id="typeField" styleClass="dark-input" />
+                    </VBox>
+                </HBox>
+                <Label styleClass="error-text" text="Warning: Amending medical volume alters historical API data tracking globally." wrapText="true" />
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <VBox spacing="15">
+                <Button onAction="#handleUpdateDonation" styleClass="btn-prime-home" text="Enact Data Changes" maxWidth="Infinity" />
+                <!-- Button configured to use outline, maintaining aesthetic but emphasizing Destructive intent -->
+                <Button onAction="#handleDeleteDonation" style="-fx-border-color:#4a0f0f; -fx-text-fill:#cc4545; -fx-font-weight:bold; -fx-background-radius:12; -fx-border-radius:12;" text="Purge Record Safely" maxWidth="Infinity" styleClass="btn-outline"/>
+            </VBox>
+        </VBox>
+    </VBox>
+</StackPane>
