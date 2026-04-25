@@ -37,6 +37,13 @@
                     <children>
                         <VBox spacing="10.0">
                             <children>
+                                <Label styleClass="stat-card-subtitle" text="Entité de collecte" />
+                                <ComboBox fx:id="entiteCombo" prefWidth="500.0" promptText="Sélectionnez une entité de collecte" />
+                                <Text fx:id="entiteError" fill="#FF3E3E" styleClass="error-text" visible="false" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="10.0">
+                            <children>
                                 <Label styleClass="stat-card-subtitle" text="Date et heure du rendez-vous" />
                                 <HBox alignment="CENTER_LEFT" spacing="15.0">
                                     <children>
@@ -57,14 +64,6 @@
                                        <Text fx:id="timeError" fill="#FF3E3E" styleClass="error-text" visible="false" />
                                    </children>
                                 </VBox>
-                            </children>
-                        </VBox>
-
-                        <VBox spacing="10.0">
-                            <children>
-                                <Label styleClass="stat-card-subtitle" text="Entité de collecte" />
-                                <ComboBox fx:id="entiteCombo" prefWidth="500.0" promptText="Sélectionnez une entité de collecte" />
-                                <Text fx:id="entiteError" fill="#FF3E3E" styleClass="error-text" visible="false" />
                             </children>
                         </VBox>
 

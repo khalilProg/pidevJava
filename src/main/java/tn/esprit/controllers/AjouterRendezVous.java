@@ -32,8 +32,8 @@ public class AjouterRendezVous {
     @FXML private ComboBox<EntiteDeCollecte> entiteCombo;
     private ObservableList<EntiteDeCollecte> entites = FXCollections.observableArrayList();
     User u = new User(9,"chaffai", "yassine", "wajdbenhajyahia18@gmail.com");
-    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
-    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
+    private Client currentClient1 = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
+    private Client currentClient = new Client(4, "A-", LocalDate.of(2003, 10, 17), u);
 
     public void setCampagne(Campagne campagne) {
         this.campagne=campagne;
@@ -44,7 +44,12 @@ public class AjouterRendezVous {
         minuteSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
 
         entiteCombo.setItems(entites);
-
+// Update the DatePicker whenever the entity changes
+        entiteCombo.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                setupDatePickerConstraints(newVal.getId());
+            }
+        });
         entiteCombo.setCellFactory(c -> new javafx.scene.control.ListCell<EntiteDeCollecte>() {
             @Override
             protected void updateItem(EntiteDeCollecte item, boolean empty) {
@@ -262,4 +267,57 @@ public class AjouterRendezVous {
             }
         });
     }
+    private void setupDatePickerConstraints(int entiteId) {
+        try {
+            // Fetch all appointments and the current campaign ID
+            List<RendezVous> allRdvs = new RendezVousService().recuperer();
+            int currentCampagneId = this.campagne.getId();
+            QuestionnaireService qService = new QuestionnaireService();
+
+            dateRdv.setDayCellFactory(picker -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) return;
+
+                    // 1. Range Validation
+                    boolean isOutOfRange = item.isBefore(LocalDate.now()) ||
+                            item.isBefore(campagne.getDateDebut()) ||
+                            item.isAfter(campagne.getDateFin());
+
+                    // 2. Strict Filter: Same Entity AND Same Campaign
+                    long count = allRdvs.stream()
+                            .filter(r -> {
+                                try {
+                                    // Filter by Entity ID
+                                    if (r.getEntite_id() != entiteId) return false;
+
+                                    // Filter by Date
+                                    if (!r.getDateDon().toLocalDate().equals(item)) return false;
+
+                                    // Filter by Campaign ID (via the Questionnaire)
+                                    Questionnaire q = qService.getQuestionnaireById(r.getQuestionnaire_id());
+                                    return q != null && q.getCampagneId() == currentCampagneId;
+
+                                } catch (SQLException e) {
+                                    return false;
+                                }
+                            })
+                            .count();
+
+                    if (isOutOfRange || count >= 18) {
+                        setDisable(true);
+                        if (count >= 18) {
+                            setStyle("-fx-background-color: #d3d3d3; -fx-text-fill: #808080;");
+                            setTooltip(new Tooltip("Limite atteinte pour cette campagne (18/18)"));
+                        }
+                    }
+                }
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

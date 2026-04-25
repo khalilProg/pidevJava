@@ -28,8 +28,8 @@ public class AjouterQuestionnaire {
     @FXML private Text sexeError;
     @FXML private Text poidsError;
     User u = new User(9,"chaffai", "yassine", "yassinechaffai4@gmail.com");
-    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
-    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
+    private Client currentClient1 = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
+    private Client currentClient = new Client(4, "A-", LocalDate.of(2003, 10, 17), u);
 
 
     public void setCampagne(Campagne c) {
