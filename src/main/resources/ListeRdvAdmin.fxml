@@ -23,7 +23,7 @@
         <font><Font size="32.0"/></font>
     </Text>
     <Button fx:id="generateReportBtn" text="Generate PDF Report"
-            layoutX="900" layoutY="130"
+            layoutX="950" layoutY="130"
             styleClass="btn-primary-modern"
             onAction="#handleGenerateReport"/>
     <Button fx:id="exportBtn" text="Export Excel" layoutX="700" layoutY="130" styleClass="btn-primary-modern" onAction="#handleExport" AnchorPane.leftAnchor="1300"/>
@@ -40,11 +40,11 @@
                 <TableView fx:id="tableView" prefWidth="1200" prefHeight="520">
                     <columns>
                         <!--                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>-->
-                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="150"/>
-                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="150"/>
+                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="180"/>
+                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="180"/>
                         <!--                    <TableColumn fx:id="qIdColumn" text="Questionnaire id" prefWidth="150"/>-->
-                        <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="150"/>
-                        <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="200"/>
+                        <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="180"/>
+                        <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="210"/>
                     </columns>
                 </TableView>
 <!--                <BarChart fx:id="rdvChart" title="Rendez-vous de la Semaine">-->

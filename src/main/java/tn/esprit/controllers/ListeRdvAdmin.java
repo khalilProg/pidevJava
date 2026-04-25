@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListeRdvAdmin {
@@ -38,8 +39,8 @@ public class ListeRdvAdmin {
     @FXML private TableColumn<RendezVous, Void> actionsColumn;
     private final RendezVousService rdvService = new RendezVousService();
     @FXML private Button exportBtn;
-    @FXML private BarChart<String, Integer> rdvChart;
     @FXML private TableView<RendezVous> rdvTable;
+    @FXML private Button generateReportBtn;
 
     @FXML public void initialize() {
         try {
@@ -265,53 +266,30 @@ public class ListeRdvAdmin {
 
     @FXML
     private void handleGenerateReport() {
-        ObservableList<RendezVous> filteredRdvs = tableView.getItems(); // filtered based on selected date
-        if (filteredRdvs.isEmpty()) {
-            new Alert(Alert.AlertType.WARNING, "Aucune donnée disponible pour le rapport !").showAndWait();
+        ObservableList<RendezVous> displayedRdvs = tableView.getItems();
+        if (displayedRdvs.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Aucune donnée à inclure dans le rapport !").show();
             return;
         }
 
-        try {
-            // Map each rendez-vous to include Questionnaire data
-            List<RendezVous> rdvWithQuestionnaire = filteredRdvs.stream().toList();
+        String filePath = System.getProperty("user.home") + "/Desktop/RendezVousReport.pdf";
 
-            // Generate PDF report
-            String filePath = System.getProperty("user.home") + "/Desktop/RendezVousReport.pdf";
-            new AiReportService().generatePdfReport(rdvWithQuestionnaire, filePath);
+        // Run in background thread to avoid freezing UI
+        new Thread(() -> {
+            try {
+                new AiReportService().generatePdfReport(new ArrayList<>(displayedRdvs), filePath);
 
-            new Alert(Alert.AlertType.INFORMATION, "Rapport généré avec succès à : " + filePath).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Erreur lors de la génération du rapport : " + e.getMessage()).show();
-        }
+                javafx.application.Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Report generated successfully at: " + filePath);
+                    alert.show();
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                javafx.application.Platform.runLater(() -> {
+                    new Alert(Alert.AlertType.ERROR, "Failed to generate report: " + e.getMessage()).show();
+                });
+            }
+        }).start();
     }
-
-//    public void updateChart() {
-//        XYChart.Series<String, Integer> series = new XYChart.Series<>();
-//        series.setName("Rendez-vous");
-//
-//        // 1. Initialize a Map for the 7 days of the week
-//        Map<String, Integer> stats = new LinkedHashMap<>();
-//        String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-//        for (String day : days) stats.put(day, 0);
-//
-//        // 2. Optimized: One pass through the existing table data
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE", Locale.ENGLISH);
-//
-//        for (RendezVous rdv : rdvTable.getItems()) {
-//            // Only count if it's within the current week (optional logic)
-//            String dayName = rdv.getDate().format(formatter); // e.g. "Mon"
-//            if (stats.containsKey(dayName)) {
-//                stats.put(dayName, stats.get(dayName) + 1);
-//            }
-//        }
-//
-//        // 3. Populate the series
-//        stats.forEach((day, count) -> {
-//            series.getData().add(new XYChart.Data<>(day, count));
-//        });
-//
-//        rdvChart.getData().clear();
-//        rdvChart.getData().add(series);
-//    }
 }

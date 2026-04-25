@@ -1,264 +1,255 @@
 package tn.esprit.services;
 
-import com.lowagie.text.*;
-import com.lowagie.text.Font;
-import com.lowagie.text.pdf.PdfWriter;
-import okhttp3.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import tn.esprit.controllers.ConfigLoader;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.entities.RendezVous;
 
-import java.io.*;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfWriter;
+import okhttp3.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class AiReportService {
 
-    private static final String API_KEY  = ConfigLoader.get("GEMINI_API_KEY");
-    private static final String MODEL    = "gemini-2.5-flash";   // stable + disponible
-    private static final String BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/";
-    private static final String GEMINI_URL = BASE_URL + MODEL + ":generateContent?key=" + API_KEY;
+    private static final String API_KEY = ConfigLoader.get("GEMINI_API_KEY");
+    private static final String GEMINI_MODEL = "gemini-2.5-flash";
+    private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1/models/" + GEMINI_MODEL + ":generateContent";
+    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    private static final MediaType JSON_TYPE = MediaType.get("application/json; charset=utf-8");
-
-    // Timeout plus long car le prompt est volumineux
-    private static final OkHttpClient CLIENT = new OkHttpClient.Builder()
+    private final OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .build();
 
-    private final QuestionnaireService    questionnaireService    = new QuestionnaireService();
-    private final EntiteCollecteService   entiteCollecteService   = new EntiteCollecteService();
+    private final QuestionnaireService qsService = new QuestionnaireService();
 
-    // ─────────────────────────────────────────────
-    //  Point d'entrée principal
-    // ─────────────────────────────────────────────
     public void generatePdfReport(List<RendezVous> rdvs, String filePath) throws Exception {
+        if (rdvs == null || rdvs.isEmpty()) throw new IllegalArgumentException("Liste vide !");
+        if (filePath == null || filePath.isBlank()) throw new IllegalArgumentException("Chemin PDF invalide !");
 
-        if (rdvs == null || rdvs.isEmpty())
-            throw new IllegalArgumentException("La liste des rendez-vous est vide.");
-        if (filePath == null || filePath.isBlank())
-            throw new IllegalArgumentException("Chemin PDF invalide.");
+        // Build raw data
+        StringBuilder data = new StringBuilder();
+        int index = 1;
+        for (RendezVous rdv : rdvs) {
+            Questionnaire q = qsService.getQuestionnaireById(rdv.getQuestionnaire_id());
+            String nom = (q != null) ? q.getNom() : "Inconnu";
+            String prenom = (q != null) ? q.getPrenom() : "";
+            String age = (q != null) ? String.valueOf(q.getAge()) : "N/A";
+            String sexe = (q != null) ? q.getSexe() : "N/A";
+            String poids = (q != null) ? String.valueOf(q.getPoids()) : "N/A";
+            String groupe = (q != null) ? q.getGroupeSanguin() : "N/A";
+            String autres = (q != null) ? q.getAutres() : "Aucune";
 
-        // 1. Construire les données brutes
-        String rawData = buildRawData(rdvs);
-
-        // 2. Appel Gemini avec retry
-        String aiText = callGeminiWithRetry(buildPrompt(rawData));
-
-        // 3. Fallback si Gemini échoue
-        if (aiText == null || aiText.isBlank()) {
-            aiText = "Rapport généré sans IA (aucune réponse reçue).\n\n" + rawData;
+            data.append("--- RDV #").append(index++).append(" ---\n")
+                    .append("Nom : ").append(nom).append("\n")
+                    .append("Prénom : ").append(prenom).append("\n")
+                    .append("Âge : ").append(age).append("\n")
+                    .append("Sexe : ").append(sexe).append("\n")
+                    .append("Poids : ").append(poids).append("\n")
+                    .append("Groupe sanguin : ").append(groupe).append("\n")
+                    .append("Autres infos : ").append(autres).append("\n")
+                    .append("Date : ").append(rdv.getDateDon()).append("\n")
+                    .append("Statut : ").append(rdv.getStatus()).append("\n\n");
         }
 
-        // 4. Écriture PDF
-        writePdf(filePath, aiText);
-    }
+        // Build prompt for AI
+        String prompt = """
+                Tu es un expert en analyse médicale pour une plateforme de don de sang.
+                Génère un rapport professionnel et structuré en français basé sur les données de rendez-vous fournies.
+                
+                STRUCTURE DU RAPPORT :
+                1. RÉSUMÉ ANALYTIQUE : Un aperçu global de la situation (nombre de donneurs, groupes sanguins représentés).
+                2. ANALYSE DES DONNEURS : Points saillants sur les profils (âge moyen, poids, contre-indications potentielles).
+                3. RECOMMANDATIONS : Conseils pour l'organisation des prochaines collectes.
+                4. CONCLUSION : Un mot de fin professionnel.
+                
+                IMPORTANT : Ne retourne QUE le texte du rapport, sans introduction méta (ex: "Voici le rapport...").
+                
+                DONNÉES :
+                """ + data;
 
-    // ─────────────────────────────────────────────
-    //  Construction des données brutes
-    // ─────────────────────────────────────────────
-    private String buildRawData(List<RendezVous> rdvs) {
-        StringBuilder sb = new StringBuilder();
-        int index = 1;
+        // Calculate KPIs for the summary box
+        int totalRdvs = rdvs.size();
+        double totalAge = 0;
+        java.util.Set<String> groups = new java.util.HashSet<>();
+        int countWithAge = 0;
 
         for (RendezVous rdv : rdvs) {
-            try {
-                Questionnaire q = questionnaireService.getQuestionnaireById(rdv.getQuestionnaire_id());
-                String entite   = entiteCollecteService.getEntiteById(rdv.getEntite_id()).getNom();
-
-                sb.append("--- Rendez-vous #").append(index++).append(" ---\n");
-                sb.append("Nom          : ").append(safe(q.getNom())).append('\n');
-                sb.append("Prénom       : ").append(safe(q.getPrenom())).append('\n');
-                sb.append("Âge          : ").append(safe(q.getAge())).append('\n');
-                sb.append("Sexe         : ").append(safe(q.getSexe())).append('\n');
-                sb.append("Poids        : ").append(safe(q.getPoids())).append(" kg\n");
-                sb.append("Groupe sanguin: ").append(safe(q.getGroupeSanguin())).append('\n');
-                sb.append("Autres infos : ").append(safe(q.getAutres())).append('\n');
-                sb.append("Date         : ").append(safe(rdv.getDateDon())).append('\n');
-                sb.append("Statut       : ").append(safe(rdv.getStatus())).append('\n');
-                sb.append("Entité       : ").append(safe(entite)).append('\n');
-                sb.append('\n');
-
-            } catch (Exception e) {
-                sb.append("--- Rendez-vous #").append(index++).append(" (erreur lecture) ---\n\n");
+            Questionnaire q = qsService.getQuestionnaireById(rdv.getQuestionnaire_id());
+            if (q != null) {
+                if (q.getAge() > 0) {
+                    totalAge += q.getAge();
+                    countWithAge++;
+                }
+                if (q.getGroupeSanguin() != null && !q.getGroupeSanguin().isBlank()) {
+                    groups.add(q.getGroupeSanguin());
+                }
             }
         }
-        return sb.toString();
+        double avgAge = countWithAge > 0 ? totalAge / countWithAge : 0;
+        String groupList = groups.isEmpty() ? "N/A" : String.join(" / ", groups);
+
+        // Call Gemini API
+        String aiText = callGemini(prompt);
+
+        // Write PDF locally with KPIs
+        writePdf(filePath, aiText, totalRdvs, avgAge, groupList);
     }
 
-    // ─────────────────────────────────────────────
-    //  Prompt Gemini
-    // ─────────────────────────────────────────────
-    private String buildPrompt(String rawData) {
-        return """
-                Tu es un assistant médical professionnel pour une plateforme de don de sang.
-                Génère un rapport professionnel en français basé sur les données suivantes.
+    private String callGemini(String text) throws Exception {
+        JSONObject body = new JSONObject();
+        
+        // Structure for Gemini generateContent: { "contents": [{ "parts": [{ "text": "..." }] }] }
+        JSONObject part = new JSONObject().put("text", text);
+        JSONArray parts = new JSONArray().put(part);
+        JSONObject content = new JSONObject().put("parts", parts);
+        JSONArray contents = new JSONArray().put(content);
+        
+        body.put("contents", contents);
 
-                Le rapport doit contenir :
-                1. Un titre : "Rapport des Rendez-Vous — Don de Sang"
-                2. Un résumé global (nombre total, répartition confirmés/annulés, groupes sanguins présents)
-                3. Une liste structurée de chaque rendez-vous
-                4. Une analyse courte (tendances, observations)
-                5. Une conclusion formelle
-
-                Règles :
-                - Ton formel et professionnel
-                - Répondre uniquement en français
-                - Ne pas inventer de données absentes
-                - Texte brut uniquement, pas de markdown
-
-                Données :
-                """ + rawData;
-    }
-
-    // ─────────────────────────────────────────────
-    //  Appel Gemini avec retry automatique
-    // ─────────────────────────────────────────────
-    private String callGeminiWithRetry(String prompt) throws IOException {
-        if (API_KEY == null || API_KEY.isBlank())
-            throw new IOException("Clé API Gemini manquante dans config.properties.");
-
-        int     maxRetries  = 3;
-        int     waitSeconds = 5;
-        IOException lastException = null;
-
-        for (int attempt = 1; attempt <= maxRetries; attempt++) {
-            try {
-                System.out.println("Gemini — tentative " + attempt + "/" + maxRetries);
-                return callGemini(prompt);
-
-            } catch (IOException e) {
-                lastException = e;
-                String msg = e.getMessage() != null ? e.getMessage() : "";
-
-                boolean retryable = msg.contains("503")
-                        || msg.contains("429")
-                        || msg.contains("UNAVAILABLE")
-                        || msg.contains("overloaded");
-
-                if (!retryable || attempt == maxRetries) break;
-
-                System.out.println("Gemini surchargé — attente " + waitSeconds + "s...");
-                try { Thread.sleep(waitSeconds * 1000L); } catch (InterruptedException ignored) {}
-                waitSeconds *= 2; // backoff exponentiel : 5s → 10s → 20s
-            }
-        }
-        throw lastException != null ? lastException
-                : new IOException("Gemini indisponible après " + maxRetries + " tentatives.");
-    }
-
-    // ─────────────────────────────────────────────
-    //  Appel HTTP Gemini (une seule tentative)
-    // ─────────────────────────────────────────────
-    private String callGemini(String prompt) throws IOException {
-
-        // Construire le JSON de la requête
-        JSONObject part    = new JSONObject().put("text", prompt);
-        JSONObject content = new JSONObject().put("parts", new JSONArray().put(part));
-        JSONObject body    = new JSONObject()
-                .put("contents", new JSONArray().put(content))
-                .put("generationConfig", new JSONObject()
-                        .put("temperature", 0.3)
-                        .put("maxOutputTokens", 2048));
-
-        RequestBody requestBody = RequestBody.create(body.toString(), JSON_TYPE);
+        RequestBody requestBody = RequestBody.create(body.toString(), JSON);
 
         Request request = new Request.Builder()
-                .url(GEMINI_URL)
-                .addHeader("Content-Type", "application/json")
+                .url(GEMINI_URL + "?key=" + API_KEY)
                 .post(requestBody)
                 .build();
 
-        try (Response response = CLIENT.newCall(request).execute()) {
-            String responseStr = response.body() != null ? response.body().string() : "";
+        try (Response response = client.newCall(request).execute()) {
+            String respStr = response.body() != null ? response.body().string() : "";
+            if (!response.isSuccessful())
+                throw new Exception("Gemini Error (HTTP " + response.code() + "): " + respStr);
 
-            if (!response.isSuccessful()) {
-                throw new IOException("Gemini HTTP " + response.code() + " : " + responseStr);
-            }
-
-            return extractText(responseStr);
-        }
-    }
-
-    // ─────────────────────────────────────────────
-    //  Extraction du texte de la réponse JSON
-    // ─────────────────────────────────────────────
-    private String extractText(String responseBody) throws IOException {
-        try {
-            JSONObject json       = new JSONObject(responseBody);
-            JSONArray  candidates = json.getJSONArray("candidates");
-            JSONObject candidate  = candidates.getJSONObject(0);
-
-            // Vérifier finishReason
-            String finishReason = candidate.optString("finishReason", "");
-            if ("SAFETY".equals(finishReason))
-                throw new IOException("Gemini a bloqué la réponse pour des raisons de sécurité.");
-
-            JSONArray parts = candidate
+            JSONObject json = new JSONObject(respStr);
+            JSONArray candidates = json.getJSONArray("candidates");
+            return candidates.getJSONObject(0)
                     .getJSONObject("content")
-                    .getJSONArray("parts");
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < parts.length(); i++) {
-                sb.append(parts.getJSONObject(i).optString("text", ""));
-            }
-
-            String result = sb.toString().trim();
-            if (result.isEmpty())
-                throw new IOException("Gemini a retourné un texte vide.");
-
-            return result;
-
-        } catch (IOException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new IOException("Erreur parsing réponse Gemini : " + responseBody, e);
+                    .getJSONArray("parts")
+                    .getJSONObject(0)
+                    .getString("text")
+                    .trim();
         }
     }
+    private void writePdf(String filePath, String content, int count, double avgAge, String groups) throws Exception {
+        File file = new File(filePath);
+        if (file.getParentFile() != null) file.getParentFile().mkdirs();
 
-    // ─────────────────────────────────────────────
-    //  Écriture PDF avec iText/OpenPDF
-    // ─────────────────────────────────────────────
-    private void writePdf(String filePath, String content) throws Exception {
-        File file   = new File(filePath);
-        File parent = file.getParentFile();
-        if (parent != null && !parent.exists()) parent.mkdirs();
+        com.lowagie.text.Document doc = new com.lowagie.text.Document(PageSize.A4, 40, 40, 40, 40);
+        PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(file));
+        doc.open();
 
-        Document doc = new Document(PageSize.A4, 50, 50, 60, 60);
+        // Colors & Fonts
+        java.awt.Color bloodRed = new java.awt.Color(200, 0, 0);
+        java.awt.Color lightGray = new java.awt.Color(150, 150, 150);
+        java.awt.Color boxBg = new java.awt.Color(255, 245, 245);
+        
+        Font brandFont = new Font(Font.HELVETICA, 28, Font.BOLD, bloodRed);
+        Font headerSmallFont = new Font(Font.HELVETICA, 9, Font.BOLD, java.awt.Color.DARK_GRAY);
+        Font dateFont = new Font(Font.HELVETICA, 8, Font.NORMAL, lightGray);
+        Font kpiValueFont = new Font(Font.HELVETICA, 18, Font.BOLD, bloodRed);
+        Font kpiLabelFont = new Font(Font.HELVETICA, 8, Font.BOLD, lightGray);
+        Font bodyFont = new Font(Font.HELVETICA, 10, Font.NORMAL, java.awt.Color.BLACK);
+        Font sectionHeaderFont = new Font(Font.HELVETICA, 10, Font.BOLD, java.awt.Color.DARK_GRAY);
+        Font footerFont = new Font(Font.HELVETICA, 8, Font.NORMAL, new java.awt.Color(200, 200, 200));
 
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            PdfWriter.getInstance(doc, fos);
-            doc.open();
+        // 1. TOP HEADER (BLOODLINK | NOTE STRATÉGIQUE)
+        com.lowagie.text.pdf.PdfPTable headerTable = new com.lowagie.text.pdf.PdfPTable(2);
+        headerTable.setWidthPercentage(100);
+        headerTable.setWidths(new float[]{1, 1});
 
-            // Titre
-            Font titleFont = new Font(Font.HELVETICA, 18, Font.BOLD);
-            Paragraph title = new Paragraph("Rapport IA — Don de Sang", titleFont);
-            title.setAlignment(Element.ALIGN_CENTER);
-            title.setSpacingAfter(20f);
-            doc.add(title);
+        com.lowagie.text.pdf.PdfPCell leftCell = new com.lowagie.text.pdf.PdfPCell(new Paragraph("BLOODLINK", brandFont));
+        leftCell.setBorder(Rectangle.NO_BORDER);
+        leftCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        headerTable.addCell(leftCell);
 
-            // Séparateur
-            doc.add(new Paragraph("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"));
-            doc.add(new Paragraph(" "));
+        Paragraph rightContent = new Paragraph();
+        rightContent.add(new Chunk("NOTE STRATÉGIQUE AI\n", headerSmallFont));
+        rightContent.add(new Chunk("Généré le: " + java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), dateFont));
+        com.lowagie.text.pdf.PdfPCell rightCell = new com.lowagie.text.pdf.PdfPCell(rightContent);
+        rightCell.setBorder(Rectangle.NO_BORDER);
+        rightCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        rightCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        headerTable.addCell(rightCell);
+        
+        doc.add(headerTable);
 
-            // Contenu généré par Gemini
-            Font bodyFont = new Font(Font.HELVETICA, 11, Font.NORMAL);
-            for (String line : content.split("\n")) {
-                Paragraph p = new Paragraph(line.isEmpty() ? " " : line, bodyFont);
-                p.setSpacingAfter(2f);
-                doc.add(p);
+        // Red line
+        com.lowagie.text.pdf.PdfPTable lineTable = new com.lowagie.text.pdf.PdfPTable(1);
+        lineTable.setWidthPercentage(100);
+        com.lowagie.text.pdf.PdfPCell lineCell = new com.lowagie.text.pdf.PdfPCell();
+        lineCell.setBorder(Rectangle.BOTTOM);
+        lineCell.setBorderWidthBottom(2f);
+        lineCell.setBorderColorBottom(bloodRed);
+        lineCell.setFixedHeight(10f);
+        lineTable.addCell(lineCell);
+        doc.add(lineTable);
+        doc.add(new Paragraph("\n"));
+
+        // 2. KPI SUMMARY BOX
+        com.lowagie.text.pdf.PdfPTable kpiTable = new com.lowagie.text.pdf.PdfPTable(3);
+        kpiTable.setWidthPercentage(100);
+        kpiTable.setSpacingBefore(10f);
+        kpiTable.setSpacingAfter(20f);
+
+        addKpiCell(kpiTable, String.valueOf(count), "RENDEZ-VOUS", kpiValueFont, kpiLabelFont, boxBg, bloodRed);
+        addKpiCell(kpiTable, String.format("%.1f", avgAge), "ÂGE MOYEN", kpiValueFont, kpiLabelFont, boxBg, bloodRed);
+        addKpiCell(kpiTable, groups, "GROUPES", kpiValueFont, kpiLabelFont, boxBg, bloodRed);
+        
+        doc.add(kpiTable);
+
+        // 3. MAIN CONTENT
+        doc.add(new Paragraph("En tant qu'expert BloodLink, voici mon analyse détaillée des données fournies :\n\n", bodyFont));
+
+        String[] lines = content.split("\n");
+        for (String line : lines) {
+            line = line.trim();
+            if (line.isEmpty()) {
+                doc.add(new Paragraph("\n"));
+                continue;
             }
 
-        } finally {
-            if (doc.isOpen()) doc.close();
+            Paragraph p = new Paragraph(line.replace("**", "").replace("#", "").trim(), bodyFont);
+            
+            // Highlight section headers
+            if (line.toUpperCase().equals(line) && line.length() > 5 || line.contains(":") && line.length() < 50) {
+                p.setFont(sectionHeaderFont);
+                p.setSpacingBefore(8f);
+            }
+            
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
+            doc.add(p);
         }
+
+        // 4. FOOTER
+        doc.add(new Paragraph("\n"));
+        doc.add(new Paragraph("────────────────────────────────────────────────────────────────────────", footerFont));
+        Paragraph footer = new Paragraph("BloodLink AI Expert System — Document Confidentiel — Direction des Opérations", footerFont);
+        footer.setAlignment(Element.ALIGN_CENTER);
+        doc.add(footer);
+
+        doc.close();
     }
 
-    private String safe(Object v) {
-        return v == null ? "Non renseigné" : v.toString().trim();
+    private void addKpiCell(com.lowagie.text.pdf.PdfPTable table, String value, String label, Font vFont, Font lFont, java.awt.Color bg, java.awt.Color border) {
+        com.lowagie.text.pdf.PdfPCell cell = new com.lowagie.text.pdf.PdfPCell();
+        cell.setBackgroundColor(bg);
+        cell.setBorder(Rectangle.BOX);
+        cell.setBorderColor(new java.awt.Color(255, 200, 200));
+        cell.setPadding(15f);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+        Paragraph p = new Paragraph();
+        p.setAlignment(Element.ALIGN_CENTER);
+        p.add(new Chunk(value + "\n", vFont));
+        p.add(new Chunk(label, lFont));
+        cell.addElement(p);
+        
+        table.addCell(cell);
     }
 }
