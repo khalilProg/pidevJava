@@ -35,7 +35,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Liste {
+public class Liste extends BaseFront {
 
     @FXML private TableView<RendezVous> tableView;
     @FXML private TableColumn<RendezVous, String> campagneColumn;
@@ -51,6 +51,8 @@ public class Liste {
 
     @FXML
     public void initialize() {
+        applySessionUser();
+
         try {
             tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -162,7 +164,8 @@ public class Liste {
                         controller.setData(q, rdv);
                         controller.setCampagne(campagneService.getCampagneById(q.getCampagneId()));
 
-                        tableView.getScene().setRoot(root);
+                        tn.esprit.tools.ThemeManager.getInstance()
+                                .setScene((javafx.stage.Stage) tableView.getScene().getWindow(), root);
                     } catch (IOException | SQLException ex) {
                         throw new RuntimeException(ex);
                     }

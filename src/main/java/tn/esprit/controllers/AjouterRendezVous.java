@@ -9,9 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.Client;
 import tn.esprit.entities.EntiteDeCollecte;
@@ -30,7 +32,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class AjouterRendezVous {
+public class AjouterRendezVous extends BaseFront {
     private Campagne campagne;
     @FXML private DatePicker dateRdv;
     @FXML private Spinner<Integer> hourSpinner;
@@ -50,22 +52,18 @@ public class AjouterRendezVous {
 
     @FXML
     public void initialize() {
+        applySessionUser();
+
         hourSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 9));
         minuteSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
 
         entiteCombo.setItems(entites);
-        entiteCombo.setCellFactory(c -> new javafx.scene.control.ListCell<>() {
-            @Override
-            protected void updateItem(EntiteDeCollecte item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getNom());
-            }
-        });
-        entiteCombo.setButtonCell(entiteCombo.getCellFactory().call(null));
+        entiteCombo.setCellFactory(c -> createEntiteCell());
+        entiteCombo.setButtonCell(createEntiteCell());
     }
 
     public void setEntities(List<EntiteDeCollecte> entitiesList) {
-        entites.setAll(entitiesList);
+        entites.setAll(entitiesList == null ? List.of() : entitiesList);
     }
 
     public void setQuestionnaire(Questionnaire q) {
@@ -145,7 +143,7 @@ public class AjouterRendezVous {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Liste.fxml"));
         Parent root = loader.load();
-        confirmerRdv.getScene().setRoot(root);
+        setRoot(root, confirmerRdv);
     }
 
     @FXML
@@ -220,21 +218,21 @@ public class AjouterRendezVous {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeRdvAdmin.fxml"));
         Parent root = loader.load();
-        confirmerRdv.getScene().setRoot(root);
+        setRoot(root, confirmerRdv);
     }
 
     @FXML
     public void handleAnnuler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
         Parent root = loader.load();
-        annulerRdv.getScene().setRoot(root);
+        setRoot(root, annulerRdv);
     }
 
     @FXML
     public void btnAnnuler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeRdvAdmin.fxml"));
         Parent root = loader.load();
-        annulerRdv.getScene().setRoot(root);
+        setRoot(root, annulerRdv);
     }
 
     private void sendConfirmationEmail(RendezVous rdv, EntiteDeCollecte selectedEntity, boolean preferSessionUser) {
@@ -298,5 +296,30 @@ public class AjouterRendezVous {
             questionnaire.setNom(client.getUser().getNom());
             questionnaire.setPrenom(client.getUser().getPrenom());
         }
+    }
+
+    private ListCell<EntiteDeCollecte> createEntiteCell() {
+        return new ListCell<>() {
+            {
+                getStyleClass().add("front-combo-cell");
+            }
+
+            @Override
+            protected void updateItem(EntiteDeCollecte item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : formatEntite(item));
+            }
+        };
+    }
+
+    private String formatEntite(EntiteDeCollecte entite) {
+        String nom = entite.getNom() == null ? "" : entite.getNom().trim();
+        String ville = entite.getVille() == null ? "" : entite.getVille().trim();
+        return ville.isEmpty() ? nom : nom + " - " + ville;
+    }
+
+    private void setRoot(Parent root, Button source) {
+        Stage stage = (Stage) source.getScene().getWindow();
+        tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
     }
 }

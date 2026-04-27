@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import tn.esprit.entities.*;
 import tn.esprit.services.ClientService;
 import tn.esprit.services.EntiteCollecteService;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AjouterQuestionnaire {
+public class AjouterQuestionnaire extends BaseFront {
 
     private Campagne campagne; // el selected campagne
     @FXML
@@ -108,11 +109,10 @@ public class AjouterQuestionnaire {
             Parent root = loader.load();
             AjouterRendezVous rdvController = loader.getController();
             rdvController.setCampagne(this.campagne);
-            // Fetch entities from service
             List<EntiteDeCollecte> entities = new EntiteCollecteService().getByCampagneId(campagne.getId());
             rdvController.setEntities(entities);
             rdvController.setQuestionnaire(q);
-            continuer.getScene().setRoot(root);
+            setRoot(root, continuer);
 
 } catch (IOException ex) {
     ex.printStackTrace();
@@ -123,7 +123,12 @@ public class AjouterQuestionnaire {
     @FXML public void handleAnnuler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
         Parent root = loader.load();
-        annuler.getScene().setRoot(root);
+        setRoot(root, annuler);
+    }
+
+    private void setRoot(Parent root, Button source) {
+        Stage stage = (Stage) source.getScene().getWindow();
+        tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
     }
 
     private Client resolveCurrentClient() throws SQLException {

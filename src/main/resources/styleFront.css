@@ -1176,3 +1176,258 @@ navbar top  right profile
 .nav-link-active .ui-font-icon {
     -fx-icon-color: #e63939;
 }
+
+/* ==========================================================
+   Campaign participation flow
+   ========================================================== */
+.front-flow-root {
+    -fx-background-color: #0a0a0a;
+}
+
+.front-flow-scroll,
+.front-flow-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.front-flow-scroll {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.front-flow-page {
+    -fx-background-color: #0a0a0a;
+}
+
+.front-flow-hero {
+    -fx-padding: 4 0 8 0;
+}
+
+.flow-eyebrow {
+    -fx-text-fill: #e63939;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.flow-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 42px;
+    -fx-font-weight: 900;
+}
+
+.flow-subtitle {
+    -fx-text-fill: rgba(255, 255, 255, 0.62);
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+}
+
+.flow-progress-card,
+.flow-info-panel,
+.front-form-card {
+    -fx-background-color: #121212;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+}
+
+.flow-progress-card {
+    -fx-padding: 18 20;
+}
+
+.flow-progress-kicker,
+.flow-panel-label {
+    -fx-text-fill: #e63939;
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+}
+
+.flow-progress-title,
+.front-form-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: 900;
+}
+
+.flow-progress-copy,
+.front-form-subtitle,
+.flow-step-copy,
+.flow-note {
+    -fx-text-fill: rgba(255, 255, 255, 0.58);
+    -fx-font-size: 13px;
+}
+
+.flow-info-panel {
+    -fx-padding: 26;
+}
+
+.flow-step-dot,
+.flow-step-dot-active,
+.flow-step-dot-done {
+    -fx-min-width: 34;
+    -fx-min-height: 34;
+    -fx-pref-width: 34;
+    -fx-pref-height: 34;
+    -fx-alignment: center;
+    -fx-background-radius: 18;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+}
+
+.flow-step-dot {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: rgba(255, 255, 255, 0.58);
+}
+
+.flow-step-dot-active,
+.flow-step-dot-done {
+    -fx-background-color: rgba(230, 57, 57, 0.18);
+    -fx-text-fill: #e63939;
+}
+
+.flow-step-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
+
+.front-form-card {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.34), 18, 0, 0, 10);
+}
+
+.front-form-label {
+    -fx-text-fill: rgba(255, 255, 255, 0.74);
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.front-input,
+.front-combo,
+.front-date-picker,
+.front-spinner,
+.front-spinner .text-field {
+    -fx-background-color: #202020;
+    -fx-border-color: rgba(255, 255, 255, 0.09);
+    -fx-border-width: 1;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.38);
+    -fx-font-size: 14px;
+    -fx-pref-height: 48;
+}
+
+.front-input,
+.front-combo,
+.front-date-picker {
+    -fx-padding: 0 14;
+}
+
+.front-input:focused,
+.front-combo:focused,
+.front-date-picker:focused,
+.front-spinner:focused {
+    -fx-border-color: #e63939;
+    -fx-effect: dropshadow(gaussian, rgba(230, 57, 57, 0.18), 10, 0, 0, 0);
+}
+
+.text-area.front-input {
+    -fx-padding: 10 14;
+}
+
+.text-area.front-input .content {
+    -fx-background-color: #202020;
+    -fx-background-radius: 10;
+}
+
+.front-combo .list-cell,
+.front-date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+}
+
+.front-combo .arrow-button,
+.front-date-picker .arrow-button,
+.front-spinner .increment-arrow-button,
+.front-spinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.front-combo .arrow-button .arrow,
+.front-date-picker .arrow-button .arrow,
+.front-spinner .increment-arrow,
+.front-spinner .decrement-arrow {
+    -fx-background-color: rgba(255, 255, 255, 0.65);
+}
+
+.front-combo .combo-box-popup .list-view {
+    -fx-background-color: #202020;
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.front-combo .combo-box-popup .list-cell {
+    -fx-background-color: #202020;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 14;
+}
+
+.front-combo .combo-box-popup .list-cell:hover,
+.front-combo .combo-box-popup .list-cell:selected {
+    -fx-background-color: rgba(230, 57, 57, 0.20);
+}
+
+.front-combo-cell {
+    -fx-background-color: #202020;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 10 14;
+}
+
+.front-combo-cell:hover,
+.front-combo-cell:selected {
+    -fx-background-color: rgba(230, 57, 57, 0.20);
+    -fx-text-fill: #ffffff;
+}
+
+.front-spinner .text-field {
+    -fx-alignment: center;
+    -fx-padding: 0;
+}
+
+.front-time-separator {
+    -fx-text-fill: rgba(255, 255, 255, 0.72);
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
+
+/* Keep front theme-toggle icons visible even when front-only CSS is loaded last. */
+.theme-toggle-btn,
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focused,
+.theme-toggle-btn:pressed {
+    -fx-content-display: graphic-only;
+    -fx-graphic-text-gap: 0;
+}
+
+.theme-toggle-btn .ui-font-icon,
+.theme-toggle-btn:hover .ui-font-icon,
+.theme-toggle-btn:focused .ui-font-icon,
+.theme-toggle-btn:pressed .ui-font-icon {
+    -fx-opacity: 1;
+    -fx-icon-color: #e63939;
+}
+
+.theme-toggle-sun .ui-font-icon,
+.theme-toggle-sun:hover .ui-font-icon,
+.theme-toggle-sun:focused .ui-font-icon,
+.theme-toggle-sun:pressed .ui-font-icon {
+    -fx-icon-color: #ffd166;
+}
+
+.theme-toggle-moon .ui-font-icon,
+.theme-toggle-moon:hover .ui-font-icon,
+.theme-toggle-moon:focused .ui-font-icon,
+.theme-toggle-moon:pressed .ui-font-icon {
+    -fx-icon-color: #b8c7ff;
+}

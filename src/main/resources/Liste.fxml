@@ -1,53 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane stylesheets="@commande.css" prefHeight="800.0" prefWidth="1550.0" styleClass="root" 
             xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.controllers.Liste">
 
-    <!-- Navbar -->
-    <fx:include source="BaseFront.fxml" fx:id="headerInclude"
-                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
-
     <children>
-        <HBox spacing="20" alignment="CENTER_LEFT" AnchorPane.topAnchor="105" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70">
-            <VBox spacing="6" HBox.hgrow="ALWAYS">
-                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Historique des dons" styleClass="hero-title">
-                    <font><Font size="32.0"/></font>
-                </Text>
-                <Text fill="#888888" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Consultez l'historique de vos participations aux campagnes.">
-                    <font><Font size="16.0"/></font>
-                </Text>
-            </VBox>
-            <TextField fx:id="searchField" promptText="Chercher campagne, entite, date ou statut..." prefWidth="360" styleClass="text-field-custom"/>
+        <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="nav-bar"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="6">
+                    <Label styleClass="brand-label" text="BLOODLINK" />
+                </HBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnThemeToggle" mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+                <Region prefWidth="12" />
+                <Button fx:id="userNameBtn" mnemonicParsing="false" onAction="#goToProfile" styleClass="user-badge" text="Utilisateur" />
+                <Region prefWidth="12" />
+                <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
+            </children>
         </HBox>
 
-        <HBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="205" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70">
-            <VBox styleClass="history-summary-card" alignment="CENTER" HBox.hgrow="ALWAYS" prefHeight="120">
-                <Text text="Campagnes participees" styleClass="history-card-title" wrappingWidth="300"/>
-                <Text fx:id="campagnesCountText" text="0" styleClass="history-card-value" wrappingWidth="300"/>
-            </VBox>
-            <VBox styleClass="history-summary-card" alignment="CENTER" HBox.hgrow="ALWAYS" prefHeight="120">
-                <Text text="Prochain don possible" styleClass="history-card-title" wrappingWidth="300"/>
-                <Text fx:id="nextDonText" text="-" styleClass="history-card-value" wrappingWidth="300"/>
-            </VBox>
-        </HBox>
+        <VBox spacing="24.0" styleClass="history-page"
+              AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="70">
+            <padding>
+                <Insets bottom="34.0" left="58.0" right="58.0" top="34.0" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="24.0" styleClass="history-hero">
+                    <children>
+                        <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="history-eyebrow" text="ESPACE DONNEUR" />
+                                <Label styleClass="history-title" text="Historique des dons" />
+                                <Label styleClass="history-subtitle" text="Consultez vos participations, vos rendez-vous et votre disponibilite pour le prochain don." wrapText="true" />
+                            </children>
+                        </VBox>
+                        <TextField fx:id="searchField" prefWidth="420.0" promptText="Chercher campagne, entite, date ou statut..." styleClass="history-search" />
+                    </children>
+                </HBox>
 
-        <TableView fx:id="tableView" prefWidth="1400" prefHeight="520"
-                   AnchorPane.topAnchor="350" AnchorPane.leftAnchor="70" AnchorPane.rightAnchor="70" AnchorPane.bottomAnchor="30">
-            <columns>
-                <TableColumn fx:id="campagneColumn" text="Campagne" prefWidth="100"/>
-                <TableColumn fx:id="dateRdvColumn" text="Date Rendez-vous" prefWidth="150"/>
-                <TableColumn fx:id="statusColumn" text="Status" prefWidth="150"/>
-                <TableColumn fx:id="entiteColumn" text="Entite" prefWidth="150"/>
-                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150"/>
-            </columns>
-        </TableView>
+                <HBox alignment="CENTER_LEFT" spacing="18.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="112.0" spacing="8.0" styleClass="history-stat-card" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="history-stat-label" text="Campagnes participees" />
+                                <Text fx:id="campagnesCountText" styleClass="history-stat-value" text="0" />
+                                <Label styleClass="history-stat-note" text="Total de vos participations confirmees" />
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="112.0" spacing="8.0" styleClass="history-stat-card" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="history-stat-label" text="Prochain don possible" />
+                                <Text fx:id="nextDonText" styleClass="history-stat-value" text="-" />
+                                <Label styleClass="history-stat-note" text="Selon votre dernier don enregistre" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <VBox spacing="14.0" styleClass="history-table-card" VBox.vgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label styleClass="history-section-title" text="Vos rendez-vous" />
+                                        <Label styleClass="history-section-subtitle" text="Suivez le statut de chaque campagne et modifiez les rendez-vous encore a venir." />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <TableView fx:id="tableView" prefHeight="520.0" styleClass="history-table" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="campagneColumn" prefWidth="220.0" text="Campagne" />
+                                <TableColumn fx:id="dateRdvColumn" prefWidth="220.0" text="Date Rendez-vous" />
+                                <TableColumn fx:id="statusColumn" prefWidth="180.0" text="Status" />
+                                <TableColumn fx:id="entiteColumn" prefWidth="220.0" text="Entite" />
+                                <TableColumn fx:id="actionsColumn" prefWidth="180.0" text="Actions" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+
+        <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false"
+              AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+                <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+                <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_RIGHT">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
+                            </children>
+                        </HBox>
+                        <Region prefHeight="20.0" />
+                        <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+                        <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+                        <Button mnemonicParsing="false" onAction="#goToHistorique" styleClass="menu-link, menu-link-active" text="HISTORIQUE" />
+                        <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
+                        <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
+                        <Region VBox.vgrow="ALWAYS" />
+                        <VBox spacing="15.0">
+                            <children>
+                                <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
+                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="DECONNEXION" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
     </children>
 </AnchorPane>
 

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.Client;
 import tn.esprit.entities.Questionnaire;
@@ -76,7 +77,8 @@ public class CampagneCard {
             Parent root = loader.load();
             AjouterQuestionnaire aq = loader.getController();
             aq.setCampagne(campagne);
-            participateButton.getScene().setRoot(root);
+            Stage stage = (Stage) participateButton.getScene().getWindow();
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (IOException | SQLException ex) {
         ex.printStackTrace();

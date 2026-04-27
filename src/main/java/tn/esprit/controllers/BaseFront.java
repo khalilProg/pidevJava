@@ -52,7 +52,7 @@ public class BaseFront {
 
     @FXML
     public void initialize() {
-        Platform.runLater(this::applyCurrentPageState);
+        Platform.runLater(this::applySessionUser);
     }
 
     protected void switchScene(javafx.event.Event event, String fxmlPath) {
@@ -193,7 +193,7 @@ public class BaseFront {
         if (text.contains("profil")) {
             return "profil";
         }
-        if (text.contains("dons")) {
+        if (text.contains("historique") || text.contains("dons")) {
             return "historique";
         }
         return "";
