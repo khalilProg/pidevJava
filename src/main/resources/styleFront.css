@@ -1165,3 +1165,14 @@ navbar top  right profile
 .menu-link:hover {
     -fx-text-fill: #e63939;
 }
+
+.menu-link-active,
+.nav-link-active {
+    -fx-text-fill: #e63939 !important;
+}
+
+.ui-font-icon,
+.menu-link-active .ui-font-icon,
+.nav-link-active .ui-font-icon {
+    -fx-icon-color: #e63939;
+}

@@ -46,6 +46,19 @@
             <version>${javafx.version}</version>
         </dependency>
 
+        <!-- Reliable icon font support for JavaFX controls -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome5-pack</artifactId>
+            <version>12.4.0</version>
+        </dependency>
+
         <!-- jBCrypt for Symfony Hash Support -->
         <dependency>
             <groupId>org.mindrot</groupId>
@@ -72,6 +85,13 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20231013</version>
+        </dependency>
+
+        <!-- Excel export for rendez-vous admin screens -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.5.1</version>
         </dependency>
     </dependencies>
 

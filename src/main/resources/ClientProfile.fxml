@@ -22,7 +22,6 @@
             <top>
                 <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
                     <HBox alignment="CENTER_LEFT" spacing="6">
-                        <Region styleClass="logo-icon" />
                         <Label styleClass="brand-label" text="BLOODLINK" />
                     </HBox>
                     <Region HBox.hgrow="ALWAYS" />
@@ -30,7 +29,7 @@
                     <Region prefWidth="12" />
                     <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Utilisateur" />
                     <Region prefWidth="12" />
-                    <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU &#9776;" />
+                    <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
                 </HBox>
             </top>
             <center>
@@ -116,7 +115,7 @@
                     <children>
                         <HBox alignment="CENTER_RIGHT">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER &#10005;" />
+                                <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
                             </children>
                         </HBox>
                         <Region prefHeight="20.0" />
@@ -125,7 +124,7 @@
                         <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
                         <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
                         <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
-                        <Button mnemonicParsing="false" onAction="#goToProfile" style="-fx-text-fill: -primary; -fx-background-color: transparent; -fx-border-width: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" styleClass="menu-link" text="MON PROFIL" />
+                        <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link, menu-link-active" text="MON PROFIL" />
                         <Region VBox.vgrow="ALWAYS" />
                         <VBox spacing="15.0">
                             <children>

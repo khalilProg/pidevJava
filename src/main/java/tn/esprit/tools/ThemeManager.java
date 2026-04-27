@@ -90,6 +90,8 @@ public class ThemeManager {
 
         if (scene.getRoot() != null) {
             applyThemeToParent(scene.getRoot(), cssUrl, darkUrl, lightUrl);
+            IconUtils.applyIcons(scene.getRoot());
+            Platform.runLater(() -> IconUtils.applyIcons(scene.getRoot()));
             AnimationUtils.applyReferenceAnimations(scene.getRoot());
         }
     }
@@ -126,7 +128,7 @@ public class ThemeManager {
      */
     public void updateToggleButton(Button btn) {
         if (btn == null) return;
-        btn.setText(currentTheme == Theme.DARK ? "\u2600" : "\u263E");
+        IconUtils.setThemeToggleIcon(btn, currentTheme == Theme.DARK);
         btn.setAccessibleText(currentTheme == Theme.DARK ? "Passer au mode clair" : "Passer au mode sombre");
         btn.getStyleClass().removeAll("theme-toggle-sun", "theme-toggle-moon");
         btn.getStyleClass().add(currentTheme == Theme.DARK ? "theme-toggle-sun" : "theme-toggle-moon");

@@ -13,14 +13,9 @@
       <!-- Top Bar matching the transparent menu bar -->
       <HBox alignment="CENTER_LEFT" prefHeight="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="header-bar" style="-fx-background-color: transparent;">
          <children>
-            <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 24px;">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </Label>
             <Label text="BLOODLINK" styleClass="logo-text" />
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" styleClass="menu-toggle" text="FERMER ✕" onAction="#handleCloseMenu" />
+            <Button mnemonicParsing="false" styleClass="menu-toggle" text="FERMER" onAction="#handleCloseMenu" />
          </children>
       </HBox>
 

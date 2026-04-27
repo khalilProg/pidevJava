@@ -61,10 +61,10 @@ public class backDemandeController {
                         box.setAlignment(Pos.CENTER_LEFT);
                         
                         Label icon = new Label("🏛");
-                        icon.setStyle("-fx-text-fill: -muted; -fx-font-size: 16px;");
+                        icon.getStyleClass().add("admin-table-muted");
                         
                         Label nameL = new Label();
-                        nameL.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        nameL.getStyleClass().add("admin-table-strong");
                         
                         if (d.getIdBanque() == 1 || d.getIdBanque() == 0) {
                             nameL.setText("Hopital ariena");
@@ -89,7 +89,7 @@ public class backDemandeController {
         colQuantite.setCellValueFactory(param -> 
             new SimpleStringProperty(param.getValue().getQuantite() + " UNITÉS")
         );
-        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
+        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
 
         // Urgence Badges
         colUrgence.setCellFactory(column -> {

@@ -16,7 +16,6 @@ import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class ListeCampagnes extends BaseFront {
 
         try {
             Client currentClient = resolveCurrentClient();
-            campagnes = campagneService.recupererByClient(currentClient);
+            campagnes = currentClient == null ? new ArrayList<>() : campagneService.recupererByClient(currentClient);
             renderCampagnes(campagnes);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -48,8 +47,7 @@ public class ListeCampagnes extends BaseFront {
 
     private Client resolveCurrentClient() throws SQLException {
         User user = SessionManager.getCurrentUser();
-        Client client = user == null ? null : clientService.getByUserId(user.getId());
-        return client == null ? new Client(1, "O+", LocalDate.of(2023, 1, 1)) : client;
+        return user == null ? null : clientService.getByUserId(user.getId());
     }
 
     private void applyFilter(String query) {

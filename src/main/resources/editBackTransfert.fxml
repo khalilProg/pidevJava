@@ -26,8 +26,8 @@
          <!-- HEADER -->
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label fx:id="titleLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER TRANSFERT" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Modifier les informations du transfert de sang." />
+                <Label fx:id="titleLabel" styleClass="admin-page-title" text="MODIFIER TRANSFERT" />
+                <Label styleClass="admin-page-subtitle" text="Modifier les informations du transfert de sang." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <Button styleClass="retour-button" mnemonicParsing="false" text="← RETOUR" onAction="#retour" />

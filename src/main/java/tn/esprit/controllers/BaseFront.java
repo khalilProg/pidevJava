@@ -16,20 +16,29 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tn.esprit.services.ChatbotService;
 import tn.esprit.entities.User;
+import tn.esprit.tools.IconUtils;
 import tn.esprit.tools.SessionManager;
 import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 
 public class BaseFront {
+    private static final String ACTIVE_PAGE_KEY = "bloodlink.activePage";
+    private static final String NAV_ACTIVE_CLASS = "nav-link-active";
+    private static final String MENU_ACTIVE_CLASS = "menu-link-active";
 
     @FXML protected HBox menuOverlay;
     @FXML protected Button menuToggleBtn;
     @FXML protected Label sessionEmailLabel;
+    @FXML protected Label userNameLabel;
     @FXML protected Button userNameBtn;
+    @FXML protected Button accueilNavBtn;
+    @FXML protected Button historiqueNavBtn;
+    @FXML protected Button campagnesNavBtn;
     @FXML protected VBox chatbotWindow;
     @FXML protected VBox chatbotMessages;
     @FXML protected ScrollPane chatbotScroll;
@@ -41,6 +50,11 @@ public class BaseFront {
     private boolean chatbotInitialized;
     private HBox chatbotTypingRow;
 
+    @FXML
+    public void initialize() {
+        Platform.runLater(this::applyCurrentPageState);
+    }
+
     protected void switchScene(javafx.event.Event event, String fxmlPath) {
         switchSceneFromNode((Node) event.getSource(), fxmlPath);
     }
@@ -49,12 +63,21 @@ public class BaseFront {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
+            String activePage = activePageForPath(fxmlPath);
+            if (!activePage.isBlank()) {
+                root.getProperties().put(ACTIVE_PAGE_KEY, activePage);
+            }
             Object controller = loader.getController();
             if (controller instanceof BaseFront frontController) {
                 frontController.applySessionUser();
+                frontController.applyCurrentPageState();
             }
 
             Stage stage = (Stage) source.getScene().getWindow();
+            String title = titleForPath(fxmlPath);
+            if (!title.isBlank()) {
+                stage.setTitle(title);
+            }
             ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {
@@ -65,6 +88,7 @@ public class BaseFront {
 
     protected void applySessionUser() {
         setupChatbot();
+        applyCurrentPageState();
 
         User user = SessionManager.getCurrentUser();
         if (user == null) {
@@ -72,20 +96,159 @@ public class BaseFront {
         }
 
         String displayName = buildDisplayName(user);
+        if (userNameLabel != null) {
+            userNameLabel.setText(displayName);
+        }
         Button displayButton = userNameBtn != null ? userNameBtn : findButtonWithStyleClass(resolveRootNode(), "user-badge");
         if (displayButton != null) {
             displayButton.setText("\uD83D\uDC64 " + displayName);
+            IconUtils.decorateButton(displayButton);
             displayButton.setOnAction(this::goToProfile);
         }
         Button themeButton = findButtonWithStyleClass(resolveRootNode(), "theme-toggle-btn");
         ThemeManager.getInstance().updateToggleButton(themeButton);
         if (menuToggleBtn != null && !menuOverlayVisible()) {
-            menuToggleBtn.setText("MENU \u2630");
+            menuToggleBtn.setText("MENU");
+            IconUtils.decorateButton(menuToggleBtn);
         }
         if (sessionEmailLabel != null) {
             String email = user.getEmail();
             sessionEmailLabel.setText(email == null || email.isBlank() ? "Session: " + displayName : "Session: " + email);
         }
+    }
+
+    protected void applyCurrentPageState() {
+        String activePage = resolveActivePage();
+        applyActiveNavigation(activePage);
+        applyActiveMenuLinks(resolveRootNode(), activePage);
+    }
+
+    private void applyActiveNavigation(String activePage) {
+        setActiveStyle(accueilNavBtn, "accueil".equals(activePage), NAV_ACTIVE_CLASS);
+        setActiveStyle(historiqueNavBtn, "historique".equals(activePage), NAV_ACTIVE_CLASS);
+        setActiveStyle(campagnesNavBtn, "campagnes".equals(activePage), NAV_ACTIVE_CLASS);
+    }
+
+    private void applyActiveMenuLinks(Node node, String activePage) {
+        if (node == null || activePage == null || activePage.isBlank()) {
+            return;
+        }
+        if (node instanceof Button button && button.getStyleClass().contains("menu-link")) {
+            setActiveStyle(button, activePage.equals(pageForMenuButton(button)), MENU_ACTIVE_CLASS);
+        }
+        if (node instanceof Parent parent) {
+            for (Node child : parent.getChildrenUnmodifiable()) {
+                applyActiveMenuLinks(child, activePage);
+            }
+        }
+    }
+
+    private void setActiveStyle(Button button, boolean active, String activeClass) {
+        if (button == null) {
+            return;
+        }
+        if (active) {
+            if (!button.getStyleClass().contains(activeClass)) {
+                button.getStyleClass().add(activeClass);
+            }
+        } else {
+            button.getStyleClass().remove(activeClass);
+        }
+        IconUtils.decorateButton(button);
+    }
+
+    private String resolveActivePage() {
+        Node rootNode = resolveRootNode();
+        if (rootNode == null) {
+            return "";
+        }
+
+        Object page = rootNode.getProperties().get(ACTIVE_PAGE_KEY);
+        if (page instanceof String pageName && !pageName.isBlank()) {
+            return pageName;
+        }
+        if (rootNode.getScene() != null && rootNode.getScene().getRoot() != null) {
+            Object scenePage = rootNode.getScene().getRoot().getProperties().get(ACTIVE_PAGE_KEY);
+            if (scenePage instanceof String pageName && !pageName.isBlank()) {
+                return pageName;
+            }
+            if (rootNode.getScene().getWindow() instanceof Stage stage) {
+                return activePageFromTitle(stage.getTitle());
+            }
+        }
+        return "";
+    }
+
+    private String pageForMenuButton(Button button) {
+        String text = safeLower(button.getText());
+        if (text.contains("accueil")) {
+            return "accueil";
+        }
+        if (text.contains("campagnes")) {
+            return "campagnes";
+        }
+        if (text.contains("commandes")) {
+            return "commandes";
+        }
+        if (text.contains("profil")) {
+            return "profil";
+        }
+        if (text.contains("dons")) {
+            return "historique";
+        }
+        return "";
+    }
+
+    private String activePageForPath(String fxmlPath) {
+        String path = safeLower(fxmlPath);
+        if (path.contains("client_home") || path.endsWith("/home.fxml")) {
+            return "accueil";
+        }
+        if (path.contains("listecampagnes") || path.contains("campagnefront") || path.contains("campagnecalendar")
+                || path.contains("ajouterquestionnaire") || path.contains("ajouterrendezvous")) {
+            return "campagnes";
+        }
+        if (path.contains("affichercommandes") || path.contains("ajoutcommande")) {
+            return "commandes";
+        }
+        if (path.endsWith("liste.fxml")) {
+            return "historique";
+        }
+        if (path.contains("clientprofile")) {
+            return "profil";
+        }
+        return "";
+    }
+
+    private String titleForPath(String fxmlPath) {
+        return switch (activePageForPath(fxmlPath)) {
+            case "accueil" -> "BloodLink - Accueil";
+            case "campagnes" -> "BloodLink - Campagnes";
+            case "commandes" -> "BloodLink - Commandes";
+            case "historique" -> "BloodLink - Historique";
+            case "profil" -> "BloodLink - Profil";
+            default -> safeLower(fxmlPath).contains("login") ? "BloodLink - Connexion" : "";
+        };
+    }
+
+    private String activePageFromTitle(String title) {
+        String normalized = safeLower(title);
+        if (normalized.contains("accueil")) {
+            return "accueil";
+        }
+        if (normalized.contains("campagne")) {
+            return "campagnes";
+        }
+        if (normalized.contains("commande")) {
+            return "commandes";
+        }
+        if (normalized.contains("historique") || normalized.contains("don")) {
+            return "historique";
+        }
+        if (normalized.contains("profil")) {
+            return "profil";
+        }
+        return "";
     }
 
     private boolean menuOverlayVisible() {
@@ -240,6 +403,18 @@ public class BaseFront {
         if (node == null) {
             node = sessionEmailLabel;
         }
+        if (node == null) {
+            node = userNameLabel;
+        }
+        if (node == null) {
+            node = accueilNavBtn;
+        }
+        if (node == null) {
+            node = historiqueNavBtn;
+        }
+        if (node == null) {
+            node = campagnesNavBtn;
+        }
         while (node != null && node.getParent() != null) {
             node = node.getParent();
         }
@@ -261,6 +436,10 @@ public class BaseFront {
         return null;
     }
 
+    private String safeLower(String value) {
+        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
+    }
+
     @FXML
     protected void handleMenuToggle(ActionEvent event) {
         if (menuOverlay != null) {
@@ -268,7 +447,8 @@ public class BaseFront {
             menuOverlay.setVisible(!isVisible);
             menuOverlay.setManaged(!isVisible);
             if (menuToggleBtn != null) {
-                menuToggleBtn.setText(isVisible ? "MENU \u2630" : "FERMER \u2715");
+                menuToggleBtn.setText(isVisible ? "MENU" : "FERMER");
+                IconUtils.decorateButton(menuToggleBtn);
             }
         }
     }
@@ -279,7 +459,8 @@ public class BaseFront {
             menuOverlay.setVisible(false);
             menuOverlay.setManaged(false);
             if (menuToggleBtn != null) {
-                menuToggleBtn.setText("MENU \u2630");
+                menuToggleBtn.setText("MENU");
+                IconUtils.decorateButton(menuToggleBtn);
             }
         }
     }

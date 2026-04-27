@@ -9,12 +9,14 @@ import javafx.scene.control.Label;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.Client;
 import tn.esprit.entities.Questionnaire;
+import tn.esprit.entities.User;
+import tn.esprit.services.ClientService;
 import tn.esprit.services.QuestionnaireService;
 import tn.esprit.services.RendezVousService;
+import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class CampagneCard {
     @FXML private Label campaignName;
@@ -23,8 +25,7 @@ public class CampagneCard {
     @FXML private Label campaignDescription;
     @FXML private Button participateButton;
     private Campagne campagne;
-    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17));
-    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1));
+    private final ClientService clientService = new ClientService();
 
     public void setData(Campagne c) {
         this.campagne = c;
@@ -37,6 +38,12 @@ public class CampagneCard {
     }
     @FXML public void openQuestionnaire() throws SQLException {
         try {
+
+            Client currentClient = resolveCurrentClient();
+            if (currentClient == null) {
+                showMissingClientProfileAlert();
+                return;
+            }
 
             int clientId = currentClient.getId();
             int campagneId = campagne.getId();
@@ -76,4 +83,16 @@ public class CampagneCard {
     }
     }
 
+    private Client resolveCurrentClient() throws SQLException {
+        User sessionUser = SessionManager.getCurrentUser();
+        return sessionUser == null ? null : clientService.getByUserId(sessionUser.getId());
+    }
+
+    private void showMissingClientProfileAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Profil client requis");
+        alert.setHeaderText(null);
+        alert.setContentText("Connectez-vous avec un compte client ayant un profil complet avant de prendre un rendez-vous.");
+        alert.showAndWait();
+    }
 }

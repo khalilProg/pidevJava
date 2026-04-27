@@ -49,6 +49,9 @@ public class AnimationUtils {
 
     public static void applyHoverAnimation(Node node) {
         if (node == null) return;
+        if (node instanceof Button button) {
+            IconUtils.decorateButton(button);
+        }
         if (Boolean.TRUE.equals(node.getProperties().get(HOVER_APPLIED_KEY))) return;
         node.getProperties().put(HOVER_APPLIED_KEY, Boolean.TRUE);
 

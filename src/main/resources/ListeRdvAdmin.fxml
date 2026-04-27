@@ -27,14 +27,14 @@
          <!-- Header -->
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="RENDEZ-VOUS" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les rendez-vous des donneurs et leur statut." />
+                <Label styleClass="admin-page-title" text="RENDEZ-VOUS" />
+                <Label styleClass="admin-page-subtitle" text="Gérez les rendez-vous des donneurs et leur statut." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <HBox spacing="15.0" alignment="CENTER">
-               <Button styleClass="submit-button" text="🧠 Générer Analyse IA" />
-               <Button styleClass="submit-button" text="📥" />
-               <Button text="📅  2 RÉS." styleClass="button-primary" />
+               <Button styleClass="submit-button" text="Analyse IA" />
+               <Button fx:id="exportBtn" styleClass="submit-button" text="Export Excel" onAction="#handleExport" />
+               <Button fx:id="totalRdvBtn" text="0 RDV" styleClass="button-primary" />
             </HBox>
          </HBox>
 
@@ -46,7 +46,7 @@
                <HBox spacing="20.0">
                   <VBox spacing="8.0" HBox.hgrow="ALWAYS">
                      <Label text="RECHERCHE" styleClass="filter-label" />
-                     <TextField promptText="Nom ou Prénom..." styleClass="text-field-custom" />
+                     <TextField fx:id="searchField" promptText="Nom ou Prenom..." styleClass="text-field-custom" />
                   </VBox>
                   <VBox spacing="8.0" prefWidth="300.0">
                      <Label text="CAMPAGNE" styleClass="filter-label" />
@@ -61,7 +61,7 @@
                <HBox spacing="20.0" alignment="BOTTOM_LEFT">
                   <VBox spacing="8.0" prefWidth="200.0">
                      <Label text="DATE" styleClass="filter-label" />
-                     <DatePicker styleClass="dark-field" promptText="mm / dd / yyyy" maxWidth="1.7976931348623157E308" />
+                     <DatePicker fx:id="dateFilter" styleClass="dark-field" promptText="mm / dd / yyyy" maxWidth="1.7976931348623157E308" />
                   </VBox>
                   <VBox spacing="8.0" prefWidth="200.0">
                      <Label text="HEURE" styleClass="filter-label" />
@@ -69,14 +69,14 @@
                   </VBox>
                   <VBox spacing="8.0" prefWidth="200.0">
                      <Label text="STATUT" styleClass="filter-label" />
-                     <ComboBox styleClass="dark-combo" promptText="Tous les statuts" maxWidth="1.7976931348623157E308" />
+                     <ComboBox fx:id="statusFilter" styleClass="dark-combo" promptText="Tous les statuts" maxWidth="1.7976931348623157E308" />
                   </VBox>
                   <VBox spacing="8.0" prefWidth="200.0">
                      <Label text="TRI" styleClass="filter-label" />
                      <ComboBox styleClass="dark-combo" promptText="Ordre par défaut" maxWidth="1.7976931348623157E308" />
                   </VBox>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button styleClass="submit-button" text="↺ RESET" />
+                  <Button styleClass="submit-button" text="RESET" onAction="#handleResetFilters" />
                </HBox>
             </VBox>
 

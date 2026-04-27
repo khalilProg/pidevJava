@@ -28,8 +28,8 @@
          <!-- Header -->
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="NOUVEAU QUESTIONNAIRE" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Saisie administrative des informations du donneur." />
+                <Label styleClass="admin-page-title" text="NOUVEAU QUESTIONNAIRE" />
+                <Label styleClass="admin-page-subtitle" text="Saisie administrative des informations du donneur." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
          </HBox>

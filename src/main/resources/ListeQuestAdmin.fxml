@@ -27,8 +27,8 @@
          <!-- Header -->
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="QUESTIONNAIRES" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Consultez et gérez les questionnaires des donneurs." />
+                <Label styleClass="admin-page-title" text="QUESTIONNAIRES" />
+                <Label styleClass="admin-page-subtitle" text="Consultez et gérez les questionnaires des donneurs." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <HBox spacing="15.0" alignment="CENTER">
@@ -45,11 +45,11 @@
                <HBox spacing="20.0">
                   <VBox spacing="8.0" HBox.hgrow="ALWAYS">
                      <Label text="RECHERCHE" styleClass="filter-label" />
-                     <TextField promptText="Nom ou Prénom..." styleClass="text-field-custom" />
+                     <TextField fx:id="searchField" promptText="Nom ou Prenom..." styleClass="text-field-custom" />
                   </VBox>
                   <VBox spacing="8.0" prefWidth="300.0">
                      <Label text="GROUPE SANGUIN" styleClass="filter-label" />
-                     <ComboBox styleClass="dark-combo" promptText="Tous les groupes" maxWidth="1.7976931348623157E308" />
+                     <ComboBox fx:id="bloodGroupFilter" styleClass="dark-combo" promptText="Tous les groupes" maxWidth="1.7976931348623157E308" />
                   </VBox>
                   <VBox spacing="8.0" prefWidth="300.0">
                      <Label text="CAMPAGNE" styleClass="filter-label" />
@@ -60,7 +60,7 @@
                <HBox spacing="20.0" alignment="BOTTOM_LEFT">
                   <VBox spacing="8.0" prefWidth="250.0">
                      <Label text="DATE" styleClass="filter-label" />
-                     <DatePicker styleClass="dark-field" promptText="mm / dd / yyyy" maxWidth="1.7976931348623157E308" />
+                     <DatePicker fx:id="dateFilter" styleClass="dark-field" promptText="mm / dd / yyyy" maxWidth="1.7976931348623157E308" />
                   </VBox>
                   <VBox spacing="8.0" prefWidth="250.0">
                      <Label text="HEURE" styleClass="filter-label" />
@@ -71,7 +71,7 @@
                      <ComboBox styleClass="dark-combo" promptText="Ordre par défaut" maxWidth="1.7976931348623157E308" />
                   </VBox>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button styleClass="submit-button" text="↺ RÉINITIALISER" />
+                  <Button styleClass="submit-button" text="RESET" onAction="#handleResetFilters" />
                </HBox>
             </VBox>
 

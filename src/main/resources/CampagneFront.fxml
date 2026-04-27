@@ -22,7 +22,6 @@
          <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="nav-bar">
             <children>
                <HBox alignment="CENTER_LEFT" spacing="6">
-                  <Region styleClass="logo-icon" />
                   <Label styleClass="brand-label" text="BLOODLINK" />
                </HBox>
                <Region HBox.hgrow="ALWAYS" />
@@ -30,7 +29,7 @@
                <Region prefWidth="12.0" />
                <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Utilisateur" />
                <Region prefWidth="12.0" />
-               <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU ☰" />
+               <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
             </children>
          </HBox>
 
@@ -99,7 +98,7 @@
                <Region prefHeight="20.0" />
                <!-- Menu Links -->
                <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
-               <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" style="-fx-text-fill: -primary;" text="CAMPAGNES" />
+               <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link, menu-link-active" text="CAMPAGNES" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
                <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
                <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />

@@ -2,6 +2,8 @@ package tn.esprit.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -37,6 +42,11 @@ public class ListeQuestAdmin {
     @FXML private TableColumn<Questionnaire, LocalDateTime> dateColumn;
     @FXML private TableColumn<Questionnaire, Void> actionsColumn;
     @FXML private Button addBtn;
+    @FXML private TextField searchField;
+    @FXML private ComboBox<String> bloodGroupFilter;
+    @FXML private DatePicker dateFilter;
+
+    private ObservableList<Questionnaire> questionnairesData = FXCollections.observableArrayList();
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -54,7 +64,7 @@ public class ListeQuestAdmin {
                     setText(null);
                 } else {
                     setText("#" + item);
-                    setStyle("-fx-font-weight: 800; -fx-text-fill: white; -fx-font-size: 12px;");
+                    setStyle("-fx-font-weight: 800; -fx-text-fill: -admin-table-strong; -fx-font-size: 12px; -fx-alignment: center-left;");
                 }
             }
         });
@@ -136,20 +146,32 @@ public class ListeQuestAdmin {
                     setText(null);
                 } else {
                     setText(FORMATTER.format(item));
-                    setStyle("-fx-text-fill: -muted; -fx-font-size: 12px;");
+                    setStyle("-fx-text-fill: -admin-table-muted; -fx-font-size: 12px; -fx-alignment: center-left;");
                 }
             }
         });
 
         // Actions Column
         actionsColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button viewBtn = new Button("👁");
+            private final Button viewBtn = new Button("View");
+            private final Button deleteBtn = new Button("Delete");
 
             {
                 viewBtn.getStyleClass().add("action-icon-btn");
+                deleteBtn.getStyleClass().addAll("action-icon-btn", "action-icon-delete");
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(viewBtn);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(deleteBtn);
                 viewBtn.setOnAction(e -> {
                     // Logic to view the questionnaire could go here. For now it's just visual.
+                });
+                deleteBtn.setOnAction(e -> {
+                    Questionnaire q = getTableView().getItems().get(getIndex());
+                    try {
+                        new QuestionnaireService().supprimer(q);
+                        questionnairesData.remove(q);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                 });
             }
 
@@ -159,22 +181,94 @@ public class ListeQuestAdmin {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    HBox box = new HBox(viewBtn);
+                    HBox box = new HBox(8, viewBtn, deleteBtn);
                     box.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
                     setGraphic(box);
                 }
             }
         });
 
-        // Load data
         try {
             List<Questionnaire> questionnaires = new QuestionnaireService().recuperer();
-            ObservableList<Questionnaire> data = FXCollections.observableArrayList(questionnaires);
-            tableView.setItems(data);
+            questionnairesData = FXCollections.observableArrayList(questionnaires);
+            setupFilters();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void setupFilters() {
+        if (bloodGroupFilter != null) {
+            bloodGroupFilter.setItems(FXCollections.observableArrayList("", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"));
+        }
+
+        FilteredList<Questionnaire> filteredData = new FilteredList<>(questionnairesData, p -> true);
+        Runnable refresh = () -> filteredData.setPredicate(this::matchesFilters);
+
+        if (searchField != null) {
+            searchField.textProperty().addListener((obs, oldValue, newValue) -> refresh.run());
+        }
+        if (bloodGroupFilter != null) {
+            bloodGroupFilter.valueProperty().addListener((obs, oldValue, newValue) -> refresh.run());
+        }
+        if (dateFilter != null) {
+            dateFilter.valueProperty().addListener((obs, oldValue, newValue) -> refresh.run());
+        }
+
+        SortedList<Questionnaire> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedData);
+    }
+
+    private boolean matchesFilters(Questionnaire q) {
+        String query = searchField == null || searchField.getText() == null
+                ? ""
+                : searchField.getText().toLowerCase().trim();
+        String group = bloodGroupFilter == null ? null : bloodGroupFilter.getValue();
+
+        if (group != null && !group.isBlank() && !group.equalsIgnoreCase(q.getGroupeSanguin())) {
+            return false;
+        }
+        if (dateFilter != null && dateFilter.getValue() != null
+                && (q.getDate() == null || !dateFilter.getValue().equals(q.getDate().toLocalDate()))) {
+            return false;
+        }
+        if (query.isEmpty()) {
+            return true;
+        }
+
+        String campagne = "";
+        try {
+            campagne = new CampagneService().getCampagneById(q.getCampagneId()).getTitre();
+        } catch (SQLException ignored) {
+        }
+
+        return contains(q.getNom(), query)
+                || contains(q.getPrenom(), query)
+                || contains(q.getSexe(), query)
+                || contains(q.getGroupeSanguin(), query)
+                || contains(campagne, query)
+                || String.valueOf(q.getAge()).contains(query)
+                || String.valueOf(q.getPoids()).contains(query)
+                || (q.getDate() != null && q.getDate().toString().toLowerCase().contains(query));
+    }
+
+    private boolean contains(String value, String query) {
+        return value != null && value.toLowerCase().contains(query);
+    }
+
+    @FXML
+    private void handleResetFilters() {
+        if (searchField != null) {
+            searchField.clear();
+        }
+        if (bloodGroupFilter != null) {
+            bloodGroupFilter.getSelectionModel().clearSelection();
+        }
+        if (dateFilter != null) {
+            dateFilter.setValue(null);
+        }
     }
 
 

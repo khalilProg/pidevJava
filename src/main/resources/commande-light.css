@@ -2469,6 +2469,37 @@
     -fx-font-weight: 900 !important;
 }
 
+.ui-font-icon {
+    -fx-icon-color: #e74c3c;
+}
+
+.button-primary .ui-font-icon,
+.submit-button .ui-font-icon,
+.btn-primary .ui-font-icon,
+.btn-primary-modern .ui-font-icon,
+.nouveau-btn .ui-font-icon,
+.user-badge .ui-font-icon,
+.sidebar-disconnect-btn .ui-font-icon {
+    -fx-icon-color: white;
+}
+
+.sidebar-nav-item .ui-font-icon,
+.theme-toggle-btn .ui-font-icon,
+.btn-outline .ui-font-icon,
+.btn-secondary .ui-font-icon,
+.retour-button .ui-font-icon,
+.cancel-button .ui-font-icon,
+.card-btn-outline .ui-font-icon {
+    -fx-icon-color: #4a4a4a;
+}
+
+.sidebar-nav-item-active .ui-font-icon,
+.action-btn-delete .ui-font-icon,
+.icon-button-danger .ui-font-icon,
+.action-icon-delete .ui-font-icon {
+    -fx-icon-color: #e74c3c;
+}
+
 /* Client home light mode */
 .home-hero-title,
 .home-section-title,
@@ -2646,4 +2677,69 @@
 .theme-toggle-moon {
     -fx-alignment: CENTER_RIGHT;
     -fx-text-fill: #2d3857;
+}
+
+.root {
+    -admin-table-strong: #1a1a1a;
+    -admin-table-muted: #5f6b76;
+}
+
+.menu-link-active,
+.nav-link-active {
+    -fx-text-fill: #e74c3c !important;
+}
+
+.menu-link-active .ui-font-icon,
+.nav-link-active .ui-font-icon {
+    -fx-icon-color: #e74c3c;
+}
+
+.table-view .column-header .label,
+.dark-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .table-cell,
+.dark-table .table-cell {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.admin-table-strong,
+.admin-form-label,
+.admin-detail-value,
+.admin-detail-title {
+    -fx-text-fill: -admin-table-strong !important;
+}
+
+.admin-table-strong,
+.admin-form-label,
+.admin-detail-title {
+    -fx-font-weight: 800;
+}
+
+.admin-table-muted,
+.admin-detail-label {
+    -fx-text-fill: -admin-table-muted !important;
+}
+
+.admin-table-muted {
+    -fx-font-size: 12px;
+}
+
+.admin-form-label {
+    -fx-font-size: 12px;
+}
+
+.admin-detail-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: 900;
+}
+
+.admin-detail-value {
+    -fx-font-size: 15px;
+}
+
+.badge-campagne {
+    -fx-border-color: rgba(20, 30, 45, 0.18) !important;
+    -fx-text-fill: #5f6b76 !important;
 }

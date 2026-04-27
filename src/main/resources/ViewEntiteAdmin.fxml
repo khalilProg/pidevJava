@@ -21,8 +21,8 @@
          
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="DÉTAILS DE L'ENTITÉ" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Informations complètes sur le lieu de collecte." />
+                <Label styleClass="admin-page-title" text="DÉTAILS DE L'ENTITÉ" />
+                <Label styleClass="admin-page-subtitle" text="Informations complètes sur le lieu de collecte." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <HBox spacing="15.0">
@@ -35,7 +35,7 @@
              <HBox spacing="30.0" alignment="CENTER_LEFT">
                  <Label fx:id="iconLabel" text="🏥" style="-fx-background-color: rgba(230,57,57,0.1); -fx-text-fill: -primary; -fx-font-size: 40px; -fx-min-width: 100; -fx-min-height: 100; -fx-alignment: center; -fx-background-radius: 15; -fx-border-color: -primary; -fx-border-radius: 15; -fx-border-width: 1;" />
                  <VBox spacing="8.0" alignment="CENTER_LEFT">
-                     <Label fx:id="nomLabel" text="Hôpital Central" style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 28px;" />
+                     <Label fx:id="nomLabel" text="Hôpital Central" styleClass="admin-detail-title" />
                      <HBox spacing="15.0" alignment="CENTER_LEFT">
                          <Label style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-padding: 3 8; -fx-background-radius: 8; -fx-font-weight: bold; -fx-font-size: 10px;" text="ACTIF" />
                          <Label fx:id="villeLabel" text="📍 Tunis" style="-fx-text-fill: -muted; -fx-font-size: 14px;" />
@@ -53,7 +53,7 @@
                  
                  <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="5.0">
                      <Label text="ADRESSE" style="-fx-text-fill: -muted; -fx-font-size: 10px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
-                     <Label fx:id="adresseLabel" text="123 Rue de la Liberté" style="-fx-text-fill: white; -fx-font-size: 15px;" wrapText="true" />
+                     <Label fx:id="adresseLabel" text="123 Rue de la Liberté" styleClass="admin-detail-value" wrapText="true" />
                  </VBox>
                  
                  <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" spacing="5.0">
@@ -63,7 +63,7 @@
                  
                  <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="5.0">
                      <Label text="ID SYSTÈME" style="-fx-text-fill: -muted; -fx-font-size: 10px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
-                     <Label fx:id="idLabel" text="#42" style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-family: 'Monospaced';" />
+                     <Label fx:id="idLabel" text="#42" styleClass="admin-detail-value" style="-fx-font-family: 'Monospaced';" />
                  </VBox>
              </GridPane>
          </VBox>

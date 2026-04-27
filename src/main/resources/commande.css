@@ -1492,6 +1492,118 @@
     -fx-border-color: #e74c3c;
 }
 
+.root {
+    -admin-table-strong: #ffffff;
+    -admin-table-muted: rgba(255, 255, 255, 0.65);
+}
+
+.menu-link-active,
+.nav-link-active {
+    -fx-text-fill: -primary !important;
+}
+
+.menu-link-active .ui-font-icon,
+.nav-link-active .ui-font-icon {
+    -fx-icon-color: -primary;
+}
+
+.table-view .column-header .label,
+.dark-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .table-cell,
+.dark-table .table-cell {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.admin-table-strong,
+.admin-form-label,
+.admin-detail-value,
+.admin-detail-title {
+    -fx-text-fill: -admin-table-strong;
+}
+
+.admin-table-strong,
+.admin-form-label,
+.admin-detail-title {
+    -fx-font-weight: 800;
+}
+
+.admin-table-muted,
+.admin-detail-label {
+    -fx-text-fill: -admin-table-muted;
+}
+
+.admin-table-muted {
+    -fx-font-size: 12px;
+}
+
+.admin-form-label {
+    -fx-font-size: 12px;
+}
+
+.admin-detail-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: 900;
+}
+
+.admin-detail-value {
+    -fx-font-size: 15px;
+}
+
+.history-summary-card {
+    -fx-background-color: rgba(255, 255, 255, 0.055);
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 18 22 18 22;
+}
+
+.history-card-title {
+    -fx-fill: #9CA3AF;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+}
+
+.history-card-value {
+    -fx-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+}
+
+.ui-font-icon {
+    -fx-icon-color: #e74c3c;
+}
+
+.button-primary .ui-font-icon,
+.submit-button .ui-font-icon,
+.btn-primary .ui-font-icon,
+.btn-primary-modern .ui-font-icon,
+.nouveau-btn .ui-font-icon,
+.user-badge .ui-font-icon,
+.sidebar-disconnect-btn .ui-font-icon {
+    -fx-icon-color: white;
+}
+
+.sidebar-nav-item .ui-font-icon,
+.theme-toggle-btn .ui-font-icon,
+.btn-outline .ui-font-icon,
+.btn-secondary .ui-font-icon,
+.retour-button .ui-font-icon,
+.cancel-button .ui-font-icon,
+.card-btn-outline .ui-font-icon {
+    -fx-icon-color: #cccccc;
+}
+
+.sidebar-nav-item-active .ui-font-icon,
+.action-btn-delete .ui-font-icon,
+.icon-button-danger .ui-font-icon,
+.action-icon-delete .ui-font-icon {
+    -fx-icon-color: #e74c3c;
+}
+
 /* Final theme toggle: sun to moon pill */
 .theme-toggle-btn {
     -fx-min-width: 58;

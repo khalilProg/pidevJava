@@ -24,8 +24,8 @@
          
          <HBox alignment="CENTER_LEFT">
              <VBox spacing="5.0">
-                 <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="TRANSFERTS DE SANG" />
-                 <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Suivez les transferts entre organisations et leur statut." />
+                 <Label styleClass="admin-page-title" text="TRANSFERTS DE SANG" />
+                 <Label styleClass="admin-page-subtitle" text="Suivez les transferts entre organisations et leur statut." />
              </VBox>
              <Region HBox.hgrow="ALWAYS" />
          </HBox>
@@ -49,8 +49,8 @@
                   <TableColumn fx:id="colTo" text="DESTINATION" prefWidth="180"/>
                   <TableColumn fx:id="colQuantite" text="QUANTITÉ" prefWidth="100"/>
                   <TableColumn fx:id="colDateEnvoie" text="DATE ENVOI" prefWidth="120"/>
-                  <TableColumn fx:id="colStatus" text="STATUT" prefWidth="120"/>
-                  <TableColumn fx:id="colActions" text="ACTIONS" prefWidth="200"/>
+                  <TableColumn fx:id="colStatus" text="STATUT" minWidth="170" prefWidth="170"/>
+                  <TableColumn fx:id="colActions" text="ACTIONS" minWidth="230" prefWidth="230"/>
                </columns>
             </TableView>
          </VBox>

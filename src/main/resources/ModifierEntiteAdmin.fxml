@@ -21,8 +21,8 @@
          <!-- Page Header -->
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="Modifier l'Entité de Collecte" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Interface d'administration" />
+                <Label styleClass="admin-page-title" text="Modifier l'Entité de Collecte" />
+                <Label styleClass="admin-page-subtitle" text="Interface d'administration" />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <Button styleClass="retour-button" mnemonicParsing="false" text="← Retour à la liste" onAction="#handleRetour" />
@@ -31,25 +31,25 @@
          <VBox styleClass="glass-card" spacing="25.0" VBox.vgrow="ALWAYS">
             
             <VBox spacing="5.0">
-               <Label text="Nom de l'entité" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <Label text="Nom de l'entité" styleClass="admin-form-label" />
                <TextField styleClass="dark-field" fx:id="nomInput" promptText="Ex: Hôpital Charles Nicolle" />
                <Label fx:id="nomError" text="Le nom officiel de l'entité de collecte (ex: Hôpital X)." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
             </VBox>
 
             <VBox spacing="5.0">
-               <Label text="Adresse" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <Label text="Adresse" styleClass="admin-form-label" />
                <TextField styleClass="dark-field" fx:id="adresseInput" promptText="Ex: 12 Rue de la République" />
                <Label fx:id="adresseError" text="Adresse complète de l'entité." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
             </VBox>
 
             <VBox spacing="5.0">
-               <Label text="Ville" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <Label text="Ville" styleClass="admin-form-label" />
                <TextField styleClass="dark-field" fx:id="villeInput" promptText="Ex: Tunis" />
                <Label fx:id="villeError" text="Ville de l'entité." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
             </VBox>
 
             <VBox spacing="5.0">
-               <Label text="Numéro de téléphone" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <Label text="Numéro de téléphone" styleClass="admin-form-label" />
                <TextField styleClass="dark-field" fx:id="telephoneInput" promptText="Ex: 71234567" />
                <Label fx:id="telephoneError" text="Exactement 8 chiffres." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
             </VBox>

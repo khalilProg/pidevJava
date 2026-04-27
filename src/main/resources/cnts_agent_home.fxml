@@ -19,11 +19,6 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar">
                <children>
-                  <Label style="-fx-text-fill: #e63939; -fx-font-size: 24px;" text="BL">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Label>
                   <Label styleClass="logo-text" text="BLOODLINK" />
                   <Region HBox.hgrow="ALWAYS" />
                   <Button fx:id="userNameBtn" mnemonicParsing="false" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 20; -fx-padding: 8 20; -fx-font-size: 13px;" text="Agent CNTS">
@@ -88,7 +83,7 @@
                      </children>
                   </HBox>
                   <Region prefHeight="20.0" />
-                  <Button mnemonicParsing="false" onAction="#goToCampagnes" style="-fx-text-fill: -primary;" styleClass="menu-link" text="CAMPAGNES" />
+                  <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link, menu-link-active" text="CAMPAGNES" />
                   <Button mnemonicParsing="false" styleClass="menu-link" text="PROFIL" />
                   <Region VBox.vgrow="ALWAYS" />
                   <VBox spacing="15.0">

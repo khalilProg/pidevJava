@@ -19,7 +19,7 @@
          <children>
             <!-- Close -->
             <HBox alignment="CENTER_RIGHT">
-               <Button mnemonicParsing="false" onAction="#handleMenuToggle" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 800; -fx-cursor: hand;" text="FERMER ✕" />
+               <Button mnemonicParsing="false" onAction="#handleMenuToggle" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 800; -fx-cursor: hand;" text="FERMER" />
             </HBox>
             <Region prefHeight="20.0" />
             <!-- Menu Links -->
@@ -28,7 +28,7 @@
             <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
             <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
             <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
-            <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" style="-fx-text-fill: -primary;" text="MON PROFIL" />
+            <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link, menu-link-active" text="MON PROFIL" />
             <Region VBox.vgrow="ALWAYS" />
             <!-- Session Info -->
             <VBox spacing="15.0">

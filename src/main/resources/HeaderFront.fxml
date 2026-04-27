@@ -8,11 +8,6 @@
 
 <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 24px;">
-         <HBox.margin>
-            <Insets right="10.0" />
-         </HBox.margin>
-      </Label>
       <Label text="BLOODLINK" styleClass="logo-text" />
       <Region HBox.hgrow="ALWAYS" />
       <Button fx:id="userNameBtn" mnemonicParsing="false" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 20; -fx-padding: 8 20; -fx-font-size: 13px;" text="👤 Utilisateur">
@@ -20,6 +15,6 @@
             <Insets right="15.0" />
          </HBox.margin>
       </Button>
-      <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU ☰" />
+      <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
    </children>
 </HBox>

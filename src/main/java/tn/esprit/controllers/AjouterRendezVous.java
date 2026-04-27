@@ -13,11 +13,16 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.text.Text;
 import tn.esprit.entities.Campagne;
+import tn.esprit.entities.Client;
 import tn.esprit.entities.EntiteDeCollecte;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.entities.RendezVous;
+import tn.esprit.entities.User;
+import tn.esprit.services.ClientService;
+import tn.esprit.services.EmailService;
 import tn.esprit.services.QuestionnaireService;
 import tn.esprit.services.RendezVousService;
+import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -87,8 +92,8 @@ public class AjouterRendezVous {
             valid = false;
         }
 
-        if (date == null || date.isBefore(campagne.getDateDebut()) || date.isAfter(campagne.getDateFin())) {
-            dateError.setText("La date doit etre comprise entre " + campagne.getDateDebut() + " et " + campagne.getDateFin());
+        if (date == null || date.isBefore(LocalDate.now()) || date.isBefore(campagne.getDateDebut()) || date.isAfter(campagne.getDateFin())) {
+            dateError.setText("La date doit etre comprise entre aujourd'hui, " + campagne.getDateDebut() + " et " + campagne.getDateFin());
             dateError.setVisible(true);
             valid = false;
         }
@@ -124,10 +129,19 @@ public class AjouterRendezVous {
             return;
         }
 
+        Client rdvClient = resolveClient(true);
+        if (rdvClient == null) {
+            dateError.setText("Aucun profil client n'est associe a cette session.");
+            dateError.setVisible(true);
+            return;
+        }
+
+        syncQuestionnaireClient(rdvClient);
         new QuestionnaireService().ajouter(questionnaire);
         int questionnaireId = questionnaire.getId();
         RendezVous rdv = new RendezVous("confirme", rdvDateTime, questionnaireId, selectedId);
         new RendezVousService().ajouter(rdv);
+        sendConfirmationEmail(rdv, selectedEntity, true);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Liste.fxml"));
         Parent root = loader.load();
@@ -153,8 +167,8 @@ public class AjouterRendezVous {
             valid = false;
         }
 
-        if (date == null || date.isBefore(campagne.getDateDebut()) || date.isAfter(campagne.getDateFin())) {
-            dateError.setText("La date doit etre comprise entre " + campagne.getDateDebut() + " et " + campagne.getDateFin());
+        if (date == null || date.isBefore(LocalDate.now()) || date.isBefore(campagne.getDateDebut()) || date.isAfter(campagne.getDateFin())) {
+            dateError.setText("La date doit etre comprise entre aujourd'hui, " + campagne.getDateDebut() + " et " + campagne.getDateFin());
             dateError.setVisible(true);
             valid = false;
         }
@@ -190,10 +204,19 @@ public class AjouterRendezVous {
             return;
         }
 
+        Client rdvClient = resolveClient(false);
+        if (rdvClient == null) {
+            dateError.setText("Aucun profil client n'est associe a ce questionnaire.");
+            dateError.setVisible(true);
+            return;
+        }
+
+        syncQuestionnaireClient(rdvClient);
         new QuestionnaireService().ajouter(questionnaire);
         int questionnaireId = questionnaire.getId();
         RendezVous rdv = new RendezVous("confirme", rdvDateTime, questionnaireId, selectedId);
         new RendezVousService().ajouter(rdv);
+        sendConfirmationEmail(rdv, selectedEntity, false);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeRdvAdmin.fxml"));
         Parent root = loader.load();
@@ -212,5 +235,68 @@ public class AjouterRendezVous {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeRdvAdmin.fxml"));
         Parent root = loader.load();
         annulerRdv.getScene().setRoot(root);
+    }
+
+    private void sendConfirmationEmail(RendezVous rdv, EntiteDeCollecte selectedEntity, boolean preferSessionUser) {
+        try {
+            Client client = resolveClient(preferSessionUser);
+            if (client == null || client.getUser() == null) {
+                return;
+            }
+
+            User user = client.getUser();
+            String fullName = ((user.getPrenom() == null ? "" : user.getPrenom()) + " "
+                    + (user.getNom() == null ? "" : user.getNom())).trim();
+
+            new EmailService().sendRendezVousConfirmation(
+                    user.getEmail(),
+                    fullName,
+                    campagne == null ? "" : campagne.getTitre(),
+                    rdv.getDateDon(),
+                    selectedEntity == null ? "" : selectedEntity.getNom()
+            );
+        } catch (Exception e) {
+            System.err.println("Could not send rendez-vous confirmation email: " + e.getMessage());
+        }
+    }
+
+    private Client resolveClient(boolean preferSessionUser) throws SQLException {
+        if (preferSessionUser) {
+            Client sessionClient = resolveSessionClient();
+            if (sessionClient != null) {
+                return sessionClient;
+            }
+        }
+
+        if (questionnaire != null && questionnaire.getClientId() > 0) {
+            for (Client client : new ClientService().recuperer()) {
+                if (client.getId() == questionnaire.getClientId()) {
+                    return client;
+                }
+            }
+        }
+
+        if (!preferSessionUser) {
+            return resolveSessionClient();
+        }
+        return null;
+    }
+
+    private Client resolveSessionClient() throws SQLException {
+        User sessionUser = SessionManager.getCurrentUser();
+        return sessionUser == null ? null : new ClientService().getByUserId(sessionUser.getId());
+    }
+
+    private void syncQuestionnaireClient(Client client) {
+        if (questionnaire == null || client == null) {
+            return;
+        }
+
+        questionnaire.setClientId(client.getId());
+        questionnaire.setGroupeSanguin(client.getTypeSang());
+        if (client.getUser() != null) {
+            questionnaire.setNom(client.getUser().getNom());
+            questionnaire.setPrenom(client.getUser().getPrenom());
+        }
     }
 }

@@ -14,7 +14,6 @@
             <!-- Brand -->
             <HBox alignment="CENTER_LEFT" spacing="12" HBox.hgrow="NEVER">
                 <padding><Insets left="25" right="25"/></padding>
-                <SVGPath content="M 12 2 C 12 2 4 10 4 16 C 4 20.418 7.582 24 12 24 C 16.418 24 20 20.418 20 16 C 20 10 12 2 12 2 Z" fill="#E53935"/>
                 <Label text="BLOODLINK" styleClass="nav-logo-text"/>
             </HBox>
             
@@ -33,7 +32,7 @@
                     <Label text="mohsen ahmed" styleClass="user-name-label" />
                 </HBox>
                 
-                <Button text="MENU ☰" styleClass="nav-link" onAction="#handleMenuToggle" style="-fx-font-size: 13px; -fx-text-fill: white;"/>
+                <Button text="MENU" styleClass="nav-link" onAction="#handleMenuToggle" style="-fx-font-size: 13px; -fx-text-fill: white;"/>
             </HBox>
         </HBox>
 
@@ -49,7 +48,7 @@
         <VBox styleClass="menu-drawer" prefWidth="400" spacing="20" onMouseClicked="#handleMenuToggle">
             <!-- Close Header -->
             <HBox alignment="CENTER_RIGHT" prefHeight="60">
-                <Button text="FERMER ✕" styleClass="nav-link" style="-fx-text-fill: white;" onAction="#handleMenuClose"/>
+                <Button text="FERMER" styleClass="nav-link" style="-fx-text-fill: white;" onAction="#handleMenuClose"/>
             </HBox>
             
             <!-- Links -->

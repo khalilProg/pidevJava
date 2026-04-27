@@ -25,8 +25,8 @@
          
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="PRENDRE UN RENDEZ-VOUS" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Veuillez choisir une date et une entité pour votre rendez-vous." />
+                <Label styleClass="admin-page-title" text="PRENDRE UN RENDEZ-VOUS" />
+                <Label styleClass="admin-page-subtitle" text="Veuillez choisir une date et une entité pour votre rendez-vous." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
          </HBox>

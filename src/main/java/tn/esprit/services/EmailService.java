@@ -8,7 +8,9 @@ import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -60,6 +62,42 @@ public class EmailService {
                 + "\nBANQUE: " + banqueName;
 
         return sendHtmlEmail(toEmail, "BloodLink - Commande creee", htmlContent, debug);
+    }
+
+    public boolean sendRendezVousConfirmation(String toEmail, String clientName, String campagne,
+                                               LocalDateTime dateTime, String entiteName) {
+        String safeClientName = escapeHtml(clientName == null || clientName.isBlank() ? "Donneur" : clientName);
+        String safeCampagne = escapeHtml(campagne == null || campagne.isBlank() ? "Campagne" : campagne);
+        String safeEntite = escapeHtml(entiteName == null || entiteName.isBlank() ? "-" : entiteName);
+        String safeDate = dateTime == null ? "-" : dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+        String htmlContent = "<!doctype html>"
+                + "<html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
+                + "<title>Rendez-vous confirme</title></head>"
+                + "<body style='margin:0;padding:0;background:#0b0f14;font-family:Arial,Helvetica,sans-serif;color:#ffffff;'>"
+                + "<table role='presentation' width='100%' cellpadding='0' cellspacing='0' style='background:#0b0f14;padding:32px 12px;'><tr><td align='center'>"
+                + "<table role='presentation' width='640' cellpadding='0' cellspacing='0' style='width:640px;max-width:640px;'>"
+                + "<tr><td style='padding:0 0 14px 0;'>"
+                + "<div style='font-weight:900;text-transform:uppercase;font-size:22px;line-height:1.2;'>Rendez-vous confirme</div>"
+                + "<div style='margin-top:6px;color:rgba(255,255,255,.65);font-size:14px;line-height:1.5;'>Votre rendez-vous BloodLink a bien ete enregistre.</div>"
+                + "</td></tr>"
+                + "<tr><td style='background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;'>"
+                + "<div style='font-size:16px;line-height:1.65;margin:0 0 16px 0;'>Bonjour <span style='font-weight:800;'>" + safeClientName + "</span>,</div>"
+                + "<table role='presentation' width='100%' cellpadding='0' cellspacing='0' style='border-collapse:separate;border-spacing:0 10px;'>"
+                + infoRow("Campagne", safeCampagne)
+                + infoRow("Date et heure", safeDate)
+                + infoRow("Entite", safeEntite)
+                + "</table>"
+                + "<div style='margin-top:18px;padding:14px 16px;border-radius:12px;background:rgba(230,57,57,.12);border:1px solid rgba(230,57,57,.35);font-size:13px;line-height:1.6;'>"
+                + "Pensez a apporter votre carte d'identite. Merci pour votre generosite."
+                + "</div>"
+                + "</td></tr>"
+                + "<tr><td style='padding:14px 2px 0 2px;color:rgba(255,255,255,.55);font-size:12px;line-height:1.6;'>"
+                + "&copy; " + Year.now().getValue() + " BloodLink - Notifications automatiques</td></tr>"
+                + "</table></td></tr></table></body></html>";
+
+        return sendHtmlEmail(toEmail, "BloodLink - Confirmation rendez-vous", htmlContent,
+                "RENDEZ-VOUS: " + safeDate + "\nCAMPAGNE: " + safeCampagne + "\nENTITE: " + safeEntite);
     }
 
     private boolean sendHtmlEmail(String toEmail, String subject, String htmlContent, String debugDetails) {

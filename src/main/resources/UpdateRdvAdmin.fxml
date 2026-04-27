@@ -25,8 +25,8 @@
          
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER LE RENDEZ-VOUS" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Ajustement administratif de la date et de l'entité de collecte." />
+                <Label styleClass="admin-page-title" text="MODIFIER LE RENDEZ-VOUS" />
+                <Label styleClass="admin-page-subtitle" text="Ajustement administratif de la date et de l'entité de collecte." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
          </HBox>

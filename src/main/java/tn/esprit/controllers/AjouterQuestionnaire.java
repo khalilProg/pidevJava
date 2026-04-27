@@ -7,36 +7,44 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import tn.esprit.entities.*;
+import tn.esprit.services.ClientService;
 import tn.esprit.services.EntiteCollecteService;
-import tn.esprit.services.QuestionnaireService;
+import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 public class AjouterQuestionnaire {
 
     private Campagne campagne; // el selected campagne
-    @FXML private TextField age;
-    @FXML private ComboBox<String> sexe;
-    @FXML private TextField poids;
-    @FXML private TextArea autres;
-    @FXML private Button continuer;
-    @FXML private Button annuler;
-    @FXML private Text ageError;
-    @FXML private Text sexeError;
-    @FXML private Text poidsError;
-    User u = new User(9,"chaffai", "yassine", "yassinechaffai4@gmail.com");
-    private Client currentClient = new Client(1, "O+", LocalDate.of(2023, 1, 1), u);
-    private Client currentClient1 = new Client(2, "A-", LocalDate.of(2003, 10, 17), u);
-
+    @FXML
+    private TextField age;
+    @FXML
+    private ComboBox<String> sexe;
+    @FXML
+    private TextField poids;
+    @FXML
+    private TextArea autres;
+    @FXML
+    private Button continuer;
+    @FXML
+    private Button annuler;
+    @FXML
+    private Text ageError;
+    @FXML
+    private Text sexeError;
+    @FXML
+    private Text poidsError;
+    private final ClientService clientService = new ClientService();
 
     public void setCampagne(Campagne c) {
         this.campagne = c;
         System.out.println("Selected campaign: " + c.getTitre());
     }
-    @FXML public void handleContinuer(ActionEvent event) throws IOException, SQLException {
+
+    @FXML
+    public void handleContinuer(ActionEvent event) throws IOException, SQLException {
         boolean valid = true;
 
         // reset lel errors
@@ -81,9 +89,16 @@ public class AjouterQuestionnaire {
         if (!valid) return; // stop itha validation fails
 
         else {
-            try{
-            String nom = currentClient.getUser().getNom();
-            String prenom = currentClient.getUser().getPrenom();
+            try {
+            Client currentClient = resolveCurrentClient();
+            if (currentClient == null || currentClient.getUser() == null) {
+                showMissingClientProfileAlert();
+                return;
+            }
+
+            User currentUser = currentClient.getUser();
+            String nom = currentUser.getNom();
+            String prenom = currentUser.getPrenom();
             String typeSang = currentClient.getTypeSang();
             int clientId = currentClient.getId();
             int campagneId = campagne.getId();
@@ -109,5 +124,18 @@ public class AjouterQuestionnaire {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
         Parent root = loader.load();
         annuler.getScene().setRoot(root);
+    }
+
+    private Client resolveCurrentClient() throws SQLException {
+        User sessionUser = SessionManager.getCurrentUser();
+        return sessionUser == null ? null : clientService.getByUserId(sessionUser.getId());
+    }
+
+    private void showMissingClientProfileAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Profil client requis");
+        alert.setHeaderText(null);
+        alert.setContentText("Connectez-vous avec un compte client ayant un profil complet avant de prendre un rendez-vous.");
+        alert.showAndWait();
     }
 }

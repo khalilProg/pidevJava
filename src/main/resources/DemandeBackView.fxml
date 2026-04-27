@@ -23,8 +23,8 @@
          
          <HBox alignment="CENTER_LEFT">
             <VBox spacing="5.0">
-                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="DEMANDES DE SANG" />
-                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Gérez les demandes de sang et validez ou refusez les requêtes." />
+                <Label styleClass="admin-page-title" text="DEMANDES DE SANG" />
+                <Label styleClass="admin-page-subtitle" text="Gérez les demandes de sang et validez ou refusez les requêtes." />
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" text="+ NOUVELLE DEMANDE" onAction="#goToAddDemande" styleClass="button-primary" />

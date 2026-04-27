@@ -14,14 +14,13 @@
         <padding>
             <Insets left="25" right="25"/>
         </padding>
-        <SVGPath content="M 12 2 C 12 2 4 10 4 16 C 4 20.418 7.582 24 12 24 C 16.418 24 20 20.418 20 16 C 20 10 12 2 12 2 Z" fill="#FF3E3E"/>
         <Label text="BLOODLINK" styleClass="nav-logo-text"/>
     </HBox>
 
     <HBox alignment="CENTER" spacing="30" HBox.hgrow="ALWAYS" styleClass="nav-links-container">
-        <Button text="Accueil" styleClass="nav-link" onAction="#goToAccueil"/>
-        <Button text="Historique" styleClass="nav-link" onAction="#goToHistorique"/>
-        <Button text="Campagnes" styleClass="nav-link" onAction="#goToCampagnes"/>
+        <Button fx:id="accueilNavBtn" text="Accueil" styleClass="nav-link" onAction="#goToAccueil"/>
+        <Button fx:id="historiqueNavBtn" text="Historique" styleClass="nav-link" onAction="#goToHistorique"/>
+        <Button fx:id="campagnesNavBtn" text="Campagnes" styleClass="nav-link" onAction="#goToCampagnes"/>
 <!--        <Button text="Questionnaires" styleClass="nav-link" onAction="#goToQuestionnaires"/>-->
 <!--        <Button text="Rendez vous" styleClass="nav-link" onAction="#goToRendezVous"/>-->
     </HBox>
@@ -38,7 +37,7 @@
                              fill="WHITE" scaleX="0.8" scaleY="0.8" />
                 </StackPane>
 
-                <Label text="ben haj yahia wajd" styleClass="user-name-label" />
+                <Label fx:id="userNameLabel" text="Utilisateur" styleClass="user-name-label" />
             </children>
         </HBox>
 

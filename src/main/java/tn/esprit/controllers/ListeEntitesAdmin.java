@@ -16,9 +16,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 import tn.esprit.entities.EntiteDeCollecte;
 import tn.esprit.services.EntiteCollecteService;
 
@@ -32,6 +34,7 @@ import java.util.stream.Collectors;
 public class ListeEntitesAdmin {
 
     @FXML private TableView<EntiteDeCollecte> tableView;
+    @FXML private TableColumn<EntiteDeCollecte, Integer> idColumn;
     @FXML private TableColumn<EntiteDeCollecte, String> nomColumn;
     @FXML private TableColumn<EntiteDeCollecte, String> adresseColumn;
     @FXML private TableColumn<EntiteDeCollecte, String> villeColumn;
@@ -53,6 +56,9 @@ public class ListeEntitesAdmin {
         sortComboBox.valueProperty().addListener((obs, old, val) -> appliquerFiltresEtTri());
 
 
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idColumn.setStyle("-fx-font-weight: 800; -fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
+
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         nomColumn.setCellFactory(col -> new TableCell<>() {
             @Override
@@ -62,7 +68,7 @@ public class ListeEntitesAdmin {
                     setText(null);
                 } else {
                     setText(item);
-                    setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 14px;");
+                    setStyle("-fx-font-weight: bold; -fx-text-fill: -admin-table-strong; -fx-font-size: 14px; -fx-alignment: center-left;");
                 }
             }
         });
@@ -76,16 +82,18 @@ public class ListeEntitesAdmin {
                     setGraphic(null);
                 } else {
                     Label locationLbl = new Label("📍 " + item);
-                    locationLbl.setStyle("-fx-text-fill: -muted; -fx-font-size: 12px;");
+                    locationLbl.getStyleClass().add("admin-table-muted");
                     // Assuming the mock needs a slightly red map pin
                     // (we can simulate it by wrapping just the pin in red if we used TextFlow,
                     // but simple Label text usually works just fine)
                     setGraphic(locationLbl);
+                    setAlignment(Pos.CENTER_LEFT);
                 }
             }
         });
 
         villeColumn.setCellValueFactory(new PropertyValueFactory<>("ville"));
+        villeColumn.setStyle("-fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
 
         telephoneColumn.setCellValueFactory(new PropertyValueFactory<>("tel"));
         telephoneColumn.setCellFactory(col -> new TableCell<>() {
@@ -96,25 +104,21 @@ public class ListeEntitesAdmin {
                     setGraphic(null);
                 } else {
                     Label phoneLbl = new Label("📞 " + item);
-                    phoneLbl.setStyle("-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;");
+                    phoneLbl.getStyleClass().add("admin-table-strong");
                     setGraphic(phoneLbl);
+                    setAlignment(Pos.CENTER_LEFT);
                 }
             }
         });
 
         // Actions Column
         actionsColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button actViewBtn = new Button("👁");
-            private final Button actEditBtn = new Button("✏");
-            private final Button actDeleteBtn = new Button("🗑");
+            private final Button actViewBtn = createActionButton("fas-eye", "Voir", "action-icon-btn");
+            private final Button actEditBtn = createActionButton("fas-edit", "Modifier", "action-icon-btn");
+            private final Button actDeleteBtn = createActionButton("fas-trash", "Supprimer", "action-icon-btn", "action-icon-delete");
             private final HBox container = new HBox(8, actViewBtn, actEditBtn, actDeleteBtn);
 
             {
-                actViewBtn.getStyleClass().add("action-icon-btn");
-
-                actEditBtn.getStyleClass().add("action-icon-btn");
-
-                actDeleteBtn.getStyleClass().addAll("action-icon-btn", "action-icon-delete");
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(actViewBtn);
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(actEditBtn);
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(actDeleteBtn);
@@ -178,6 +182,19 @@ public class ListeEntitesAdmin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private Button createActionButton(String iconLiteral, String tooltipText, String... styleClasses) {
+        Button button = new Button();
+        FontIcon icon = new FontIcon(iconLiteral);
+        icon.setIconSize(13);
+        icon.getStyleClass().add("ui-font-icon");
+        button.setGraphic(icon);
+        button.setText("");
+        button.setTooltip(new Tooltip(tooltipText));
+        button.setAccessibleText(tooltipText);
+        button.getStyleClass().addAll(styleClasses);
+        return button;
     }
 
     private void appliquerFiltresEtTri() {

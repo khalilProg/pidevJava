@@ -41,6 +41,11 @@ public class backTransfertController {
 
     @FXML
     public void initialize() {
+        tableTransfert.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        colStatus.setMinWidth(170);
+        colStatus.setPrefWidth(170);
+        colActions.setMinWidth(230);
+        colActions.setPrefWidth(230);
 
         colId.setCellValueFactory(param -> 
             new SimpleStringProperty("#" + param.getValue().getId())
@@ -55,7 +60,7 @@ public class backTransfertController {
                 return new SimpleStringProperty("N/A");
             }
         });
-        colDemande.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
+        colDemande.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
 
         colFrom.setCellFactory(column -> createMultilineCell("fromOrg"));
         colTo.setCellFactory(column -> createMultilineCell("toOrg"));
@@ -63,7 +68,7 @@ public class backTransfertController {
         colQuantite.setCellValueFactory(param -> 
             new SimpleStringProperty(param.getValue().getQuantite() + " UNITÉS")
         );
-        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
+        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
 
         colDateEnvoie.setCellValueFactory(param -> {
             LocalDate date = param.getValue().getDateEnvoie();
@@ -83,6 +88,9 @@ public class backTransfertController {
                         Transfert t = getTableRow().getItem();
                         Label badge = new Label();
                         badge.setStyle("-fx-padding: 4 12; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 11px;");
+                        badge.setMinWidth(146);
+                        badge.setPrefWidth(146);
+                        badge.setAlignment(Pos.CENTER);
                         
                         String statusStr = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "EN_ATTENTE";
                         
@@ -124,10 +132,10 @@ public class backTransfertController {
                     box.setAlignment(Pos.CENTER_LEFT);
                     
                     Label nameLbl = new Label();
-                    nameLbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                    nameLbl.getStyleClass().add("admin-table-strong");
                     
                     Label idLbl = new Label();
-                    idLbl.setStyle("-fx-text-fill: -muted; -fx-font-size: 10px;");
+                    idLbl.getStyleClass().add("admin-table-muted");
                     
                     if (field.equals("fromOrg")) {
                         nameLbl.setText(t.getFromOrg() != null ? t.getFromOrg().toUpperCase() : "INCONNU");
