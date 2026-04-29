@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.Home"
+            prefHeight="400.0" prefWidth="600.0">
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude"/>
+
+    <!-- Welcome Banner -->
+    <VBox styleClass="welcome-banner-card" spacing="15" AnchorPane.leftAnchor="308" AnchorPane.topAnchor="100" prefWidth="1200" minWidth="1200" maxWidth="1200">
+        <Label textFill="white" text="BLOODLINK ADMINISTRATION" styleClass="welcome-badge-text"/>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Text fill="white" text="Bienvenue, Administrateur" styleClass="welcome-title"/>
+        </HBox>
+        <Text wrappingWidth="600" styleClass="welcome-description" fill="white"
+              text="Vous êtes sur le centre de contrôle de BloodLink. Gérez les stocks, suivez les commandes et supervisez la communauté des donneurs en toute simplicité."/>
+
+        <Region prefHeight="20"/>
+
+        <Button text="+  NOUVEL UTILISATEUR" styleClass="btn-primary-modern"/>
+    </VBox>
+
+</AnchorPane>

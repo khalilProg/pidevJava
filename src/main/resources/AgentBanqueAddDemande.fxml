@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.geometry.Insets?>
+
+<VBox stylesheets="@agent_banque.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.controllers.AgentBanqueAddDemandeController" spacing="30"
+      style="-fx-background-color: #0d0d0d; -fx-padding: 40 50;">
+
+    <Button text="← Retour aux demandes" style="-fx-text-fill: #b3b3b3; -fx-background-color: transparent; -fx-font-weight: bold; -fx-cursor: hand;" onAction="#goBack"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <SVGPath content="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-3v3h-2v-3H8v-2h3v-3h2v3h3v2zm-3-7V3.5L18.5 9H13z" fill="#E53935" scaleX="1.3" scaleY="1.3"/>
+        <VBox spacing="2">
+            <Label text="Créer une Demande" styleClass="page-title"/>
+            <Label text="Remplissez les informations ci-dessous pour soumettre votre demande de sang." styleClass="page-subtitle"/>
+        </VBox>
+    </HBox>
+
+    <VBox spacing="25" style="-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 40 50;" VBox.vgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-border-color: #222222; -fx-border-width: 0 0 1 0; -fx-padding: 0 0 20 0;">
+            <StackPane style="-fx-background-color: #1a0a0a; -fx-background-radius: 10; -fx-padding: 10;">
+                <SVGPath content="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-3v3h-2v-3H8v-2h3v-3h2v3h3v2zm-3-7V3.5L18.5 9H13z" fill="#E53935"/>
+            </StackPane>
+            <VBox>
+                <Label text="FORMULAIRE DE DEMANDE" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-letter-spacing: 2px;"/>
+                <Label text="Veuillez vérifier les informations avant de sauvegarder." style="-fx-text-fill: #555555; -fx-font-size: 11px;"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="30">
+            <!-- Left Column -->
+            <VBox spacing="20" HBox.hgrow="ALWAYS">
+                <VBox spacing="4">
+                    <Label text="BANQUE" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px;"/>
+                    <ComboBox fx:id="comboBanque" promptText="Sélectionnez une banque" styleClass="dark-combo-box" maxWidth="Infinity" prefHeight="45"/>
+                    <Label fx:id="errBanque" text="Ce champ est requis" style="-fx-text-fill: #E53935; -fx-font-size: 11px;" visible="false" managed="false"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="QUANTITÉ (UNITÉS)" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px;"/>
+                    <TextField fx:id="txtQuantite" promptText="Quantité en unités" styleClass="search-field" prefHeight="45"/>
+                    <Label fx:id="errQuantite" text="Ce champ est requis" style="-fx-text-fill: #E53935; -fx-font-size: 11px;" visible="false" managed="false"/>
+                </VBox>
+            </VBox>
+            
+            <!-- Right Column -->
+            <VBox spacing="20" HBox.hgrow="ALWAYS">
+                <VBox spacing="4">
+                    <Label text="TYPE DE SANG" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px;"/>
+                    <ComboBox fx:id="comboType" promptText="Choisissez un type" styleClass="dark-combo-box" maxWidth="Infinity" prefHeight="45"/>
+                    <Label fx:id="errType" text="Ce champ est requis" style="-fx-text-fill: #E53935; -fx-font-size: 11px;" visible="false" managed="false"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="URGENCE" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px;"/>
+                    <ComboBox fx:id="comboUrgence" promptText="Sélectionnez" styleClass="dark-combo-box" maxWidth="Infinity" prefHeight="45"/>
+                    <Label fx:id="errUrgence" text="Ce champ est requis" style="-fx-text-fill: #E53935; -fx-font-size: 11px;" visible="false" managed="false"/>
+                </VBox>
+            </VBox>
+        </HBox>
+        
+        <Region VBox.vgrow="ALWAYS" />
+
+        <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 30 0 0 0;">
+            <Button text="➤ ENVOYER LA DEMANDE" styleClass="btn-primary" style="-fx-padding: 12 30;" onAction="#handleAddDemande"/>
+        </HBox>
+    </VBox>
+</VBox>

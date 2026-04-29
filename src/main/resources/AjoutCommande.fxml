@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.AjoutCommandeController">
+    <children>
+<BorderPane styleClass="main-container">
+
+    <top>
+        <HBox styleClass="nav-bar" alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" spacing="6">
+                <Region styleClass="logo-icon"/>
+                <Label text="BLOODLINK" styleClass="brand-label"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" onAction="#handleThemeToggle"/>
+            <Region prefWidth="12"/>
+            <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU &#9776;" />
+            <Region prefWidth="12"/>
+            <Button text="👤  chaffai yassine" styleClass="user-badge"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="edge-to-edge-scroll"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox spacing="0" styleClass="content-area">
+                <padding><Insets top="0" right="32" bottom="40" left="32"/></padding>
+
+                <VBox styleClass="page-header" spacing="0">
+                    <Label text="BLOODLINK" styleClass="breadcrumb-label"/>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="🛒" style="-fx-font-size: 24px;"/>
+                        <Label text="Créer une " styleClass="page-title"/>
+                        <Label text="Commande" styleClass="page-title-highlight"/>
+                    </HBox>
+                    <Label text="Remplissez les informations ci-dessous pour soumettre votre demande."
+                           styleClass="page-subtitle"/>
+                </VBox>
+
+                <Region prefHeight="24"/>
+
+                <VBox styleClass="form-card" spacing="20" maxWidth="1.7976931348623157E308">
+                    <Label text="DÉTAILS DE LA COMMANDE" styleClass="form-section-title"/>
+
+                    <!-- Row 1: Reference + Quantité -->
+                    <HBox spacing="20">
+
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="QUANTITÉ" styleClass="field-label"/>
+                            <TextField fx:id="tfQuantite" promptText="Quantité"
+                                       styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorQuantite" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Row 2: Type Sang + Priorité -->
+                    <HBox spacing="20">
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="TYPE SANG" styleClass="field-label"/>
+                            <ComboBox fx:id="cbTypeSang" promptText="Choisir un type de sang"
+                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorTypeSang" text="" styleClass="field-error"/>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="PRIORITÉ" styleClass="field-label"/>
+                            <ComboBox fx:id="cbPriorite" promptText="Choisir une priorité"
+                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorPriorite" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Row 3: Banque -->
+                    <VBox spacing="0">
+                        <Label text="BANQUE" styleClass="field-label"/>
+                        <ComboBox fx:id="cbBanque" promptText="Choisir une banque"
+                                  styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                        <Label fx:id="lblErrorBanque" text="" styleClass="field-error"/>
+                    </VBox>
+
+                    <Region prefHeight="8"/>
+                    <Separator styleClass="dark-separator"/>
+                    <Label fx:id="lblStatus" text="" styleClass="status-success"/>
+
+                    <HBox alignment="CENTER_RIGHT" spacing="16">
+                        <Button text="Annuler" styleClass="cancel-button" onAction="#handleCancel"/>
+                        <Button text="🚀  ENVOYER LA COMMANDE" styleClass="submit-button" onAction="#handleSubmit"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+        </BorderPane>
+
+        <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+            <children>
+                <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+                <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_RIGHT">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
+                            </children>
+                        </HBox>
+                        <Region prefHeight="20.0" />
+                        <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+                        <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
+                        <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" style="-fx-text-fill: -primary;" text="COMMANDES" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MEDICAL" />
+                        <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
+                        <Region VBox.vgrow="ALWAYS" />
+                        <VBox spacing="15.0">
+                            <children>
+                                <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
+                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="DECONNEXION" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</StackPane>

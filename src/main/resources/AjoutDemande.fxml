@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.DemandeController"
+            stylesheets="@commande.css"
+            prefHeight="750" prefWidth="900">
+
+    <children>
+
+        <!-- SCROLL GLOBAL -->
+        <ScrollPane fitToWidth="true"
+                    prefWidth="900"
+                    prefHeight="750">
+
+            <content>
+
+                <VBox spacing="20" style="-fx-padding: 20;">
+
+                    <!-- HEADER -->
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Label text="Gestion des Demandes"
+                               style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                        <Pane HBox.hgrow="ALWAYS"/>
+
+                        <Button fx:id="btnExport"
+                                text="📄 Exporter PDF"
+                                onAction="#exportPDF"
+                                styleClass="btn-secondary"/>
+                        <Button fx:id="btnAdd"
+                                text="+ Nouvelle Demande"
+                                styleClass="btn-primary"/>
+                    </HBox>
+
+                    <!-- TABLE DEMANDES -->
+                    <TableView fx:id="tableDemande"
+                               prefHeight="250"
+                               styleClass="table-dark">
+
+                        <columns>
+                            <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="colBanque" text="Banque" prefWidth="100"/>
+                            <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="colQuantite" text="Quantité" prefWidth="100"/>
+                            <TableColumn fx:id="colUrgence" text="Urgence" prefWidth="120"/>
+                            <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                            <TableColumn fx:id="colActions" text="Actions" prefWidth="140"/>
+                        </columns>
+
+                    </TableView>
+
+                    <!-- TITRE COMMANDES -->
+                    <Label text="Gestion des Commandes"
+                           style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+
+                    <!-- TABLE COMMANDES -->
+                    <TableView fx:id="tableCommande"
+                               prefHeight="250"
+                               styleClass="table-dark"
+                               style="-fx-border-color: transparent;">
+
+                        <columns>
+                            <TableColumn fx:id="colCmdId" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="colCmdClient" text="Client" prefWidth="120"/>
+                            <TableColumn fx:id="colCmdType" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="colCmdQte" text="Quantité" prefWidth="100"/>
+                            <TableColumn fx:id="colCmdStatus" text="Status" prefWidth="120"/>
+                            <TableColumn fx:id="colCmdActions" text="Actions" prefWidth="140"/>
+                        </columns>
+
+                    </TableView>
+
+                    <!-- NAV -->
+                    <HBox spacing="10">
+                        <Button text="Transferts" onAction="#goToTransfert" styleClass="btn-primary"/>
+                        <Button text="Demandes" onAction="#goToDemande" styleClass="submit-button"/>
+                    </HBox>
+
+                </VBox>
+
+            </content>
+
+        </ScrollPane>
+
+    </children>
+
+</AnchorPane>

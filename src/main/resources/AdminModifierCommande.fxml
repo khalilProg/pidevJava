@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminModifierCommandeController">
+
+    <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge-scroll" vbarPolicy="AS_NEEDED">
+            <VBox spacing="0" styleClass="content-area">
+                <padding><Insets bottom="40" left="32" right="32" top="28"/></padding>
+
+                <VBox spacing="4">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label styleClass="page-title" text="MODIFIER LA COMMANDE"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button onAction="#handleCancel" styleClass="retour-button" text="← RETOUR"/>
+                    </HBox>
+                    <Label styleClass="page-subtitle" text="Mettez à jour les statuts et priorités en tant qu'administrateur."/>
+                </VBox>
+
+                <Region prefHeight="24"/>
+
+                <VBox maxWidth="1.7976931348623157E308" spacing="20" styleClass="form-card">
+                    <Label text="DÉTAILS DE LA COMMANDE" styleClass="form-section-title"/>
+
+                    <HBox spacing="20">
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="REFERENCE"/>
+                            <TextField fx:id="tfReference" maxWidth="1.7976931348623157E308" promptText="Ex: 2024001" styleClass="dark-field"/>
+                            <Label fx:id="lblErrorReference" text="" styleClass="field-error"/>
+                        </VBox>
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="QUANTITÉ"/>
+                            <TextField fx:id="tfQuantite" maxWidth="1.7976931348623157E308" promptText="Quantité" styleClass="dark-field"/>
+                            <Label fx:id="lblErrorQuantite" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="20">
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="TYPE SANG"/>
+                            <ComboBox fx:id="cbTypeSang" maxWidth="1.7976931348623157E308" promptText="Choisir un type de sang" styleClass="dark-combo"/>
+                            <Label fx:id="lblErrorTypeSang" text="" styleClass="field-error"/>
+                        </VBox>
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="PRIORITÉ"/>
+                            <ComboBox fx:id="cbPriorite" maxWidth="1.7976931348623157E308" promptText="Choisir une priorité" styleClass="dark-combo"/>
+                            <Label fx:id="lblErrorPriorite" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="20">
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="STATUT DE LA COMMANDE"/>
+                            <ComboBox fx:id="cbStatut" maxWidth="1.7976931348623157E308" promptText="Ex: En attente, Validée..." styleClass="dark-combo"/>
+                            <Label fx:id="lblErrorStatut" text="" styleClass="field-error"/>
+                        </VBox>
+                        <VBox spacing="0" HBox.hgrow="ALWAYS">
+                            <Label styleClass="field-label" text="BANQUE"/>
+                            <ComboBox fx:id="cbBanque" maxWidth="1.7976931348623157E308" promptText="Choisir une banque" styleClass="dark-combo"/>
+                            <Label fx:id="lblErrorBanque" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <Region prefHeight="8"/>
+                    <Separator styleClass="dark-separator"/>
+                    <Label fx:id="lblStatus" styleClass="status-success" text=""/>
+
+                    <HBox alignment="CENTER_RIGHT" spacing="16">
+                        <Button fx:id="btnAnnuler" onAction="#handleCancel" styleClass="cancel-button" text="ANNULER"/>
+                        <Button fx:id="btnEnregistrer" onAction="#handleSubmit" styleClass="submit-button" text="🔴  ENREGISTRER MODIFICATIONS"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

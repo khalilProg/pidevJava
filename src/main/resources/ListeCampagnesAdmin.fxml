@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeCampagnesAdmin">
+   <!-- Sidebar -->
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="35.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         
+         <!-- Header -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label styleClass="admin-page-title" text="Gestion des Campagnes" />
+                <Label styleClass="admin-page-subtitle" text="Interface d'administration" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="addBtn" mnemonicParsing="false" text="+ Nouvelle Campagne" onAction="#handleAjouter" styleClass="button-primary" />
+         </HBox>
+
+         <VBox styleClass="glass-card" spacing="30.0" VBox.vgrow="ALWAYS">
+            
+            <!-- Filter Section -->
+            <HBox spacing="20.0" alignment="CENTER_LEFT">
+               <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" styleClass="search-shell">
+                   <Label text="🔍" style="-fx-text-fill: -muted;" />
+                   <TextField fx:id="searchField" styleClass="dark-field" promptText="Rechercher une campagne..." HBox.hgrow="ALWAYS" />
+               </HBox>
+               <ComboBox fx:id="sortComboBox" styleClass="dark-combo" promptText="Trier" prefWidth="250.0" />
+            </HBox>
+
+            <!-- Statistics Section -->
+            <HBox prefHeight="260.0" spacing="20.0">
+               <VBox prefWidth="650.0" spacing="12.0" styleClass="glass-card" HBox.hgrow="ALWAYS">
+                  <Label styleClass="admin-chart-title" text="Campagnes par Mois" />
+                  <BarChart fx:id="campagneChart" legendVisible="false" animated="false" VBox.vgrow="ALWAYS">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </BarChart>
+               </VBox>
+
+               <VBox prefWidth="300.0" spacing="12.0" styleClass="glass-card">
+                  <Label styleClass="admin-chart-title" text="Top Mois" />
+                  <VBox fx:id="topMonthsList" spacing="8.0" VBox.vgrow="ALWAYS" />
+               </VBox>
+            </HBox>
+
+            <!-- Table -->
+            <TableView fx:id="tableView" VBox.vgrow="ALWAYS" >
+               <columns>
+                  <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                  <TableColumn fx:id="titreColumn" text="TITRE" prefWidth="180" />
+                  <TableColumn fx:id="descColumn" text="DESCRIPTION" prefWidth="200" />
+                  <TableColumn fx:id="entiteColumn" text="ENTITÉS" prefWidth="220" />
+                  <TableColumn fx:id="typesSangColumn" text="TYPES DE SANG" prefWidth="150" />
+                  <TableColumn fx:id="datesColumn" text="DATES" prefWidth="150" />
+                  <TableColumn fx:id="actionsColumn" text="ACTIONS" prefWidth="150" />
+               </columns>
+            </TableView>
+         </VBox>
+         
+      </VBox>
+   </center>
+</BorderPane>

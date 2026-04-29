@@ -33,7 +33,7 @@ public class backTransfertController {
     private final TransfertService service = new TransfertService();
     private List<Transfert> list;
 
-    // ================= INIT =================
+
     @FXML
     public void initialize() {
 
@@ -49,7 +49,7 @@ public class backTransfertController {
         addActions();
     }
 
-    // ================= LOAD =================
+
     private void loadData() {
         try {
             list = service.recuperer();
@@ -59,7 +59,7 @@ public class backTransfertController {
         }
     }
 
-    // ================= ACTIONS =================
+
     private void addActions() {
 
         colActions.setCellFactory(param -> new TableCell<>() {
@@ -70,13 +70,13 @@ public class backTransfertController {
             private final Button btnDelete = new Button("🗑");
 
             {
-                // 🎨 STYLE
+
                 btnConfirm.setStyle("-fx-background-color: green; -fx-text-fill: white;");
                 btnCancel.setStyle("-fx-background-color: red; -fx-text-fill: white;");
                 btnEdit.setStyle("-fx-background-color: #f1c40f; -fx-text-fill: black;");
                 btnDelete.setStyle("-fx-background-color: black; -fx-text-fill: white;");
 
-                // ================= CONFIRM =================
+
                 btnConfirm.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
 
@@ -92,7 +92,7 @@ public class backTransfertController {
                     }
                 });
 
-                // ================= CANCEL =================
+
                 btnCancel.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
 
@@ -106,7 +106,7 @@ public class backTransfertController {
                     }
                 });
 
-                // ================= DELETE =================
+
                 btnDelete.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
 
@@ -119,7 +119,7 @@ public class backTransfertController {
                     }
                 });
 
-                // ================= EDIT =================
+
                 btnEdit.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
 
@@ -154,10 +154,10 @@ public class backTransfertController {
                 HBox actions = new HBox(8);
                 actions.setAlignment(Pos.CENTER);
 
-                // 🔥 toujours visibles
+
                 actions.getChildren().addAll(btnEdit, btnDelete);
 
-                // 🔥 seulement si EN_COURS
+
                 if ("EN_COURS".equals(t.getStatus())) {
                     actions.getChildren().add(0, btnConfirm);
                     actions.getChildren().add(1, btnCancel);
@@ -168,7 +168,7 @@ public class backTransfertController {
         });
     }
 
-    // ================= NAVIGATION =================
+
     @FXML
     private void retour() {
         try {

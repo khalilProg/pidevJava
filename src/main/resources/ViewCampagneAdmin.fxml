@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ViewCampagneAdmin">
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <center>
+      <ScrollPane fitToWidth="true" styleClass="main-content-scroll" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+         <VBox styleClass="main-content" spacing="40.0">
+            <padding>
+               <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+            </padding>
+            
+            <HBox alignment="CENTER_LEFT">
+               <VBox spacing="5.0">
+                   <Label fx:id="titreHeaderLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="DÉTAILS DE LA CAMPAGNE" />
+                   <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Informations sur la mobilisation et lieux de collecte." />
+               </VBox>
+               <Region HBox.hgrow="ALWAYS" />
+               <HBox spacing="15.0">
+                   <Button styleClass="retour-button" mnemonicParsing="false" text="← RETOUR" onAction="#handleRetour" />
+                   <Button mnemonicParsing="false" text="✏ MODIFIER" onAction="#handleNavigateModifier" styleClass="button-primary" />
+               </HBox>
+            </HBox>
+            
+            <VBox styleClass="glass-card" spacing="30.0" maxWidth="900.0" style="-fx-padding: 40;">
+                <VBox spacing="10.0">
+                    <Label fx:id="titreLabel" text="Campagne de Printemps" style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 30px;" />
+                    <HBox spacing="15.0">
+                        <Label fx:id="datesLabel" text="📅 01/04/2026 — 15/04/2026" style="-fx-text-fill: -primary; -fx-font-weight: bold; -fx-font-size: 14px;" />
+                        <Label fx:id="idLabel" text="#123" style="-fx-text-fill: -muted; -fx-font-size: 14px;" />
+                    </HBox>
+                </VBox>
+
+                <Region prefHeight="1" style="-fx-background-color: rgba(255,255,255,0.05);" />
+
+                <VBox spacing="15.0">
+                    <Label text="DESCRIPTION" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
+                    <Label fx:id="descLabel" text="Description de la campagne ici..." style="-fx-text-fill: white; -fx-font-size: 15px; -fx-line-spacing: 5;" wrapText="true" />
+                </VBox>
+
+                <VBox spacing="15.0">
+                    <Label text="GROUPES SANGUINS CIBLÉS" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
+                    <FlowPane fx:id="bloodTypesFlowPane" hgap="10.0" vgap="10.0" />
+                </VBox>
+
+                <VBox spacing="15.0">
+                    <Label text="LIEUX DE COLLECTE" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
+                    <FlowPane fx:id="entitesFlowPane" hgap="10.0" vgap="10.0" />
+                </VBox>
+            </VBox>
+         </VBox>
+      </ScrollPane>
+   </center>
+</BorderPane>

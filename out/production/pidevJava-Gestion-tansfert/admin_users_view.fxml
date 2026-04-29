@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminUsersViewController">
+   <!-- Sidebar (Same as others) -->
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="PROFIL UTILISATEUR" />
+                <Label fx:id="subtitleLabel" style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Consultez les informations détaillées du compte." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox spacing="15.0">
+                <Button styleClass="retour-button" mnemonicParsing="false" text="← RETOUR" onAction="#handleNavigateUsers" />
+                <Button mnemonicParsing="false" text="👤 MODIFIER" onAction="#handleNavigateModify" styleClass="button-primary" />
+            </HBox>
+         </HBox>
+         
+         <!-- User Identity Card -->
+         <VBox styleClass="glass-card" spacing="30.0" maxWidth="800.0" alignment="CENTER_LEFT" style="-fx-padding: 40;">
+             <HBox spacing="30.0" alignment="CENTER_LEFT">
+                 <Label fx:id="initialsLabel" text="MB" style="-fx-background-color: rgba(230,57,57,0.1); -fx-text-fill: -primary; -fx-font-size: 30px; -fx-font-weight: bold; -fx-min-width: 90; -fx-min-height: 90; -fx-alignment: center; -fx-background-radius: 45; -fx-border-color: -primary; -fx-border-radius: 45; -fx-border-width: 1;" />
+                 <VBox spacing="8.0" alignment="CENTER_LEFT">
+                     <Label fx:id="fullNameLabel" text="med khalil boujemaa" style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 24px;" />
+                     <HBox spacing="15.0" alignment="CENTER_LEFT">
+                         <Label fx:id="roleLabel" text="ADMIN" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-padding: 3 8; -fx-background-radius: 8; -fx-font-weight: bold; -fx-font-size: 10px;" />
+                         <Label fx:id="emailLabel" text="✉ khalilboujemaa@gmail.com" style="-fx-text-fill: -muted; -fx-font-size: 12px;" />
+                     </HBox>
+                 </VBox>
+             </HBox>
+             
+             <!-- Role-Specific Details (dynamically populated) -->
+             <VBox fx:id="roleDetailsContainer" spacing="15.0" />
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>

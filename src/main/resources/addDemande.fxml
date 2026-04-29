@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.addDemandeController"
+            prefWidth="600" prefHeight="400"
+            style="-fx-background-color:#0a0a0a;">
+
+    <children>
+
+        <!-- FORM CONTAINER -->
+        <VBox spacing="15"
+              layoutX="80"
+              layoutY="60"
+              style="-fx-background-color:#111;
+                     -fx-padding:20;
+                     -fx-background-radius:10;
+                     -fx-border-color:#222;
+                     -fx-border-radius:10;">
+
+            <!-- BANQUE -->
+            <TextField styleClass="dark-field" fx:id="txtBanque"
+                       promptText="ID Banque"/>
+
+            <!-- TYPE SANG -->
+            <ComboBox styleClass="dark-combo" fx:id="comboType"
+                      promptText="Type de sang">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="A+"/>
+                        <String fx:value="A-"/>
+                        <String fx:value="B+"/>
+                        <String fx:value="B-"/>
+                        <String fx:value="O+"/>
+                        <String fx:value="O-"/>
+                        <String fx:value="AB+"/>
+                        <String fx:value="AB-"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- QUANTITE -->
+            <TextField styleClass="dark-field" fx:id="txtQuantite"
+                       promptText="Quantité"/>
+
+            <!-- URGENCE -->
+            <ComboBox styleClass="dark-combo" fx:id="comboUrgence"
+                      promptText="Urgence">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="FAIBLE"/>
+                        <String fx:value="MOYENNE"/>
+                        <String fx:value="ELEVEE"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- BUTTON -->
+            <Button styleClass="submit-button" text="Ajouter Demande"
+                    onAction="#ajouterDemande"/>
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>

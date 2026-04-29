@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox stylesheets="@commande.css" styleClass="sidebar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminSidebarController">
+    <!-- Brand -->
+    <HBox styleClass="sidebar-brand" alignment="CENTER_LEFT" spacing="8">
+        <Region styleClass="logo-icon"/>
+        <Label text="BLOODLINK" styleClass="sidebar-brand-text"/>
+        <Label text="ADMIN" styleClass="sidebar-admin-badge"/>
+    </HBox>
+
+    <!-- Section Label -->
+    <Label text="GESTION" styleClass="sidebar-section-label"/>
+
+    <!-- Navigation Items -->
+    <VBox styleClass="sidebar-nav-list" spacing="2">
+        <Button fx:id="btnDashboard" text="📊  Dashboard" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateDashboard"/>
+        <Button fx:id="btnUsers" text="👥  Utilisateurs" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateUsers"/>
+        <Button fx:id="btnCommandes" text="📦  Commandes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateCommandes"/>
+        <Button fx:id="btnStocks" text="🏢  Stocks" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateStocks"/>
+        <Button fx:id="btnDemandes" text="📋  Demandes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateDemandes"/>
+        <Button fx:id="btnTransferts" text="🔄  Transferts" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateTransferts"/>
+        <Button fx:id="btnQuestionnaires" text="❓  Questionnaires" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateQuestionnaires"/>
+        <Button fx:id="btnRendezVous" text="📅  Rendez-vous" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateRendezVous"/>
+        <Button fx:id="btnCampagnes" text="📢  Campagnes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateCampagnes"/>
+        <Button fx:id="btnCollectes" text="🏥  Collectes" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308" onAction="#handleNavigateCollectes"/>
+        <Button text="💉  Dons" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+        <Button text="📁  Dossiers" styleClass="sidebar-nav-item" maxWidth="1.7976931348623157E308"/>
+    </VBox>
+
+    <!-- Spacer -->
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <!-- User Section -->
+    <VBox styleClass="sidebar-user-section" spacing="12">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <StackPane styleClass="sidebar-user-avatar">
+                <Region styleClass="logo-icon"/>
+            </StackPane>
+            <VBox spacing="2">
+                <Label text="admin@bloodlink.tn" styleClass="sidebar-user-email"/>
+                <Label text="Administrateur" styleClass="sidebar-user-role"/>
+            </VBox>
+        </HBox>
+        <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" maxWidth="1.7976931348623157E308" onAction="#handleThemeToggle"/>
+        <Button text="⏻  Déconnexion" styleClass="sidebar-disconnect-btn" maxWidth="1.7976931348623157E308" onAction="#handleLogout"/>
+    </VBox>
+</VBox>

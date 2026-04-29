@@ -24,6 +24,11 @@
                         text="+ Nouvelle Demande"
                         styleClass="btn-primary"/>
             </HBox>
+            <TextField fx:id="searchField"
+                       promptText="Rechercher..."
+                       layoutX="20"
+                       layoutY="10"
+                       prefWidth="200"/>
 
             <!-- TABLE -->
             <TableView fx:id="tableDemande"

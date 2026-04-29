@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeQuestAdmin">
+   <!-- Sidebar -->
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="35.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         
+         <!-- Header -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="QUESTIONNAIRES" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Consultez et gérez les questionnaires des donneurs." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox spacing="15.0" alignment="CENTER">
+               <Button styleClass="submit-button" text="📥" />
+               <Button fx:id="addBtn" mnemonicParsing="false" text="+ NOUVEAU QUESTIONNAIRE" onAction="#handleAjouter" styleClass="button-primary" />
+            </HBox>
+         </HBox>
+
+         <VBox styleClass="glass-card" spacing="30.0" VBox.vgrow="ALWAYS">
+            
+            <!-- Filter Section -->
+            <VBox spacing="20.0">
+               <!-- Filter Row 1 -->
+               <HBox spacing="20.0">
+                  <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                     <Label text="RECHERCHE" styleClass="filter-label" />
+                     <TextField promptText="Nom ou Prénom..." styleClass="text-field-custom" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="300.0">
+                     <Label text="GROUPE SANGUIN" styleClass="filter-label" />
+                     <ComboBox styleClass="dark-combo" promptText="Tous les groupes" maxWidth="1.7976931348623157E308" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="300.0">
+                     <Label text="CAMPAGNE" styleClass="filter-label" />
+                     <ComboBox styleClass="dark-combo" promptText="Toutes les campagnes" maxWidth="1.7976931348623157E308" />
+                  </VBox>
+               </HBox>
+               <!-- Filter Row 2 -->
+               <HBox spacing="20.0" alignment="BOTTOM_LEFT">
+                  <VBox spacing="8.0" prefWidth="250.0">
+                     <Label text="DATE" styleClass="filter-label" />
+                     <DatePicker styleClass="dark-field" promptText="mm / dd / yyyy" maxWidth="1.7976931348623157E308" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="250.0">
+                     <Label text="HEURE" styleClass="filter-label" />
+                     <TextField promptText="--:-- --" styleClass="text-field-custom" />
+                  </VBox>
+                  <VBox spacing="8.0" prefWidth="250.0">
+                     <Label text="TRI" styleClass="filter-label" />
+                     <ComboBox styleClass="dark-combo" promptText="Ordre par défaut" maxWidth="1.7976931348623157E308" />
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button styleClass="submit-button" text="↺ RÉINITIALISER" />
+               </HBox>
+            </VBox>
+
+            <!-- Table -->
+            <TableView fx:id="tableView" VBox.vgrow="ALWAYS" >
+               <columns>
+                  <TableColumn fx:id="idColumn" text="ID" prefWidth="80"/>
+                  <TableColumn fx:id="donneurColumn" text="DONNEUR" prefWidth="300" />
+                  <TableColumn fx:id="typeSangColumn" text="GROUPE" prefWidth="120" />
+                  <TableColumn fx:id="campagneColumn" text="CAMPAGNE" prefWidth="150" />
+                  <TableColumn fx:id="dateColumn" text="DATE" prefWidth="200" />
+                  <TableColumn fx:id="actionsColumn" text="ACTIONS" prefWidth="120" />
+               </columns>
+            </TableView>
+         </VBox>
+         
+      </VBox>
+   </center>
+</BorderPane>

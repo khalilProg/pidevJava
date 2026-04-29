@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane stylesheets="@commande.css" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.AjoutCommandeController"
+            styleClass="main-container">
+
+    <top>
+        <HBox styleClass="nav-bar" alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" spacing="6">
+                <Region styleClass="logo-icon"/>
+                <Label text="BLOODLINK" styleClass="brand-label"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnThemeToggle" text="☀  Light" styleClass="theme-toggle-btn" onAction="#handleThemeToggle"/>
+            <Region prefWidth="12"/>
+            <Button text="👤  chaffai yassine" styleClass="user-badge"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="edge-to-edge-scroll"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox spacing="0" styleClass="content-area">
+                <padding><Insets top="0" right="32" bottom="40" left="32"/></padding>
+
+                <VBox styleClass="page-header" spacing="0">
+                    <Label text="BLOODLINK" styleClass="breadcrumb-label"/>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="🛒" style="-fx-font-size: 24px;"/>
+                        <Label text="Créer une " styleClass="page-title"/>
+                        <Label text="Commande" styleClass="page-title-highlight"/>
+                    </HBox>
+                    <Label text="Remplissez les informations ci-dessous pour soumettre votre demande."
+                           styleClass="page-subtitle"/>
+                </VBox>
+
+                <Region prefHeight="24"/>
+
+                <VBox styleClass="form-card" spacing="20" maxWidth="1.7976931348623157E308">
+                    <Label text="DÉTAILS DE LA COMMANDE" styleClass="form-section-title"/>
+
+                    <!-- Row 1: Reference + Quantité -->
+                    <HBox spacing="20">
+
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="QUANTITÉ" styleClass="field-label"/>
+                            <TextField fx:id="tfQuantite" promptText="Quantité"
+                                       styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorQuantite" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Row 2: Type Sang + Priorité -->
+                    <HBox spacing="20">
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="TYPE SANG" styleClass="field-label"/>
+                            <ComboBox fx:id="cbTypeSang" promptText="Choisir un type de sang"
+                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorTypeSang" text="" styleClass="field-error"/>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="PRIORITÉ" styleClass="field-label"/>
+                            <ComboBox fx:id="cbPriorite" promptText="Choisir une priorité"
+                                      styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorPriorite" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Row 3: Banque -->
+                    <VBox spacing="0">
+                        <Label text="BANQUE" styleClass="field-label"/>
+                        <ComboBox fx:id="cbBanque" promptText="Choisir une banque"
+                                  styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                        <Label fx:id="lblErrorBanque" text="" styleClass="field-error"/>
+                    </VBox>
+
+                    <Region prefHeight="8"/>
+                    <Separator styleClass="dark-separator"/>
+                    <Label fx:id="lblStatus" text="" styleClass="status-success"/>
+
+                    <HBox alignment="CENTER_RIGHT" spacing="16">
+                        <Button text="Annuler" styleClass="cancel-button" onAction="#handleCancel"/>
+                        <Button text="🚀  ENVOYER LA COMMANDE" styleClass="submit-button" onAction="#handleSubmit"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

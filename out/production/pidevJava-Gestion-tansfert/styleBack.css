@@ -1,0 +1,110 @@
+/* ======================================================
+   BLOODLINK – Admin Dashboard Styles
+   ====================================================== */
+
+.admin-layout {
+    -fx-background-color: #0A0A0A;
+}
+
+.sidebar {
+    -fx-background-color: #0C0C0C;
+    -fx-pref-width: 260px;
+    -fx-min-width: 260px;
+    -fx-border-color: #1E1E1E;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 30 15;
+}
+
+.sidebar-brand-section {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 45 10;
+}
+
+.admin-badge {
+    -fx-background-color: #E63939;
+    -fx-background-radius: 4px;
+    -fx-padding: 2 6;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: 900;
+}
+
+.sidebar-label {
+    -fx-text-fill: #555555;
+    -fx-font-weight: 900;
+    -fx-font-size: 12px;
+    -fx-padding: 0 0 10 10;
+}
+
+.sidebar-nav-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #8A8A8A;
+    -fx-font-weight: 700;
+    -fx-font-size: 15px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 14 20;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-min-width: 230px;
+}
+
+.sidebar-nav-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-text-fill: white;
+}
+
+.sidebar-nav-item-active {
+    -fx-background-color: rgba(198, 40, 40, 0.12);
+    -fx-text-fill: #FF3E3E;
+    -fx-border-color: rgba(255, 62, 62, 0.3);
+    -fx-border-radius: 12px;
+    -fx-border-width: 1px;
+}
+
+.admin-main-content {
+    -fx-padding: 40 60;
+}
+
+.admin-top-bar {
+    -fx-alignment: CENTER_RIGHT;
+    -fx-padding: 0 0 40 0;
+}
+
+.notification-bell {
+    -fx-cursor: hand;
+    -fx-opacity: 0.6;
+}
+
+.notification-bell:hover {
+    -fx-opacity: 1;
+}
+
+.welcome-banner-card {
+    -fx-background-color: linear-gradient(to right, #1A0D0D, #120A0A);
+    -fx-background-radius: 25px;
+    -fx-border-color: rgba(230, 57, 57, 0.15);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 25px;
+    -fx-padding: 50 60;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 10);
+}
+
+.welcome-badge-text {
+    -fx-text-fill: #E63939;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-letter-spacing: 1px;
+}
+
+.welcome-title {
+    -fx-font-size: 48px;
+    -fx-font-weight: 900;
+    -fx-text-fill: white;
+}
+
+.welcome-description {
+    -fx-text-fill: #888888;
+    -fx-font-size: 16px;
+    -fx-line-spacing: 4px;
+}

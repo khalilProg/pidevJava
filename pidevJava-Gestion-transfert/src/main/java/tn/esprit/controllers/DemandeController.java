@@ -17,7 +17,8 @@ import javafx.stage.Stage;
 
 import tn.esprit.entities.Demande;
 import tn.esprit.services.DemandeService;
-
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -32,6 +33,8 @@ public class DemandeController {
     @FXML private TableColumn<Demande, String> colStatus;
     @FXML private TableColumn<Demande, Void> colActions;
     @FXML private Button btnAdd;
+    @FXML
+    private TextField searchField;
     @FXML private Button btnTransfert;
     @FXML private TextField txtBanque;
     @FXML private TextField txtType;
@@ -58,7 +61,7 @@ public class DemandeController {
 
         addActionButtons();
 
-        // 🔥 charger données depuis DB
+
         loadData();
 
         tableDemande.setItems(list);
@@ -74,14 +77,14 @@ public class DemandeController {
         }
     }
 
-    // ✅ Ajouter une demande depuis formulaire
+
     public void addDemandeToTable(Demande d) {
         d.setId(idCounter++);
         d.setCreatedAt(LocalDateTime.now());
         list.add(d);
     }
 
-    // ✅ boutons edit + delete
+
     private void addActionButtons() {
 
         colActions.setCellFactory(param -> new TableCell<>() {
@@ -130,7 +133,7 @@ public class DemandeController {
         });
     }
 
-    // ✅ ouvrir formulaire et récupérer données
+
 
     private void openForm() {
         try {
@@ -154,7 +157,7 @@ public class DemandeController {
             Parent root = loader.load();
 
             addDemandeController controller = loader.getController();
-            controller.setEditData(d); // 🔥 on envoie les données
+            controller.setEditData(d);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

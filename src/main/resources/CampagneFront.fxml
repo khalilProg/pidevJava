@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styleFront.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneFrontController">
+   <children>
+      <VBox styleClass="main-content">
+         <children>
+         <!-- Header Bar -->
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar">
+            <children>
+               <Label style="-fx-text-fill: #e63939; -fx-font-size: 24px;" text="🩸">
+                  <HBox.margin>
+                     <Insets right="10.0" />
+                  </HBox.margin>
+               </Label>
+               <Label styleClass="logo-text" text="BLOODLINK" />
+               <Region HBox.hgrow="ALWAYS" />
+               <Button fx:id="userNameBtn" mnemonicParsing="false" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 20; -fx-padding: 8 20; -fx-font-size: 13px;" text="👤 Utilisateur">
+                  <HBox.margin>
+                     <Insets right="15.0" />
+                  </HBox.margin>
+               </Button>
+               <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU ☰" />
+            </children>
+         </HBox>
+
+            <!-- Hero Section -->
+            <VBox styleClass="hero-section-alt">
+               <children>
+                  <Label styleClass="hero-label-small" text="BLOODLINK" />
+                  <Label styleClass="hero-title-large" text="Campagnes de Collecte" />
+                  <Label styleClass="hero-subtitle-alt" text="Sélectionnez une campagne pour participer et sauver des vies" />
+               </children>
+            </VBox>
+
+            <!-- Search and Filter -->
+            <HBox spacing="15.0" styleClass="hero-section-alt" style="-fx-padding: 10 50 10 50;" alignment="CENTER_LEFT">
+               <children>
+                  <TextField fx:id="txtRechercheFront" prefHeight="40.0" prefWidth="250.0" promptText="Rechercher..." styleClass="text-field" />
+                  <DatePicker fx:id="datePickerFilter" prefHeight="40.0" prefWidth="180.0" promptText="Filtrer par date" styleClass="dark-datepicker" />
+                  <Button fx:id="btnTrier" mnemonicParsing="false" onAction="#handleTrier" text="Sort A-Z" styleClass="btn-outline" style="-fx-padding: 8 15;" />
+                  <Button fx:id="btnTrierDate" mnemonicParsing="false" onAction="#handleTrierDate" text="Date ↓" styleClass="btn-outline" style="-fx-padding: 8 15;" />
+                  <Button mnemonicParsing="false" onAction="#handleReset" text="Reset" styleClass="btn-outline-red" style="-fx-padding: 8 15;" />
+                  <Button mnemonicParsing="false" onAction="#goToCalendar" text="Vue Calendrier 📅" styleClass="btn-outline" style="-fx-padding: 8 15;" />
+               </children>
+            </HBox>
+
+            <!-- Content Area -->
+            <AnchorPane VBox.vgrow="ALWAYS">
+               <children>
+                  <!-- No Campaign Placeholder -->
+                  <VBox fx:id="vboxEmptyState" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" styleClass="empty-state-vbox">
+                     <children>
+                        <Label text="⏳" style="-fx-font-size: 50;" />
+                        <Label styleClass="empty-state-text" text="Aucune campagne active" />
+                        <Label styleClass="empty-state-subtext" text="Revenez plus tard pour voir les nouvelles opportunités de don." />
+                     </children>
+                  </VBox>
+
+                  <!-- Campaign Grid -->
+                  <ScrollPane fx:id="scrollPaneCampagnes" fitToWidth="true" styleClass="scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <GridPane fx:id="gridCampagnes" hgap="30.0" vgap="30.0" styleClass="grid-container">
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+
+   <!-- Right Side Menu Overlay (hidden by default) -->
+   <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+      <children>
+         <!-- Clickable background to close -->
+         <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+         <!-- Menu Panel -->
+         <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+            <padding>
+               <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+            <children>
+               <!-- Close -->
+               <HBox alignment="CENTER_RIGHT">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
+                  </children>
+               </HBox>
+               <Region prefHeight="20.0" />
+               <!-- Menu Links -->
+               <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+               <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" style="-fx-text-fill: -primary;" text="CAMPAGNES" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
+               <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
+               <Region VBox.vgrow="ALWAYS" />
+               <!-- Session Info -->
+               <VBox spacing="15.0">
+                  <children>
+                     <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="BloodLink Session" />
+                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 20; -fx-cursor: hand;" text="⏻ Déconnexion" />
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   </children>
+</StackPane>

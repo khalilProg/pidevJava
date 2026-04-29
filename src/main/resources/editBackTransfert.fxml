@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<BorderPane stylesheets="@commande.css" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.EditTransfertController">
+   
+   <left><fx:include source="admin_sidebar.fxml" /></left>
+
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <!-- HEADER -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label fx:id="titleLabel" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER TRANSFERT" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Modifier les informations du transfert de sang." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="retour-button" mnemonicParsing="false" text="← RETOUR" onAction="#retour" />
+         </HBox>
+
+         <!-- FORM CARD -->
+         <VBox styleClass="glass-card" spacing="30.0" maxWidth="800">
+             
+            <Label style="-fx-text-fill: #e63939; -fx-font-weight: 900; -fx-font-size: 18px;" text="DÉTAILS DU TRANSFERT" />
+
+            <GridPane hgap="30" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" />
+                    <ColumnConstraints percentWidth="50" />
+                </columnConstraints>
+                
+                <!-- ORIGINE -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label styleClass="form-label" text="ORGANISATION ORIGINE" />
+                    <TextField promptText="BloodLink Central" styleClass="text-field-custom" />
+                </VBox>
+                <VBox spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label styleClass="form-label" text="ID ORIGINE" />
+                    <TextField fx:id="txtFrom" promptText="0" styleClass="text-field-custom" />
+                    <Label fx:id="txtFromError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+
+                <!-- DESTINATION -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="ORGANISATION DESTINATION" />
+                    <TextField promptText="Hopital Ariena" styleClass="text-field-custom" />
+                </VBox>
+                <VBox spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="ID DESTINATION" />
+                    <TextField fx:id="txtTo" promptText="41" styleClass="text-field-custom" />
+                    <Label fx:id="txtToError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+
+                <!-- QUANTITE & DATES -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label styleClass="form-label" text="QUANTITÉ" />
+                    <TextField fx:id="txtQuantite" promptText="50" styleClass="text-field-custom" />
+                    <Label fx:id="txtQuantiteError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+                <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <Label styleClass="form-label" text="DATE D'ENVOI" />
+                        <DatePicker fx:id="dateEnvoie" styleClass="text-field-custom" maxWidth="1.7976931348623157E308"/>
+                        <Label fx:id="dateEnvoieError" styleClass="field-error" managed="false" visible="false" />
+                    </VBox>
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <Label styleClass="form-label" text="DATE DE RÉCEPTION" />
+                        <DatePicker fx:id="dateReception" styleClass="text-field-custom" maxWidth="1.7976931348623157E308"/>
+                        <Label fx:id="dateReceptionError" styleClass="field-error" managed="false" visible="false" />
+                    </VBox>
+                </HBox>
+
+                <!-- STATUT, STOCK, DEMANDE -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <Label styleClass="form-label" text="STATUT" />
+                    <ComboBox fx:id="comboStatus" promptText="En cours" styleClass="text-field-custom" prefWidth="600" />
+                    <Label fx:id="comboStatusError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+                <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <Label styleClass="form-label" text="STOCK" />
+                        <TextField promptText="A+" styleClass="text-field-custom" maxWidth="1.7976931348623157E308"/>
+                    </VBox>
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <Label styleClass="form-label" text="DEMANDE" />
+                        <TextField promptText="12" styleClass="text-field-custom" maxWidth="1.7976931348623157E308"/>
+                    </VBox>
+                </HBox>
+            </GridPane>
+
+            <Region prefHeight="10" />
+
+            <HBox spacing="15.0" alignment="CENTER_RIGHT">
+                <Button styleClass="cancel-button" mnemonicParsing="false" onAction="#retour" text="ANNULER" />
+                <Button mnemonicParsing="false" onAction="#updateTransfert" styleClass="button-primary" text="✓ ENREGISTRER" prefWidth="180" />
+            </HBox>
+            
+         </VBox>
+
+      </VBox>
+   </center>
+</BorderPane>

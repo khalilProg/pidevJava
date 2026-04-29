@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styleFront.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneCalendarController">
+   <children>
+      <VBox styleClass="main-content">
+         <children>
+         <!-- Header Bar -->
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar">
+            <children>
+               <Label style="-fx-text-fill: #e63939; -fx-font-size: 24px;" text="🩸">
+                  <HBox.margin>
+                     <Insets right="10.0" />
+                  </HBox.margin>
+               </Label>
+               <Label styleClass="logo-text" text="BLOODLINK" />
+               <Region HBox.hgrow="ALWAYS" />
+               <Button fx:id="userNameBtn" mnemonicParsing="false" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 20; -fx-padding: 8 20; -fx-font-size: 13px;" text="👤 Utilisateur">
+                  <HBox.margin>
+                     <Insets right="15.0" />
+                  </HBox.margin>
+               </Button>
+               <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU ☰" />
+            </children>
+         </HBox>
+
+            <!-- Calendar Header -->
+            <HBox alignment="CENTER" spacing="50.0" styleClass="hero-section-alt" style="-fx-padding: 30 50 20 50;">
+               <children>
+                  <Button onAction="#previousMonth" styleClass="btn-outline" text="&lt;" />
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="monthYearLabel" styleClass="hero-title-large" text="Avril 2026" />
+                        <Label styleClass="hero-subtitle-alt" text="Surveillance en temps réel des campagnes" />
+                     </children>
+                  </VBox>
+                  <Button onAction="#nextMonth" styleClass="btn-outline" text="&gt;" />
+               </children>
+            </HBox>
+
+            <!-- Week Days -->
+            <GridPane fx:id="weekDaysGrid" hgap="5.0" style="-fx-padding: 0 50 10 50;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #888888; -fx-font-weight: 800;" text="LUN" />
+                  <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #888888; -fx-font-weight: 800;" text="MAR" GridPane.columnIndex="1" />
+                  <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #888888; -fx-font-weight: 800;" text="MER" GridPane.columnIndex="2" />
+                  <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #888888; -fx-font-weight: 800;" text="JEU" GridPane.columnIndex="3" />
+                  <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #888888; -fx-font-weight: 800;" text="VEN" GridPane.columnIndex="4" />
+                  <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #888888; -fx-font-weight: 800;" text="SAM" GridPane.columnIndex="5" />
+                  <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #FF3E3E; -fx-font-weight: 800;" text="DIM" GridPane.columnIndex="6" />
+               </children>
+            </GridPane>
+
+            <!-- Calendar Grid -->
+            <ScrollPane fitToWidth="true" styleClass="scroll-pane" VBox.vgrow="ALWAYS">
+               <content>
+                  <GridPane fx:id="calendarGrid" hgap="8.0" vgap="8.0" style="-fx-padding: 0 50 40 50; -fx-background-color: transparent;">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+
+   <!-- Right Side Menu Overlay (hidden by default) -->
+   <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+      <children>
+         <!-- Clickable background to close -->
+         <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+         <!-- Menu Panel -->
+         <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+            <padding>
+               <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+            <children>
+               <!-- Close -->
+               <HBox alignment="CENTER_RIGHT">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
+                  </children>
+               </HBox>
+               <Region prefHeight="20.0" />
+               <!-- Menu Links -->
+               <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+               <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="DONS" />
+               <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
+               <Button mnemonicParsing="false" styleClass="menu-link" text="MON PROFIL" />
+               <Region VBox.vgrow="ALWAYS" />
+               <!-- Session Info -->
+               <VBox spacing="15.0">
+                  <children>
+                     <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="BloodLink Session" />
+                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 20; -fx-cursor: hand;" text="⏻ Déconnexion" />
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   </children>
+</StackPane>

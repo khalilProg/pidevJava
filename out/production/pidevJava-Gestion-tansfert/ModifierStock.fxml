@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ModifierStockController">
+
+    <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge-scroll" vbarPolicy="AS_NEEDED">
+            <VBox spacing="0" styleClass="content-area">
+                <padding><Insets bottom="40" left="32" right="32" top="28"/></padding>
+
+                <VBox spacing="4">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label styleClass="page-title" text="MODIFIER LE STOCK"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button onAction="#handleRetour" styleClass="retour-button" text="← RETOUR"/>
+                    </HBox>
+                    <Label styleClass="page-subtitle" text="Mettez à jour les informations de l'inventaire sanguin."/>
+                </VBox>
+
+                <Region prefHeight="24"/>
+
+                <VBox maxWidth="1.7976931348623157E308" spacing="20" styleClass="form-card">
+                    <Label text="DÉTAILS DU STOCK" styleClass="form-section-title"/>
+
+                    <HBox spacing="20">
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="TYPE ORGANISATION" styleClass="field-label"/>
+                            <ComboBox fx:id="cbTypeOrg" promptText="Choisir un type" styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorTypeOrg" text="" styleClass="field-error"/>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="ORGANISATION" styleClass="field-label"/>
+                            <ComboBox fx:id="cbOrganisation" promptText="Sélectionnez un type d'abord" styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorOrganisation" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="20">
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="TYPE SANG" styleClass="field-label"/>
+                            <ComboBox fx:id="cbTypeSang" promptText="Choisir un type de sang" styleClass="dark-combo" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorTypeSang" text="" styleClass="field-error"/>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <Label text="QUANTITÉ (UNITÉS)" styleClass="field-label"/>
+                            <TextField fx:id="txtQuantite" promptText="Ex: 50" styleClass="dark-field" maxWidth="1.7976931348623157E308"/>
+                            <Label fx:id="lblErrorQuantite" text="" styleClass="field-error"/>
+                        </VBox>
+                    </HBox>
+
+                    <Region prefHeight="8"/>
+                    <Separator styleClass="dark-separator"/>
+
+                    <HBox alignment="CENTER_RIGHT" spacing="16">
+                        <Button fx:id="btnAnnuler" text="ANNULER" styleClass="cancel-button"/>
+                        <Button fx:id="btnEnregistrer" text="🔴  METTRE À JOUR" styleClass="submit-button"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ViewEntiteAdmin">
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="DÉTAILS DE L'ENTITÉ" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Informations complètes sur le lieu de collecte." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox spacing="15.0">
+                <Button styleClass="retour-button" mnemonicParsing="false" text="← RETOUR" onAction="#handleRetour" />
+                <Button mnemonicParsing="false" text="✏ MODIFIER" onAction="#handleNavigateModifier" styleClass="button-primary" />
+            </HBox>
+         </HBox>
+         
+         <VBox styleClass="glass-card" spacing="30.0" maxWidth="800.0" style="-fx-padding: 40;">
+             <HBox spacing="30.0" alignment="CENTER_LEFT">
+                 <Label fx:id="iconLabel" text="🏥" style="-fx-background-color: rgba(230,57,57,0.1); -fx-text-fill: -primary; -fx-font-size: 40px; -fx-min-width: 100; -fx-min-height: 100; -fx-alignment: center; -fx-background-radius: 15; -fx-border-color: -primary; -fx-border-radius: 15; -fx-border-width: 1;" />
+                 <VBox spacing="8.0" alignment="CENTER_LEFT">
+                     <Label fx:id="nomLabel" text="Hôpital Central" style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 28px;" />
+                     <HBox spacing="15.0" alignment="CENTER_LEFT">
+                         <Label style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-padding: 3 8; -fx-background-radius: 8; -fx-font-weight: bold; -fx-font-size: 10px;" text="ACTIF" />
+                         <Label fx:id="villeLabel" text="📍 Tunis" style="-fx-text-fill: -muted; -fx-font-size: 14px;" />
+                     </HBox>
+                 </VBox>
+             </HBox>
+             
+             <Region prefHeight="1" style="-fx-background-color: rgba(255,255,255,0.05);" />
+             
+             <GridPane vgap="20.0" hgap="40.0">
+                 <columnConstraints>
+                     <ColumnConstraints minWidth="150" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                 </columnConstraints>
+                 
+                 <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="5.0">
+                     <Label text="ADRESSE" style="-fx-text-fill: -muted; -fx-font-size: 10px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
+                     <Label fx:id="adresseLabel" text="123 Rue de la Liberté" style="-fx-text-fill: white; -fx-font-size: 15px;" wrapText="true" />
+                 </VBox>
+                 
+                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" spacing="5.0">
+                     <Label text="TÉLÉPHONE" style="-fx-text-fill: -muted; -fx-font-size: 10px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
+                     <Label fx:id="telephoneLabel" text="71 123 456" style="-fx-text-fill: -primary; -fx-font-size: 18px; -fx-font-weight: bold;" />
+                 </VBox>
+                 
+                 <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="5.0">
+                     <Label text="ID SYSTÈME" style="-fx-text-fill: -muted; -fx-font-size: 10px; -fx-font-weight: bold; -fx-letter-spacing: 1px;" />
+                     <Label fx:id="idLabel" text="#42" style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-family: 'Monospaced';" />
+                 </VBox>
+             </GridPane>
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>
