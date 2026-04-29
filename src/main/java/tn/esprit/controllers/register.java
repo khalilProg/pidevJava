@@ -41,6 +41,9 @@ public class register {
     private Label passError;
 
     @FXML
+    private Label googleLoadingLabel;
+
+    @FXML
     void handleRegister(ActionEvent event) {
         clearErrors();
 
@@ -135,6 +138,75 @@ public class register {
             Parent root = FXMLLoader.load(getClass().getResource("/custom_menu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("BloodLink - Menu");
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handleGoogleSignUp(ActionEvent event) {
+        clearErrors();
+        googleLoadingLabel.setVisible(true);
+        googleLoadingLabel.setManaged(true);
+        
+        // Run OAuth flow in a background thread to prevent freezing the UI
+        new Thread(() -> {
+            try {
+                tn.esprit.services.GoogleOAuthService oauthService = new tn.esprit.services.GoogleOAuthService();
+                tn.esprit.services.GoogleOAuthService.GoogleUserInfo userInfo = oauthService.authenticate();
+                
+                // Switch back to JavaFX Application Thread for UI/DB updates
+                javafx.application.Platform.runLater(() -> {
+                    try {
+                        UserService userService = new UserService();
+                        User u = userService.findByEmail(userInfo.email);
+                        
+                        if (u == null) {
+                            // User doesn't exist, create a new one
+                            String randomPassword = java.util.UUID.randomUUID().toString();
+                            u = new User(userInfo.email, userInfo.familyName, userInfo.givenName, randomPassword, "client", "");
+                            userService.ajouter(u);
+                            System.out.println("Google Auth: Created new user " + userInfo.email);
+                        }
+                        
+                        // Proceed to login
+                        tn.esprit.tools.SessionManager.setCurrentUser(u);
+                        
+                        // Always go to Client Home for new sign-ups or if they already have an account, route them
+                        if ("admin".equalsIgnoreCase(u.getRole())) {
+                            navigateTo("/admin_dashboard.fxml", event);
+                        } else if (u.getRole() != null && u.getRole().toLowerCase().contains("cnts")) {
+                            navigateTo("/cnts_agent_home.fxml", event);
+                        } else if (u.getRole() != null && u.getRole().toLowerCase().contains("banque")) {
+                            navigateTo("/AgentBanqueBase.fxml", event);
+                        } else {
+                            navigateTo("/client_home.fxml", event);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showFieldError(emailError, "Erreur base de données: " + e.getMessage());
+                    } finally {
+                        googleLoadingLabel.setVisible(false);
+                        googleLoadingLabel.setManaged(false);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                javafx.application.Platform.runLater(() -> {
+                    googleLoadingLabel.setVisible(false);
+                    googleLoadingLabel.setManaged(false);
+                    showFieldError(emailError, "Erreur Google SignUp: " + e.getMessage());
+                });
+            }
+        }).start();
+    }
+    
+    private void navigateTo(String fxml, ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.show();
         } catch (IOException e) {

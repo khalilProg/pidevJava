@@ -33,19 +33,19 @@ public class AgentBanqueTransfertController {
     private javafx.scene.Node createTransfertCard(Transfert t) {
         HBox card = new HBox(20);
         card.setAlignment(Pos.CENTER_LEFT);
-        card.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25;");
-        
-        card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #1a1a1a; -fx-border-color: #444444; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25; -fx-cursor: hand;"));
-        card.setOnMouseExited(e -> card.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25;"));
+        card.getStyleClass().add("glass-card");
+        card.setStyle("-fx-padding: 15 25; -fx-cursor: hand;");
         
         // 1. ID Pill
         Label lblId = new Label("#" + t.getId());
-        lblId.setStyle("-fx-background-color: #222222; -fx-text-fill: #aaaaaa; -fx-padding: 5 12; -fx-background-radius: 6; -fx-font-size: 13px; -fx-font-weight: bold;");
+        lblId.setStyle("-fx-padding: 5 12; -fx-font-size: 13px; -fx-font-weight: bold;");
+        lblId.getStyleClass().add("card-subtitle");
         
         // 2. Demande Link Pill
         int dId = (t.getDemande() != null) ? t.getDemande().getId() : 0;
         Label lblDemande = new Label("DEM-" + dId);
-        lblDemande.setStyle("-fx-background-color: transparent; -fx-border-color: #444444; -fx-border-radius: 12; -fx-text-fill: #cccccc; -fx-font-weight: bold; -fx-padding: 4 12; -fx-font-size: 11px;");
+        lblDemande.setStyle("-fx-background-color: transparent; -fx-border-color: #888888; -fx-border-radius: 12; -fx-padding: 4 12; -fx-font-size: 11px;");
+        lblDemande.getStyleClass().add("card-title");
         
         // 3. Mini Flow Map (Origine -> Arrow -> Destination)
         HBox flowMap = new HBox(8);
@@ -53,7 +53,8 @@ public class AgentBanqueTransfertController {
         flowMap.setPrefWidth(300);
         
         Label lblOrigine = new Label(t.getFromOrg() != null ? t.getFromOrg().toUpperCase() : "N/A");
-        lblOrigine.setStyle("-fx-text-fill: #aaaaaa; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblOrigine.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+        lblOrigine.getStyleClass().add("card-subtitle");
         
         javafx.scene.shape.SVGPath arrow = new javafx.scene.shape.SVGPath();
         arrow.setContent("M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z");
@@ -61,20 +62,23 @@ public class AgentBanqueTransfertController {
         arrow.setScaleX(0.7); arrow.setScaleY(0.7);
         
         Label lblDest = new Label(t.getToOrg() != null ? t.getToOrg().toUpperCase() : "N/A");
-        lblDest.setStyle("-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblDest.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+        lblDest.getStyleClass().add("card-title");
         
         flowMap.getChildren().addAll(lblOrigine, arrow, lblDest);
         
         // 4. Quantity
         Label lblQty = new Label(t.getQuantite() + " ml");
-        lblQty.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;");
+        lblQty.setStyle("-fx-font-size: 13px;");
+        lblQty.getStyleClass().add("card-title");
         lblQty.setPrefWidth(80);
         
         // 5. Date Envoi
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dateStr = (t.getDateEnvoie() != null) ? t.getDateEnvoie().format(formatter) : "--/--/----";
         Label lblDate = new Label(dateStr);
-        lblDate.setStyle("-fx-text-fill: #777777; -fx-font-size: 13px;");
+        lblDate.setStyle("-fx-font-size: 13px;");
+        lblDate.getStyleClass().add("card-subtitle");
         lblDate.setPrefWidth(100);
         
         // 6. Status
@@ -82,13 +86,13 @@ public class AgentBanqueTransfertController {
         Label lblStatus = new Label();
         String styleStatus = "-fx-padding: 6 15; -fx-background-radius: 20; -fx-font-size: 11px; -fx-font-weight: bold; ";
         if (statusText.contains("REÇU") || statusText.contains("RECU")) {
-            styleStatus += "-fx-background-color: rgba(40, 167, 69, 0.1); -fx-text-fill: #28a745;";
+            styleStatus += "-fx-background-color: rgba(40, 167, 69, 0.2); -fx-text-fill: #28a745;";
             lblStatus.setText("✔ REÇU");
         } else if (statusText.contains("COURS") || statusText.contains("ATTENTE")) {
-            styleStatus += "-fx-background-color: rgba(255, 193, 7, 0.1); -fx-text-fill: #ffc107;";
+            styleStatus += "-fx-background-color: rgba(255, 193, 7, 0.2); -fx-text-fill: #ffc107;";
             lblStatus.setText("🚚 EN COURS");
         } else {
-            styleStatus += "-fx-background-color: #333333; -fx-text-fill: white;";
+            styleStatus += "-fx-background-color: rgba(128, 128, 128, 0.2); -fx-text-fill: #888888;";
             lblStatus.setText(statusText);
         }
         lblStatus.setStyle(styleStatus);
@@ -103,10 +107,10 @@ public class AgentBanqueTransfertController {
         Button btnView = new Button();
         javafx.scene.shape.SVGPath viewIcon = new javafx.scene.shape.SVGPath();
         viewIcon.setContent("M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z");
-        viewIcon.setFill(javafx.scene.paint.Color.web("#E53935"));
+        viewIcon.setFill(javafx.scene.paint.Color.web("#007bff"));
         viewIcon.setScaleX(0.7); viewIcon.setScaleY(0.7);
         btnView.setGraphic(viewIcon);
-        btnView.setStyle("-fx-background-color: #2a1111; -fx-border-color: #442a2a; -fx-border-radius: 15; -fx-min-width: 38; -fx-min-height: 38; -fx-cursor: hand;");
+        btnView.setStyle("-fx-background-color: rgba(0,123,255,0.2); -fx-border-color: rgba(0,123,255,0.2); -fx-border-radius: 15; -fx-background-radius: 15; -fx-min-width: 38; -fx-min-height: 38; -fx-cursor: hand;");
         btnView.setOnAction(e -> openViewDetails(t));
         
         card.getChildren().addAll(lblId, lblDemande, flowMap, lblQty, lblDate, lblStatus, spacer, btnView);

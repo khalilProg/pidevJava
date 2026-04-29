@@ -13,88 +13,95 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styleFront.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CntsAgentHomeController">
-   <children>
-      <VBox styleClass="main-content">
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@commande.css"
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="tn.esprit.controllers.CntsAgentHomeController">
+
+   <AnchorPane styleClass="main-content">
+      <children>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="nav-bar"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+               <HBox alignment="CENTER_LEFT" spacing="6">
+                  <Label styleClass="brand-label" text="BLOODLINK" />
+               </HBox>
+               <Region HBox.hgrow="ALWAYS" />
+               <Button mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+               <Region prefWidth="12.0" />
+               <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Agent CNTS" />
+               <Region prefWidth="12.0" />
+               <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
+            </children>
+         </HBox>
+
+         <VBox spacing="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+            <children>
+               <VBox spacing="8.0" style="-fx-padding: 40 50 20 50;">
+                  <children>
+                     <HBox alignment="CENTER_LEFT" spacing="8.0">
+                        <children>
+                           <Label styleClass="live-badge" text="CNTS" />
+                           <Label styleClass="home-muted-text" text="Gerez les campagnes de collecte." />
+                        </children>
+                     </HBox>
+                     <Label styleClass="home-hero-title" text="Campagnes de Collecte" wrapText="true" />
+                     <Label styleClass="home-hero-copy" text="Vue CNTS pour suivre, filtrer et consulter les campagnes actives" wrapText="true" />
+                  </children>
+               </VBox>
+
+               <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-padding: 10 50 10 50;">
+                  <children>
+                     <TextField fx:id="txtRechercheFront" prefHeight="40.0" prefWidth="250.0" promptText="Rechercher..." styleClass="dark-field" />
+                     <DatePicker fx:id="datePickerFilter" prefHeight="40.0" prefWidth="180.0" promptText="Filtrer par date" />
+                     <Button fx:id="btnTrier" mnemonicParsing="false" onAction="#handleTrier" styleClass="cancel-button" text="Sort A-Z" />
+                     <Button fx:id="btnTrierDate" mnemonicParsing="false" onAction="#handleTrierDate" styleClass="cancel-button" text="Date" />
+                     <Button mnemonicParsing="false" onAction="#handleReset" styleClass="submit-button" text="Reset" />
+                     <Button mnemonicParsing="false" onAction="#goToCalendar" styleClass="cancel-button" text="Vue Calendrier" />
+                  </children>
+               </HBox>
+
+               <AnchorPane VBox.vgrow="ALWAYS">
+                  <children>
+                     <VBox fx:id="vboxEmptyState" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" alignment="CENTER" spacing="10.0">
+                        <children>
+                           <Label style="-fx-font-size: 50;" text="..." />
+                           <Label styleClass="page-title" text="Aucune campagne active" />
+                           <Label styleClass="page-subtitle" text="Revenez plus tard pour voir les nouvelles campagnes CNTS." />
+                        </children>
+                     </VBox>
+
+                     <ScrollPane fx:id="scrollPaneCampagnes" fitToWidth="true" styleClass="edge-to-edge-scroll" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <content>
+                           <GridPane fx:id="gridCampagnes" hgap="30.0" style="-fx-padding: 20 50;" vgap="30.0" />
+                        </content>
+                     </ScrollPane>
+                  </children>
+               </AnchorPane>
+            </children>
+         </VBox>
+      </children>
+   </AnchorPane>
+
+   <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+      <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+      <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+         </padding>
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar">
-               <children>
-                  <Label styleClass="logo-text" text="BLOODLINK" />
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="userNameBtn" mnemonicParsing="false" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-background-radius: 20; -fx-padding: 8 20; -fx-font-size: 13px;" text="Agent CNTS">
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
-               </children>
+            <HBox alignment="CENTER_RIGHT">
+               <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
             </HBox>
-
-            <VBox styleClass="hero-section-alt">
-               <children>
-                  <Label styleClass="hero-label-small" text="CNTS DESK" />
-                  <Label styleClass="hero-title-large" text="Campagnes de Collecte" />
-                  <Label styleClass="hero-subtitle-alt" text="Vue CNTS pour suivre, filtrer et consulter les campagnes actives" />
-               </children>
+            <Region prefHeight="20.0" />
+            <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link, menu-link-active" text="CAMPAGNES" />
+            <Button mnemonicParsing="false" onAction="#goToEntites" styleClass="menu-link" text="ENTITÉS DE COLLECTE" />
+            <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
+            <Region VBox.vgrow="ALWAYS" />
+            <VBox spacing="15.0">
+               <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="CNTS Session" />
+               <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="Deconnexion" />
             </VBox>
-
-            <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-padding: 10 50 10 50;" styleClass="hero-section-alt">
-               <children>
-                  <TextField fx:id="txtRechercheFront" prefHeight="40.0" prefWidth="250.0" promptText="Rechercher..." styleClass="text-field" />
-                  <DatePicker fx:id="datePickerFilter" prefHeight="40.0" prefWidth="180.0" promptText="Filtrer par date" styleClass="dark-datepicker" />
-                  <Button fx:id="btnTrier" mnemonicParsing="false" onAction="#handleTrier" style="-fx-padding: 8 15;" styleClass="btn-outline" text="Sort A-Z" />
-                  <Button fx:id="btnTrierDate" mnemonicParsing="false" onAction="#handleTrierDate" style="-fx-padding: 8 15;" styleClass="btn-outline" text="Date" />
-                  <Button mnemonicParsing="false" onAction="#handleReset" style="-fx-padding: 8 15;" styleClass="btn-outline-red" text="Reset" />
-                  <Button mnemonicParsing="false" onAction="#goToCalendar" style="-fx-padding: 8 15;" styleClass="btn-outline" text="Vue Calendrier" />
-               </children>
-            </HBox>
-
-            <AnchorPane VBox.vgrow="ALWAYS">
-               <children>
-                  <VBox fx:id="vboxEmptyState" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" styleClass="empty-state-vbox">
-                     <children>
-                        <Label style="-fx-font-size: 50;" text="..." />
-                        <Label styleClass="empty-state-text" text="Aucune campagne active" />
-                        <Label styleClass="empty-state-subtext" text="Revenez plus tard pour voir les nouvelles campagnes CNTS." />
-                     </children>
-                  </VBox>
-
-                  <ScrollPane fx:id="scrollPaneCampagnes" fitToWidth="true" styleClass="scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <content>
-                        <GridPane fx:id="gridCampagnes" hgap="30.0" styleClass="grid-container" vgap="30.0" />
-                     </content>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
          </children>
       </VBox>
-
-      <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
-         <children>
-            <Region onMouseClicked="#handleMenuClose" style="-fx-background-color: rgba(0,0,0,0.6);" HBox.hgrow="ALWAYS" />
-            <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
-               <padding>
-                  <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
-               </padding>
-               <children>
-                  <HBox alignment="CENTER_RIGHT">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#handleMenuToggle" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 800; -fx-cursor: hand;" text="FERMER" />
-                     </children>
-                  </HBox>
-                  <Region prefHeight="20.0" />
-                  <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link, menu-link-active" text="CAMPAGNES" />
-                  <Button mnemonicParsing="false" styleClass="menu-link" text="PROFIL" />
-                  <Region VBox.vgrow="ALWAYS" />
-                  <VBox spacing="15.0">
-                     <children>
-                        <Label fx:id="sessionEmailLabel" style="-fx-text-fill: -muted; -fx-font-size: 13px;" text="CNTS Session" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 20; -fx-cursor: hand;" text="DECONNEXION" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </children>
+   </HBox>
 </StackPane>

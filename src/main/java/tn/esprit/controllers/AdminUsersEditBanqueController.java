@@ -71,10 +71,10 @@ public class AdminUsersEditBanqueController {
         this.currentBanque = banqueData;
         
         ObservableList<String> roles = FXCollections.observableArrayList(
-            user != null && user.getRole() != null ? user.getRole().toLowerCase() : "banque"
+            "admin", "client", "docteur", "agent banque", "agent cnts"
         );
         roleCombo.setItems(roles);
-        roleCombo.setValue(roles.get(0));
+        roleCombo.setValue(user != null && user.getRole() != null ? user.getRole().toLowerCase() : "agent banque");
 
         if (user != null) {
             subtitleLabel.setText("Mettre à jour les coordonnées de l'établissement pour " + user.getPrenom() + " " + user.getNom() + ".");
@@ -189,6 +189,12 @@ public class AdminUsersEditBanqueController {
         currentUser.setPrenom(prenom);
         currentUser.setNom(nom);
         currentUser.setEmail(email);
+
+        String newRole = roleCombo.getValue();
+        if (newRole != null && !newRole.isEmpty()) {
+            currentUser.setRole(newRole);
+        }
+
         if (password != null && !password.isEmpty()) {
             currentUser.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(10)));
         }

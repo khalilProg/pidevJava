@@ -127,4 +127,26 @@ public class UserService implements IGeneralService<User> {
         if (rs.next()) return rs.getInt(1);
         return 0;
     }
+
+    /**
+     * Find a user by email address. Returns null if not found.
+     */
+    public User findByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM user WHERE email = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, email);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            return new User(
+                    rs.getInt("id"),
+                    rs.getString("email"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("password"),
+                    rs.getString("role"),
+                    rs.getString("telephone")
+            );
+        }
+        return null;
+    }
 }

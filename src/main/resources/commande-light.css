@@ -3012,3 +3012,55 @@
     -fx-alignment: CENTER_LEFT !important;
     -fx-padding: 12 14 12 14 !important;
 }
+
+/* ==============================================
+   GOOGLE OAUTH BUTTON & AUTH DIVIDER (LIGHT MODE)
+   ============================================== */
+.google-btn {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #3c4043;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 24 12 24;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #dadce0;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 10;
+    -fx-alignment: CENTER;
+}
+
+.google-btn:hover {
+    -fx-background-color: #f7f8f8;
+    -fx-border-color: #c6c8ca;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+}
+
+.google-btn:pressed {
+    -fx-background-color: #e8eaed;
+}
+
+.auth-divider {
+    -fx-alignment: CENTER;
+    -fx-spacing: 12;
+}
+
+.auth-divider-line {
+    -fx-background-color: #dadce0;
+    -fx-pref-height: 1;
+    -fx-min-height: 1;
+    -fx-max-height: 1;
+}
+
+.auth-divider-text {
+    -fx-text-fill: #5f6b76;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.auth-loading {
+    -fx-text-fill: #ffc107;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}

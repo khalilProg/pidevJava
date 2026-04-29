@@ -13,15 +13,17 @@
 <BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminUsersController">
    <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
    <center>
-      <VBox styleClass="main-content" spacing="25.0" BorderPane.alignment="CENTER">
-         <padding><Insets bottom="40.0" left="40.0" right="40.0" top="40.0" /></padding>
-         <HBox alignment="CENTER_LEFT">
-            <Label styleClass="admin-page-title" text="UTILISATEURS" />
-            <Region HBox.hgrow="ALWAYS" />
-            <Button text="AJOUTER UTILISATEUR" onAction="#handleNavigateAddUser" styleClass="button-primary" />
-         </HBox>
-         <TextField fx:id="searchField" promptText="Rechercher..." styleClass="text-field-custom" prefWidth="350.0" />
-         <VBox fx:id="usersContainer" spacing="10.0" />
-      </VBox>
+      <ScrollPane fitToWidth="true" styleClass="edge-to-edge-scroll">
+         <VBox styleClass="main-content" spacing="25.0" BorderPane.alignment="CENTER">
+            <padding><Insets bottom="40.0" left="40.0" right="40.0" top="40.0" /></padding>
+            <HBox alignment="CENTER_LEFT">
+               <Label styleClass="admin-page-title" text="UTILISATEURS" />
+               <Region HBox.hgrow="ALWAYS" />
+               <Button text="AJOUTER UTILISATEUR" onAction="#handleNavigateAddUser" styleClass="button-primary" />
+            </HBox>
+            <TextField fx:id="searchField" promptText="Rechercher..." styleClass="text-field-custom" prefWidth="350.0" />
+            <VBox fx:id="usersContainer" spacing="10.0" />
+         </VBox>
+      </ScrollPane>
    </center>
 </BorderPane>

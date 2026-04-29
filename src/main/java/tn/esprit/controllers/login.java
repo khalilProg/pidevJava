@@ -37,6 +37,9 @@ public class login {
     private Label errorLabel;
 
     @FXML
+    private Label googleLoadingLabel;
+
+    @FXML
     public void initialize() {
         Preferences prefs = Preferences.userNodeForPackage(login.class);
         String savedEmail = prefs.get("saved_email", "");
@@ -212,5 +215,62 @@ public class login {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void handleGoogleSignIn(ActionEvent event) {
+        errorLabel.setVisible(false);
+        googleLoadingLabel.setVisible(true);
+        googleLoadingLabel.setManaged(true);
+        
+        // Run OAuth flow in a background thread to prevent freezing the UI
+        new Thread(() -> {
+            try {
+                tn.esprit.services.GoogleOAuthService oauthService = new tn.esprit.services.GoogleOAuthService();
+                tn.esprit.services.GoogleOAuthService.GoogleUserInfo userInfo = oauthService.authenticate();
+                
+                // Switch back to JavaFX Application Thread for UI/DB updates
+                javafx.application.Platform.runLater(() -> {
+                    try {
+                        UserService userService = new UserService();
+                        User u = userService.findByEmail(userInfo.email);
+                        
+                        if (u == null) {
+                            // User doesn't exist, create a new one with a random placeholder password
+                            String randomPassword = java.util.UUID.randomUUID().toString();
+                            u = new User(userInfo.email, userInfo.familyName, userInfo.givenName, randomPassword, "client", "");
+                            userService.ajouter(u);
+                            System.out.println("Google Auth: Created new user " + userInfo.email);
+                        }
+                        
+                        // Proceed to login
+                        SessionManager.setCurrentUser(u);
+                        
+                        if ("admin".equalsIgnoreCase(u.getRole())) {
+                            navigateToDashboard(event);
+                        } else if (u.getRole() != null && u.getRole().toLowerCase().contains("cnts")) {
+                            navigateToCntsAgentHome(event, u);
+                        } else if (u.getRole() != null && u.getRole().toLowerCase().contains("banque")) {
+                            navigateToAgentBanque(event, u);
+                        } else {
+                            navigateToClientHome(event, u);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        displayError("Erreur base de données: " + e.getMessage());
+                    } finally {
+                        googleLoadingLabel.setVisible(false);
+                        googleLoadingLabel.setManaged(false);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                javafx.application.Platform.runLater(() -> {
+                    googleLoadingLabel.setVisible(false);
+                    googleLoadingLabel.setManaged(false);
+                    displayError("Erreur Google SignIn: " + e.getMessage());
+                });
+            }
+        }).start();
     }
 }

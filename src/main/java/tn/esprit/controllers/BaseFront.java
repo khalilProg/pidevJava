@@ -510,4 +510,9 @@ public class BaseFront {
     public void goToHistorique(javafx.event.Event event) {
         switchScene(event, "/Liste.fxml");
     }
+
+    @FXML
+    public void goToEntites(javafx.event.Event event) {
+        switchScene(event, "/EntiteCollecteFront.fxml");
+    }
 }

@@ -15,7 +15,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@styleFront.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneCalendarController">
+<StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneCalendarController">
    <children>
       <VBox styleClass="main-content">
          <children>
@@ -111,11 +111,8 @@
                </HBox>
                <Region prefHeight="20.0" />
                <!-- Menu Links -->
-               <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
                <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link, menu-link-active" text="CAMPAGNES" />
-               <Button mnemonicParsing="false" onAction="#goToHistorique" styleClass="menu-link" text="HISTORIQUE" />
-               <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
-               <Button mnemonicParsing="false" styleClass="menu-link" text="DOSSIER MÉDICAL" />
+               <Button mnemonicParsing="false" onAction="#goToEntites" styleClass="menu-link" text="ENTITÉS DE COLLECTE" />
                <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
                <Region VBox.vgrow="ALWAYS" />
                <!-- Session Info -->

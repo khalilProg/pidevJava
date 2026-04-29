@@ -62,8 +62,7 @@
                      </VBox>
                      <VBox spacing="3.0" HBox.hgrow="ALWAYS">
                          <Label styleClass="form-label" text="RÔLE" />
-                         <ComboBox styleClass="dark-combo" fx:id="roleCombo" promptText="Client" disable="true" maxWidth="1.7976931348623157E308" />
-                         <Label text="(Rôle non modifiable ici)" style="-fx-text-fill: -muted; -fx-font-size: 10px;" />
+                         <ComboBox styleClass="dark-combo" fx:id="roleCombo" promptText="Client" maxWidth="1.7976931348623157E308" />
                      </VBox>
                  </HBox>
 

@@ -3,28 +3,25 @@ package tn.esprit.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import tn.esprit.entities.User;
+import tn.esprit.tools.SessionManager;
+import tn.esprit.tools.ThemeManager;
+
 import java.io.IOException;
 
-public class AgentBanqueBaseController {
+public class AgentBanqueBaseController extends BaseFront {
 
-    @FXML private HBox menuOverlay;
-    @FXML private Label sessionEmailLabel;
     @FXML private StackPane contentArea;
-    
-    private tn.esprit.entities.User currentUser;
-    
+
+    private User currentUser;
+
     private static AgentBanqueBaseController instance;
 
-    @FXML
+    @Override
     public void initialize() {
+        super.initialize();
         instance = this;
         // Load the default page (Mes Demandes)
         loadView("/AgentBanqueDemande.fxml");
@@ -34,11 +31,10 @@ public class AgentBanqueBaseController {
         return instance;
     }
 
-    public void initData(tn.esprit.entities.User user) {
+    public void initData(User user) {
         this.currentUser = user;
-        if (sessionEmailLabel != null && user != null) {
-            sessionEmailLabel.setText(user.getEmail());
-        }
+        SessionManager.setCurrentUser(user);
+        applySessionUser();
     }
 
     public void loadView(String fxmlPath) {
@@ -47,6 +43,10 @@ public class AgentBanqueBaseController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             contentArea.getChildren().setAll(root);
+            // Apply theme to the loaded sub-view
+            if (contentArea.getScene() != null) {
+                ThemeManager.getInstance().applyTheme(contentArea.getScene());
+            }
         } catch (IOException e) {
             System.err.println("Error loading FXML: " + fxmlPath);
             e.printStackTrace();
@@ -56,60 +56,64 @@ public class AgentBanqueBaseController {
     public void loadView(Parent root) {
         if (contentArea != null && root != null) {
             contentArea.getChildren().setAll(root);
+            if (contentArea.getScene() != null) {
+                ThemeManager.getInstance().applyTheme(contentArea.getScene());
+            }
         }
     }
 
-    @FXML
-    void handleMenuToggle(ActionEvent event) {
-        if (menuOverlay != null) {
-            boolean isVisible = menuOverlay.isVisible();
-            menuOverlay.setVisible(!isVisible);
-            menuOverlay.setManaged(!isVisible);
-        }
+    // Override navigation to keep Agent Banque routing — do NOT navigate to client pages
+    @Override
+    public void goToAccueil(javafx.event.Event event) {
+        // Agent Banque has no separate accueil — just go to demandes
+        loadView("/AgentBanqueDemande.fxml");
+        closeMenu();
     }
 
-    @FXML
-    void handleMenuClose(javafx.scene.input.MouseEvent event) {
-        if (menuOverlay != null) {
-            menuOverlay.setVisible(false);
-            menuOverlay.setManaged(false);
-        }
+    @Override
+    public void goToCampagnes(javafx.event.Event event) {
+        // Not applicable for Agent Banque
     }
 
-    @FXML
-    void handleLogout(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void goToCommandes(javafx.event.Event event) {
+        // Not applicable for Agent Banque
     }
 
-    @FXML
-    public void goToAccueil(ActionEvent event) {
-        // Implement when page exists
-        System.out.println("Go to Accueil");
+    @Override
+    public void goToProfile(javafx.event.Event event) {
+        // Implement when profile page exists
+        System.out.println("Go to Profil");
+        closeMenu();
     }
 
     @FXML
     public void goToDemandes(ActionEvent event) {
         loadView("/AgentBanqueDemande.fxml");
-        handleMenuClose(null);
+        closeMenu();
     }
 
     @FXML
     public void goToTransferts(ActionEvent event) {
         loadView("/AgentBanqueTransfert.fxml");
-        handleMenuClose(null);
+        closeMenu();
     }
-    
+
     @FXML
     public void goToProfil(ActionEvent event) {
-        // Implement when page exists
+        // Implement when profile page exists
         System.out.println("Go to Profil");
+        closeMenu();
+    }
+
+    private void closeMenu() {
+        if (menuOverlay != null) {
+            menuOverlay.setVisible(false);
+            menuOverlay.setManaged(false);
+            if (menuToggleBtn != null) {
+                menuToggleBtn.setText("MENU");
+                tn.esprit.tools.IconUtils.decorateButton(menuToggleBtn);
+            }
+        }
     }
 }

@@ -74,9 +74,11 @@ public class AdminUsersEditClientController {
         );
         groupeSangCombo.setItems(bloodTypes);
         
-        ObservableList<String> roles = FXCollections.observableArrayList("client");
+        ObservableList<String> roles = FXCollections.observableArrayList(
+            "admin", "client", "docteur", "agent banque", "agent cnts"
+        );
         roleCombo.setItems(roles);
-        roleCombo.setValue("client");
+        roleCombo.setValue(user != null && user.getRole() != null ? user.getRole().toLowerCase() : "client");
 
         if (user != null) {
             subtitleLabel.setText("Mettre à jour les informations de " + user.getPrenom() + " " + user.getNom() + ".");
@@ -177,6 +179,12 @@ public class AdminUsersEditClientController {
         currentUser.setPrenom(prenom);
         currentUser.setNom(nom);
         currentUser.setEmail(email);
+        
+        String newRole = roleCombo.getValue();
+        if (newRole != null && !newRole.isEmpty()) {
+            currentUser.setRole(newRole);
+        }
+
         if (password != null && !password.isEmpty()) {
             currentUser.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(10)));
         }
