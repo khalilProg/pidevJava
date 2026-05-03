@@ -35,14 +35,27 @@ public class ListeCampagnes extends BaseFront {
 
         try {
             Client currentClient = resolveCurrentClient();
-            campagnes = currentClient == null ? new ArrayList<>() : campagneService.recupererByClient(currentClient);
+            System.out.println("Client = " + currentClient);
+
+            if (currentClient != null) {
+                campagnes = campagneService.recupererByClient(currentClient);
+                System.out.println("Campagnes size = " + campagnes.size());
+            } else {
+                campagnes = new ArrayList<>();
+            }
+
             renderCampagnes(campagnes);
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             renderCampagnes(new ArrayList<>());
         }
 
-        searchField.textProperty().addListener((obs, oldValue, newValue) -> applyFilter(newValue));
+        if (searchField != null) {
+            searchField.textProperty().addListener((obs, oldValue, newValue) -> applyFilter(newValue));
+        } else {
+            System.out.println("searchField is NULL ⚠️");
+        }
     }
 
     private Client resolveCurrentClient() throws SQLException {

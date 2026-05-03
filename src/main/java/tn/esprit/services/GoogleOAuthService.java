@@ -42,6 +42,8 @@ public class GoogleOAuthService {
         }
     }
 
+    private static HttpServer activeServer = null;
+
     /**
      * Starts the full OAuth flow and returns the authenticated user's info.
      * This method blocks until the user completes auth in the browser (up to 2 min).
@@ -66,8 +68,16 @@ public class GoogleOAuthService {
                 + "&prompt=consent";
 
         // 3. Start local HTTP server to capture redirect
+        if (activeServer != null) {
+            activeServer.stop(0);
+            activeServer = null;
+            // Give the OS a moment to free the port
+            Thread.sleep(500);
+        }
+
         CompletableFuture<String> codeFuture = new CompletableFuture<>();
         HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", GoogleOAuthConfig.REDIRECT_PORT), 0);
+        activeServer = server;
 
         server.createContext("/", exchange -> {
             String query = exchange.getRequestURI().getQuery();
@@ -107,11 +117,22 @@ public class GoogleOAuthService {
         System.out.println("🔐 OAuth local server started on port " + GoogleOAuthConfig.REDIRECT_PORT);
 
         // 4. Open system browser
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            Desktop.getDesktop().browse(new URI(authUrl));
-        } else {
-            // Fallback: try xdg-open on Linux
-            Runtime.getRuntime().exec(new String[]{"xdg-open", authUrl});
+        String os = System.getProperty("os.name").toLowerCase();
+        try {
+            if (os.contains("linux") || os.contains("unix")) {
+                Runtime.getRuntime().exec(new String[]{"xdg-open", authUrl});
+            } else if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(new URI(authUrl));
+            } else if (os.contains("mac")) {
+                Runtime.getRuntime().exec(new String[]{"open", authUrl});
+            } else if (os.contains("win")) {
+                Runtime.getRuntime().exec(new String[]{"rundll32", "url.dll,FileProtocolHandler", authUrl});
+            } else {
+                System.out.println("Veuillez ouvrir cette URL manuellement : " + authUrl);
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur d'ouverture du navigateur : " + e.getMessage());
+            System.out.println("Veuillez ouvrir cette URL manuellement : " + authUrl);
         }
 
         // 5. Wait for the redirect (max 2 minutes)
@@ -119,7 +140,10 @@ public class GoogleOAuthService {
         try {
             authCode = codeFuture.get(2, TimeUnit.MINUTES);
         } finally {
-            server.stop(1);
+            if (activeServer != null) {
+                activeServer.stop(0);
+                activeServer = null;
+            }
             System.out.println("🔐 OAuth local server stopped.");
         }
 

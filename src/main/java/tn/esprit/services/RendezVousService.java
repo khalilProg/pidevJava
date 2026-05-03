@@ -11,23 +11,21 @@ import java.util.List;
 
 public class RendezVousService implements IGeneralService<RendezVous> {
     Connection cn;
+
     public RendezVousService() {
         cn = MyDatabase.getInstance().getCnx();
     }
+
     @Override
     public void ajouter(RendezVous rendezVous) throws SQLException {
         String sql = "insert into rendez_vous(date_don, status, questionnaire_id, entite_id) values(?,?,?,?)";
-        PreparedStatement rdv = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        rdv.setTimestamp(1,Timestamp.valueOf(rendezVous.getDateDon()));
-        rdv.setString(2,rendezVous.getStatus());
+        PreparedStatement rdv = cn.prepareStatement(sql);
+        rdv.setTimestamp(1, Timestamp.valueOf(rendezVous.getDateDon()));
+        rdv.setString(2, rendezVous.getStatus());
         rdv.setInt(3, rendezVous.getQuestionnaire_id());
         rdv.setInt(4, rendezVous.getEntite_id());
         System.out.println("executing insert...");
         rdv.executeUpdate();
-        ResultSet generatedKeys = rdv.getGeneratedKeys();
-        if (generatedKeys.next()) {
-            rendezVous.setId(generatedKeys.getInt(1));
-        }
     }
 
     @Override
@@ -38,32 +36,14 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         pstRV.executeUpdate();
     }
 
-    public boolean supprimerForClient(int rdvId) throws SQLException {
-        String sql = "UPDATE rendez_vous SET status = 'annulé' WHERE id = ?";
-        PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setInt(1, rdvId);
-        return pst.executeUpdate() > 0;
-    }
-
-    public boolean hasRendezVous(int clientId, int campagneId) throws SQLException {
-        String sql = "SELECT rv.id FROM rendez_vous rv " +
-                "JOIN questionnaire q ON rv.questionnaire_id = q.id " +
-                "WHERE q.client_id = ? AND q.campagne_id = ?";
-        PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setInt(1, clientId);
-        pst.setInt(2, campagneId);
-        ResultSet rs = pst.executeQuery();
-        return rs.next();
-    }
-
     public int chercher(RendezVous rendezVous) throws SQLException {
         String sql = "SELECT 1 FROM rendez_vous WHERE id = ?";
         PreparedStatement pst = cn.prepareStatement(sql);
         pst.setInt(1, rendezVous.getId());
         ResultSet rs = pst.executeQuery();
-        if (rs.next()){
-            System.out.println("ce rendez vous existe avec l'id "+rendezVous.getId());
-        }else{
+        if (rs.next()) {
+            System.out.println("ce rendez vous existe avec l'id " + rendezVous.getId());
+        } else {
             System.out.println("ce rendez vous n'existe pas");
         }
         return rendezVous.getId();
@@ -71,16 +51,14 @@ public class RendezVousService implements IGeneralService<RendezVous> {
 
     @Override
     public void modifier(RendezVous rendezVous) throws SQLException {
-        if(chercher(rendezVous)== rendezVous.getId()){
-            String sql = "UPDATE rendez_vous SET date_don = ?, status = ?, entite_id = ? WHERE id=?";
+        if (chercher(rendezVous) == rendezVous.getId()) {
+            String sql = "UPDATE rendez_vous SET date_don = ?, status = ? WHERE id=?";
             PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setTimestamp(1, Timestamp.valueOf(rendezVous.getDateDon()));
+            pst.setTimestamp(1, Timestamp.valueOf(rendezVous.getDateDon().plusHours(1)));
             pst.setString(2, rendezVous.getStatus());
-            pst.setInt(3, rendezVous.getEntite_id());
-            pst.setInt(4, rendezVous.getId());
+            pst.setInt(3, rendezVous.getId());
             pst.executeUpdate();
-        }
-        else {
+        } else {
             System.out.println("ce rendez vous n'existe pas");
         }
     }
@@ -91,7 +69,7 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<RendezVous> rendezvouet = new ArrayList<>();
-        while(rs.next()){
+        while (rs.next()) {
             RendezVous rdv = new RendezVous(
                     rs.getInt("id"),
                     rs.getString("status"),
@@ -105,7 +83,27 @@ public class RendezVousService implements IGeneralService<RendezVous> {
         return rendezvouet;
     }
 
-    public java.util.Map<String, Integer> getStatusStats() throws SQLException {
+    public boolean hasRendezVous(int clientId, int campagneId) throws SQLException {
+        String sql = "SELECT COUNT(*) AS total FROM rendez_vous r JOIN questionnaire q ON r.questionnaire_id = q.id WHERE q.client_id = ? AND q.campagne_id = ?";
+        PreparedStatement st = cn.prepareStatement(sql);
+        st.setInt(1, clientId);
+        st.setInt(2, campagneId);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("total") > 0;
+        }
+        return false;
+    }
+
+
+    public boolean supprimerForClient(int rendezVousId) throws SQLException {
+        String sql = "UPDATE rendez_vous SET status = 'annulé' WHERE id = ?";
+        PreparedStatement st = cn.prepareStatement(sql);
+        st.setInt(1, rendezVousId);
+        int updated = st.executeUpdate();
+        return updated > 0;
+    }
+        public java.util.Map<String, Integer> getStatusStats() throws SQLException {
         java.util.Map<String, Integer> stats = new java.util.HashMap<>();
         String sql = "SELECT status, COUNT(*) as nb FROM rendez_vous GROUP BY status";
         Statement st = cn.createStatement();
@@ -114,13 +112,5 @@ public class RendezVousService implements IGeneralService<RendezVous> {
             stats.put(rs.getString("status"), rs.getInt("nb"));
         }
         return stats;
-    }
-
-    public int getTotalRendezVous() throws SQLException {
-        String sql = "SELECT COUNT(*) FROM rendez_vous";
-        Statement st = cn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
-        if (rs.next()) return rs.getInt(1);
-        return 0;
     }
 }

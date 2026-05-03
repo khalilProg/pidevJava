@@ -212,7 +212,7 @@ public class EmailService {
             dsn = LOCAL_CONFIG.getProperty("mailer.dsn");
         }
 
-        MailerConfig defaults = new MailerConfig(DEFAULT_SMTP_HOST, DEFAULT_SMTP_PORT, DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL, "");
+        MailerConfig defaults = new MailerConfig(DEFAULT_SMTP_HOST, DEFAULT_SMTP_PORT, DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL, "ijfzcohnmscvxajv");
         if (dsn == null || dsn.isBlank()) {
             return defaults;
         }

@@ -2641,3 +2641,64 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
+
+/* ==============================================
+   FACE ID BUTTON & OVERLAY
+   ============================================== */
+.faceid-btn {
+    -fx-background-color: linear-gradient(to bottom, #1a1a2e, #16162a);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 24 12 24;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: linear-gradient(to bottom, #3a3a5c, #2a2a4a);
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 10;
+    -fx-alignment: CENTER;
+}
+
+.faceid-btn:hover {
+    -fx-background-color: linear-gradient(to bottom, #252545, #1e1e3a);
+    -fx-border-color: #5a5a8a;
+    -fx-effect: dropshadow(gaussian, rgba(100, 100, 255, 0.25), 10, 0, 0, 2);
+}
+
+.faceid-btn:pressed {
+    -fx-background-color: #12122a;
+}
+
+.faceid-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.92);
+}
+
+.faceid-status-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.faceid-hint-text {
+    -fx-text-fill: #888888;
+    -fx-font-size: 13px;
+}
+
+.faceid-cancel-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 30;
+    -fx-border-color: rgba(231, 76, 60, 0.4);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+}
+
+.faceid-cancel-btn:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.1);
+    -fx-border-color: #e74c3c;
+}

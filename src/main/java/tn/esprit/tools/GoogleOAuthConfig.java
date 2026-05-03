@@ -1,5 +1,6 @@
 package tn.esprit.tools;
 
+import io.github.cdimascio.dotenv.Dotenv;
 /**
  * Configuration for Google OAuth 2.0 Desktop flow.
  *
@@ -13,10 +14,10 @@ package tn.esprit.tools;
  */
 public class GoogleOAuthConfig {
 
-    // ─── Replace these with your own credentials ────────────────────────
-    public static final String CLIENT_ID = "YOUR_CLIENT_ID.apps.googleusercontent.com";
-    public static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET";
-    // ────────────────────────────────────────────────────────────────────
+    private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+
+    public static final String CLIENT_ID = dotenv.get("GOOGLE_CLIENT_ID", "YOUR_CLIENT_ID.apps.googleusercontent.com");
+    public static final String CLIENT_SECRET = dotenv.get("GOOGLE_CLIENT_SECRET", "YOUR_CLIENT_SECRET");
 
     /** Port for the local HTTP server that catches the redirect. */
     public static final int REDIRECT_PORT = 8888;

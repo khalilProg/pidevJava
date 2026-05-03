@@ -15,7 +15,7 @@ public class DonService {
     }
 
     public int countDonByClient(int clientId) throws SQLException {
-        String sql = "SELECT COUNT(*) AS total FROM don WHERE id_client = ?";
+        String sql = "SELECT COUNT(*) AS total FROM don WHERE client_id = ?";
         try (PreparedStatement pst = cn.prepareStatement(sql)) {
             pst.setInt(1, clientId);
             ResultSet rs = pst.executeQuery();

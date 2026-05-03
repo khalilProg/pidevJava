@@ -40,3 +40,14 @@ build/
 # Local SMTP secrets
 email.properties
 chatbot.properties
+
+# Environment variables
+.env
+
+# Google Calendar cached tokens
+google_calendar_tokens.json
+tokens/
+
+# Sensitive configuration files
+credentials.json
+config.properties

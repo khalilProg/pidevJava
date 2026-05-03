@@ -5,35 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ConfigLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GoogleCalendarOAuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/MailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AdminUsersEditBanqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AdminUsersEditBanqueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AdminUsersEditClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AdminUsersEditClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueBaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueDemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueTransfertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ForgotPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ForgotPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Liste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Liste.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueAddDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueAddDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueEditDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueEditDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueTransfert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewTransfert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneCalendar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneFront.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit_banque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit_banque.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/admin_users_edit_client.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/admin_users_edit_client.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cnts_agent_home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cnts_agent_home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/mains/Launcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CampagneService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CampagneService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/DonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/DonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GoogleOAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GoogleOAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/RendezVousService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/RendezVousService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/GoogleOAuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/GoogleOAuthConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/commande-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/commande-light.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/commande.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/commande.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/forgot_password.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/forgot_password.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/register.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +217,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/rabii/Desktop/Pidev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/khalil/Downloads&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -340,23 +333,19 @@
       <workItem from="1777167006562" duration="653000" />
       <workItem from="1777248164648" duration="3342000" />
       <workItem from="1777461694085" duration="3148000" />
-      <workItem from="1777468414653" duration="2542000" />
+      <workItem from="1777468414653" duration="3003000" />
+      <workItem from="1777552794251" duration="1940000" />
+      <workItem from="1777805433401" duration="2300000" />
+      <workItem from="1777807858470" duration="18000" />
+      <workItem from="1777808242842" duration="4691000" />
+      <workItem from="1777812943897" duration="911000" />
+      <workItem from="1777813864104" duration="3992000" />
+      <workItem from="1777817873038" duration="1347000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tn/esprit/mains/Main.java</url>
-          <line>1</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/bloodlink$MainFx.ic" NAME="MainFx Coverage Results" MODIFIED="1776098931207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

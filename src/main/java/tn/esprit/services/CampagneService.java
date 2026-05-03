@@ -247,15 +247,22 @@ public class CampagneService implements IGeneralService<Campagne> {
         return null;
     }
 
-    public List<Campagne> recupererByClient(Client c) throws SQLException {
-        String sql = "SELECT * FROM compagne WHERE type_sang LIKE ?";
+    public List<Campagne> recupererByClient(Client client) throws SQLException {
+        String sql = "SELECT DISTINCT c.* FROM compagne c WHERE c.type_sang LIKE ? AND c.date_fin > CURRENT_DATE AND c.date_debut >= ?";
         PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setString(1, "%" + c.getTypeSang() + "%");
+        pst.setString(1, "%\"" + client.getTypeSang() + "\"%");
+        java.sql.Date minDate = (client.getDernierDon() != null)
+                ? java.sql.Date.valueOf(client.getDernierDon().plusWeeks(3))
+                : java.sql.Date.valueOf("1970-01-01");
+        pst.setDate(2, minDate);
+
         ResultSet rs = pst.executeQuery();
         List<Campagne> campagnes = new ArrayList<>();
-        while(rs.next()){
+
+        while (rs.next()) {
             campagnes.add(mapCampagne(rs));
         }
+
         return campagnes;
     }
 

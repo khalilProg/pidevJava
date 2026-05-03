@@ -3064,3 +3064,31 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
+
+/* ==============================================
+   FACE ID BUTTON (LIGHT MODE)
+   ============================================== */
+.faceid-btn {
+    -fx-background-color: linear-gradient(to bottom, #eef0f8, #e4e6f0);
+    -fx-text-fill: #1a1a2e;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 24 12 24;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #c8cce0;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 10;
+    -fx-alignment: CENTER;
+}
+
+.faceid-btn:hover {
+    -fx-background-color: linear-gradient(to bottom, #e0e2f0, #d6d8e8);
+    -fx-border-color: #a0a4c0;
+    -fx-effect: dropshadow(gaussian, rgba(80, 80, 180, 0.15), 10, 0, 0, 2);
+}
+
+.faceid-btn:pressed {
+    -fx-background-color: #d0d2e2;
+}

@@ -65,7 +65,7 @@ public class Liste extends BaseFront {
 
             ObservableList<RendezVous> data = loadClientRendezVous(rdvService, qsService);
             updateSummaryCards(donService);
-            setupColumns(rdvService, qsService, campagneService, entiteService);
+            setupColumns(rdvService, qsService, campagneService, entiteService, data);
             setupSearch(data, qsService, campagneService, entiteService);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,7 +108,8 @@ public class Liste extends BaseFront {
     }
 
     private void setupColumns(RendezVousService rdvService, QuestionnaireService qsService,
-                              CampagneService campagneService, EntiteCollecteService entiteService) {
+                              CampagneService campagneService, EntiteCollecteService entiteService,
+                              ObservableList<RendezVous> data) {
         campagneColumn.setCellValueFactory(cell -> {
             try {
                 Questionnaire q = qsService.getQuestionnaireById(cell.getValue().getQuestionnaire_id());
@@ -145,7 +146,7 @@ public class Liste extends BaseFront {
                     RendezVous rdv = getTableView().getItems().get(getIndex());
                     try {
                         if (rdvService.supprimerForClient(rdv.getId())) {
-                            getTableView().getItems().remove(rdv);
+                            data.remove(rdv);
                         }
                     } catch (SQLException ex) {
                         ex.printStackTrace();

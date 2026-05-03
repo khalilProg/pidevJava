@@ -6,12 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tn.esprit.entities.Campagne;
@@ -20,10 +15,7 @@ import tn.esprit.entities.EntiteDeCollecte;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.entities.RendezVous;
 import tn.esprit.entities.User;
-import tn.esprit.services.ClientService;
-import tn.esprit.services.EmailService;
-import tn.esprit.services.QuestionnaireService;
-import tn.esprit.services.RendezVousService;
+import tn.esprit.services.*;
 import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
@@ -45,6 +37,8 @@ public class AjouterRendezVous extends BaseFront {
     @FXML private Text timeError;
     @FXML private ComboBox<EntiteDeCollecte> entiteCombo;
     private final ObservableList<EntiteDeCollecte> entites = FXCollections.observableArrayList();
+    private UserService us = new UserService();
+    private User currentclient = SessionManager.getCurrentUser();
 
     public void setCampagne(Campagne campagne) {
         this.campagne = campagne;
@@ -139,13 +133,53 @@ public class AjouterRendezVous extends BaseFront {
         int questionnaireId = questionnaire.getId();
         RendezVous rdv = new RendezVous("confirme", rdvDateTime, questionnaireId, selectedId);
         new RendezVousService().ajouter(rdv);
+         askAddToGoogleCalendar(
+                 currentclient.getNom() + " " + currentclient.getPrenom(),
+                campagne.getTitre(),
+                rdvDateTime,
+                selectedEntity.getNom()
+        );
+
         sendConfirmationEmail(rdv, selectedEntity, true);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Liste.fxml"));
         Parent root = loader.load();
         setRoot(root, confirmerRdv);
     }
+private void askAddToGoogleCalendar(String patientName, String campagne, LocalDateTime dateTime, String entite) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Ajouter à Google Calendar");
+        alert.setHeaderText("Voulez-vous ajouter ce rendez-vous à votre calendrier Google ?");
+        alert.setContentText("Campagne: " + campagne + "\nDate & Heure: " + dateTime + "\nEntité: " + entite);
 
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // Run on background thread — the OAuth flow opens a browser and waits
+                new Thread(() -> {
+                    try {
+                        GoogleCalendarOAuthService service = new GoogleCalendarOAuthService();
+                        String link = service.addRendezVous(patientName, campagne, dateTime, entite);
+                        javafx.application.Platform.runLater(() -> {
+                            Alert confirm = new Alert(Alert.AlertType.INFORMATION);
+                            confirm.setTitle("Rendez-vous ajouté");
+                            confirm.setHeaderText("Rendez-vous ajouté à Google Calendar !");
+                            confirm.setContentText("Vous pouvez voir votre événement ici:\n" + link);
+                            confirm.show();
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        javafx.application.Platform.runLater(() -> {
+                            Alert error = new Alert(Alert.AlertType.ERROR);
+                            error.setTitle("Erreur Google Calendar");
+                            error.setHeaderText("Impossible d'ajouter l'événement");
+                            error.setContentText(e.getMessage());
+                            error.show();
+                        });
+                    }
+                }).start();
+            }
+        });
+    }
     @FXML
     private void handleConfirmerRdvAdmin() throws SQLException, IOException {
         boolean valid = true;
@@ -221,6 +255,58 @@ public class AjouterRendezVous extends BaseFront {
         setRoot(root, confirmerRdv);
     }
 
+    private void setupDatePickerConstraints(int entiteId) {
+        try {
+            // Fetch all appointments and the current campaign ID
+            List<RendezVous> allRdvs = new RendezVousService().recuperer();
+            int currentCampagneId = this.campagne.getId();
+            QuestionnaireService qService = new QuestionnaireService();
+
+            dateRdv.setDayCellFactory(picker -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) return;
+
+                    // 1. Range Validation
+                    boolean isOutOfRange = item.isBefore(LocalDate.now()) ||
+                            item.isBefore(campagne.getDateDebut()) ||
+                            item.isAfter(campagne.getDateFin());
+
+                    // 2. Strict Filter: Same Entity AND Same Campaign
+                    long count = allRdvs.stream()
+                            .filter(r -> {
+                                try {
+                                    // Filter by Entity ID
+                                    if (r.getEntite_id() != entiteId) return false;
+
+                                    // Filter by Date
+                                    if (!r.getDateDon().toLocalDate().equals(item)) return false;
+
+                                    // Filter by Campaign ID (via the Questionnaire)
+                                    Questionnaire q = qService.getQuestionnaireById(r.getQuestionnaire_id());
+                                    return q != null && q.getCampagneId() == currentCampagneId;
+
+                                } catch (SQLException e) {
+                                    return false;
+                                }
+                            })
+                            .count();
+
+                    if (isOutOfRange || count >= 18) {
+                        setDisable(true);
+                        if (count >= 18) {
+                            setStyle("-fx-background-color: #d3d3d3; -fx-text-fill: #808080;");
+                            setTooltip(new Tooltip("Limite atteinte pour cette campagne (18/18)"));
+                        }
+                    }
+                }
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     public void handleAnnuler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCampagnes.fxml"));
@@ -246,7 +332,7 @@ public class AjouterRendezVous extends BaseFront {
             String fullName = ((user.getPrenom() == null ? "" : user.getPrenom()) + " "
                     + (user.getNom() == null ? "" : user.getNom())).trim();
 
-            new EmailService().sendRendezVousConfirmation(
+            new MailService().sendConfirmation(
                     user.getEmail(),
                     fullName,
                     campagne == null ? "" : campagne.getTitre(),
