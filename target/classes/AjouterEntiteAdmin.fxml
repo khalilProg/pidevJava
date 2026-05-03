@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterEntiteAdmin">
+   <!-- Sidebar -->
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="35.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="80.0" right="80.0" top="40.0" />
+         </padding>
+
+         <!-- Header -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="Nouvelle Entité" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Interface d'administration" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="retour-button" mnemonicParsing="false" text="← Retour à la liste" onAction="#handleRetour" />
+         </HBox>
+
+         <VBox styleClass="glass-card" spacing="25.0" VBox.vgrow="ALWAYS">
+            
+            <VBox spacing="5.0">
+               <Label text="Nom de l'entité" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField styleClass="dark-field" fx:id="nomInput" promptText="Ex: Hôpital Charles Nicolle" />
+               <Label fx:id="nomError" text="Le nom officiel de l'entité de collecte (ex: Hôpital X)." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
+
+            <VBox spacing="5.0">
+               <Label text="Adresse" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField styleClass="dark-field" fx:id="adresseInput" promptText="Ex: 12 Rue de la République" />
+               <Label fx:id="adresseError" text="Adresse complète de l'entité." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
+
+            <VBox spacing="5.0">
+               <Label text="Ville" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField styleClass="dark-field" fx:id="villeInput" promptText="Ex: Tunis" />
+               <Label fx:id="villeError" text="Ville de l'entité." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
+
+            <VBox spacing="5.0">
+               <Label text="Numéro de téléphone" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+               <TextField styleClass="dark-field" fx:id="telephoneInput" promptText="Ex: 71234567" />
+               <Label fx:id="telephoneError" text="Exactement 8 chiffres." style="-fx-text-fill: -muted; -fx-font-size: 11px;" />
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Button mnemonicParsing="false" text="Créer l'entité" onAction="#handleCreer" styleClass="button-primary" maxWidth="1.7976931348623157E308"/>
+            
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>
