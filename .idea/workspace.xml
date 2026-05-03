@@ -5,28 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GoogleCalendarOAuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/MailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/AiReportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ForgotPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ForgotPasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Liste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/Liste.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeCampagnes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/mains/Launcher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CampagneService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CampagneService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/DonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/DonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GoogleOAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GoogleOAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/RendezVousService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/RendezVousService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/GoogleOAuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/GoogleOAuthConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/commande-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/commande-light.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/commande.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/commande.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/forgot_password.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/forgot_password.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeQuestAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeQuestAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeRdvAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ListeRdvAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeQuestAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeQuestAdmin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeRdvAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeRdvAdmin.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,7 +325,8 @@
       <workItem from="1777808242842" duration="4691000" />
       <workItem from="1777812943897" duration="911000" />
       <workItem from="1777813864104" duration="3992000" />
-      <workItem from="1777817873038" duration="1347000" />
+      <workItem from="1777817873038" duration="2281000" />
+      <workItem from="1777838130518" duration="2031000" />
     </task>
     <servers />
   </component>
