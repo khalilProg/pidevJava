@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,19 +37,29 @@ public class backTransfertController {
     @FXML private TableColumn<Transfert, String> colDateEnvoie;
     @FXML private TableColumn<Transfert, String> colStatus;
     @FXML private TableColumn<Transfert, Void> colActions;
+    @FXML private TextField txtSearch;
+    @FXML private ComboBox<String> comboStatus;
 
     private final TransfertService service = new TransfertService();
     private List<Transfert> list;
+    private final ObservableList<Transfert> masterData = FXCollections.observableArrayList();
+    private FilteredList<Transfert> filteredData;
 
     @FXML
     public void initialize() {
-        tableTransfert.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        colStatus.setMinWidth(170);
-        colStatus.setPrefWidth(170);
-        colActions.setMinWidth(230);
-        colActions.setPrefWidth(230);
+        // Initialize FilteredList
+        filteredData = new FilteredList<>(masterData, p -> true);
+        tableTransfert.setItems(filteredData);
 
-        colId.setCellValueFactory(param -> 
+        // Setup Filters
+        comboStatus.getItems().addAll("Tous les statuts", "En cours", "Reçu", "Annulé");
+        comboStatus.getSelectionModel().selectFirst();
+
+        // Listeners
+        txtSearch.textProperty().addListener((obs, oldVal, newVal) -> updateFilters());
+        comboStatus.valueProperty().addListener((obs, oldVal, newVal) -> updateFilters());
+
+        colId.setCellValueFactory(param ->
             new SimpleStringProperty("#" + param.getValue().getId())
         );
         colId.setStyle("-fx-font-weight: bold; -fx-alignment: center;");
@@ -60,15 +72,15 @@ public class backTransfertController {
                 return new SimpleStringProperty("N/A");
             }
         });
-        colDemande.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
+        colDemande.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
 
         colFrom.setCellFactory(column -> createMultilineCell("fromOrg"));
         colTo.setCellFactory(column -> createMultilineCell("toOrg"));
 
-        colQuantite.setCellValueFactory(param -> 
+        colQuantite.setCellValueFactory(param ->
             new SimpleStringProperty(param.getValue().getQuantite() + " UNITÉS")
         );
-        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
+        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
 
         colDateEnvoie.setCellValueFactory(param -> {
             LocalDate date = param.getValue().getDateEnvoie();
@@ -88,12 +100,9 @@ public class backTransfertController {
                         Transfert t = getTableRow().getItem();
                         Label badge = new Label();
                         badge.setStyle("-fx-padding: 4 12; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 11px;");
-                        badge.setMinWidth(146);
-                        badge.setPrefWidth(146);
-                        badge.setAlignment(Pos.CENTER);
-                        
+
                         String statusStr = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "EN_ATTENTE";
-                        
+
                         if (statusStr.equals("EN_COURS") || statusStr.equals("EN COURS")) {
                             badge.setText("🚚  EN COURS");
                             badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(241, 196, 15, 0.2); -fx-text-fill: #f1c40f; -fx-border-color: #f1c40f; -fx-border-radius: 12;");
@@ -130,13 +139,13 @@ public class backTransfertController {
                     Transfert t = getTableRow().getItem();
                     VBox box = new VBox(2);
                     box.setAlignment(Pos.CENTER_LEFT);
-                    
+
                     Label nameLbl = new Label();
-                    nameLbl.getStyleClass().add("admin-table-strong");
-                    
+                    nameLbl.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+
                     Label idLbl = new Label();
-                    idLbl.getStyleClass().add("admin-table-muted");
-                    
+                    idLbl.setStyle("-fx-text-fill: -muted; -fx-font-size: 10px;");
+
                     if (field.equals("fromOrg")) {
                         nameLbl.setText(t.getFromOrg() != null ? t.getFromOrg().toUpperCase() : "INCONNU");
                         idLbl.setText("ID: " + t.getFromOrgId());
@@ -144,7 +153,7 @@ public class backTransfertController {
                         nameLbl.setText(t.getToOrg() != null ? t.getToOrg().toUpperCase() : "INCONNU");
                         idLbl.setText("ID: " + t.getToOrgId());
                     }
-                    
+
                     box.getChildren().addAll(nameLbl, idLbl);
                     setGraphic(box);
                 }
@@ -155,10 +164,35 @@ public class backTransfertController {
     private void loadData() {
         try {
             list = service.recuperer();
-            tableTransfert.setItems(FXCollections.observableArrayList(list));
+            masterData.setAll(list);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateFilters() {
+        String searchText = (txtSearch.getText() == null) ? "" : txtSearch.getText().toLowerCase().trim();
+        String status = comboStatus.getValue();
+
+        filteredData.setPredicate(transfert -> {
+            // Search Match
+            boolean matchesSearch = searchText.isEmpty() ||
+                (transfert.getToOrg() != null && transfert.getToOrg().toLowerCase().contains(searchText)) ||
+                (transfert.getStatus() != null && transfert.getStatus().toLowerCase().contains(searchText)) ||
+                (String.valueOf(transfert.getId()).contains(searchText));
+
+            // Status Match
+            String mappedStatus = "";
+            if (status != null) {
+                if (status.equals("En cours")) mappedStatus = "EN_COURS";
+                else if (status.equals("Reçu")) mappedStatus = "RECU";
+                else if (status.equals("Annulé")) mappedStatus = "ANNULE";
+            }
+            boolean matchesStatus = (status == null || status.equals("Tous les statuts")) ||
+                (transfert.getStatus() != null && transfert.getStatus().equalsIgnoreCase(mappedStatus));
+
+            return matchesSearch && matchesStatus;
+        });
     }
 
     private void addActions() {
@@ -169,8 +203,8 @@ public class backTransfertController {
 
             {
                 btnDelete.getStyleClass().add("action-btn-delete");
-                btnAccept.getStyleClass().add("action-btn-edit");
-                btnReject.getStyleClass().add("action-btn-delete");
+                btnAccept.setStyle("-fx-background-color: rgba(46, 204, 113, 0.15); -fx-text-fill: #2ecc71; -fx-border-color: rgba(46, 204, 113, 0.3); -fx-border-radius: 4; -fx-font-weight: bold;");
+                btnReject.setStyle("-fx-background-color: rgba(231, 76, 60, 0.15); -fx-text-fill: #e74c3c; -fx-border-color: rgba(231, 76, 60, 0.3); -fx-border-radius: 4; -fx-font-weight: bold;");
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnDelete);
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnAccept);
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnReject);
@@ -192,7 +226,7 @@ public class backTransfertController {
 
                 btnReject.setOnAction(e -> {
                     Transfert t = getTableView().getItems().get(getIndex());
-                    handleUpdateStatus(t, "REFUSE");
+                    handleUpdateStatus(t, "REFUSEE");
                 });
             }
 
@@ -203,17 +237,17 @@ public class backTransfertController {
                     setGraphic(null);
                     return;
                 }
-                
+
                 Transfert t = getTableRow().getItem();
                 HBox actions = new HBox(8);
                 actions.setAlignment(Pos.CENTER_LEFT);
 
-                // Only show Accept/Reject if status is EN_COURS
-                String status = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "";
-                if (status.equals("EN_COURS") || status.equals("EN COURS")) {
+                // Show Accept/Reject if status is EN_COURS or EN_ATTENTE
+                String status = (t.getStatus() != null) ? t.getStatus().toUpperCase() : "EN_ATTENTE";
+                if (status.equals("EN_COURS") || status.equals("EN COURS") || status.equals("EN_ATTENTE") || status.equals("EN ATTENTE")) {
                     actions.getChildren().addAll(btnAccept, btnReject);
                 }
-                
+
                 actions.getChildren().add(btnDelete);
                 setGraphic(actions);
             }

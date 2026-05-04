@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +13,32 @@ import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import tn.esprit.entities.Commande;
 import tn.esprit.entities.Demande;
+import tn.esprit.services.CommandeService;
 import tn.esprit.services.DemandeService;
+import tn.esprit.services.BanqueService;
+import tn.esprit.services.StockService;
+import tn.esprit.entities.Stock;
+import tn.esprit.tools.SessionManager;
+import tn.esprit.entities.User;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.io.FileOutputStream;
 public class DemandeController {
 
     @FXML private TableView<Demande> tableDemande;
@@ -37,6 +55,18 @@ public class DemandeController {
     @FXML private TextField txtType;
     @FXML private TextField txtQuantite;
     @FXML private ComboBox<String> comboUrgence;
+    @FXML private TableView<Commande> tableCommande;
+
+    @FXML private TableColumn<Commande, String> colCmdId;
+    @FXML private TableColumn<Commande, String> colCmdClient;
+    @FXML private TableColumn<Commande, String> colCmdType;
+    @FXML private TableColumn<Commande, String> colCmdQte;
+    @FXML private TableColumn<Commande, String> colCmdStatus;
+    @FXML private TableColumn<Commande, Void> colCmdActions;
+    @FXML private VBox paneCommandes;
+
+    private final CommandeService commandeService = new CommandeService();
+    private ObservableList<Commande> commandes;
     private DemandeService service = new DemandeService();
 
     private ObservableList<Demande> list = FXCollections.observableArrayList();
@@ -62,6 +92,114 @@ public class DemandeController {
         loadData();
 
         tableDemande.setItems(list);
+        initCommandeTable();
+        loadCommandes();
+    }
+
+    private void loadCommandes() {
+        try {
+            User user = SessionManager.getCurrentUser();
+            if (user != null) {
+                BanqueService banqueService = new BanqueService();
+                tn.esprit.entities.Banque b = banqueService.getBanqueByUserId(user.getId());
+                if (b != null) {
+                    commandes = FXCollections.observableArrayList(commandeService.recupererByBanqueId(b.getId()));
+                    tableCommande.setItems(commandes);
+                }
+            } else {
+                commandes = FXCollections.observableArrayList(commandeService.recuperer());
+                tableCommande.setItems(commandes);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initCommandeTable() {
+        colCmdId.setCellValueFactory(c ->
+            new SimpleStringProperty("#" + c.getValue().getId())
+        );
+
+        colCmdClient.setCellValueFactory(c ->
+            new SimpleStringProperty("Client #" + c.getValue().getClientId())
+        );
+
+        colCmdType.setCellValueFactory(c ->
+            new SimpleStringProperty(c.getValue().getTypeSang())
+        );
+
+        colCmdQte.setCellValueFactory(c ->
+            new SimpleStringProperty(c.getValue().getQuantite() + " unités")
+        );
+
+        colCmdStatus.setCellValueFactory(c ->
+            new SimpleStringProperty(c.getValue().getStatus())
+        );
+
+        colCmdActions.setCellFactory(col -> new TableCell<>() {
+
+            private final Button btnValider = new Button("✔");
+            private final Button btnRefuser = new Button("✖");
+
+            {
+                btnValider.setOnAction(e -> updateStatus("VALIDEE"));
+                btnRefuser.setOnAction(e -> updateStatus("REFUSEE"));
+            }
+
+            private void updateStatus(String status) {
+                Commande cmd = getTableView().getItems().get(getIndex());
+
+                try {
+                    if ("VALIDEE".equals(status)) {
+                        StockService stockService = new StockService();
+                        Stock stock = stockService.getStockByOrg(cmd.getBanqueId(), "BANQUE", cmd.getTypeSang());
+
+                        if (stock == null || stock.getQuantite() < cmd.getQuantite()) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Stock Insuffisant");
+                            alert.setHeaderText("Erreur de validation");
+                            alert.setContentText("Le stock actuel (" + (stock != null ? stock.getQuantite() : 0) +
+                                " ml) est insuffisant pour valider cette commande.");
+                            alert.showAndWait();
+                            return;
+                        }
+
+                        // Déduire du stock
+                        stock.setQuantite(stock.getQuantite() - cmd.getQuantite());
+                        stock.setUpdatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
+                        stockService.modifier(stock);
+                    }
+
+                    cmd.setStatus(status);
+                    commandeService.modifier(cmd);
+                    tableCommande.refresh();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || getTableRow().getItem() == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                Commande cmd = getTableRow().getItem();
+
+                HBox box = new HBox(10);
+                box.setAlignment(Pos.CENTER);
+
+                String s = cmd.getStatus() == null ? "" : cmd.getStatus().trim().toUpperCase().replace(" ", "_");
+                if (s.isEmpty() || s.contains("ATTENTE")) {
+                    box.getChildren().addAll(btnValider, btnRefuser);
+                }
+
+                setGraphic(box);
+            }
+        });
     }
 
     public void loadData() {
@@ -195,6 +333,13 @@ public class DemandeController {
         }
     }
     @FXML
+    public void toggleCommandes() {
+        boolean isVisible = paneCommandes.isVisible();
+        paneCommandes.setVisible(!isVisible);
+        paneCommandes.setManaged(!isVisible);
+    }
+
+    @FXML
     public void goToDemande(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DemandeBackView.fxml"));
@@ -205,6 +350,61 @@ public class DemandeController {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void exportPDF() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enregistrer le PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
+        File file = fileChooser.showSaveDialog(tableDemande.getScene().getWindow());
+
+        if (file != null) {
+            try {
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(file));
+                document.open();
+
+                document.add(new Paragraph("Liste des Demandes"));
+                document.add(new Paragraph(" "));
+
+                PdfPTable pdfTable = new PdfPTable(6);
+                pdfTable.setWidthPercentage(100);
+
+                pdfTable.addCell("ID");
+                pdfTable.addCell("Banque");
+                pdfTable.addCell("Type");
+                pdfTable.addCell("Quantité");
+                pdfTable.addCell("Urgence");
+                pdfTable.addCell("Status");
+
+                for (Demande d : list) {
+                    pdfTable.addCell(String.valueOf(d.getId()));
+                    pdfTable.addCell(String.valueOf(d.getIdBanque()));
+                    pdfTable.addCell(d.getTypeSang() != null ? d.getTypeSang() : "");
+                    pdfTable.addCell(String.valueOf(d.getQuantite()));
+                    pdfTable.addCell(d.getUrgence() != null ? d.getUrgence() : "");
+                    pdfTable.addCell(d.getStatus() != null ? d.getStatus() : "");
+                }
+
+                document.add(pdfTable);
+                document.close();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succès");
+                alert.setHeaderText(null);
+                alert.setContentText("Exportation PDF réussie !");
+                alert.showAndWait();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Erreur lors de l'exportation PDF : " + e.getMessage());
+                alert.showAndWait();
+            }
         }
     }
 }

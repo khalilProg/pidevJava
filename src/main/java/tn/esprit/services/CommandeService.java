@@ -86,6 +86,13 @@ public class CommandeService implements IGeneralService<Commande> {
         ResultSet rs = ps.executeQuery();
         return mapCommandes(rs);
     }
+    public List<Commande> recupererByBanqueId(int banqueId) throws SQLException {
+        String sql = "SELECT * FROM commande WHERE banque_id = ?";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, banqueId);
+        ResultSet rs = ps.executeQuery();
+        return mapCommandes(rs);
+    }
 
     public Commande findByIdOrReference(String idOrReference, Integer clientId) throws SQLException {
         if (idOrReference == null || !idOrReference.matches("\\d+")) {

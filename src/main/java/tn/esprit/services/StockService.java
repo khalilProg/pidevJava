@@ -113,4 +113,25 @@ public class StockService implements IGeneralService<Stock> {
         if (rs.next()) return rs.getInt(1);
         return 0;
     }
+    public Stock getStockByOrg(int orgId, String orgType, String bloodType) throws SQLException {
+        String sql = "SELECT * FROM stock WHERE type_orgid=? AND type_org=? AND type_sang=?";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, orgId);
+        ps.setString(2, orgType);
+        ps.setString(3, bloodType);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Stock(
+                rs.getInt("id"),
+                rs.getInt("type_orgid"),
+                rs.getString("type_org"),
+                rs.getString("type_sang"),
+                rs.getInt("quantite"),
+                rs.getTimestamp("created_at"),
+                rs.getTimestamp("updated_at")
+            );
+        }
+        return null;
+    }
+
 }

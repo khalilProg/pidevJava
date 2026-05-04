@@ -1,6 +1,8 @@
 package tn.esprit.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,17 +34,36 @@ public class backDemandeController {
     @FXML private TableColumn<Demande, String> colStatus;
     @FXML private TableColumn<Demande, String> colDate;
     @FXML private TableColumn<Demande, Void> colActions;
+    @FXML private TextField txtSearch;
+    @FXML private ComboBox<String> comboUrgency;
+    @FXML private ComboBox<String> comboStatus;
 
     private DemandeService demandeService = new DemandeService();
     private TransfertService transfertService = new TransfertService();
 
     private List<Demande> list;
+    private final ObservableList<Demande> masterData = FXCollections.observableArrayList();
+    private FilteredList<Demande> filteredData;
 
     @FXML
     public void initialize() {
+        // Initialize FilteredList
+        filteredData = new FilteredList<>(masterData, p -> true);
+        tableDemande.setItems(filteredData);
+
+        // Setup Filters
+        comboUrgency.getItems().addAll("Toutes urgences", "URGENTE", "NORMALE");
+        comboStatus.getItems().addAll("Tous les statuts", "En attente", "Validée", "Refusée", "Annulée");
+        comboUrgency.getSelectionModel().selectFirst();
+        comboStatus.getSelectionModel().selectFirst();
+
+        // Listeners
+        txtSearch.textProperty().addListener((obs, oldVal, newVal) -> updateFilters());
+        comboUrgency.valueProperty().addListener((obs, oldVal, newVal) -> updateFilters());
+        comboStatus.valueProperty().addListener((obs, oldVal, newVal) -> updateFilters());
 
         // ID Formatting ("#12")
-        colId.setCellValueFactory(param -> 
+        colId.setCellValueFactory(param ->
             new SimpleStringProperty("#" + param.getValue().getId())
         );
         colId.setStyle("-fx-font-weight: bold; -fx-alignment: center;");
@@ -59,13 +80,13 @@ public class backDemandeController {
                         Demande d = getTableRow().getItem();
                         HBox box = new HBox(8);
                         box.setAlignment(Pos.CENTER_LEFT);
-                        
+
                         Label icon = new Label("🏛");
-                        icon.getStyleClass().add("admin-table-muted");
-                        
+                        icon.setStyle("-fx-text-fill: -muted; -fx-font-size: 16px;");
+
                         Label nameL = new Label();
-                        nameL.getStyleClass().add("admin-table-strong");
-                        
+                        nameL.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+
                         if (d.getIdBanque() == 1 || d.getIdBanque() == 0) {
                             nameL.setText("Hopital ariena");
                         } else {
@@ -80,16 +101,16 @@ public class backDemandeController {
         });
 
         // Type Sanguin Styling
-        colType.setCellValueFactory(param -> 
+        colType.setCellValueFactory(param ->
             new SimpleStringProperty(param.getValue().getTypeSang())
         );
         colType.setStyle("-fx-text-fill: #e63939; -fx-font-weight: 900; -fx-alignment: center-left;");
 
         // Quantite format ("50 UNITÉS")
-        colQuantite.setCellValueFactory(param -> 
+        colQuantite.setCellValueFactory(param ->
             new SimpleStringProperty(param.getValue().getQuantite() + " UNITÉS")
         );
-        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: -admin-table-strong;");
+        colQuantite.setStyle("-fx-font-weight: bold; -fx-alignment: center-left; -fx-text-fill: white;");
 
         // Urgence Badges
         colUrgence.setCellFactory(column -> {
@@ -104,9 +125,9 @@ public class backDemandeController {
                         Demande d = getTableRow().getItem();
                         Label badge = new Label();
                         badge.setStyle("-fx-padding: 4 12; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 11px;");
-                        
+
                         String u = (d.getUrgence() != null) ? d.getUrgence().toUpperCase() : "NORMALE";
-                        
+
                         if (u.equals("URGENTE")) {
                             badge.setText("⚠  URGENTE");
                             badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(231, 76, 60, 0.2); -fx-text-fill: #e74c3c; -fx-border-color: #e74c3c; -fx-border-radius: 12;");
@@ -135,9 +156,9 @@ public class backDemandeController {
                         Demande d = getTableRow().getItem();
                         Label badge = new Label();
                         badge.setStyle("-fx-padding: 4 12; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 11px;");
-                        
-                        String statusStr = (d.getStatus() != null) ? d.getStatus().toUpperCase() : "EN_ATTENTE";
-                        
+
+                        String statusStr = (d.getStatus() != null) ? d.getStatus().toUpperCase() : "En Attente";
+
                         if (statusStr.equals("VALIDEE") || statusStr.equals("CONFIRME")) {
                             badge.setText("✔  VALIDEE");
                             badge.setStyle(badge.getStyle() + "-fx-background-color: rgba(46, 204, 113, 0.2); -fx-text-fill: #2ecc71; -fx-border-color: #2ecc71; -fx-border-radius: 12;");
@@ -171,10 +192,40 @@ public class backDemandeController {
     private void loadData() {
         try {
             list = demandeService.recuperer();
-            tableDemande.setItems(FXCollections.observableArrayList(list));
+            masterData.setAll(list);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateFilters() {
+        String searchText = (txtSearch.getText() == null) ? "" : txtSearch.getText().toLowerCase().trim();
+        String urgency = comboUrgency.getValue();
+        String status = comboStatus.getValue();
+
+        filteredData.setPredicate(demande -> {
+            // Search Match
+            boolean matchesSearch = searchText.isEmpty() ||
+                (demande.getTypeSang() != null && demande.getTypeSang().toLowerCase().contains(searchText)) ||
+                (demande.getStatus() != null && demande.getStatus().toLowerCase().contains(searchText));
+
+            // Urgency Match
+            boolean matchesUrgency = (urgency == null || urgency.equals("Toutes urgences")) ||
+                (demande.getUrgence() != null && demande.getUrgence().equalsIgnoreCase(urgency));
+
+            // Status Match
+            String mappedStatus = "";
+            if (status != null) {
+                if (status.equals("En attente")) mappedStatus = "EN_ATTENTE";
+                else if (status.equals("Validée")) mappedStatus = "VALIDEE";
+                else if (status.equals("Refusée")) mappedStatus = "REFUSEE";
+                else if (status.equals("Annulée")) mappedStatus = "ANNULEE";
+            }
+            boolean matchesStatus = (status == null || status.equals("Tous les statuts")) ||
+                (demande.getStatus() != null && demande.getStatus().equalsIgnoreCase(mappedStatus));
+
+            return matchesSearch && matchesUrgency && matchesStatus;
+        });
     }
 
     private void addActions() {
@@ -185,8 +236,8 @@ public class backDemandeController {
             private final Button btnDelete = new Button("🗑");
 
             {
-                btnValider.getStyleClass().add("action-btn-edit");
-                btnRefuser.getStyleClass().add("action-btn-delete");
+                btnValider.setStyle("-fx-background-color: rgba(46, 204, 113, 0.15); -fx-text-fill: #2ecc71; -fx-border-color: rgba(46, 204, 113, 0.3); -fx-border-radius: 4; -fx-font-weight: bold;");
+                btnRefuser.setStyle("-fx-background-color: rgba(231, 76, 60, 0.15); -fx-text-fill: #e74c3c; -fx-border-color: rgba(231, 76, 60, 0.3); -fx-border-radius: 4; -fx-font-weight: bold;");
                 btnDelete.getStyleClass().add("action-btn-delete");
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnValider);
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnRefuser);
@@ -237,17 +288,18 @@ public class backDemandeController {
                     setGraphic(null);
                     return;
                 }
-                
+
                 Demande d = getTableRow().getItem();
                 HBox actions = new HBox(8);
                 actions.setAlignment(Pos.CENTER_LEFT);
-                
-                if ("EN_ATTENTE".equalsIgnoreCase(d.getStatus())) {
+
+                String status = (d.getStatus() != null) ? d.getStatus().toUpperCase() : "EN_ATTENTE";
+                if (status.isEmpty() || status.equals("EN_ATTENTE") || status.equals("EN ATTENTE")) {
                     actions.getChildren().addAll(btnValider, btnRefuser);
-                } else {
-                    actions.getChildren().addAll(btnDelete);
                 }
                 
+                actions.getChildren().add(btnDelete);
+
                 setGraphic(actions);
             }
         });

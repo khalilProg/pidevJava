@@ -30,7 +30,7 @@ public class AgentBanqueViewDemandeController {
     public void initData(Demande d) {
         this.currentDemande = d;
         lblTitle.setText("Demande #" + d.getId());
-        
+
         if (d.getCreatedAt() != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy 'à' HH:mm");
             lblCreatedAt.setText("Créée le " + d.getCreatedAt().format(formatter));
@@ -40,7 +40,7 @@ public class AgentBanqueViewDemandeController {
         lblType.setText(d.getTypeSang());
         lblQuantite.setText(String.valueOf(d.getQuantite()));
         lblUrgence.setText(d.getUrgence());
-        
+
         // Fetch bank name
         try {
             List<Banque> banques = banqueService.recuperer();
@@ -62,10 +62,10 @@ public class AgentBanqueViewDemandeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AgentBanqueEditDemande.fxml"));
             Parent root = loader.load();
-            
+
             AgentBanqueEditDemandeController controller = loader.getController();
             controller.initData(currentDemande);
-            
+
             AgentBanqueBaseController.getInstance().loadView(root);
         } catch (java.io.IOException e) {
             e.printStackTrace();

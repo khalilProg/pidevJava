@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import tn.esprit.entities.Demande;
 import tn.esprit.entities.Transfert;
 import tn.esprit.services.DemandeService;
+import tn.esprit.services.EmailService;
 import tn.esprit.services.TransfertService;
 import tn.esprit.services.BanqueService;
 import tn.esprit.entities.Banque;
@@ -23,9 +24,11 @@ public class ValidateDemandeController {
     @FXML private Label errorEnvoi, errorReception;
 
     private Demande selectedDemande;
+    private Banque selectedBanque;
     private final DemandeService demandeService = new DemandeService();
     private final TransfertService transfertService = new TransfertService();
     private final BanqueService banqueService = new BanqueService();
+    private final EmailService emailService = new EmailService();
 
     @FXML
     public void initialize() {
@@ -38,12 +41,13 @@ public class ValidateDemandeController {
         lblId.setText("#" + d.getId());
         lblType.setText(d.getTypeSang());
         lblQuantite.setText(d.getQuantite() + " UNITÉS");
-        
-        // Fetch bank name
+
+        // Fetch bank name and cache the Banque object
         try {
             for (Banque b : banqueService.recuperer()) {
                 if (b.getId() == d.getBanque()) {
                     lblBanque.setText(b.getNom());
+                    this.selectedBanque = b; // cache for email
                     break;
                 }
             }
@@ -83,6 +87,24 @@ public class ValidateDemandeController {
             t.setStock(1);
 
             transfertService.ajouter(t);
+
+            // 3. Envoyer l'email de notification au responsable de la banque
+            if (selectedBanque != null && selectedBanque.getUser() != null) {
+                String userEmail = selectedBanque.getUser().getEmail();
+                String userName = selectedBanque.getUser().getPrenom() + " " + selectedBanque.getUser().getNom();
+                String banqueName = selectedBanque.getNom();
+                String dateEnvoiStr = dateEnvoi.getValue() != null ? dateEnvoi.getValue().toString() : "N/A";
+                String dateRecepStr = dateReception.getValue() != null ? dateReception.getValue().toString() : "N/A";
+
+
+                new Thread(() -> emailService.sendDemandeValideeEmail(
+                    userEmail, userName, banqueName,
+                    selectedDemande.getId(), selectedDemande.getTypeSang(),
+                    selectedDemande.getQuantite(), dateEnvoiStr, dateRecepStr
+                )).start();
+
+                System.out.println("Email de notification envoyé à : " + userEmail);
+            }
 
             System.out.println("Demande validée et Transfert créé !");
             handleBack();

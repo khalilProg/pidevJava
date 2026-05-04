@@ -16,7 +16,7 @@ import tn.esprit.entities.Transfert;
 import tn.esprit.services.TransfertService;
 
 public class addTrasnfertController {
-    
+
     @FXML private TextField txtFrom;
     @FXML private TextField txtTo;
     @FXML private TextField txtQuantite;
@@ -26,7 +26,7 @@ public class addTrasnfertController {
 
     @FXML private ComboBox<String> comboStatus;
     private Demande demande;
-    
+
     private final TransfertService service = new TransfertService();
 
     @FXML
@@ -50,7 +50,7 @@ public class addTrasnfertController {
             t.setQuantite(Integer.parseInt(txtQuantite.getText()));
 
             // Optional or hardcoded display strings for organizations
-            t.setFromOrg("BloodLink Central"); 
+            t.setFromOrg("BloodLink Central");
             t.setToOrg("Banque " + txtTo.getText());
 
             if (dateEnvoie.getValue() != null) t.setDateEnvoie(dateEnvoie.getValue());
@@ -82,7 +82,7 @@ public class addTrasnfertController {
 
         if (txtFrom.getText() == null || txtFrom.getText().trim().isEmpty()) errors.append("- ID Origine obligatoire\n");
         if (txtTo.getText() == null || txtTo.getText().trim().isEmpty()) errors.append("- ID Destination obligatoire\n");
-        
+
         if (txtQuantite.getText() == null || txtQuantite.getText().trim().isEmpty()) {
             errors.append("- Quantité obligatoire\n");
         } else {
@@ -94,7 +94,7 @@ public class addTrasnfertController {
                 errors.append("- Quantité invalide\n");
             }
         }
-        
+
         if (dateEnvoie.getValue() == null) errors.append("- Date d'envoi obligatoire\n");
         if (dateReception.getValue() == null) errors.append("- Date de réception obligatoire\n");
         if (comboStatus.getValue() == null) errors.append("- Statut obligatoire\n");
@@ -113,7 +113,7 @@ public class addTrasnfertController {
     private void fermer(ActionEvent event) {
         retour(event);
     }
-    
+
     private void retour(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/TransfertBackView.fxml"));

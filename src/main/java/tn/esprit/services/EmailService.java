@@ -4,6 +4,7 @@ import tn.esprit.entities.Commande;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -101,15 +102,21 @@ public class EmailService {
     }
 
     private boolean sendHtmlEmail(String toEmail, String subject, String htmlContent, String debugDetails) {
+        return sendHtmlEmail(toEmail, subject, htmlContent, debugDetails, null, null);
+    }
+
+    private boolean sendHtmlEmail(String toEmail, String subject, String htmlContent, String debugDetails, String customUser, String customPass) {
         if (toEmail == null || toEmail.isBlank()) {
             System.err.println("Email could not be sent: empty recipient.");
             return false;
         }
 
-        String smtpUser = getConfig("BLOODLINK_SMTP_USER", "bloodlink.smtp.user", MAILER_CONFIG.user);
-        String smtpPassword = getConfig("BLOODLINK_SMTP_PASSWORD", "bloodlink.smtp.password", MAILER_CONFIG.password);
-        if (smtpPassword.isBlank()) {
-            System.err.println("Email could not be sent: missing BLOODLINK_SMTP_PASSWORD, -Dbloodlink.smtp.password, or MAILER_DSN.");
+        String smtpUser = customUser != null ? customUser : getConfig("BLOODLINK_SMTP_USER", "bloodlink.smtp.user", MAILER_CONFIG.user);
+        String smtpPassword = customPass != null ? customPass : getConfig("BLOODLINK_SMTP_PASSWORD", "bloodlink.smtp.password", MAILER_CONFIG.password);
+        String fromEmail = customUser != null ? customUser : getFromEmail();
+
+        if (smtpPassword == null || smtpPassword.isBlank()) {
+            System.err.println("Email could not be sent: missing SMTP password.");
             return false;
         }
 
@@ -122,17 +129,17 @@ public class EmailService {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(getFromEmail()));
+            message.setFrom(new InternetAddress(fromEmail, "BloodLink Support"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(subject);
             message.setContent(htmlContent, "text/html; charset=utf-8");
 
             Transport.send(message);
-            System.out.println("Email sent successfully to " + toEmail);
+            System.out.println("Email sent successfully to " + toEmail + (customUser != null ? " via custom account" : ""));
             return true;
-        } catch (MessagingException e) {
+        } catch (MessagingException | java.io.UnsupportedEncodingException e) {
             e.printStackTrace();
-            System.err.println("Email could not be sent.");
+            System.err.println("Email could not be sent: " + e.getMessage());
             return false;
         }
     }
@@ -147,6 +154,7 @@ public class EmailService {
         props.put("mail.smtp.connectiontimeout", "10000");
         props.put("mail.smtp.timeout", "10000");
         props.put("mail.smtp.writetimeout", "10000");
+        props.put("mail.debug", "true"); // Enable debugging to see SMTP log in console
         return props;
     }
 
@@ -328,6 +336,62 @@ public class EmailService {
                 + "</td><td style='font-size:14px;color:#fff;font-weight:700;'>"
                 + value
                 + "</td></tr>";
+    }
+    public boolean sendDemandeValideeEmail(String toEmail, String userName, String banqueName,
+                                           int demandeId, String typeSang, int quantite,
+                                           String dateEnvoi, String dateReception) {
+        String htmlContent = buildDemandeValideeHtml(userName, banqueName, demandeId, typeSang, quantite, dateEnvoi, dateReception);
+        String debug = "DEMANDE VALIDEE: #" + demandeId
+            + "\nTYPE SANG: " + typeSang
+            + "\nQUANTITE: " + quantite + " ml"
+            + "\nBANQUE: " + banqueName
+            + "\nDATE ENVOI: " + dateEnvoi
+            + "\nDATE RECEPTION: " + dateReception;
+        return sendHtmlEmail(toEmail, "BloodLink ✔ Votre demande a été validée", htmlContent, debug,
+            "ramysnoussi@gmail.com", "");
+    }
+
+    private String buildDemandeValideeHtml(String userName, String banqueName, int demandeId,
+                                           String typeSang, int quantite, String dateEnvoi, String dateReception) {
+        String safeName = escapeHtml(userName == null || userName.isBlank() ? "Utilisateur" : userName);
+        String safeBanque = escapeHtml(banqueName == null || banqueName.isBlank() ? "-" : banqueName);
+        String safeType = escapeHtml(typeSang == null ? "-" : typeSang);
+
+        return "<!doctype html>"
+            + "<html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
+            + "<title>Demande Validée</title></head>"
+            + "<body style='margin:0;padding:0;background:#0b0f14;font-family:Arial,Helvetica,sans-serif;color:#ffffff;'>"
+            + "<table role='presentation' width='100%' cellpadding='0' cellspacing='0' style='background:#0b0f14;padding:32px 12px;'><tr><td align='center'>"
+            + "<table role='presentation' width='620' cellpadding='0' cellspacing='0' style='width:620px;max-width:620px;'>"
+            // Header
+            + "<tr><td style='background:#e63939;border-radius:14px 14px 0 0;padding:28px 30px;text-align:center;'>"
+            + "<div style='font-size:26px;font-weight:900;letter-spacing:2px;color:white;'>&#128149; BLOODLINK</div>"
+            + "<div style='font-size:13px;color:rgba(255,255,255,0.85);margin-top:6px;'>Notification Officielle</div>"
+            + "</td></tr>"
+            // Body
+            + "<tr><td style='background:#111111;padding:30px;border:1px solid #222222;'>"
+            + "<div style='display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(46,204,113,0.15);border:1px solid #2ecc71;color:#2ecc71;font-weight:800;font-size:12px;letter-spacing:1px;margin-bottom:20px;'>"
+            + "&#10004;  DEMANDE VALIDÉE</div>"
+            + "<p style='font-size:16px;line-height:1.7;margin:0 0 14px 0;'>Bonjour <strong>" + safeName + "</strong>,</p>"
+            + "<p style='font-size:14px;color:#cccccc;line-height:1.7;margin:0 0 22px 0;'>Bonne nouvelle ! Votre demande de sang <strong>#" + demandeId + "</strong> a été validée et un transfert a été créé pour votre organisation.</p>"
+            // Info table
+            + "<table role='presentation' width='100%' cellpadding='0' cellspacing='0' style='border-collapse:separate;border-spacing:0 8px;margin-bottom:22px;'>"
+            + infoRow("Banque", safeBanque)
+            + infoRow("Type Sanguin", "<span style='color:#e63939;font-weight:900;'>" + safeType + "</span>")
+            + infoRow("Quantité", quantite + " ml")
+            + infoRow("Date d'envoi", escapeHtml(dateEnvoi))
+            + infoRow("Date de réception prévue", escapeHtml(dateReception))
+            + "</table>"
+            + "<div style='background:#1a1a1a;border-radius:10px;padding:15px;font-size:13px;color:#aaaaaa;border-left:4px solid #e63939;'>"
+            + "Suivez l'état de votre transfert en vous connectant à votre espace BloodLink."
+            + "</div>"
+            + "</td></tr>"
+            // Footer
+            + "<tr><td style='background:#0b0f14;border-radius:0 0 14px 14px;padding:20px 30px;text-align:center;'>"
+            + "<p style='color:#555555;font-size:12px;margin:0;'>Si vous n'êtes pas concerné par cette demande, ignorez cet email.<br>&copy; "
+            + Year.now().getValue() + " BLOODLINK - Notifications automatiques</p>"
+            + "</td></tr>"
+            + "</table></td></tr></table></body></html>";
     }
 
     private String escapeHtml(String value) {

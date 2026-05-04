@@ -89,7 +89,7 @@ public class addDemandeController {
 
             @Override
             public Banque fromString(String string) {
-                return null; 
+                return null;
             }
         });
     }
@@ -101,7 +101,7 @@ public class addDemandeController {
         try {
             Demande d = isEditMode ? demandeToEdit : new Demande();
             Banque selectedBanque = cbBanque.getValue();
-            
+
             d.setBanque(selectedBanque.getId());
             d.setTypeSang(comboType.getValue());
             d.setQuantite(Integer.parseInt(txtQuantite.getText()));
@@ -112,7 +112,7 @@ public class addDemandeController {
                 demandeService.modifier(d);
                 System.out.println("Demande modifiée avec succès");
             } else {
-                d.setStatus("EN_ATTENTE"); 
+                d.setStatus("EN_ATTENTE");
                 d.setCreatedAt(LocalDateTime.now());
                 demandeService.ajouter(d);
                 System.out.println("Demande créée avec succès (En Attente)");

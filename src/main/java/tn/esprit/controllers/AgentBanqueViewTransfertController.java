@@ -11,15 +11,15 @@ public class AgentBanqueViewTransfertController {
     @FXML private Label lblTitle;
     @FXML private Label lblCreatedAt;
     @FXML private Label lblStatusTop;
-    
+
     @FXML private Label lblOrigine;
     @FXML private Label lblOrigineId;
-    
+
     @FXML private Label lblFlowQuantite;
-    
+
     @FXML private Label lblDestination;
     @FXML private Label lblDestinationId;
-    
+
     @FXML private Label lblDemandeLiee;
     @FXML private Label lblBloodType;
     @FXML private Label lblDateEnvoi;
@@ -27,7 +27,7 @@ public class AgentBanqueViewTransfertController {
 
     public void initData(Transfert t) {
         lblTitle.setText("Transfert #" + t.getId());
-        
+
         DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy 'à' HH:mm");
         if (t.getCreatedAt() != null) {
             lblCreatedAt.setText("Enregistré le " + t.getCreatedAt().format(dtFormatter));

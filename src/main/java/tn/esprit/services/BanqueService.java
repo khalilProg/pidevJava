@@ -81,23 +81,69 @@ public class BanqueService implements IGeneralService<Banque> {
 
     @Override
     public List<Banque> recuperer() throws SQLException {
-        String sql = "SELECT id, nom, adresse, telephone FROM banque";
+
+        String sql = "SELECT b.id, b.nom, b.adresse, b.telephone, " +
+            "u.id AS user_id, u.email, u.nom AS u_nom, u.prenom, u.password, u.role, u.telephone AS u_tel " +
+            "FROM banque b JOIN user u ON b.user_id = u.id";
+
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(sql);
+
         List<Banque> banques = new ArrayList<>();
+
         while (rs.next()) {
-            Banque b = new Banque(
-                    rs.getInt("id"),
-                    rs.getString("nom"),
-                    rs.getString("adresse"),
-                    rs.getString("telephone"),
-                    null
+
+            User u = new User(
+                rs.getInt("user_id"),   // ✅ OK maintenant
+                rs.getString("email"),
+                rs.getString("u_nom"),
+                rs.getString("prenom"),
+                rs.getString("password"),
+                rs.getString("role"),
+                rs.getString("u_tel")
             );
+
+            Banque b = new Banque(
+                rs.getInt("id"),        // ✅ ID BANQUE CORRECT
+                rs.getString("nom"),
+                rs.getString("adresse"),
+                rs.getString("telephone"),
+                u
+            );
+
             banques.add(b);
         }
+
         return banques;
     }
 
+    public Banque getBanqueByUserId(int userId) throws SQLException {
+        String sql = "SELECT b.id, b.nom, b.adresse, b.telephone, " +
+            "u.id AS user_id, u.email, u.nom AS u_nom, u.prenom, u.password, u.role, u.telephone AS u_tel " +
+            "FROM banque b JOIN user u ON b.user_id = u.id WHERE b.user_id = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setInt(1, userId);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            User u = new User(
+                rs.getInt("user_id"),
+                rs.getString("email"),
+                rs.getString("u_nom"),
+                rs.getString("prenom"),
+                rs.getString("password"),
+                rs.getString("role"),
+                rs.getString("u_tel")
+            );
+            return new Banque(
+                rs.getInt("id"),
+                rs.getString("nom"),
+                rs.getString("adresse"),
+                rs.getString("telephone"),
+                u
+            );
+        }
+        return null;
+    }
     public Banque getById(int id) throws SQLException {
         String sql = "SELECT id, nom, adresse, telephone FROM banque WHERE id = ?";
         PreparedStatement pst = cn.prepareStatement(sql);
@@ -107,11 +153,11 @@ public class BanqueService implements IGeneralService<Banque> {
             return null;
         }
         return new Banque(
-                rs.getInt("id"),
-                rs.getString("nom"),
-                rs.getString("adresse"),
-                rs.getString("telephone"),
-                null
+            rs.getInt("id"),
+            rs.getString("nom"),
+            rs.getString("adresse"),
+            rs.getString("telephone"),
+            null
         );
     }
 }
