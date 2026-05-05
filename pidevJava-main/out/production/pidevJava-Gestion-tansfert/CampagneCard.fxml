@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.SVGPath?>
+<AnchorPane maxWidth="400.0" prefWidth="380.0" styleClass="card" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CampagneCard">
+   <children>
+      <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="campagne-card" stylesheets="@styleFront.css">
+         <children>
+            <VBox spacing="8.0" style="-fx-padding: 20 20 0 20;">
+               <children>
+                  <Label fx:id="campaignName" styleClass="card-title" text="Nom de la Campagne" wrapText="true" />
+                  <Label fx:id="campaignDates" styleClass="card-subtitle" text="📅 22/04/2026 - 30/04/2026" textFill="#888888" />
+               </children>
+            </VBox>
+            
+            <VBox spacing="10.0" VBox.vgrow="ALWAYS" style="-fx-padding: 0 20 0 20;">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <Label style="-fx-text-fill: #FF3E3E; -fx-font-weight: bold;" text="🩸 " />
+                        <Label fx:id="bloodTypes" styleClass="card-subtitle" text="Groupes: A+, O-" textFill="#FF3E3E" style="-fx-font-weight: bold;" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="campaignDescription" styleClass="card-description" text="Description de la campagne..." textFill="#CCCCCC" wrapText="true" />
+               </children>
+            </VBox>
+
+            <VBox alignment="CENTER" style="-fx-padding: 0 20 20 20;">
+               <children>
+                  <Button fx:id="participateButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#openQuestionnaire" styleClass="btn-participate-full" text="PARTICIPER →" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

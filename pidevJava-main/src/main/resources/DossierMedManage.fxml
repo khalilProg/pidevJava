@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefWidth="600.0" prefHeight="750.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.DossierMedManageController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
+    <VBox alignment="CENTER">
+        <VBox maxWidth="520" spacing="20" styleClass="form-card">
+            <padding>
+                <Insets bottom="35" left="40" right="40" top="35" />
+            </padding>
+
+            <VBox spacing="5">
+                <Label styleClass="ai-title" text="CLINICAL OVERRIDE TERMINAL" />
+                <Label styleClass="stat-card-title" text="Edit Patient Biological Data" />
+            </VBox>
+
+            <Separator style="-fx-opacity: 0.1;" />
+
+            <GridPane hgap="20" vgap="15">
+                <!-- Identity Group -->
+                <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label styleClass="form-label" text="GIVEN NAME" />
+                    <TextField fx:id="prenomField" styleClass="dark-input" />
+                </VBox>
+                <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label styleClass="form-label" text="FAMILY NAME" />
+                    <TextField fx:id="nomField" styleClass="dark-input" />
+                </VBox>
+
+                <!-- Clinical Measurements (Unlocked for modification) -->
+                <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="HEIGHT (cm)" />
+                    <TextField fx:id="tailleField" styleClass="dark-input" />
+                </VBox>
+                <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="WEIGHT (kg)" />
+                    <TextField fx:id="poidField" styleClass="dark-input" />
+                </VBox>
+
+                <!-- Biometric Type & Temperature -->
+                <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label styleClass="form-label" text="BLOOD TYPE" />
+                    <TextField fx:id="bloodTypeField" styleClass="dark-input" />
+                </VBox>
+                <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label styleClass="form-label" text="BODY TEMP (°C)" />
+                    <TextField fx:id="tempField" styleClass="dark-input" />
+                </VBox>
+
+                <!-- Demographics -->
+                <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <Label styleClass="form-label" text="AGE" />
+                    <TextField fx:id="ageField" styleClass="dark-input" />
+                </VBox>
+                <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <Label styleClass="form-label" text="GENDER" />
+                    <TextField fx:id="sexeField" styleClass="dark-input" />
+                </VBox>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="SOMETIMES" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <VBox spacing="12">
+                <Button maxWidth="Infinity" onAction="#handleUpdateFolder" styleClass="btn-prime-home" text="Confirm Biometric Update" />
+                <Button maxWidth="Infinity" onAction="#handleDeleteFolder" styleClass="btn-outline-red" text="Eradicate Record" />
+                <!-- Fixed: Removed variant="link" and used simple CSS text-fill -->
+                <Button maxWidth="Infinity" onAction="#closeWindow" style="-fx-text-fill: #888; -fx-background-color: transparent;" text="Discard Changes" />
+            </VBox>
+        </VBox>
+    </VBox>
+</StackPane>
