@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueDemandeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueTransfertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewDemandeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewTransfertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/DemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/DemandeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ValidateDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ValidateDemandeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addDemandeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addTrasnfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addTrasnfertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backDemandeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backTransfertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/BanqueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/BanqueService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CommandeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/MyDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/MyDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueAddDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueAddDemande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueDemande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueEditDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueEditDemande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueTransfert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewDemande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewTransfert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AjoutDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjoutDemande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/agent_banque.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/agent_banque.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="209" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Rami496"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/khalilProg/pidevJava.git",
+    "accountId": "49405b2c-6048-439c-b11b-712d64ecce98"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="$PROJECT_DIR$/../../../../xampp/php/php.exe">
+    <include_path>
+      <path value="$PROJECT_DIR$/Pidev/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/clock" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/runtime" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/asset-mapper" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/password-hasher" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/flex" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/web-link" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/stimulus-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/polyfill-php84" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/monolog-bridge" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/debug-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/doctrine-messenger" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/messenger" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/notifier" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/ux-turbo" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/composer" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/Pidev/vendor/twig/extra-bundle" />
+    </include_path>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="3C8RHgivrClWrfNIPWABBskiPt9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Launcher.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.MainFx.executor": "Run",
+    "Application.UserMain.executor": "Run",
+    "Application.banqueMain.executor": "Run",
+    "Maven.bloodlink [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ramys/integrationfinal/pidevJava",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rabii\Desktop\Pidev\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-24.0.2+12-54" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-24.0.2+12-54" />
+      <option name="MAIN_CLASS_NAME" value="tn.esprit.mains.Main" />
+      <module name="bloodlink" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tn.esprit.mains.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainFx" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="jbr-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="tn.esprit.mains.MainFx" />
+      <module name="bloodlink" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tn.esprit.mains.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Launcher" />
+      <item itemvalue="Application.MainFx" />
+      <item itemvalue="Application.Main" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MainFx" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="" />
+      <created>1775765124868</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1775765124868</updated>
+      <workItem from="1775765126006" duration="2958000" />
+      <workItem from="1776093865325" duration="1465000" />
+      <workItem from="1776095445291" duration="112000" />
+      <workItem from="1776095565696" duration="109000" />
+      <workItem from="1776095731660" duration="24000" />
+      <workItem from="1776095766551" duration="17000" />
+      <workItem from="1776095826259" duration="51000" />
+      <workItem from="1776095885470" duration="36000" />
+      <workItem from="1776095931598" duration="40000" />
+      <workItem from="1776095989533" duration="12000" />
+      <workItem from="1776096032677" duration="944000" />
+      <workItem from="1776098229401" duration="4590000" />
+      <workItem from="1776341866653" duration="1888000" />
+      <workItem from="1776427889569" duration="2290000" />
+      <workItem from="1776432973019" duration="312000" />
+      <workItem from="1776433299631" duration="43000" />
+      <workItem from="1776433349616" duration="569000" />
+      <workItem from="1776433928856" duration="337000" />
+      <workItem from="1776434276636" duration="5827000" />
+      <workItem from="1776440265617" duration="2163000" />
+      <workItem from="1776848561012" duration="11088000" />
+      <workItem from="1776867199095" duration="4509000" />
+      <workItem from="1776882364885" duration="4410000" />
+      <workItem from="1776892859383" duration="3046000" />
+      <workItem from="1776904304984" duration="7270000" />
+      <workItem from="1776912083110" duration="1342000" />
+      <workItem from="1776933316531" duration="2073000" />
+      <workItem from="1776935772181" duration="2539000" />
+      <workItem from="1776949164338" duration="778000" />
+      <workItem from="1777133076527" duration="1325000" />
+      <workItem from="1777167006562" duration="653000" />
+      <workItem from="1777248164648" duration="3342000" />
+      <workItem from="1777461694085" duration="3148000" />
+      <workItem from="1777468414653" duration="3003000" />
+      <workItem from="1777552794251" duration="1940000" />
+      <workItem from="1777805433401" duration="2300000" />
+      <workItem from="1777807858470" duration="18000" />
+      <workItem from="1777808242842" duration="4691000" />
+      <workItem from="1777812943897" duration="911000" />
+      <workItem from="1777813864104" duration="3992000" />
+      <workItem from="1777817873038" duration="2281000" />
+      <workItem from="1777838130518" duration="2031000" />
+      <workItem from="1777893939075" duration="6315000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/bloodlink$MainFx.ic" NAME="MainFx Coverage Results" MODIFIED="1776098931207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>tn.esprit.mains.*</FILTER>
+    </SUITE>
+  </component>
+</project>

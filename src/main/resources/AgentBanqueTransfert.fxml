@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.geometry.Insets?>
+
+<VBox stylesheets="@agent_banque.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.controllers.AgentBanqueTransfertController" spacing="40"
+      styleClass="main-content" style="-fx-padding: 40 50;">
+
+    <!-- Top Header -->
+    <HBox alignment="CENTER_LEFT">
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label text="BLOODLINK" style="-fx-text-fill: #e74c3c; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <SVGPath content="M19 4h-4V2H9v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7-2h4v2h-4V2zM7 10h10v2H7v-2zm0 4h10v2H7v-2z" fill="#E53935" scaleX="1.3" scaleY="1.3"/>
+                <Label text="Transferts" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;"/>
+            </HBox>
+            <Label text="Suivez les transferts de sang entre les organisations." style="-fx-text-fill: #888888; -fx-font-size: 14px;"/>
+        </VBox>
+        <HBox alignment="CENTER_RIGHT" spacing="12">
+            <Button text="📗 Excel" styleClass="btn-secondary" onAction="#handleExportExcel" style="-fx-border-color: #28a745; -fx-text-fill: #28a745;"/>
+            <Button text="📊 Stats" styleClass="btn-secondary" onAction="#showStats" style="-fx-border-color: #00bcd4; -fx-text-fill: #00bcd4;"/>
+        </HBox>
+    </HBox>
+
+    <!-- Main Glass Card Container -->
+    <VBox styleClass="glass-card" spacing="20" VBox.vgrow="ALWAYS">
+
+        <!-- Filter Bar -->
+        <HBox spacing="15" alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" spacing="10" prefWidth="400" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 10;">
+                <Label text="🔍" style="-fx-text-fill: rgba(255,255,255,0.5);"/>
+                <TextField fx:id="txtSearch" promptText="Rechercher par destination, statut..." styleClass="transparent-input" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="comboStatusFilter" promptText="Tous les statuts" styleClass="filter-btn" prefWidth="250"/>
+        </HBox>
+
+        <!-- Table Container -->
+        <VBox fx:id="tableContainer" VBox.vgrow="ALWAYS" spacing="10">
+            <HBox alignment="CENTER_LEFT" style="-fx-border-color: rgba(255,255,255,0.08); -fx-border-width: 0 0 1 0; -fx-padding: 0 0 10 0;">
+                <Label text="LISTE DES TRANSFERTS" style="-fx-text-fill: rgba(255,255,255,0.65); -fx-font-weight: 800; -fx-font-size: 11px;"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblCount" text="0 transfert(s)" style="-fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+            </HBox>
+            <ScrollPane fitToWidth="true" styleClass="dark-scroll-pane" VBox.vgrow="ALWAYS">
+                <VBox fx:id="cardsContainer" spacing="12" style="-fx-padding: 5 15 20 0;" />
+            </ScrollPane>
+        </VBox>
+    </VBox>
+
+</VBox>

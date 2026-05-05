@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.UpdateRdvAdmin">
+   <!-- Sidebar -->
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="25.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER LE RENDEZ-VOUS" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Ajustement administratif de la date et de l'entité de collecte." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+         </HBox>
+
+         <VBox styleClass="glass-card" spacing="25.0" VBox.vgrow="ALWAYS">
+            
+            <!-- Date -->
+            <VBox spacing="8.0">
+                <Label text="DATE DU RENDEZ-VOUS" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: 800;" />
+                <DatePicker styleClass="dark-field" fx:id="dateRdvPicker" prefWidth="500.0" />
+                <Text fx:id="dateError" fill="#FF3E3E" visible="false" style="-fx-font-size: 11px;" />
+            </VBox>
+
+            <!-- Time -->
+            <VBox spacing="8.0">
+                <Label text="HEURE" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: 800;" />
+                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                    <Spinner styleClass="dark-field" fx:id="hourSpinner" prefWidth="80.0" />
+                    <Label text="h" style="-fx-text-fill: -muted; -fx-font-weight: bold;" />
+                    <Spinner styleClass="dark-field" fx:id="minuteSpinner" prefWidth="80.0" />
+                    <Label text="m" style="-fx-text-fill: -muted; -fx-font-weight: bold;" />
+                </HBox>
+                <Text fx:id="timeError" fill="#FF3E3E" visible="false" style="-fx-font-size: 11px;" />
+            </VBox>
+
+            <!-- Entite -->
+            <VBox spacing="8.0">
+                <Label text="ENTITÉ DE COLLECTE" style="-fx-text-fill: -muted; -fx-font-size: 11px; -fx-font-weight: 800;" />
+                <ComboBox styleClass="dark-combo" fx:id="entiteCombo" maxWidth="1.7976931348623157E308" />
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Buttons -->
+            <HBox spacing="15.0" alignment="CENTER_RIGHT">
+                <Button styleClass="cancel-button" fx:id="annulerBtn" text="ANNULER" onAction="#handleAnnuler" />
+                <Button fx:id="confirmerBtn" text="CONFIRMER ✔" onAction="#handleConfirmer" styleClass="button-primary" />
+            </HBox>
+         </VBox>
+         
+      </VBox>
+   </center>
+</BorderPane>

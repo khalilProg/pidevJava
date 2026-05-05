@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/pidevJava-main/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pidevJava-main/src/main/resources" charset="UTF-8" />
+=======
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+>>>>>>> 0eaf0184c24622c474532bf7675f2f799cdfd025
   </component>
 </project>

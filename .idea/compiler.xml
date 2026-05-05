@@ -6,6 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
+=======
+        <module name="Pidev" />
+>>>>>>> 0eaf0184c24622c474532bf7675f2f799cdfd025
         <module name="bloodlink" />
       </profile>
     </annotationProcessing>

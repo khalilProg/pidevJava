@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+ 
+<HBox stylesheets="@commande.css" prefHeight="800.0" prefWidth="1550.0" styleClass="admin-layout"
+      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.controllers.BaseBack">
+ 
+    <!-- SIDEBAR -->
+    <fx:include source="admin_sidebar.fxml" />
+ 
+    <!-- MAIN CONTENT AREA -->
+    <VBox styleClass="admin-main-content" HBox.hgrow="ALWAYS">
+        <!-- Top Bar -->
+        <HBox styleClass="admin-top-bar" alignment="CENTER_RIGHT" spacing="25">
+            <StackPane styleClass="notification-bell">
+                <SVGPath content="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"
+                         fill="#888888" scaleX="1.2" scaleY="1.2"/>
+                <Circle radius="4" fill="#E63939" translateX="8" translateY="-8"/>
+            </StackPane>
+            <Label fx:id="dateLabel" text="15 Apr 2026" style="-fx-text-fill: #888888; -fx-font-size: 14px; -fx-font-weight: 700;"/>
+        </HBox>
+ 
+
+        
+        <!-- Placeholder for future dashboard stats -->
+        <Region VBox.vgrow="ALWAYS"/>
+    </VBox>
+ 
+</HBox>
