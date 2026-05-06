@@ -6,9 +6,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.kordamp.ikonli.javafx.FontIcon;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.services.CampagneService;
 import tn.esprit.services.QuestionnaireService;
@@ -63,9 +65,10 @@ public class ListeQuestAdmin {
 
         // Actions column (delete button)
         actionsColumn.setCellFactory(col -> new TableCell<Questionnaire, Void>() {
-            private final Button deleteBtn = new Button("Delete");
+            private final Button deleteBtn = createActionButton("fas-trash", "Supprimer", "action-icon-btn", "action-icon-delete");
 
             {
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(deleteBtn);
                 deleteBtn.setOnAction(e -> {
                     Questionnaire q = getTableView().getItems().get(getIndex());
                     try {
@@ -80,7 +83,12 @@ public class ListeQuestAdmin {
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                setGraphic(empty ? null : deleteBtn);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setAlignment(Pos.CENTER_LEFT);
+                    setGraphic(deleteBtn);
+                }
             }
         });
 
@@ -126,6 +134,22 @@ public class ListeQuestAdmin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private Button createActionButton(String iconLiteral, String tooltipText, String... styleClasses) {
+        Button button = new Button();
+        FontIcon icon = new FontIcon(iconLiteral);
+        icon.setIconSize(13);
+        icon.getStyleClass().add("ui-font-icon");
+        button.setGraphic(icon);
+        button.setText("");
+        button.setTooltip(new Tooltip(tooltipText));
+        button.setAccessibleText(tooltipText);
+        button.setFocusTraversable(false);
+        button.setMinSize(32, 32);
+        button.setPrefSize(32, 32);
+        button.getStyleClass().addAll(styleClasses);
+        return button;
     }
 
     @FXML

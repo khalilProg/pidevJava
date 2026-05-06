@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@commande.css" styleClass="sidebar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminSidebarController">
+<VBox stylesheets="@commande.css" styleClass="sidebar" prefWidth="260.0" minWidth="260.0" maxWidth="260.0" maxHeight="1.7976931348623157E308" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminSidebarController">
     <!-- Brand -->
     <HBox styleClass="sidebar-brand" alignment="CENTER_LEFT" spacing="8">
         <Label text="BLOODLINK" styleClass="sidebar-brand-text"/>

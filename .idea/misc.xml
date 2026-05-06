@@ -4,13 +4,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-<<<<<<< HEAD
-        <option value="$PROJECT_DIR$/pidevJava-main/pom.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
-=======
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>

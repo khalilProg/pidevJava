@@ -29,6 +29,7 @@ import tn.esprit.services.CommandeService;
 import tn.esprit.entities.Commande;
 import tn.esprit.entities.User;
 import tn.esprit.tools.SessionManager;
+import tn.esprit.tools.ThemeManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -125,7 +126,11 @@ public class AgentBanqueDemandeController {
                 stockAlertIcon.setManaged(false);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Validation impossible");
+            alert.setHeaderText("Erreur de stock");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -251,52 +256,50 @@ public class AgentBanqueDemandeController {
     private javafx.scene.Node createDemandeCard(Demande d) {
         HBox card = new HBox(25);
         card.setAlignment(Pos.CENTER_LEFT);
-        card.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25;");
-
-        card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #1a1a1a; -fx-border-color: #444444; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25; -fx-cursor: hand;"));
-        card.setOnMouseExited(e -> card.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25;"));
+        card.getStyleClass().add("agent-data-card");
 
         // Col 1 : ID
         Label lblId = new Label("#" + d.getId());
-        lblId.setStyle("-fx-background-color: #222222; -fx-text-fill: #aaaaaa; -fx-padding: 5 12; -fx-background-radius: 6; -fx-font-size: 13px; -fx-font-weight: bold;");
+        lblId.getStyleClass().add("agent-id-chip");
         lblId.setMinWidth(60);
 
         // Col 2 : Banque
         HBox bankBox = new HBox(8);
         bankBox.setAlignment(Pos.CENTER_LEFT);
-        bankBox.setPrefWidth(220);
+        bankBox.setMinWidth(160);
+        HBox.setHgrow(bankBox, Priority.SOMETIMES);
         SVGPath iconBank = new SVGPath();
         iconBank.setContent("M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z");
-        iconBank.setFill(Color.web("#555555"));
+        iconBank.setFill(Color.web("#667085"));
+        iconBank.getStyleClass().add("agent-card-icon");
         iconBank.setScaleX(0.8); iconBank.setScaleY(0.8);
         Label lblBank = new Label(bankNamesMap.getOrDefault(d.getBanque(), "Banque ID: " + d.getBanque()));
-        lblBank.setStyle("-fx-text-fill: #cccccc; -fx-font-size: 13px;");
+        lblBank.getStyleClass().add("agent-card-text");
         bankBox.getChildren().addAll(iconBank, lblBank);
 
         // Col 3 : Type
         Label lblType = new Label(d.getTypeSang() != null ? d.getTypeSang() : "N/A");
-        lblType.setStyle("-fx-border-color: #E53935; -fx-border-radius: 12; -fx-text-fill: #E53935; -fx-font-weight: bold; -fx-padding: 4 12; -fx-font-size: 13px;");
+        lblType.getStyleClass().add("agent-blood-badge");
         lblType.setPrefWidth(80); lblType.setAlignment(Pos.CENTER);
 
         // Col 4 : Quantité
         Label lblQty = new Label(d.getQuantite() + " ml");
-        lblQty.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;");
+        lblQty.getStyleClass().add("agent-card-strong");
         lblQty.setPrefWidth(80);
 
         // Col 5 : Statut
         String statusText = (d.getStatus() != null) ? d.getStatus().toUpperCase() : "INCONNU";
-        Label lblStatusBadge = new Label("⌚ " + statusText);
-        String styleStatus = "-fx-padding: 6 15; -fx-background-radius: 20; -fx-font-size: 11px; -fx-font-weight: bold; ";
+        Label lblStatusBadge = new Label(statusText);
+        lblStatusBadge.getStyleClass().add("agent-status");
 
         if (statusText.toLowerCase().contains("confirm") || statusText.toLowerCase().contains("valid")) {
-            styleStatus += "-fx-background-color: rgba(40, 167, 69, 0.1); -fx-text-fill: #28a745;";
-            lblStatusBadge.setText("✔ " + statusText);
+            lblStatusBadge.getStyleClass().add("agent-status-valid");
         } else if (statusText.toLowerCase().contains("attente")) {
-            styleStatus += "-fx-background-color: rgba(255, 193, 7, 0.1); -fx-text-fill: #ffc107;";
+            lblStatusBadge.getStyleClass().add("agent-status-pending");
         } else {
-            styleStatus += "-fx-background-color: #333333; -fx-text-fill: white;";
+            lblStatusBadge.getStyleClass().add("agent-status-muted");
         }
-        lblStatusBadge.setStyle(styleStatus);
+        lblStatusBadge.setText(statusText);
         lblStatusBadge.setPrefWidth(140); lblStatusBadge.setAlignment(Pos.CENTER);
 
         javafx.scene.layout.Region spacer = new javafx.scene.layout.Region();
@@ -329,26 +332,26 @@ public class AgentBanqueDemandeController {
     private javafx.scene.Node createCommandeCard(Commande c) {
         HBox card = new HBox(25);
         card.setAlignment(Pos.CENTER_LEFT);
-        card.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25;");
+        card.getStyleClass().add("agent-data-card");
 
         // ID
         Label lblId = new Label("#" + c.getId());
-        lblId.setStyle("-fx-background-color: #222222; -fx-text-fill: #aaaaaa; -fx-padding: 5 12; -fx-background-radius: 6; -fx-font-size: 13px; -fx-font-weight: bold;");
+        lblId.getStyleClass().add("agent-id-chip");
         lblId.setMinWidth(60);
 
         // Client
         Label lblClient = new Label("Client ID: " + c.getClientId());
-        lblClient.setStyle("-fx-text-fill: #cccccc; -fx-font-size: 13px;");
+        lblClient.getStyleClass().add("agent-card-text");
         lblClient.setPrefWidth(200);
 
         // Type
         Label lblType = new Label(c.getTypeSang() != null ? c.getTypeSang() : "N/A");
-        lblType.setStyle("-fx-border-color: #2ecc71; -fx-border-radius: 12; -fx-text-fill: #2ecc71; -fx-font-weight: bold; -fx-padding: 4 12; -fx-font-size: 13px;");
+        lblType.getStyleClass().add("agent-blood-badge");
         lblType.setPrefWidth(80); lblType.setAlignment(Pos.CENTER);
 
         // Qty
         Label lblQty = new Label(c.getQuantite() + " unités");
-        lblQty.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;");
+        lblQty.getStyleClass().add("agent-card-strong");
         lblQty.setPrefWidth(100);
 
         // Status — normalize for comparison
@@ -369,6 +372,18 @@ public class AgentBanqueDemandeController {
         }
         Label lblStatus = new Label(displayStatus);
         lblStatus.setStyle(styleStatus);
+        lblStatus.setStyle(null);
+        lblStatus.getStyleClass().add("agent-status");
+        if (statusNorm.contains("VALID")) {
+            lblStatus.setText("VALIDEE");
+            lblStatus.getStyleClass().add("agent-status-valid");
+        } else if (statusNorm.contains("REFUS")) {
+            lblStatus.setText("REFUSEE");
+            lblStatus.getStyleClass().add("agent-status-danger");
+        } else {
+            lblStatus.setText("EN ATTENTE");
+            lblStatus.getStyleClass().add("agent-status-pending");
+        }
         lblStatus.setPrefWidth(140); lblStatus.setAlignment(Pos.CENTER);
 
         Region spacer = new Region();
@@ -393,7 +408,7 @@ public class AgentBanqueDemandeController {
 
     private void handleUpdateCmdStatus(Commande c, String status) {
         try {
-            if ("VALIDEE".equals(status)) {
+            if (false && "VALIDEE".equals(status)) {
                 StockService stockService = new StockService();
                 // On cherche le stock de cette banque pour ce type de sang
                 // On suppose que type_org est "BANQUE" pour les banques de sang
@@ -418,8 +433,7 @@ public class AgentBanqueDemandeController {
                 // Optionnel: Envoyer un email de validation ici si nécessaire
             }
 
-            c.setStatus(status);
-            commandeService.modifier(c);
+            commandeService.updateStatusAndAdjustStock(c, status);
             loadCommandes();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -433,8 +447,22 @@ public class AgentBanqueDemandeController {
         path.setFill(Color.web(iconColor));
         path.setScaleX(0.7); path.setScaleY(0.7);
         btn.setGraphic(path);
-        btn.setStyle(String.format("-fx-background-color: %s; -fx-border-color: %s; -fx-border-radius: 15; -fx-background-radius: 15; -fx-min-width: 32; -fx-min-height: 32; -fx-cursor: hand;", bgColor, borderColor));
+        btn.getStyleClass().addAll("agent-icon-btn", iconButtonClass(iconColor));
         return btn;
+    }
+
+    private String iconButtonClass(String iconColor) {
+        String color = iconColor == null ? "" : iconColor.toLowerCase();
+        if (color.contains("2ecc") || color.contains("28a745")) {
+            return "agent-icon-btn-success";
+        }
+        if (color.contains("e539") || color.contains("e74c")) {
+            return "agent-icon-btn-danger";
+        }
+        if (color.contains("ffc")) {
+            return "agent-icon-btn-warning";
+        }
+        return "agent-icon-btn-neutral";
     }
 
     private void openEditForm(Demande selected) {
@@ -649,14 +677,14 @@ public class AgentBanqueDemandeController {
             stage.initStyle(StageStyle.TRANSPARENT);
 
             VBox root = new VBox(20);
-            root.setStyle("-fx-background-color: #0d0d0d; -fx-border-color: #222222; -fx-border-width: 2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-padding: 30;");
+            root.getStyleClass().add("agent-modal-card");
             root.setPrefWidth(450);
 
             HBox header = new HBox(15);
             header.setAlignment(Pos.CENTER_LEFT);
 
             StackPane iconPane = new StackPane();
-            iconPane.setStyle("-fx-background-color: #2a1111; -fx-background-radius: 10; -fx-padding: 10;");
+            iconPane.getStyleClass().add("agent-modal-icon");
             SVGPath icon = new SVGPath();
             icon.setContent("M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z");
             icon.setFill(Color.web("#E53935"));
@@ -665,9 +693,9 @@ public class AgentBanqueDemandeController {
 
             VBox titleBox = new VBox();
             Label subtitle = new Label("INVENTAIRE");
-            subtitle.setStyle("-fx-text-fill: #E53935; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 2px;");
+            subtitle.getStyleClass().add("agent-kicker");
             Label title = new Label("Mon Stock de Sang");
-            title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
+            title.getStyleClass().add("agent-modal-title");
             titleBox.getChildren().addAll(subtitle, title);
 
             header.getChildren().addAll(iconPane, titleBox);
@@ -675,22 +703,22 @@ public class AgentBanqueDemandeController {
             VBox content = new VBox(10);
             if (stockStats.isEmpty()) {
                 Label emptyLabel = new Label("Votre stock est actuellement vide.");
-                emptyLabel.setStyle("-fx-text-fill: #888888; -fx-font-size: 14px;");
+                emptyLabel.getStyleClass().add("agent-card-muted");
                 content.getChildren().add(emptyLabel);
             } else {
                 for (Map.Entry<String, Integer> entry : stockStats.entrySet()) {
                     HBox row = new HBox();
                     row.setAlignment(Pos.CENTER_LEFT);
-                    row.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15;");
+                    row.getStyleClass().add("agent-data-card");
 
                     Label typeLabel = new Label(entry.getKey());
-                    typeLabel.setStyle("-fx-text-fill: #E53935; -fx-font-size: 16px; -fx-font-weight: bold; -fx-border-color: #E53935; -fx-border-radius: 12; -fx-padding: 4 12;");
+                    typeLabel.getStyleClass().add("agent-blood-badge");
 
                     Region spacer = new Region();
                     HBox.setHgrow(spacer, Priority.ALWAYS);
 
                     Label qteLabel = new Label(entry.getValue() + " ml");
-                    qteLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+                    qteLabel.getStyleClass().add("agent-card-strong");
 
                     row.getChildren().addAll(typeLabel, spacer, qteLabel);
                     content.getChildren().add(row);
@@ -700,13 +728,15 @@ public class AgentBanqueDemandeController {
             HBox footer = new HBox();
             footer.setAlignment(Pos.CENTER_RIGHT);
             Button closeBtn = new Button("Fermer");
-            closeBtn.setStyle("-fx-background-color: #e53935; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 8 20; -fx-cursor: hand;");
+            closeBtn.getStyleClass().add("btn-primary");
             closeBtn.setOnAction(e -> stage.close());
             footer.getChildren().add(closeBtn);
 
             root.getChildren().addAll(header, content, footer);
 
             Scene scene = new Scene(root);
+            root.getStylesheets().add(getClass().getResource("/agent_banque.css").toExternalForm());
+            ThemeManager.getInstance().applyTheme(scene);
             scene.setFill(Color.TRANSPARENT);
             stage.setScene(scene);
             stage.showAndWait();

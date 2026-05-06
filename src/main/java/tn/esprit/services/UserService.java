@@ -149,4 +149,24 @@ public class UserService implements IGeneralService<User> {
         }
         return null;
     }
+
+    public List<User> findAdmins() throws SQLException {
+        String sql = "SELECT * FROM user WHERE LOWER(role) LIKE ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, "%admin%");
+        ResultSet rs = pst.executeQuery();
+        List<User> admins = new ArrayList<>();
+        while (rs.next()) {
+            admins.add(new User(
+                    rs.getInt("id"),
+                    rs.getString("email"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("password"),
+                    rs.getString("role"),
+                    rs.getString("telephone")
+            ));
+        }
+        return admins;
+    }
 }

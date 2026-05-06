@@ -90,11 +90,14 @@
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-border-width: 0;
+    -fx-border-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-focus-traversable: false;
     -fx-alignment: center-left;
     -fx-cursor: hand;
-    -fx-padding: 0;
+    -fx-padding: 8 0;
+    -fx-effect: none;
 }
 
 .menu-btn:hover,
@@ -102,10 +105,15 @@
 .menu-btn:armed {
     -fx-background-color: transparent;
     -fx-text-fill: -primary;
+    -fx-border-color: transparent;
+    -fx-effect: none;
 }
 
 .menu-btn-active {
     -fx-text-fill: -primary;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-effect: none;
 }
 
 .logout-btn {
@@ -730,4 +738,580 @@
 .filter-btn:hover {
     -fx-background-color: #3a3a3a;
     -fx-text-fill: white;
+}
+
+/* ==========================================
+   AGENT BANQUE PAGE REFRESH
+   ========================================== */
+.agent-root,
+.agent-page,
+.main-content {
+    -fx-background-color: #0a0a0a;
+}
+
+.agent-page {
+    -fx-padding: 34 42;
+}
+
+.navbar-container {
+    -fx-background-color: #141414;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: none;
+}
+
+.nav-logo-text {
+    -fx-text-fill: #ff574c;
+    -fx-font-size: 20px;
+    -fx-font-weight: 900;
+}
+
+.nav-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-padding: 9 12;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.nav-link:hover,
+.nav-link:focused {
+    -fx-background-color: rgba(231, 76, 60, 0.14);
+    -fx-text-fill: #ffffff;
+}
+
+.user-pill {
+    -fx-background-color: #e74c3c;
+    -fx-border-color: #e74c3c;
+    -fx-border-width: 0;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 4 16 4 5;
+    -fx-min-height: 40;
+    -fx-max-height: 42;
+    -fx-cursor: hand;
+}
+
+.user-name-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+}
+
+.menu-drawer {
+    -fx-background-color: #141414;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+}
+
+.menu-drawer .menu-btn {
+    -fx-text-fill: #f8fafc;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: none;
+}
+
+.menu-drawer .menu-btn:hover,
+.menu-drawer .menu-btn:focused,
+.menu-drawer .menu-btn:armed,
+.menu-drawer .menu-btn-active {
+    -fx-text-fill: #ff574c;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-effect: none;
+}
+
+.agent-session-label {
+    -fx-text-fill: rgba(255, 255, 255, 0.62);
+    -fx-font-size: 13px;
+}
+
+.agent-session-email {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-weight: 800;
+}
+
+.agent-page .glass-card {
+    -fx-background-color: #141414;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 20 22;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.28), 18, 0, 0, 8);
+}
+
+.agent-kicker {
+    -fx-text-fill: #ff574c;
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+}
+
+.agent-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 31px;
+    -fx-font-weight: 900;
+}
+
+.agent-subtitle {
+    -fx-text-fill: #9aa3af;
+    -fx-font-size: 14px;
+}
+
+.agent-search-box {
+    -fx-background-color: #202020;
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 0 12;
+    -fx-min-height: 44;
+}
+
+.agent-search-icon {
+    -fx-icon-color: #9aa3af;
+}
+
+.transparent-input {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #7a828d;
+    -fx-font-size: 13px;
+}
+
+.filter-btn {
+    -fx-background-color: #202020;
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-padding: 8 12;
+    -fx-min-height: 44;
+}
+
+.filter-btn:hover,
+.filter-btn:focused,
+.filter-btn:showing {
+    -fx-background-color: #252525;
+    -fx-border-color: rgba(231, 76, 60, 0.70);
+    -fx-text-fill: #ffffff;
+}
+
+.filter-btn .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 13px;
+}
+
+.agent-section-header {
+    -fx-padding: 0 0 10 0;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 0 0 1 0;
+}
+
+.agent-section-title {
+    -fx-text-fill: #9aa3af;
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+}
+
+.agent-count-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+}
+
+.agent-empty-state {
+    -fx-padding: 60 20;
+    -fx-alignment: center;
+}
+
+.agent-empty-icon {
+    -fx-background-color: rgba(231, 76, 60, 0.12);
+    -fx-border-color: rgba(231, 76, 60, 0.24);
+    -fx-border-width: 1;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-padding: 20;
+    -fx-max-width: 64;
+    -fx-max-height: 64;
+    -fx-min-width: 64;
+    -fx-min-height: 64;
+    -fx-alignment: center;
+}
+
+.agent-empty-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: 900;
+    -fx-padding: 8 0 0 0;
+}
+
+.agent-empty-copy {
+    -fx-text-fill: #9aa3af;
+    -fx-font-size: 13px;
+    -fx-padding: 0 0 8 0;
+}
+
+.agent-data-card {
+    -fx-background-color: #181818;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 16 24;
+    -fx-cursor: hand;
+    -fx-min-height: 58;
+    -fx-alignment: center-left;
+}
+
+.agent-data-card:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.08);
+    -fx-border-color: rgba(231, 76, 60, 0.28);
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.06), 8, 0, 0, 2);
+}
+
+.agent-id-chip,
+.agent-ref-chip {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 5 12;
+    -fx-text-fill: #cbd2dc;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.agent-ref-chip {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.16);
+    -fx-border-width: 1;
+}
+
+.agent-blood-badge {
+    -fx-background-color: rgba(231, 76, 60, 0.12);
+    -fx-border-color: rgba(231, 76, 60, 0.64);
+    -fx-border-width: 1;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 4 12;
+    -fx-text-fill: #ff574c;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+}
+
+.agent-card-text {
+    -fx-text-fill: #cbd2dc;
+    -fx-font-size: 13px;
+}
+
+.agent-card-strong {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+}
+
+.agent-card-muted {
+    -fx-text-fill: #9aa3af;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+}
+
+.agent-card-icon {
+    -fx-fill: #7a828d;
+}
+
+.agent-status {
+    -fx-padding: 6 14;
+    -fx-background-radius: 999;
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+}
+
+.agent-status-valid {
+    -fx-background-color: rgba(46, 204, 113, 0.12);
+    -fx-text-fill: #2ecc71;
+}
+
+.agent-status-pending {
+    -fx-background-color: rgba(255, 193, 7, 0.14);
+    -fx-text-fill: #ffc107;
+}
+
+.agent-status-danger {
+    -fx-background-color: rgba(231, 76, 60, 0.14);
+    -fx-text-fill: #ff574c;
+}
+
+.agent-status-muted {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #cbd2dc;
+}
+
+.agent-icon-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-min-width: 34;
+    -fx-min-height: 34;
+    -fx-pref-width: 34;
+    -fx-pref-height: 34;
+    -fx-cursor: hand;
+}
+
+.agent-icon-btn:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.14);
+    -fx-border-color: rgba(231, 76, 60, 0.34);
+}
+
+.agent-icon-btn-success:hover {
+    -fx-background-color: rgba(46, 204, 113, 0.14);
+    -fx-border-color: rgba(46, 204, 113, 0.42);
+}
+
+.agent-icon-btn-danger:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.16);
+    -fx-border-color: rgba(231, 76, 60, 0.48);
+}
+
+.agent-icon-btn-warning:hover {
+    -fx-background-color: rgba(255, 193, 7, 0.16);
+    -fx-border-color: rgba(255, 193, 7, 0.46);
+}
+
+.agent-root .navbar-container {
+    -fx-background-color: #141414;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-effect: none;
+}
+
+.agent-root .nav-logo-text {
+    -fx-text-fill: #ff574c;
+}
+
+.agent-root .nav-link {
+    -fx-text-fill: #f8fafc;
+}
+
+.agent-root .nav-link:hover,
+.agent-root .nav-link:focused {
+    -fx-background-color: rgba(231, 76, 60, 0.14);
+    -fx-text-fill: #ffffff;
+}
+
+.agent-root .menu-drawer {
+    -fx-background-color: #141414;
+}
+
+.agent-page .filter-btn,
+.agent-page .agent-search-box {
+    -fx-background-color: #202020;
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+}
+
+.agent-page .transparent-input {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #ffffff;
+}
+
+.agent-modal-card {
+    -fx-background-color: #141414;
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 1;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 28;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 24, 0, 0, 12);
+}
+
+.agent-modal-icon {
+    -fx-background-color: rgba(231, 76, 60, 0.12);
+    -fx-border-color: rgba(231, 76, 60, 0.25);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 10;
+}
+
+.agent-modal-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: 900;
+}
+
+/* ==========================================
+   THEME TOGGLE BUTTON
+   ========================================== */
+.theme-toggle-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-text-fill: #9aa3af;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+    -fx-padding: 7 16;
+    -fx-cursor: hand;
+    -fx-min-width: 40;
+    -fx-min-height: 40;
+    -fx-max-height: 42;
+}
+
+.theme-toggle-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.14);
+    -fx-border-color: rgba(255, 255, 255, 0.22);
+    -fx-text-fill: #ffffff;
+}
+
+/* ==========================================
+   MENU CLOSE BUTTON FIX
+   ========================================== */
+.menu-drawer .nav-link {
+    -fx-text-fill: #ff574c;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-background-radius: 8;
+}
+
+.menu-drawer .nav-link:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.10);
+    -fx-text-fill: #ff7b73;
+}
+
+/* ==========================================
+   CARD TEXT OVERFLOW FIXES
+   ========================================== */
+.agent-card-text {
+    -fx-text-fill: #cbd2dc;
+    -fx-font-size: 13px;
+    -fx-text-overrun: ellipsis;
+}
+
+.agent-card-strong {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-text-overrun: ellipsis;
+}
+
+.agent-card-muted {
+    -fx-text-fill: #9aa3af;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+    -fx-text-overrun: ellipsis;
+}
+
+.agent-id-chip {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 5 12;
+    -fx-text-fill: #cbd2dc;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+    -fx-min-width: 50;
+    -fx-alignment: center;
+}
+
+.agent-ref-chip {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.16);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 5 12;
+    -fx-text-fill: #cbd2dc;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+    -fx-min-width: 70;
+    -fx-alignment: center;
+}
+
+/* ==========================================
+   EXCEL / STATS BUTTON STYLES
+   ========================================== */
+.btn-excel {
+    -fx-text-fill: #2ecc71;
+    -fx-border-color: rgba(46, 204, 113, 0.4);
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+    -fx-padding: 9 22;
+}
+
+.btn-excel:hover {
+    -fx-background-color: rgba(46, 204, 113, 0.08);
+    -fx-border-color: #2ecc71;
+}
+
+.btn-info {
+    -fx-text-fill: #00bcd4;
+    -fx-border-color: rgba(0, 188, 212, 0.4);
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+    -fx-padding: 9 22;
+}
+
+.btn-info:hover {
+    -fx-background-color: rgba(0, 188, 212, 0.08);
+    -fx-border-color: #00bcd4;
+}
+
+/* ==========================================
+   STATUS BADGE ALIGNMENT FIX
+   ========================================== */
+.agent-status {
+    -fx-padding: 6 14;
+    -fx-background-radius: 999;
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+    -fx-alignment: center;
+    -fx-min-width: 90;
+}
+
+/* ==========================================
+   BLOOD BADGE ALIGNMENT FIX
+   ========================================== */
+.agent-blood-badge {
+    -fx-background-color: rgba(231, 76, 60, 0.12);
+    -fx-border-color: rgba(231, 76, 60, 0.64);
+    -fx-border-width: 1;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 4 14;
+    -fx-text-fill: #ff574c;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-alignment: center;
+    -fx-min-width: 60;
+}
+
+/* ==========================================
+   ICON BUTTON NEUTRAL
+   ========================================== */
+.agent-icon-btn-neutral {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+}
+
+.agent-icon-btn-neutral:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-border-color: rgba(255, 255, 255, 0.22);
 }

@@ -210,10 +210,10 @@ public class AdminModifierCommandeController {
             currentCommande.setStatus(cbStatut.getValue());
             currentCommande.setBanqueId(banqueId);
 
-            commandeService.modifier(currentCommande);
+            commandeService.updateStatusAndAdjustStock(currentCommande, cbStatut.getValue());
             navigateBack();
         } catch (SQLException e) {
-            lblStatus.setText("⚠ Erreur Base de Données.");
+            lblStatus.setText("Erreur: " + e.getMessage());
             lblStatus.setStyle("-fx-text-fill: #e74c3c;");
             e.printStackTrace();
         }

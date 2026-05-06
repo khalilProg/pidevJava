@@ -48,6 +48,7 @@ public class AdminSidebarController {
                 themeManager.applyTheme(btnThemeToggle.getScene());
                 themeManager.updateToggleButton(btnThemeToggle);
             }
+            AdminTopBar.install(btnDashboard);
             updateActiveNavigation();
         });
     }

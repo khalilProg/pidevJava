@@ -1609,6 +1609,577 @@
     -fx-icon-color: #e74c3c;
 }
 
+/* Final front commande dropdown polish */
+.front-commande-combo {
+    -fx-min-height: 48 !important;
+    -fx-pref-height: 48 !important;
+    -fx-background-color: #242424 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.13) !important;
+    -fx-border-width: 1 !important;
+    -fx-background-radius: 9 !important;
+    -fx-border-radius: 9 !important;
+    -fx-background-insets: 0 !important;
+    -fx-padding: 0 8 0 14 !important;
+}
+
+.front-commande-combo:hover {
+    -fx-background-color: #292929 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+.front-commande-combo:focused,
+.front-commande-combo:showing {
+    -fx-border-color: rgba(231, 76, 60, 0.72) !important;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.14), 10, 0, 0, 0) !important;
+}
+
+.front-commande-combo .arrow-button {
+    -fx-background-color: transparent !important;
+    -fx-padding: 0 8 0 8 !important;
+}
+
+.front-commande-combo .arrow-button .arrow {
+    -fx-background-color: #9aa3ad !important;
+    -fx-shape: "M0 0 L5 5 L10 0 Z";
+}
+
+.front-commande-button-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-text-fill: #ffffff !important;
+    -fx-font-size: 14px !important;
+    -fx-font-weight: 500 !important;
+    -fx-padding: 0 !important;
+}
+
+.front-commande-combo .combo-box-popup .list-view {
+    -fx-background-color: #202020 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.14) !important;
+    -fx-border-width: 1 !important;
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
+    -fx-padding: 6 !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 18, 0, 0, 8) !important;
+}
+
+.front-commande-dropdown-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-background-radius: 7 !important;
+    -fx-border-radius: 7 !important;
+    -fx-text-fill: #eef1f5 !important;
+    -fx-font-size: 14px !important;
+    -fx-padding: 9 12 9 12 !important;
+    -fx-min-height: 36 !important;
+    -fx-pref-height: 36 !important;
+}
+
+.front-commande-dropdown-cell:filled:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.14) !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.front-commande-dropdown-cell:filled:selected {
+    -fx-background-color: #e74c3c !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.front-commande-dropdown-cell:empty {
+    -fx-opacity: 0 !important;
+    -fx-padding: 0 !important;
+    -fx-pref-height: 0 !important;
+}
+
+/* Popup ComboBox scene polish - final override */
+.combo-box-popup .list-view {
+    -fx-background-color: #202020 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.14) !important;
+    -fx-border-width: 1 !important;
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
+    -fx-padding: 6 !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 18, 0, 0, 8) !important;
+}
+
+.combo-box-popup .list-view .virtual-flow,
+.combo-box-popup .list-view .virtual-flow .clipped-container,
+.combo-box-popup .list-view .virtual-flow .sheet {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-background-radius: 7 !important;
+    -fx-border-radius: 7 !important;
+    -fx-text-fill: #eef1f5 !important;
+    -fx-font-size: 14px !important;
+    -fx-padding: 9 12 9 12 !important;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.20) !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: #e74c3c !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.combo-box-popup .list-view .scroll-bar:vertical,
+.combo-box-popup .list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent !important;
+    -fx-pref-width: 9 !important;
+    -fx-pref-height: 9 !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .track {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.24) !important;
+    -fx-background-radius: 999 !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .increment-button,
+.combo-box-popup .list-view .scroll-bar .decrement-button {
+    -fx-padding: 0 !important;
+    -fx-opacity: 0 !important;
+}
+
+/* Popup ComboBox scene polish */
+.combo-box-popup .list-view {
+    -fx-background-color: #202020 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.14) !important;
+    -fx-border-width: 1 !important;
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
+    -fx-padding: 6 !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 18, 0, 0, 8) !important;
+}
+
+.combo-box-popup .list-view .virtual-flow,
+.combo-box-popup .list-view .virtual-flow .clipped-container,
+.combo-box-popup .list-view .virtual-flow .sheet {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-background-radius: 7 !important;
+    -fx-border-radius: 7 !important;
+    -fx-text-fill: #eef1f5 !important;
+    -fx-font-size: 14px !important;
+    -fx-padding: 9 12 9 12 !important;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.20) !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: #e74c3c !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.combo-box-popup .list-view .scroll-bar:vertical,
+.combo-box-popup .list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent !important;
+    -fx-pref-width: 9 !important;
+    -fx-pref-height: 9 !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .track {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.24) !important;
+    -fx-background-radius: 999 !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .increment-button,
+.combo-box-popup .list-view .scroll-bar .decrement-button {
+    -fx-padding: 0 !important;
+    -fx-opacity: 0 !important;
+}
+
+/* Front commande redesign */
+.front-commande-root,
+.front-commande-shell,
+.front-commande-content,
+.front-commande-scroll,
+.front-commande-scroll > .viewport {
+    -fx-background-color: #0a0a0a;
+}
+
+.front-commande-scroll {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.front-commande-hero,
+.front-commande-toolbar,
+.front-commande-table-card,
+.front-commande-form-card,
+.front-commande-side-card {
+    -fx-background-color: #141414;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.front-commande-hero {
+    -fx-padding: 22 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.26), 18, 0, 0, 8);
+}
+
+.front-commande-hero-icon,
+.front-commande-side-icon {
+    -fx-background-color: rgba(231, 76, 60, 0.12);
+    -fx-border-color: rgba(231, 76, 60, 0.26);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-alignment: center;
+}
+
+.front-commande-hero-icon {
+    -fx-min-width: 56;
+    -fx-min-height: 56;
+    -fx-pref-width: 56;
+    -fx-pref-height: 56;
+}
+
+.front-commande-side-icon {
+    -fx-min-width: 40;
+    -fx-min-height: 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+}
+
+.front-commande-hero-font-icon,
+.front-commande-side-font-icon,
+.front-commande-section-icon {
+    -fx-icon-color: #e74c3c;
+}
+
+.front-commande-kicker {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+}
+
+.front-commande-title,
+.front-commande-title-accent {
+    -fx-font-size: 30px;
+    -fx-font-weight: 900;
+}
+
+.front-commande-title,
+.front-commande-card-title {
+    -fx-text-fill: #ffffff;
+}
+
+.front-commande-title-accent {
+    -fx-text-fill: #e74c3c;
+}
+
+.front-commande-subtitle,
+.front-commande-card-subtitle,
+.front-commande-metric-label {
+    -fx-text-fill: #8f98a3;
+    -fx-font-size: 12px;
+}
+
+.front-commande-metric {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 10 14;
+    -fx-min-width: 98;
+}
+
+.front-commande-metric-value {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 22px;
+    -fx-font-weight: 900;
+}
+
+.front-commande-primary-btn {
+    -fx-background-color: #e74c3c;
+    -fx-background-radius: 8;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-padding: 12 18;
+    -fx-cursor: hand;
+}
+
+.front-commande-primary-btn:hover {
+    -fx-background-color: #c0392b;
+}
+
+.front-commande-primary-btn .ui-font-icon {
+    -fx-icon-color: #ffffff;
+}
+
+.front-commande-cancel-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.14);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-text-fill: #d7dce3;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+    -fx-padding: 11 18;
+    -fx-cursor: hand;
+}
+
+.front-commande-cancel-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+}
+
+.front-commande-toolbar {
+    -fx-padding: 14 16;
+}
+
+.front-commande-input,
+.front-commande-combo {
+    -fx-background-color: #202020;
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #747d88;
+    -fx-font-size: 13px;
+}
+
+.front-commande-combo .list-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-text-fill: #ffffff !important;
+    -fx-prompt-text-fill: #747d88 !important;
+    -fx-font-size: 13px;
+    -fx-padding: 0 8 0 8 !important;
+}
+
+.front-commande-input {
+    -fx-padding: 12 14;
+}
+
+.front-commande-combo {
+    -fx-padding: 3 8;
+}
+
+.front-commande-input:focused,
+.front-commande-combo:focused {
+    -fx-border-color: #e74c3c;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.18), 10, 0, 0, 0);
+}
+
+.front-commande-table-card,
+.front-commande-form-card,
+.front-commande-side-card {
+    -fx-padding: 20 22;
+}
+
+.front-commande-card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: 900;
+}
+
+.front-commande-count,
+.front-commande-reference,
+.front-commande-quantity {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 900;
+}
+
+.front-commande-table {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.front-commande-table .column-header-background,
+.front-commande-table .column-header,
+.front-commande-table .filler {
+    -fx-background-color: #1d1d1d;
+}
+
+.front-commande-table .column-header .label {
+    -fx-text-fill: #a7afba;
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.front-commande-table .table-row-cell {
+    -fx-background-color: #141414;
+    -fx-border-color: rgba(255, 255, 255, 0.06);
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 58px;
+}
+
+.front-commande-table .table-row-cell:odd {
+    -fx-background-color: #171717;
+}
+
+.front-commande-table .table-row-cell:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.08);
+}
+
+.front-commande-table .table-cell {
+    -fx-text-fill: #eef1f5;
+    -fx-padding: 10 12;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.front-commande-blood-badge,
+.front-commande-priority,
+.front-commande-status-pill {
+    -fx-background-radius: 999px;
+    -fx-padding: 5 10;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.front-commande-blood-badge {
+    -fx-background-color: rgba(231, 76, 60, 0.16);
+    -fx-text-fill: #ff6b5f;
+}
+
+.front-priority-high {
+    -fx-background-color: rgba(231, 76, 60, 0.18);
+    -fx-text-fill: #ff6b5f;
+}
+
+.front-priority-medium {
+    -fx-background-color: rgba(241, 196, 15, 0.16);
+    -fx-text-fill: #f1c40f;
+}
+
+.front-priority-low {
+    -fx-background-color: rgba(46, 204, 113, 0.14);
+    -fx-text-fill: #2ecc71;
+}
+
+.front-status-pending {
+    -fx-background-color: rgba(241, 196, 15, 0.14);
+}
+
+.front-status-valid {
+    -fx-background-color: rgba(46, 204, 113, 0.14);
+}
+
+.front-status-cancelled {
+    -fx-background-color: rgba(231, 76, 60, 0.14);
+}
+
+.front-status-pending .front-commande-status-icon,
+.front-status-pending .front-commande-status-text {
+    -fx-icon-color: #f1c40f;
+    -fx-text-fill: #f1c40f;
+}
+
+.front-status-valid .front-commande-status-icon,
+.front-status-valid .front-commande-status-text {
+    -fx-icon-color: #2ecc71;
+    -fx-text-fill: #2ecc71;
+}
+
+.front-status-cancelled .front-commande-status-icon,
+.front-status-cancelled .front-commande-status-text {
+    -fx-icon-color: #ff6b5f;
+    -fx-text-fill: #ff6b5f;
+}
+
+.front-commande-receipt-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+    -fx-padding: 8 12;
+    -fx-cursor: hand;
+}
+
+.front-commande-receipt-btn:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.16);
+    -fx-border-color: rgba(231, 76, 60, 0.36);
+}
+
+.front-commande-form-layout {
+    -fx-alignment: top-left;
+}
+
+.front-commande-field-label {
+    -fx-text-fill: #cbd2dc;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.front-commande-info-box,
+.front-commande-payment-info {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 10 12;
+    -fx-text-fill: #aeb7c3;
+    -fx-font-size: 12px;
+}
+
+/* Home page icon fixes */
+.home-card-icon-shell {
+    -fx-background-color: rgba(231, 76, 60, 0.10);
+    -fx-border-color: rgba(231, 76, 60, 0.24);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-min-width: 42;
+    -fx-min-height: 42;
+    -fx-pref-width: 42;
+    -fx-pref-height: 42;
+    -fx-alignment: center;
+}
+
+.home-card-icon-shell-alert {
+    -fx-background-color: rgba(231, 76, 60, 0.16);
+}
+
+.home-card-icon {
+    -fx-icon-color: #e74c3c;
+    -fx-text-fill: #e74c3c;
+}
+
 /* Final theme toggle: sun to moon pill */
 .theme-toggle-btn {
     -fx-min-width: 58;
@@ -2320,6 +2891,153 @@
     -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.2), 6, 0, 0, 0);
 }
 
+/* Admin notification top bar */
+.admin-center-with-topbar {
+    -fx-background-color: #0a0a0a;
+}
+
+.admin-notification-bar {
+    -fx-background-color: #050505;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+    -fx-min-height: 58px;
+    -fx-pref-height: 58px;
+    -fx-padding: 0 36 0 36;
+}
+
+.admin-notification-stack {
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+}
+
+.admin-notification-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 999px;
+    -fx-padding: 8px;
+    -fx-cursor: hand;
+}
+
+.admin-notification-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+}
+
+.admin-notification-icon {
+    -fx-icon-color: rgba(255, 255, 255, 0.45);
+}
+
+.admin-notification-button:hover .admin-notification-icon {
+    -fx-icon-color: #ffffff;
+}
+
+.admin-notification-dot {
+    -fx-fill: #ef6b6b;
+    -fx-stroke: #5b6068;
+    -fx-stroke-width: 2px;
+}
+
+.admin-date-box {
+    -fx-padding: 0 0 0 6px;
+}
+
+.admin-date-icon {
+    -fx-icon-color: #e63939;
+}
+
+.admin-date-label {
+    -fx-text-fill: #888888;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+}
+
+.admin-notification-popup {
+    -fx-background-color: #111111;
+    -fx-background-radius: 8px;
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.50), 24, 0, 0, 12);
+    -fx-min-width: 320px;
+    -fx-pref-width: 320px;
+}
+
+.admin-notification-popup-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: 900;
+}
+
+.admin-notification-popup-subtitle,
+.admin-notification-empty,
+.admin-notification-row-meta {
+    -fx-text-fill: #888888;
+    -fx-font-size: 12px;
+}
+
+.admin-notification-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-padding: 0;
+}
+
+.admin-notification-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.admin-notification-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.admin-notification-scroll .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.admin-notification-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.18);
+    -fx-background-radius: 999px;
+}
+
+.admin-notification-scroll .scroll-bar:vertical .increment-button,
+.admin-notification-scroll .scroll-bar:vertical .decrement-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
+}
+
+.admin-notification-row {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-background-radius: 8px;
+    -fx-padding: 10 12;
+    -fx-cursor: hand;
+}
+
+.admin-notification-row:hover {
+    -fx-background-color: rgba(230, 57, 57, 0.12);
+}
+
+.admin-notification-row-icon {
+    -fx-icon-color: #e63939;
+}
+
+.admin-notification-row-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+
+.admin-notification-open-btn {
+    -fx-background-color: #e63939;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+    -fx-padding: 10 12;
+    -fx-cursor: hand;
+}
+
+.admin-notification-open-btn:hover {
+    -fx-background-color: #ff4a4a;
+}
+
 .combo-box-popup .list-view {
     -fx-background-color: #2a2a2a;
     -fx-border-color: #3a3a3a;
@@ -2701,4 +3419,164 @@
 .faceid-cancel-btn:hover {
     -fx-background-color: rgba(231, 76, 60, 0.1);
     -fx-border-color: #e74c3c;
+}
+
+/* Final admin shell overrides for legacy BaseBack pages */
+.sidebar {
+    -fx-pref-width: 260px !important;
+    -fx-min-width: 260px !important;
+    -fx-max-width: 260px !important;
+}
+
+.action-icon-btn .ui-font-icon {
+    -fx-icon-color: rgba(255, 255, 255, 0.72);
+}
+
+.action-icon-delete .ui-font-icon {
+    -fx-icon-color: #e74c3c;
+}
+
+/* Last-pass front commande dropdown polish */
+.front-commande-combo {
+    -fx-min-height: 48 !important;
+    -fx-pref-height: 48 !important;
+    -fx-background-color: #242424 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.13) !important;
+    -fx-border-width: 1 !important;
+    -fx-background-radius: 9 !important;
+    -fx-border-radius: 9 !important;
+    -fx-background-insets: 0 !important;
+    -fx-padding: 0 8 0 14 !important;
+}
+
+.front-commande-combo:hover {
+    -fx-background-color: #292929 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+.front-commande-combo:focused,
+.front-commande-combo:showing {
+    -fx-border-color: rgba(231, 76, 60, 0.72) !important;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.14), 10, 0, 0, 0) !important;
+}
+
+.front-commande-combo .arrow-button {
+    -fx-background-color: transparent !important;
+    -fx-padding: 0 8 0 8 !important;
+}
+
+.front-commande-combo .arrow-button .arrow {
+    -fx-background-color: #9aa3ad !important;
+    -fx-shape: "M0 0 L5 5 L10 0 Z";
+}
+
+.front-commande-button-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-text-fill: #ffffff !important;
+    -fx-font-size: 14px !important;
+    -fx-font-weight: 500 !important;
+    -fx-padding: 0 !important;
+}
+
+.front-commande-combo .combo-box-popup .list-view {
+    -fx-background-color: #202020 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.14) !important;
+    -fx-border-width: 1 !important;
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
+    -fx-padding: 6 !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 18, 0, 0, 8) !important;
+}
+
+.front-commande-dropdown-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-background-radius: 7 !important;
+    -fx-border-radius: 7 !important;
+    -fx-text-fill: #eef1f5 !important;
+    -fx-font-size: 14px !important;
+    -fx-padding: 9 12 9 12 !important;
+    -fx-min-height: 36 !important;
+    -fx-pref-height: 36 !important;
+}
+
+.front-commande-dropdown-cell:filled:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.14) !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.front-commande-dropdown-cell:filled:selected {
+    -fx-background-color: #e74c3c !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.front-commande-dropdown-cell:empty {
+    -fx-opacity: 0 !important;
+    -fx-padding: 0 !important;
+    -fx-pref-height: 0 !important;
+}
+
+/* Popup ComboBox scene polish - true final override */
+.combo-box-popup .list-view {
+    -fx-background-color: #202020 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.14) !important;
+    -fx-border-width: 1 !important;
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
+    -fx-padding: 6 !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 18, 0, 0, 8) !important;
+}
+
+.combo-box-popup .list-view .virtual-flow,
+.combo-box-popup .list-view .virtual-flow .clipped-container,
+.combo-box-popup .list-view .virtual-flow .sheet {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-background-radius: 7 !important;
+    -fx-border-radius: 7 !important;
+    -fx-text-fill: #eef1f5 !important;
+    -fx-font-size: 14px !important;
+    -fx-padding: 9 12 9 12 !important;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.20) !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: #e74c3c !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.combo-box-popup .list-view .scroll-bar:vertical,
+.combo-box-popup .list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent !important;
+    -fx-pref-width: 9 !important;
+    -fx-pref-height: 9 !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .track {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.24) !important;
+    -fx-background-radius: 999 !important;
+}
+
+.combo-box-popup .list-view .scroll-bar .increment-button,
+.combo-box-popup .list-view .scroll-bar .decrement-button {
+    -fx-padding: 0 !important;
+    -fx-opacity: 0 !important;
 }

@@ -5,6 +5,7 @@ import tn.esprit.tools.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class StockService implements IGeneralService<Stock> {
@@ -114,7 +115,7 @@ public class StockService implements IGeneralService<Stock> {
         return 0;
     }
     public Stock getStockByOrg(int orgId, String orgType, String bloodType) throws SQLException {
-        String sql = "SELECT * FROM stock WHERE type_orgid=? AND type_org=? AND type_sang=?";
+        String sql = "SELECT * FROM stock WHERE type_orgid=? AND LOWER(type_org)=LOWER(?) AND type_sang=?";
         PreparedStatement ps = cnx.prepareStatement(sql);
         ps.setInt(1, orgId);
         ps.setString(2, orgType);
@@ -130,6 +131,50 @@ public class StockService implements IGeneralService<Stock> {
                 rs.getTimestamp("created_at"),
                 rs.getTimestamp("updated_at")
             );
+        }
+        return null;
+    }
+
+    public int getAvailableQuantityForOrg(int orgId, String orgType, String bloodType) throws SQLException {
+        String sql = "SELECT SUM(quantite) FROM stock WHERE type_orgid=? AND LOWER(type_org)=LOWER(?) AND type_sang=?";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, orgId);
+        ps.setString(2, orgType);
+        ps.setString(3, bloodType);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return 0;
+    }
+
+    public Stock findBestCompatibleStockForBank(int banqueId, String patientBloodType, int requiredQuantity)
+            throws SQLException {
+        for (String compatibleType : BloodCompatibilityService.compatibleDonorTypesFor(patientBloodType)) {
+            Stock stock = getStockByOrg(banqueId, "banque", compatibleType);
+            if (stock != null && stock.getQuantite() >= requiredQuantity) {
+                return stock;
+            }
+        }
+        return null;
+    }
+
+    public Stock findBestCompatibleStockForAnyBank(String patientBloodType, int requiredQuantity,
+                                                   Collection<Integer> banqueIds) throws SQLException {
+        if (banqueIds == null || banqueIds.isEmpty()) {
+            return null;
+        }
+
+        for (String compatibleType : BloodCompatibilityService.compatibleDonorTypesFor(patientBloodType)) {
+            for (Integer banqueId : banqueIds) {
+                if (banqueId == null) {
+                    continue;
+                }
+                Stock stock = getStockByOrg(banqueId, "banque", compatibleType);
+                if (stock != null && stock.getQuantite() >= requiredQuantity) {
+                    return stock;
+                }
+            }
         }
         return null;
     }

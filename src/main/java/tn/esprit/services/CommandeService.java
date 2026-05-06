@@ -1,13 +1,18 @@
 package tn.esprit.services;
 
 import tn.esprit.entities.Commande;
+import tn.esprit.entities.Stock;
 import tn.esprit.tools.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CommandeService implements IGeneralService<Commande> {
+    private static final String PENDING_STATUS_CONDITION =
+            "LOWER(REPLACE(TRIM(COALESCE(status, '')), '_', ' ')) = 'en attente'";
+
     private final Connection cnx;
 
     public CommandeService() {
@@ -71,6 +76,37 @@ public class CommandeService implements IGeneralService<Commande> {
         System.out.println("Commande modifiee!");
     }
 
+    public void updateStatusAndAdjustStock(Commande c, String newStatus) throws SQLException {
+        if (c == null) {
+            throw new SQLException("Commande invalide.");
+        }
+
+        String previousStatus = getStatusById(c.getId());
+        boolean shouldDecreaseStock = isValidatedStatus(newStatus) && !isValidatedStatus(previousStatus);
+        boolean previousAutoCommit = cnx.getAutoCommit();
+
+        try {
+            cnx.setAutoCommit(false);
+
+            if (shouldDecreaseStock) {
+                decreaseStockForValidatedCommande(c);
+            }
+
+            c.setStatus(newStatus);
+            modifier(c);
+            cnx.commit();
+        } catch (SQLException e) {
+            try {
+                cnx.rollback();
+            } catch (SQLException rollbackError) {
+                e.addSuppressed(rollbackError);
+            }
+            throw e;
+        } finally {
+            cnx.setAutoCommit(previousAutoCommit);
+        }
+    }
+
     @Override
     public List<Commande> recuperer() throws SQLException {
         String sql = "SELECT * FROM commande";
@@ -94,6 +130,21 @@ public class CommandeService implements IGeneralService<Commande> {
         return mapCommandes(rs);
     }
 
+    public int countPendingCommandes() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM commande WHERE " + PENDING_STATUS_CONDITION;
+        Statement st = cnx.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        return rs.next() ? rs.getInt(1) : 0;
+    }
+
+    public List<Commande> recupererRecentPendingCommandes(int limit) throws SQLException {
+        String sql = "SELECT * FROM commande WHERE " + PENDING_STATUS_CONDITION + " ORDER BY id DESC LIMIT ?";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, Math.max(1, limit));
+        ResultSet rs = ps.executeQuery();
+        return mapCommandes(rs);
+    }
+
     public Commande findByIdOrReference(String idOrReference, Integer clientId) throws SQLException {
         if (idOrReference == null || !idOrReference.matches("\\d+")) {
             return null;
@@ -113,6 +164,61 @@ public class CommandeService implements IGeneralService<Commande> {
         ResultSet rs = ps.executeQuery();
         List<Commande> commandes = mapCommandes(rs);
         return commandes.isEmpty() ? null : commandes.get(0);
+    }
+
+    private String getStatusById(int id) throws SQLException {
+        String sql = "SELECT status FROM commande WHERE id = ?";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getString("status");
+        }
+        return null;
+    }
+
+    private void decreaseStockForValidatedCommande(Commande c) throws SQLException {
+        Stock stock = findStockForUpdate(c.getBanqueId(), c.getTypeSang());
+        if (stock == null || stock.getQuantite() < c.getQuantite()) {
+            int available = stock == null ? 0 : stock.getQuantite();
+            throw new SQLException("Stock insuffisant pour valider cette commande. Disponible: "
+                    + available + " ml, demande: " + c.getQuantite() + " ml.");
+        }
+
+        String sql = "UPDATE stock SET quantite=?, updated_at=? WHERE id=?";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, stock.getQuantite() - c.getQuantite());
+        ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+        ps.setInt(3, stock.getId());
+        ps.executeUpdate();
+    }
+
+    private Stock findStockForUpdate(int banqueId, String bloodType) throws SQLException {
+        String sql = "SELECT * FROM stock WHERE type_orgid=? AND LOWER(type_org)=LOWER(?) AND type_sang=? FOR UPDATE";
+        PreparedStatement ps = cnx.prepareStatement(sql);
+        ps.setInt(1, banqueId);
+        ps.setString(2, "banque");
+        ps.setString(3, bloodType);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Stock(
+                    rs.getInt("id"),
+                    rs.getInt("type_orgid"),
+                    rs.getString("type_org"),
+                    rs.getString("type_sang"),
+                    rs.getInt("quantite"),
+                    rs.getTimestamp("created_at"),
+                    rs.getTimestamp("updated_at")
+            );
+        }
+        return null;
+    }
+
+    private boolean isValidatedStatus(String status) {
+        if (status == null) {
+            return false;
+        }
+        return status.toUpperCase(Locale.ROOT).contains("VALID");
     }
 
     private List<Commande> mapCommandes(ResultSet rs) throws SQLException {

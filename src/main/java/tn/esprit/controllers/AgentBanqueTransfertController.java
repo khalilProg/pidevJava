@@ -18,6 +18,7 @@ import tn.esprit.entities.Stock;
 import tn.esprit.entities.Transfert;
 import tn.esprit.services.StockService;
 import tn.esprit.services.TransfertService;
+import tn.esprit.tools.ThemeManager;
 import javafx.collections.transformation.FilteredList;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -120,47 +121,47 @@ public class AgentBanqueTransfertController {
     private javafx.scene.Node createTransfertCard(Transfert t) {
         HBox card = new HBox(20);
         card.setAlignment(Pos.CENTER_LEFT);
-        card.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25;");
-
-        // Effet Hover
-        card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #1a1a1a; -fx-border-color: #444444; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25; -fx-cursor: hand;"));
-        card.setOnMouseExited(e -> card.setStyle("-fx-background-color: #111111; -fx-border-color: #222222; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15 25;"));
+        card.getStyleClass().add("agent-data-card");
 
         // 1. ID Pill
         Label lblId = new Label("#" + t.getId());
-        lblId.setStyle("-fx-background-color: #222222; -fx-text-fill: #aaaaaa; -fx-padding: 5 12; -fx-background-radius: 6; -fx-font-size: 13px; -fx-font-weight: bold;");
+        lblId.getStyleClass().add("agent-id-chip");
 
         // 2. Lien Demande
         int dId = (t.getDemande() != null) ? t.getDemande().getId() : 0;
         Label lblDemande = new Label("DEM-" + dId);
-        lblDemande.setStyle("-fx-background-color: transparent; -fx-border-color: #444444; -fx-border-radius: 12; -fx-text-fill: #cccccc; -fx-font-weight: bold; -fx-padding: 4 12; -fx-font-size: 11px;");
+        lblDemande.getStyleClass().add("agent-ref-chip");
 
         // 3. Flux (Origine -> Destination)
         HBox flowMap = new HBox(8);
         flowMap.setAlignment(Pos.CENTER_LEFT);
-        flowMap.setPrefWidth(250);
+        HBox.setHgrow(flowMap, Priority.SOMETIMES);
+        flowMap.setMinWidth(200);
         Label lblOrigine = new Label(t.getFromOrg() != null ? t.getFromOrg().toUpperCase() : "N/A");
-        lblOrigine.setStyle("-fx-text-fill: #aaaaaa; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblOrigine.getStyleClass().add("agent-card-muted");
+        lblOrigine.setMaxWidth(140);
         SVGPath arrow = new SVGPath();
         arrow.setContent("M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z");
         arrow.setFill(Color.web("#E53935"));
         arrow.setScaleX(0.7); arrow.setScaleY(0.7);
         Label lblDest = new Label(t.getToOrg() != null ? t.getToOrg().toUpperCase() : "N/A");
-        lblDest.setStyle("-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblDest.getStyleClass().add("agent-card-strong");
+        lblDest.setMaxWidth(160);
         flowMap.getChildren().addAll(lblOrigine, arrow, lblDest);
 
         // 4. Quantité & Date
         Label lblQty = new Label(t.getQuantite() + " ml");
-        lblQty.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;");
+        lblQty.getStyleClass().add("agent-card-strong");
         lblQty.setPrefWidth(70);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Label lblDate = new Label(t.getDateEnvoie() != null ? t.getDateEnvoie().format(formatter) : "--/--/----");
-        lblDate.setStyle("-fx-text-fill: #777777; -fx-font-size: 13px;");
+        lblDate.getStyleClass().add("agent-card-muted");
         lblDate.setPrefWidth(90);
 
         // 5. Statut Badge
         String statusText = t.getStatus() != null ? t.getStatus().toUpperCase() : "EN COURS";
+        String statusKey = statusText.replace('\u00C7', 'C').replace('\u00E7', 'C');
         Label lblStatus = new Label();
         String styleStatus = "-fx-padding: 6 15; -fx-background-radius: 20; -fx-font-size: 11px; -fx-font-weight: bold; ";
 
@@ -177,6 +178,21 @@ public class AgentBanqueTransfertController {
             lblStatus.setText(statusText);
         }
         lblStatus.setStyle(styleStatus);
+        lblStatus.setStyle(null);
+        lblStatus.getStyleClass().add("agent-status");
+        if (statusKey.contains("RECU")) {
+            lblStatus.setText("RECU");
+            lblStatus.getStyleClass().add("agent-status-valid");
+        } else if (isPending) {
+            lblStatus.setText("EN COURS");
+            lblStatus.getStyleClass().add("agent-status-pending");
+        } else if (statusKey.contains("ANNULE") || statusKey.contains("REFUS")) {
+            lblStatus.setText("ANNULE");
+            lblStatus.getStyleClass().add("agent-status-danger");
+        } else {
+            lblStatus.setText(statusText);
+            lblStatus.getStyleClass().add("agent-status-muted");
+        }
         lblStatus.setPrefWidth(110);
         lblStatus.setAlignment(Pos.CENTER);
 
@@ -264,15 +280,20 @@ public class AgentBanqueTransfertController {
 
         btn.setGraphic(icon);
         btn.setTooltip(new Tooltip(tooltipText));
-
-        // Design du bouton (Sombre et moderne)
-        btn.setStyle("-fx-background-color: #222222; -fx-border-color: #333333; -fx-border-radius: 12; -fx-background-radius: 12; -fx-min-width: 34; -fx-min-height: 34; -fx-cursor: hand;");
-
-        // Animation simple au survol
-        btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: #333333; -fx-border-color: " + color + "; -fx-border-radius: 12; -fx-background-radius: 12; -fx-min-width: 34; -fx-min-height: 34; -fx-cursor: hand;"));
-        btn.setOnMouseExited(e -> btn.setStyle("-fx-background-color: #222222; -fx-border-color: #333333; -fx-border-radius: 12; -fx-background-radius: 12; -fx-min-width: 34; -fx-min-height: 34; -fx-cursor: hand;"));
+        btn.getStyleClass().addAll("agent-icon-btn", iconButtonClass(color));
 
         return btn;
+    }
+
+    private String iconButtonClass(String iconColor) {
+        String normalized = iconColor == null ? "" : iconColor.toLowerCase();
+        if (normalized.contains("28a745") || normalized.contains("2ecc")) {
+            return "agent-icon-btn-success";
+        }
+        if (normalized.contains("e539") || normalized.contains("e74c")) {
+            return "agent-icon-btn-danger";
+        }
+        return "agent-icon-btn-neutral";
     }
 
     @FXML
@@ -370,15 +391,15 @@ public class AgentBanqueTransfertController {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         VBox root = new VBox(20);
-        root.setStyle("-fx-background-color: #0d0d0d; -fx-border-color: #222222; -fx-border-width: 2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-padding: 30;");
+        root.getStyleClass().add("agent-modal-card");
         root.setPrefWidth(600);
         root.setPrefHeight(500);
 
         // Header
         Label title = new Label("STATISTIQUES DE TRANSFERT");
-        title.setStyle("-fx-text-fill: #E53935; -fx-font-size: 14px; -fx-font-weight: bold; -fx-letter-spacing: 2px;");
+        title.getStyleClass().add("agent-kicker");
         Label subtitle = new Label("Quantité totale transférée par demande");
-        subtitle.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
+        subtitle.getStyleClass().add("agent-modal-title");
 
         // Chart
         CategoryAxis xAxis = new CategoryAxis();
@@ -405,7 +426,7 @@ public class AgentBanqueTransfertController {
         barChart.lookupAll(".chart-plot-background").forEach(n -> n.setStyle("-fx-background-color: transparent;"));
 
         Button closeBtn = new Button("Fermer");
-        closeBtn.setStyle("-fx-background-color: #e53935; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 8 20; -fx-cursor: hand;");
+        closeBtn.getStyleClass().add("btn-primary");
         closeBtn.setOnAction(e -> stage.close());
 
         HBox footer = new HBox(closeBtn);
@@ -414,6 +435,8 @@ public class AgentBanqueTransfertController {
         root.getChildren().addAll(title, subtitle, barChart, footer);
 
         Scene scene = new Scene(root);
+        root.getStylesheets().add(getClass().getResource("/agent_banque.css").toExternalForm());
+        ThemeManager.getInstance().applyTheme(scene);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.showAndWait();

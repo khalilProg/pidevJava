@@ -15,15 +15,20 @@
     <fx:include source="admin_sidebar.fxml" />
  
     <!-- MAIN CONTENT AREA -->
-    <VBox styleClass="admin-main-content" HBox.hgrow="ALWAYS">
+    <VBox styleClass="admin-center-with-topbar" HBox.hgrow="ALWAYS">
         <!-- Top Bar -->
-        <HBox styleClass="admin-top-bar" alignment="CENTER_RIGHT" spacing="25">
-            <StackPane styleClass="notification-bell">
+        <HBox styleClass="admin-notification-bar" alignment="CENTER_RIGHT" spacing="24">
+            <Region HBox.hgrow="ALWAYS"/>
+            <StackPane fx:id="notificationBell" styleClass="admin-notification-stack">
                 <SVGPath content="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"
-                         fill="#888888" scaleX="1.2" scaleY="1.2"/>
-                <Circle radius="4" fill="#E63939" translateX="8" translateY="-8"/>
+                         fill="#8b9098" scaleX="1.2" scaleY="1.2"/>
+                <Circle fx:id="notificationDot" styleClass="admin-notification-dot"/>
             </StackPane>
-            <Label fx:id="dateLabel" text="15 Apr 2026" style="-fx-text-fill: #888888; -fx-font-size: 14px; -fx-font-weight: 700;"/>
+            <HBox alignment="CENTER" spacing="8" styleClass="admin-date-box">
+                <SVGPath content="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"
+                         fill="#e63939" scaleX="0.8" scaleY="0.8"/>
+                <Label fx:id="dateLabel" text="15 Apr 2026" styleClass="admin-date-label"/>
+            </HBox>
         </HBox>
  
 

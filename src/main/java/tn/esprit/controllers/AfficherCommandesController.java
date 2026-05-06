@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.kordamp.ikonli.javafx.FontIcon;
 import tn.esprit.entities.Client;
 import tn.esprit.entities.Commande;
 import tn.esprit.entities.User;
@@ -54,6 +55,9 @@ public class AfficherCommandesController extends BaseFront implements Initializa
     @FXML private ComboBox<String> cbStatutFiltre;
     @FXML private ComboBox<String> cbPrioriteFiltre;
     @FXML private Label lblCount;
+    @FXML private Label lblTotalCommandes;
+    @FXML private Label lblPendingCommandes;
+    @FXML private Label lblUrgentCommandes;
     @FXML private Button btnThemeToggle;
     
     @FXML private TableView<Commande> tableCommandes;
@@ -75,6 +79,7 @@ public class AfficherCommandesController extends BaseFront implements Initializa
         applySessionUser();
         setupFilters();
         setupTableColumns();
+        setupFriendlyTableColumns();
         loadDonnees();
 
         // Apply theme
@@ -100,7 +105,7 @@ public class AfficherCommandesController extends BaseFront implements Initializa
     }
 
     private void refreshInlineStyles() {
-        lblCount.setStyle(themeManager.getFrontCountStyle());
+        lblCount.setStyle("");
     }
 
     private void setupFilters() {
@@ -126,7 +131,7 @@ public class AfficherCommandesController extends BaseFront implements Initializa
                     setText(null);
                 } else {
                     Label lbl = new Label("#" + item);
-                    lbl.setStyle(themeManager.getTableBoldStyle());
+                    lbl.getStyleClass().add("front-commande-reference");
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -142,8 +147,8 @@ public class AfficherCommandesController extends BaseFront implements Initializa
                     setGraphic(null);
                     setText(null);
                 } else {
-                    Label lbl = new Label(String.valueOf(item));
-                    lbl.setStyle(themeManager.getTableBoldStyle());
+                    Label lbl = new Label(item + " ml");
+                    lbl.getStyleClass().add("front-commande-quantity");
                     setGraphic(lbl);
                     setText(null);
                 }
@@ -157,10 +162,12 @@ public class AfficherCommandesController extends BaseFront implements Initializa
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
+                    setText(null);
                 } else {
                     Label lbl = new Label(item);
-                    lbl.getStyleClass().addAll("badge", "badge-red");
+                    lbl.getStyleClass().add("front-commande-blood-badge");
                     setGraphic(lbl);
+                    setText(null);
                 }
             }
         });
@@ -172,13 +179,12 @@ public class AfficherCommandesController extends BaseFront implements Initializa
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
+                    setText(null);
                 } else {
                     Label lbl = new Label(item);
-                    lbl.getStyleClass().addAll("badge", "badge-yellow");
-                    if ("Haute".equals(item)) {
-                        lbl.getStyleClass().add("badge-red");
-                    }
+                    lbl.getStyleClass().addAll("front-commande-priority", priorityClass(item));
                     setGraphic(lbl);
+                    setText(null);
                 }
             }
         });
@@ -191,7 +197,7 @@ public class AfficherCommandesController extends BaseFront implements Initializa
                 if (empty || item == null) {
                     setGraphic(null);
                 } else {
-                    Label lbl = new Label("🕘 " + item);
+                    Label lbl = new Label(item);
                     lbl.setStyle("-fx-text-fill: #f1c40f; -fx-font-weight: bold; -fx-font-size: 12px;");
                     setGraphic(lbl);
                 }
@@ -200,7 +206,7 @@ public class AfficherCommandesController extends BaseFront implements Initializa
 
         colActions.setCellValueFactory(param -> new javafx.beans.property.SimpleObjectProperty<>(param.getValue()));
         colActions.setCellFactory(param -> new TableCell<Commande, Commande>() {
-            private final Button btnPdf = new Button("📄 Reçu PDF");
+            private final Button btnPdf = new Button("Recu PDF");
 
             {
                 btnPdf.getStyleClass().add("submit-button");
@@ -224,6 +230,174 @@ public class AfficherCommandesController extends BaseFront implements Initializa
                 }
             }
         });
+    }
+
+    private void setupFriendlyTableColumns() {
+        colReference.setCellFactory(column -> new TableCell<Commande, Integer>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                }
+                Label lbl = new Label("#" + item);
+                lbl.getStyleClass().add("front-commande-reference");
+                setGraphic(lbl);
+                setText(null);
+            }
+        });
+
+        colQuantite.setCellFactory(column -> new TableCell<Commande, Integer>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                }
+                Label lbl = new Label(item + " ml");
+                lbl.getStyleClass().add("front-commande-quantity");
+                setGraphic(lbl);
+                setText(null);
+            }
+        });
+
+        colTypeSang.setCellFactory(column -> new TableCell<Commande, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                }
+                Label lbl = new Label(item);
+                lbl.getStyleClass().add("front-commande-blood-badge");
+                setGraphic(lbl);
+                setText(null);
+            }
+        });
+
+        colPriorite.setCellFactory(column -> new TableCell<Commande, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                }
+                Label lbl = new Label(item);
+                lbl.getStyleClass().addAll("front-commande-priority", priorityClass(item));
+                setGraphic(lbl);
+                setText(null);
+            }
+        });
+
+        colStatut.setCellFactory(column -> new TableCell<Commande, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                }
+                FontIcon icon = new FontIcon(statusIcon(item));
+                icon.setIconSize(12);
+                icon.getStyleClass().add("front-commande-status-icon");
+
+                Label lbl = new Label(item);
+                lbl.getStyleClass().add("front-commande-status-text");
+
+                HBox box = new HBox(7, icon, lbl);
+                box.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                box.getStyleClass().addAll("front-commande-status-pill", statusClass(item));
+                setGraphic(box);
+                setText(null);
+            }
+        });
+
+        colActions.setCellFactory(param -> new TableCell<Commande, Commande>() {
+            private final Button btnPdf = createReceiptButton();
+
+            {
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(btnPdf);
+                btnPdf.setOnAction(event -> {
+                    Commande commande = getTableView().getItems().get(getIndex());
+                    generatePDFReceipt(commande);
+                });
+            }
+
+            @Override
+            protected void updateItem(Commande commande, boolean empty) {
+                super.updateItem(commande, empty);
+                if (empty || commande == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                }
+                HBox hBox = new HBox(8, btnPdf);
+                hBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                setGraphic(hBox);
+                setText(null);
+            }
+        });
+    }
+
+    private Button createReceiptButton() {
+        Button button = new Button("Recu");
+        FontIcon icon = new FontIcon("fas-file-pdf");
+        icon.setIconSize(13);
+        icon.getStyleClass().add("ui-font-icon");
+        button.setGraphic(icon);
+        button.setTooltip(new Tooltip("Telecharger le recu PDF"));
+        button.setAccessibleText("Telecharger le recu PDF");
+        button.setFocusTraversable(false);
+        button.getStyleClass().add("front-commande-receipt-btn");
+        return button;
+    }
+
+    private String priorityClass(String priority) {
+        if (priority == null) {
+            return "front-priority-medium";
+        }
+        String normalized = priority.trim().toLowerCase();
+        if (normalized.contains("haute")) {
+            return "front-priority-high";
+        }
+        if (normalized.contains("basse")) {
+            return "front-priority-low";
+        }
+        return "front-priority-medium";
+    }
+
+    private String statusClass(String status) {
+        if (status == null) {
+            return "front-status-pending";
+        }
+        String normalized = status.trim().toLowerCase();
+        if (normalized.contains("valid")) {
+            return "front-status-valid";
+        }
+        if (normalized.contains("annul") || normalized.contains("refus")) {
+            return "front-status-cancelled";
+        }
+        return "front-status-pending";
+    }
+
+    private String statusIcon(String status) {
+        String cssClass = statusClass(status);
+        if ("front-status-valid".equals(cssClass)) {
+            return "fas-check-circle";
+        }
+        if ("front-status-cancelled".equals(cssClass)) {
+            return "fas-times-circle";
+        }
+        return "fas-clock";
     }
 
     private void loadDonnees() {
@@ -273,6 +447,26 @@ public class AfficherCommandesController extends BaseFront implements Initializa
     private void updateCount() {
         if (filteredData != null) {
             lblCount.setText(filteredData.size() + " commande(s)");
+        }
+        if (commandesList == null) {
+            return;
+        }
+
+        long pending = commandesList.stream()
+                .filter(commande -> commande.getStatus() != null && commande.getStatus().toLowerCase().contains("attente"))
+                .count();
+        long urgent = commandesList.stream()
+                .filter(commande -> commande.getPriorite() != null && commande.getPriorite().equalsIgnoreCase("Haute"))
+                .count();
+
+        if (lblTotalCommandes != null) {
+            lblTotalCommandes.setText(String.valueOf(commandesList.size()));
+        }
+        if (lblPendingCommandes != null) {
+            lblPendingCommandes.setText(String.valueOf(pending));
+        }
+        if (lblUrgentCommandes != null) {
+            lblUrgentCommandes.setText(String.valueOf(urgent));
         }
     }
 

@@ -6,7 +6,7 @@
 <?import javafx.geometry.Insets?>
 
 <StackPane stylesheets="@agent_banque.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="tn.esprit.controllers.AgentBanqueBaseController" prefWidth="1550" prefHeight="900" style="-fx-background-color: #0A0A0A;">
+           fx:controller="tn.esprit.controllers.AgentBanqueBaseController" prefWidth="1550" prefHeight="900" styleClass="agent-root">
 
     <VBox>
         <!-- Custom Top Navigation -->
@@ -20,7 +20,7 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <!-- User Section & Menu Button -->
+            <!-- User Section &amp; Menu Button -->
             <HBox alignment="CENTER_RIGHT" spacing="20">
                 <padding><Insets left="25" right="25"/></padding>
 
@@ -33,7 +33,8 @@
                     <Label fx:id="userNameLabel" text="Utilisateur" styleClass="user-name-label" />
                 </HBox>
 
-                <Button text="MENU ☰" styleClass="nav-link" onAction="#handleMenuToggle" style="-fx-font-size: 13px; -fx-text-fill: white; -fx-font-weight: 800;"/>
+                <Button fx:id="btnThemeToggle" mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+                <Button fx:id="menuToggleBtn" text="≡  MENU" styleClass="nav-link" onAction="#handleMenuToggle"/>
             </HBox>
         </HBox>
 
@@ -46,16 +47,16 @@
           style="-fx-background-color: rgba(0,0,0,0.6);" onMouseClicked="#handleMenuClose">
         <HBox HBox.hgrow="ALWAYS" /> <!-- Filler left space -->
 
-        <VBox styleClass="menu-drawer" prefWidth="400" spacing="20" onMouseClicked="#handleMenuToggle">
+        <VBox styleClass="menu-drawer" prefWidth="420" spacing="24" onMouseClicked="#consumeMenuClick">
             <!-- Close Header -->
-            <HBox alignment="CENTER_RIGHT" prefHeight="60">
-                <Button text="FERMER ✕" styleClass="nav-link" style="-fx-text-fill: white;" onAction="#handleMenuClose"/>
+            <HBox alignment="CENTER_RIGHT" prefHeight="50">
+                <Button text="✕  FERMER" styleClass="nav-link" onAction="#handleMenuToggle"/>
             </HBox>
 
             <!-- Links -->
-            <VBox spacing="10">
+            <VBox spacing="12">
                 <Button text="ACCUEIL" styleClass="menu-btn" onAction="#goToAccueil" maxWidth="Infinity" alignment="CENTER_LEFT" />
-                <Button text="DEMANDES" styleClass="menu-btn, menu-btn-active" onAction="#goToDemandes" maxWidth="Infinity" alignment="CENTER_LEFT"/>
+                <Button text="DEMANDES" styleClass="menu-btn" onAction="#goToDemandes" maxWidth="Infinity" alignment="CENTER_LEFT"/>
                 <Button text="TRANSFERTS" styleClass="menu-btn" onAction="#goToTransferts" maxWidth="Infinity" alignment="CENTER_LEFT"/>
                 <Button text="MON PROFIL" styleClass="menu-btn" onAction="#goToProfil" maxWidth="Infinity" alignment="CENTER_LEFT"/>
             </VBox>
@@ -64,9 +65,9 @@
 
             <!-- Session Footer -->
             <VBox spacing="15">
-                <Label text="Session: " style="-fx-text-fill: rgba(255,255,255,0.65); -fx-font-size: 13px;" />
-                <Label fx:id="sessionEmailLabel" text="email@example.com" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px;" />
-                <Button text="[➜] Déconnexion" styleClass="logout-btn" maxWidth="Infinity" onAction="#handleLogout"/>
+                <Label text="Session:" styleClass="agent-session-label" />
+                <Label fx:id="sessionEmailLabel" text="email@example.com" styleClass="agent-session-email" />
+                <Button text="Deconnexion" styleClass="logout-btn" maxWidth="Infinity" onAction="#handleLogout"/>
             </VBox>
         </VBox>
     </HBox>

@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Service d'appel à l'API Google Gemini pour les prédictions IA.
  */
 public class GeminiServiceCampagne {
-
+    private static final String API_KEY = " ";
     private static final String API_URL =
             "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=" + API_KEY;
 

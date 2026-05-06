@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <StackPane prefHeight="900.0" prefWidth="1400.0" stylesheets="@commande.css"
            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
@@ -52,7 +53,12 @@
                               <Label styleClass="home-hero-title-accent" text="Une goutte a la fois." wrapText="true" />
                            </VBox>
                            <Label styleClass="home-hero-copy" text="Bienvenue sur votre espace BloodLink. Gerez vos dons, suivez vos commandes de sang et restez informe des campagnes de collecte en temps reel." wrapText="true" />
-                           <Button mnemonicParsing="false" styleClass="button-primary" text="Faire un don" />
+                           <Button mnemonicParsing="false" styleClass="button-primary">
+                              <graphic>
+                                 <FontIcon iconLiteral="fas-tint" iconSize="14" styleClass="ui-font-icon" />
+                              </graphic>
+                              <text>Faire un don</text>
+                           </Button>
                         </children>
                      </VBox>
 
@@ -61,7 +67,9 @@
                            <VBox spacing="5.0" styleClass="home-info-card">
                               <children>
                                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                    <Label styleClass="home-card-icon" text="Impact" />
+                                    <StackPane styleClass="home-card-icon-shell">
+                                       <FontIcon iconLiteral="fas-heartbeat" iconSize="20" styleClass="home-card-icon" />
+                                    </StackPane>
                                     <VBox>
                                        <Label styleClass="home-card-title" text="Direct Impact" />
                                        <Label styleClass="home-card-copy" text="1 don = 3 vies sauvees" />
@@ -72,7 +80,9 @@
                            <VBox spacing="5.0" styleClass="home-alert-card">
                               <children>
                                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                    <Label styleClass="home-card-icon" text="Urgent" />
+                                    <StackPane styleClass="home-card-icon-shell, home-card-icon-shell-alert">
+                                       <FontIcon iconLiteral="fas-exclamation-triangle" iconSize="18" styleClass="home-card-icon" />
+                                    </StackPane>
                                     <VBox>
                                        <Label styleClass="home-card-title" text="Besoin Urgent" />
                                        <Label styleClass="home-card-copy" text="Stocks critiques, O-" />

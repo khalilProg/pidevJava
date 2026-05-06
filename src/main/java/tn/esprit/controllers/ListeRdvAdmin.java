@@ -9,12 +9,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import org.kordamp.ikonli.javafx.FontIcon;
 import tn.esprit.entities.Questionnaire;
 import tn.esprit.entities.RendezVous;
 import tn.esprit.entities.User;
@@ -79,10 +81,15 @@ public class ListeRdvAdmin {
 
         //Actions column
         actionsColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button updateBtn = new Button("Update");
-            private final Button deleteBtn = new Button("Delete");
-            private final HBox container = new HBox(5, updateBtn, deleteBtn);
+            private final Button updateBtn = createActionButton("fas-edit", "Modifier", "action-icon-btn");
+            private final Button deleteBtn = createActionButton("fas-trash", "Supprimer", "action-icon-btn", "action-icon-delete");
+            private final HBox container = new HBox(8, updateBtn, deleteBtn);
+
             {
+                container.setAlignment(Pos.CENTER_LEFT);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(updateBtn);
+                tn.esprit.tools.AnimationUtils.applyHoverAnimation(deleteBtn);
+
                 deleteBtn.setOnAction(e -> {
                     RendezVous rdv = getTableView().getItems().get(getIndex());
                     try {
@@ -120,12 +127,31 @@ public class ListeRdvAdmin {
                 if (empty) setGraphic(null);
                 else {
                     RendezVous rdv = getTableView().getItems().get(getIndex());
-                    updateBtn.setVisible(rdv.getDateDon().isAfter(LocalDateTime.now()));
+                    boolean canUpdate = rdv.getDateDon().isAfter(LocalDateTime.now());
+                    updateBtn.setVisible(canUpdate);
+                    updateBtn.setManaged(canUpdate);
+                    setAlignment(Pos.CENTER_LEFT);
                     setGraphic(container);
                 }
 
             }
         });
+    }
+
+    private Button createActionButton(String iconLiteral, String tooltipText, String... styleClasses) {
+        Button button = new Button();
+        FontIcon icon = new FontIcon(iconLiteral);
+        icon.setIconSize(13);
+        icon.getStyleClass().add("ui-font-icon");
+        button.setGraphic(icon);
+        button.setText("");
+        button.setTooltip(new Tooltip(tooltipText));
+        button.setAccessibleText(tooltipText);
+        button.setFocusTraversable(false);
+        button.setMinSize(32, 32);
+        button.setPrefSize(32, 32);
+        button.getStyleClass().addAll(styleClasses);
+        return button;
     }
 
     private void loadCalendarEntries() throws SQLException {

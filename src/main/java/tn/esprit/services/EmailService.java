@@ -4,7 +4,6 @@ import tn.esprit.entities.Commande;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +13,6 @@ import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -63,6 +61,54 @@ public class EmailService {
                 + "\nBANQUE: " + banqueName;
 
         return sendHtmlEmail(toEmail, "BloodLink - Commande creee", htmlContent, debug);
+    }
+
+    public boolean sendAdminNewCommandeNotification(String adminEmail, String adminName, String clientName,
+                                                    Commande commande, String banqueName, String requestedBloodType) {
+        String safeAdminName = escapeHtml(adminName == null || adminName.isBlank() ? "Administrateur" : adminName);
+        String safeClientName = escapeHtml(clientName == null || clientName.isBlank() ? "Client" : clientName);
+        String safeBanqueName = escapeHtml(banqueName == null || banqueName.isBlank() ? "-" : banqueName);
+        String safeRequested = escapeHtml(requestedBloodType == null || requestedBloodType.isBlank()
+                ? commande.getTypeSang()
+                : requestedBloodType);
+        String safeSelected = escapeHtml(commande.getTypeSang());
+
+        String htmlContent = "<!doctype html>"
+                + "<html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
+                + "<title>Nouvelle commande BloodLink</title></head>"
+                + "<body style='margin:0;padding:0;background:#0b0f14;font-family:Arial,Helvetica,sans-serif;color:#ffffff;'>"
+                + "<table role='presentation' width='100%' cellpadding='0' cellspacing='0' style='background:#0b0f14;padding:28px 12px;'><tr><td align='center'>"
+                + "<table role='presentation' width='620' cellpadding='0' cellspacing='0' style='width:620px;max-width:620px;'>"
+                + "<tr><td style='padding:0 0 14px 0;'>"
+                + "<div style='font-weight:900;text-transform:uppercase;font-size:22px;'>Nouvelle commande</div>"
+                + "<div style='margin-top:6px;color:rgba(255,255,255,.65);font-size:14px;'>Une nouvelle demande de sang attend une validation admin.</div>"
+                + "</td></tr>"
+                + "<tr><td style='background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px;'>"
+                + "<p style='font-size:15px;line-height:1.6;margin:0 0 16px 0;'>Bonjour <strong>" + safeAdminName + "</strong>,</p>"
+                + "<p style='font-size:14px;color:rgba(255,255,255,.78);line-height:1.7;margin:0 0 18px 0;'>"
+                + safeClientName + " a cree la commande <strong>#" + commande.getReference() + "</strong>.</p>"
+                + "<table role='presentation' width='100%' cellpadding='0' cellspacing='0' style='border-collapse:separate;border-spacing:0 10px;'>"
+                + infoRow("Banque", safeBanqueName)
+                + infoRow("Besoin patient", safeRequested)
+                + infoRow("Type commande", safeSelected)
+                + infoRow("Quantite", commande.getQuantite() + " ml")
+                + infoRow("Priorite", escapeHtml(commande.getPriorite()))
+                + "</table>"
+                + "<div style='margin-top:18px;padding:14px 16px;border-radius:12px;background:rgba(230,57,57,.12);border:1px solid rgba(230,57,57,.35);font-size:13px;line-height:1.6;'>"
+                + "Le stock sera diminue uniquement si cette commande est validee.</div>"
+                + "</td></tr>"
+                + "<tr><td style='padding:14px 2px 0 2px;color:rgba(255,255,255,.55);font-size:12px;'>"
+                + "&copy; " + Year.now().getValue() + " BloodLink - Notifications automatiques</td></tr>"
+                + "</table></td></tr></table></body></html>";
+
+        String debug = "ADMIN NOTIFICATION"
+                + "\nCOMMANDE: #" + commande.getReference()
+                + "\nCLIENT: " + clientName
+                + "\nTYPE DEMANDE: " + requestedBloodType
+                + "\nTYPE COMMANDE: " + commande.getTypeSang()
+                + "\nQUANTITE: " + commande.getQuantite();
+
+        return sendHtmlEmail(adminEmail, "BloodLink - Nouvelle commande #" + commande.getReference(), htmlContent, debug);
     }
 
     public boolean sendRendezVousConfirmation(String toEmail, String clientName, String campagne,
@@ -137,7 +183,7 @@ public class EmailService {
             Transport.send(message);
             System.out.println("Email sent successfully to " + toEmail + (customUser != null ? " via custom account" : ""));
             return true;
-        } catch (MessagingException | java.io.UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Email could not be sent: " + e.getMessage());
             return false;
@@ -154,7 +200,7 @@ public class EmailService {
         props.put("mail.smtp.connectiontimeout", "10000");
         props.put("mail.smtp.timeout", "10000");
         props.put("mail.smtp.writetimeout", "10000");
-        props.put("mail.debug", "true"); // Enable debugging to see SMTP log in console
+        props.put("mail.debug", getConfig("BLOODLINK_MAIL_DEBUG", "bloodlink.mail.debug", "false"));
         return props;
     }
 

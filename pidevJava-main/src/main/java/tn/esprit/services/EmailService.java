@@ -4,7 +4,6 @@ import tn.esprit.entities.Commande;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +13,6 @@ import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -137,7 +135,7 @@ public class EmailService {
             Transport.send(message);
             System.out.println("Email sent successfully to " + toEmail + (customUser != null ? " via custom account" : ""));
             return true;
-        } catch (MessagingException | java.io.UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Email could not be sent: " + e.getMessage());
             return false;
@@ -154,7 +152,7 @@ public class EmailService {
         props.put("mail.smtp.connectiontimeout", "10000");
         props.put("mail.smtp.timeout", "10000");
         props.put("mail.smtp.writetimeout", "10000");
-        props.put("mail.debug", "true"); // Enable debugging to see SMTP log in console
+        props.put("mail.debug", getConfig("BLOODLINK_MAIL_DEBUG", "bloodlink.mail.debug", "false"));
         return props;
     }
 

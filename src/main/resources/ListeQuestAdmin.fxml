@@ -14,7 +14,7 @@
 
     <!-- Navbar -->
     <fx:include source="BaseBack.fxml" fx:id="headerInclude"
-                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"/>
     <!-- Page Title -->
 
     <Text fill="WHITE" layoutX="300" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"

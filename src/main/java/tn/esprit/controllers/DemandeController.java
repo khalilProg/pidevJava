@@ -150,7 +150,7 @@ public class DemandeController {
                 Commande cmd = getTableView().getItems().get(getIndex());
 
                 try {
-                    if ("VALIDEE".equals(status)) {
+                    if (false && "VALIDEE".equals(status)) {
                         StockService stockService = new StockService();
                         Stock stock = stockService.getStockByOrg(cmd.getBanqueId(), "BANQUE", cmd.getTypeSang());
 
@@ -170,8 +170,7 @@ public class DemandeController {
                         stockService.modifier(stock);
                     }
 
-                    cmd.setStatus(status);
-                    commandeService.modifier(cmd);
+                    commandeService.updateStatusAndAdjustStock(cmd, status);
                     tableCommande.refresh();
                 } catch (Exception ex) {
                     ex.printStackTrace();

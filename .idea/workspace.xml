@@ -4,37 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueDemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueTransfertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewDemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueViewTransfertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/DemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/DemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ValidateDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/ValidateDemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addDemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addTrasnfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/addTrasnfertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backDemandeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backDemandeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backTransfertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/backTransfertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/BanqueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/BanqueService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/CommandeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/StockService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/MyDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/tools/MyDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueAddDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueAddDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueEditDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueEditDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueTransfert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewTransfert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueViewTransfert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjoutDemande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjoutDemande.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DemandeBackView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TransfertBackView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/agent_banque.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/agent_banque.css" afterDir="false" />
-    </list>
+    <list default="true" id="d34c9672-e8ad-407c-811e-80886160ad51" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,18 +27,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Rami496"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Rami496&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/khalilProg/pidevJava.git",
-    "accountId": "49405b2c-6048-439c-b11b-712d64ecce98"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/khalilProg/pidevJava.git&quot;,
+    &quot;accountId&quot;: &quot;49405b2c-6048-439c-b11b-712d64ecce98&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -216,39 +186,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Launcher.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.MainFx.executor": "Run",
-    "Application.UserMain.executor": "Run",
-    "Application.banqueMain.executor": "Run",
-    "Maven.bloodlink [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ramys/integrationfinal/pidevJava",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainFx.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UserMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.banqueMain.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.bloodlink [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ramys/integrationfinal/pidevJava&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\rabii\Desktop\Pidev\src\main\resources" />
@@ -263,7 +233,8 @@
       </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-24.0.2+12-54" />
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/jbr-17.0.14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="tn.esprit.mains.Main" />
       <module name="bloodlink" />
       <extension name="coverage">
@@ -292,6 +263,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.mainfx" />
       <item itemvalue="Application.Launcher" />
       <item itemvalue="Application.MainFx" />
       <item itemvalue="Application.Main" />
@@ -307,7 +279,6 @@
     <attachedChunks>
       <set>
         <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -361,6 +332,7 @@
       <workItem from="1777817873038" duration="2281000" />
       <workItem from="1777838130518" duration="2031000" />
       <workItem from="1777893939075" duration="6315000" />
+      <workItem from="1778077100693" duration="15362000" />
     </task>
     <servers />
   </component>

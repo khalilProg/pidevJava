@@ -17,7 +17,7 @@
             fx:controller="tn.esprit.controllers.ListeRdvAdmin">
 
     <!-- Navbar -->
-    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"/>
     <Text fill="WHITE" layoutX="300" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
           text="Liste rendez vous" styleClass="hero-title">
         <font><Font size="32.0"/></font>

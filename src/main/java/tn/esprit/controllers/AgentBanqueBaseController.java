@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import tn.esprit.entities.User;
 import tn.esprit.tools.SessionManager;
@@ -104,6 +105,11 @@ public class AgentBanqueBaseController extends BaseFront {
         // Implement when profile page exists
         System.out.println("Go to Profil");
         closeMenu();
+    }
+
+    @FXML
+    public void consumeMenuClick(MouseEvent event) {
+        event.consume();
     }
 
     private void closeMenu() {

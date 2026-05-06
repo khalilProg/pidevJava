@@ -1,0 +1,13 @@
+# Option 1: safer production/demo backend endpoint.
+# bloodlink.stripe.checkout.endpoint=http://localhost:4242/create-checkout-session
+
+# Option 2: direct Stripe API from the JavaFX app.
+# Use test keys only. Do not ship a live secret key in a desktop app.
+stripe.secret.key=sk_test_your_key_here
+stripe.currency=usd
+
+# Amount in the smallest currency unit. 1000 USD cents = $10.00.
+stripe.unit.amount=1000
+
+stripe.success.url=https://example.com/success
+stripe.cancel.url=https://example.com/cancel
