@@ -4,11 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -21,13 +26,16 @@ import tn.esprit.services.EntiteCollecteService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import javafx.scene.web.WebView;
+import javafx.scene.web.WebEngine;
+import javafx.concurrent.Worker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class EntiteCollecteFrontController implements Initializable {
+public class EntiteCollecteFrontController extends BaseFront implements Initializable {
 
     @FXML private ScrollPane scrollPaneEntite;
     @FXML private GridPane gridEntites;
@@ -36,12 +44,19 @@ public class EntiteCollecteFrontController implements Initializable {
     @FXML private Button btnAjouter;
     @FXML private Button btnModifier;
     @FXML private Button btnSupprimer;
+    @FXML private Button btnToggleView;
+    @FXML private VBox mapContainer;
+    @FXML private WebView mapWebView;
+    @FXML private HBox dashboardContainer;
 
     private EntiteCollecteService service = new EntiteCollecteService();
     private List<EntiteDeCollecte> activeList = new ArrayList<>();
     private boolean isSorted = false;
     private EntiteDeCollecte selectedEntite = null;
     private VBox selectedCard = null;
+    private boolean isMapView = false;
+    private WebEngine webEngine;
+    private boolean mapLoaded = false;
 
     private static final String STYLE_NORMAL   = "-fx-background-color: #141414; -fx-background-radius: 16; -fx-border-color: #2D2D2D; -fx-border-width: 1; -fx-border-radius: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 12, 0, 0, 5); -fx-cursor: hand; -fx-padding: 18;";
     private static final String STYLE_HOVER    = "-fx-background-color: #1A1A1A; -fx-background-radius: 16; -fx-border-color: rgba(255,62,62,0.3); -fx-border-width: 1; -fx-border-radius: 16; -fx-effect: dropshadow(gaussian, rgba(255,62,62,0.1), 15, 0, 0, 5); -fx-cursor: hand; -fx-padding: 18;";
@@ -49,11 +64,83 @@ public class EntiteCollecteFrontController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        super.initialize(); // Appel à BaseFront
+        chargerDashboard();
         chargerDonnees(null);
 
         txtRechercheFront.textProperty().addListener((observable, oldValue, newValue) -> {
             chargerDonnees(newValue);
         });
+    }
+
+    private void chargerDashboard() {
+        dashboardContainer.getChildren().clear();
+
+        int totalEntites = service.countTotalEntites();
+        int totalCampagnes = service.countTotalCampagnesLiees();
+        java.util.List<Object[]> top3 = service.getTopEntitesByContributions(3);
+
+        // Card: Total Entités
+        VBox cardTotal = buildStatCard("🏥", String.valueOf(totalEntites), "Total Entités", false, "#E63946");
+        HBox.setHgrow(cardTotal, Priority.ALWAYS);
+
+        // Card: Campagnes liées
+        VBox cardCampagnes = buildStatCard("🩸", String.valueOf(totalCampagnes), "Campagnes Liées", false, "#E63946");
+        HBox.setHgrow(cardCampagnes, Priority.ALWAYS);
+
+        dashboardContainer.getChildren().addAll(cardTotal, cardCampagnes);
+
+        // Top 3 entités les plus actives
+        String[] medals = {"1", "2", "3"};
+        String[] colors = {"#FFD700", "#C0C0C0", "#CD7F32"}; // Gold, Silver, Bronze
+
+        for (int i = 0; i < top3.size(); i++) {
+            Object[] row = top3.get(i);
+            String nom = (String) row[1];
+            String type = (String) row[2];
+            int nbCampagnes = (int) row[4];
+
+            VBox card = buildStatCard(
+                    "#" + medals[i],
+                    String.valueOf(nbCampagnes),
+                    nom + " (" + type + ")",
+                    true,
+                    colors[i]
+            );
+            HBox.setHgrow(card, Priority.ALWAYS);
+            dashboardContainer.getChildren().add(card);
+        }
+    }
+
+    private VBox buildStatCard(String icon, String value, String label, boolean isTop3, String rankColor) {
+        VBox card = new VBox(10);
+        card.getStyleClass().add("bloodlink-stat-card");
+
+        HBox topRow = new HBox(12);
+        topRow.setAlignment(Pos.CENTER_LEFT);
+
+        Label lblIcon = new Label(icon);
+        lblIcon.getStyleClass().add("bloodlink-stat-icon");
+        if (isTop3) {
+            lblIcon.setStyle("-fx-text-fill: " + rankColor + "; -fx-font-size: 16px; -fx-font-weight: 900;");
+        }
+
+        StackPane iconContainer = new StackPane(lblIcon);
+        iconContainer.getStyleClass().add("bloodlink-stat-icon-container");
+        if (isTop3) {
+            iconContainer.setStyle("-fx-background-color: " + rankColor + "1A;"); // 10% opacity
+        }
+
+        Label lblValue = new Label(value);
+        lblValue.getStyleClass().add("bloodlink-stat-value");
+
+        topRow.getChildren().addAll(iconContainer, lblValue);
+
+        Label lblLabel = new Label(label);
+        lblLabel.getStyleClass().add("bloodlink-stat-label");
+
+        card.getChildren().addAll(topRow, lblLabel);
+        return card;
     }
 
     private void chargerDonnees(String recherche) {
@@ -68,6 +155,7 @@ public class EntiteCollecteFrontController implements Initializable {
             selectedEntite = null;
             selectedCard = null;
             renduCartes();
+            if (isMapView) rafraichirCarte();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -80,6 +168,7 @@ public class EntiteCollecteFrontController implements Initializable {
             btnTrier.setText("⬆ Reprendre l'ordre");
             isSorted = true;
             renduCartes();
+            if (isMapView) rafraichirCarte();
         } else {
             chargerDonnees(txtRechercheFront.getText());
         }
@@ -87,18 +176,7 @@ public class EntiteCollecteFrontController implements Initializable {
 
     @FXML
     void handleAjouter(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEntiteCollecte.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Ajouter une Entité de Collecte");
-            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-            chargerDonnees(txtRechercheFront.getText());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        switchScene(event, "/AjouterEntiteCollecte.fxml");
     }
 
     @FXML
@@ -107,20 +185,8 @@ public class EntiteCollecteFrontController implements Initializable {
             afficherAlerte(Alert.AlertType.WARNING, "Aucune sélection", "Cliquez sur une carte pour la sélectionner avant de modifier.");
             return;
         }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierEntiteCollecte.fxml"));
-            Parent root = loader.load();
-            ModifierEntiteCollecteController ctrl = loader.getController();
-            ctrl.setEntite(selectedEntite);
-            Stage stage = new Stage();
-            stage.setTitle("Modifier l'Entité de Collecte");
-            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-            chargerDonnees(txtRechercheFront.getText());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ModifierEntiteCollecteController.setEntiteActive(selectedEntite);
+        switchScene(event, "/ModifierEntiteCollecte.fxml");
     }
 
     @FXML
@@ -141,6 +207,53 @@ public class EntiteCollecteFrontController implements Initializable {
             } catch (Exception e) {
                 afficherAlerte(Alert.AlertType.ERROR, "Erreur", e.getMessage());
             }
+        }
+    }
+
+    @FXML
+    void handleToggleView(ActionEvent event) {
+        isMapView = !isMapView;
+        if (isMapView) {
+            btnToggleView.setText("🔲 Vue Grille");
+            scrollPaneEntite.setVisible(false);
+            mapContainer.setVisible(true);
+
+            if (!mapLoaded) {
+                webEngine = mapWebView.getEngine();
+                webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+                    if (newState == Worker.State.SUCCEEDED) {
+                        mapLoaded = true;
+                        rafraichirCarte();
+                    }
+                });
+                URL url = getClass().getResource("/map_entites.html");
+                if (url != null) {
+                    webEngine.load(url.toExternalForm());
+                } else {
+                    System.err.println("Fichier map_entites.html introuvable !");
+                }
+            } else {
+                rafraichirCarte();
+            }
+        } else {
+            btnToggleView.setText("🗺️ Vue Carte");
+            scrollPaneEntite.setVisible(true);
+            mapContainer.setVisible(false);
+        }
+    }
+
+    private void rafraichirCarte() {
+        if (!mapLoaded || webEngine == null) return;
+
+        webEngine.executeScript("clearMarkers();");
+        for (EntiteDeCollecte e : activeList) {
+            String nom = e.getNom().replace("'", "\\'");
+            String type = e.getType().replace("'", "\\'");
+            String adresse = (e.getAdresse() + ", " + e.getVille() + ", Tunisie").replace("'", "\\'");
+            String tel = e.getTel().replace("'", "\\'");
+
+            String script = String.format("queueMarqueur('%s', '%s', '%s', '%s');", nom, type, adresse, tel);
+            webEngine.executeScript(script);
         }
     }
 

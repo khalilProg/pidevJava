@@ -6,10 +6,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tn.esprit.entities.EntiteDeCollecte;
@@ -29,6 +38,7 @@ public class EntiteCollecteBackController implements Initializable {
     @FXML private Button btnModifier;
     @FXML private Button btnSupprimer;
     @FXML private Button btnTrier;
+    @FXML private HBox dashboardContainer;
 
     private EntiteCollecteService service = new EntiteCollecteService();
     private ObservableList<EntiteDeCollecte> observableList;
@@ -37,11 +47,82 @@ public class EntiteCollecteBackController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initialiserTable();
+        chargerDashboard();
         chargerDonnees();
 
         txtRecherche.textProperty().addListener((observable, oldValue, newValue) -> {
             rechercher(newValue);
         });
+    }
+
+    private void chargerDashboard() {
+        dashboardContainer.getChildren().clear();
+
+        int totalEntites = service.countTotalEntites();
+        int totalCampagnes = service.countTotalCampagnesLiees();
+        List<Object[]> top3 = service.getTopEntitesByContributions(3);
+
+        // Card: Total Entités
+        VBox cardTotal = buildStatCard("🏥", String.valueOf(totalEntites), "Total Entités", false, "#E63946");
+        HBox.setHgrow(cardTotal, Priority.ALWAYS);
+
+        // Card: Campagnes liées
+        VBox cardCampagnes = buildStatCard("🩸", String.valueOf(totalCampagnes), "Campagnes Liées", false, "#E63946");
+        HBox.setHgrow(cardCampagnes, Priority.ALWAYS);
+
+        dashboardContainer.getChildren().addAll(cardTotal, cardCampagnes);
+
+        // Top 3 entités les plus actives
+        String[] medals = {"1", "2", "3"};
+        String[] colors = {"#FFD700", "#C0C0C0", "#CD7F32"}; // Gold, Silver, Bronze
+
+        for (int i = 0; i < top3.size(); i++) {
+            Object[] row = top3.get(i);
+            String nom = (String) row[1];
+            String type = (String) row[2];
+            int nbCampagnes = (int) row[4];
+
+            VBox card = buildStatCard(
+                    "#" + medals[i],
+                    String.valueOf(nbCampagnes),
+                    nom + " (" + type + ")",
+                    true,
+                    colors[i]
+            );
+            HBox.setHgrow(card, Priority.ALWAYS);
+            dashboardContainer.getChildren().add(card);
+        }
+    }
+
+    private VBox buildStatCard(String icon, String value, String label, boolean isTop3, String rankColor) {
+        VBox card = new VBox(10);
+        card.getStyleClass().add("bloodlink-stat-card");
+
+        HBox topRow = new HBox(12);
+        topRow.setAlignment(Pos.CENTER_LEFT);
+
+        Label lblIcon = new Label(icon);
+        lblIcon.getStyleClass().add("bloodlink-stat-icon");
+        if (isTop3) {
+            lblIcon.setStyle("-fx-text-fill: " + rankColor + "; -fx-font-size: 16px; -fx-font-weight: 900;");
+        }
+
+        StackPane iconContainer = new StackPane(lblIcon);
+        iconContainer.getStyleClass().add("bloodlink-stat-icon-container");
+        if (isTop3) {
+            iconContainer.setStyle("-fx-background-color: " + rankColor + "1A;"); // 10% opacity
+        }
+
+        Label lblValue = new Label(value);
+        lblValue.getStyleClass().add("bloodlink-stat-value");
+
+        topRow.getChildren().addAll(iconContainer, lblValue);
+
+        Label lblLabel = new Label(label);
+        lblLabel.getStyleClass().add("bloodlink-stat-label");
+
+        card.getChildren().addAll(topRow, lblLabel);
+        return card;
     }
 
     private void initialiserTable() {
@@ -81,7 +162,7 @@ public class EntiteCollecteBackController implements Initializable {
         observableList = FXCollections.observableArrayList(listRecherche);
         tableEntite.setItems(observableList);
     }
-    
+
     @FXML
     void handleTrier(ActionEvent event) {
         if (observableList != null) {
@@ -90,7 +171,7 @@ public class EntiteCollecteBackController implements Initializable {
                 btnTrier.setText("⬆ Reprendre l'ordre");
                 isSorted = true;
             } else {
-                chargerDonnees(); 
+                chargerDonnees();
                 btnTrier.setText("⬇ Trier de A - Z");
                 isSorted = false;
             }
@@ -100,16 +181,17 @@ public class EntiteCollecteBackController implements Initializable {
     @FXML
     void handleAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEntiteCollecte.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEntiteAdmin.fxml"));
             Parent root = loader.load();
-            
+
             Stage stage = new Stage();
             stage.setTitle("Ajouter une Entité de Collecte");
             tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            
+
             chargerDonnees();
+            chargerDashboard();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,17 +208,17 @@ public class EntiteCollecteBackController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierEntiteCollecte.fxml"));
             Parent root = loader.load();
-            
-            ModifierEntiteCollecteController modifierController = loader.getController();
-            modifierController.setEntite(selected);
-            
+
+            ModifierEntiteCollecteController.setEntiteActive(selected);
+
             Stage stage = new Stage();
             stage.setTitle("Modifier l'Entité de Collecte");
             tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            
+
             chargerDonnees();
+            chargerDashboard();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,7 +231,7 @@ public class EntiteCollecteBackController implements Initializable {
             afficherAlerte(Alert.AlertType.WARNING, "Aucune sélection", "Veuillez sélectionner une entité à supprimer.");
             return;
         }
-        
+
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Voulez-vous vraiment supprimer l'entité : " + selected.getNom() + " ?", ButtonType.YES, ButtonType.NO);
         confirm.showAndWait();
         if(confirm.getResult() == ButtonType.YES) {
@@ -157,12 +239,18 @@ public class EntiteCollecteBackController implements Initializable {
                 service.supprimer(selected);
                 afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Entité supprimée avec succès !");
                 chargerDonnees();
+                chargerDashboard();
             } catch (Exception e) {
                 afficherAlerte(Alert.AlertType.ERROR, "Erreur lors de la suppression", e.getMessage());
             }
         }
     }
-    
+
+    @FXML
+    void handleRetour(ActionEvent event) {
+        // Retour à la page d'administration principale si besoin
+    }
+
     private void afficherAlerte(Alert.AlertType type, String titre, String msg) {
         Alert alert = new Alert(type);
         alert.setTitle(titre);

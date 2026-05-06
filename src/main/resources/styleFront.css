@@ -1431,3 +1431,48 @@ navbar top  right profile
 .theme-toggle-moon:pressed .ui-font-icon {
     -fx-icon-color: #b8c7ff;
 }
+
+
+/* ==============================
+   CALENDAR CSS
+   ============================== */
+.calendar-day-box {
+    -fx-background-color: #1A1A1A;
+    -fx-border-color: #2D2D2D;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px;
+    -fx-alignment: top-center;
+    -fx-min-height: 100px;
+}
+
+.calendar-day-box:hover {
+    -fx-background-color: rgba(230, 57, 57, 0.08);
+    -fx-border-color: rgba(230, 57, 57, 0.5);
+    -fx-cursor: hand;
+}
+
+.calendar-day-today {
+    -fx-background-color: rgba(230, 57, 57, 0.15);
+    -fx-border-color: #E63939;
+    -fx-border-width: 2px;
+}
+
+.calendar-day-number {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 5 0;
+}
+
+.calendar-event-tag {
+    -fx-background-color: #E63939;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 4px 8px;
+    -fx-background-radius: 4px;
+    -fx-alignment: center-left;
+    -fx-text-overrun: ellipsis;
+}

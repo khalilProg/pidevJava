@@ -18,6 +18,10 @@ import tn.esprit.tools.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import tn.esprit.services.CampagneService;
+import tn.esprit.tools.AnimationUtils;
 
 public class CampagneCard {
     @FXML private Label campaignName;
@@ -25,6 +29,8 @@ public class CampagneCard {
     @FXML private Label bloodTypes;
     @FXML private Label campaignDescription;
     @FXML private Button participateButton;
+    @FXML private Button btnModifier;
+    @FXML private Button btnSupprimer;
     private Campagne campagne;
     private final ClientService clientService = new ClientService();
 
@@ -32,10 +38,10 @@ public class CampagneCard {
         this.campagne = c;
         campaignName.setText(c.getTitre());
         campaignDates.setText("Du " + c.getDateDebut() + " au " + c.getDateFin());
-//        bloodTypes.setText(c.getTypeSang());
         bloodTypes.setText(c.getTypeSang().replace("[", "").replace("]", "").replace("\"", ""));
         campaignDescription.setText(c.getDescription());
-
+        if (btnModifier != null) AnimationUtils.applyHoverAnimation(btnModifier);
+        if (btnSupprimer != null) AnimationUtils.applyHoverAnimation(btnSupprimer);
     }
     @FXML public void openQuestionnaire() throws SQLException {
         try {
@@ -61,8 +67,8 @@ public class CampagneCard {
                                 } catch (SQLException e) {
                                     throw new RuntimeException(e);
                                 }
-                    }
-            )) {
+                            }
+                    )) {
                 // Show message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Info");
@@ -81,8 +87,8 @@ public class CampagneCard {
             tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
 
         } catch (IOException | SQLException ex) {
-        ex.printStackTrace();
-    }
+            ex.printStackTrace();
+        }
     }
 
     private Client resolveCurrentClient() throws SQLException {
@@ -96,5 +102,48 @@ public class CampagneCard {
         alert.setHeaderText(null);
         alert.setContentText("Connectez-vous avec un compte client ayant un profil complet avant de prendre un rendez-vous.");
         alert.showAndWait();
+    }
+
+
+    @FXML public void handleModifier(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierCampagneFront.fxml"));
+            Parent root = loader.load();
+            tn.esprit.controllers.ModifierCampagneFrontController controller = loader.getController();
+            controller.setCampagneToEdit(campagne);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML public void handleSupprimer(ActionEvent event) {
+        // Confirmation avant suppression
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirmer la suppression");
+        confirm.setHeaderText("Supprimer cette campagne ?");
+        confirm.setContentText("Cette action est irréversible. Voulez-vous vraiment supprimer \"" + campagne.getTitre() + "\" ?");
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                CampagneService service = new CampagneService();
+                try {
+                    service.supprimer(campagne);
+                    // Rafraîchir la liste
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/cnts_agent_home.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
+                } catch (RuntimeException ex) {
+                    Alert erreur = new Alert(Alert.AlertType.ERROR);
+                    erreur.setTitle("Suppression impossible");
+                    erreur.setHeaderText("Impossible de supprimer cette campagne");
+                    erreur.setContentText("Cette campagne est liée à des données existantes (rendez-vous, questionnaires, dons...). Veuillez d'abord supprimer ces données associées.");
+                    erreur.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

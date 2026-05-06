@@ -3,69 +3,119 @@ package tn.esprit.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import tn.esprit.entities.EntiteDeCollecte;
 import tn.esprit.services.EntiteCollecteService;
 
-public class ModifierEntiteCollecteController {
+public class ModifierEntiteCollecteController extends BaseFront {
 
-    private EntiteDeCollecte entiteActive;
+    private static EntiteDeCollecte entiteActive;
+
+    public static void setEntiteActive(EntiteDeCollecte entite) {
+        entiteActive = entite;
+    }
+
+    @FXML private TextField txtNom;
+    @FXML private TextField txtType;
+    @FXML private TextField txtAdresse;
+    @FXML private TextField txtVille;
+    @FXML private TextField txtTelephone;
+
+    @FXML private Label nomError;
+    @FXML private Label typeError;
+    @FXML private Label adresseError;
+    @FXML private Label villeError;
+    @FXML private Label telephoneError;
+
     private EntiteCollecteService service = new EntiteCollecteService();
 
     @FXML
-    private TextField txtNom;
+    public void initialize() {
+        super.initialize(); // Initialize BaseFront components
+        resetErrors();
 
-    @FXML
-    private TextField txtTelephone;
+        if (entiteActive != null) {
+            txtNom.setText(entiteActive.getNom());
+            txtTelephone.setText(entiteActive.getTel());
+            txtType.setText(entiteActive.getType());
+            txtAdresse.setText(entiteActive.getAdresse());
+            txtVille.setText(entiteActive.getVille());
+        }
+    }
 
-    @FXML
-    private TextField txtType;
+    private void resetErrors() {
+        nomError.setStyle("-fx-text-fill: -muted; -fx-font-size: 11px;");
+        nomError.setText("Le nom officiel de l'entité de collecte (ex: Hôpital X).");
 
-    @FXML
-    private TextField txtAdresse;
+        typeError.setStyle("-fx-text-fill: -muted; -fx-font-size: 11px;");
+        typeError.setText("Le type de l'entité.");
 
-    @FXML
-    private TextField txtVille;
+        adresseError.setStyle("-fx-text-fill: -muted; -fx-font-size: 11px;");
+        adresseError.setText("Adresse complète de l'entité.");
 
-    @FXML
-    private Button btnEnregistrer;
+        villeError.setStyle("-fx-text-fill: -muted; -fx-font-size: 11px;");
+        villeError.setText("Ville où se situe l'entité.");
 
-    @FXML
-    private Button btnAnnuler;
+        telephoneError.setStyle("-fx-text-fill: -muted; -fx-font-size: 11px;");
+        telephoneError.setText("Exactement 8 chiffres.");
 
-    public void setEntite(EntiteDeCollecte e) {
-        this.entiteActive = e;
-        txtNom.setText(e.getNom());
-        txtTelephone.setText(e.getTel());
-        txtType.setText(e.getType());
-        txtAdresse.setText(e.getAdresse());
-        txtVille.setText(e.getVille());
+        txtNom.setStyle("");
+        txtType.setStyle("");
+        txtAdresse.setStyle("");
+        txtVille.setStyle("");
+        txtTelephone.setStyle("");
+    }
+
+    private void showError(Label label, TextField field, String message) {
+        label.setText(message);
+        label.setStyle("-fx-text-fill: #ff4d4d; -fx-font-size: 11px; -fx-font-weight: bold;");
+        field.setStyle("-fx-border-color: #ff4d4d; -fx-border-width: 2px; -fx-border-radius: 6px;");
     }
 
     @FXML
     void handleEnregistrer(ActionEvent event) {
-        String nom = txtNom.getText();
-        String telephone = txtTelephone.getText();
-        String type = txtType.getText();
-        String adresse = txtAdresse.getText();
-        String ville = txtVille.getText();
+        resetErrors();
+        boolean isValid = true;
 
-        if (nom.isEmpty() || type.isEmpty() || telephone.isEmpty() || adresse.isEmpty() || ville.isEmpty()) {
-            afficherErreur("Erreur", "Tous les champs sont obligatoires.");
-            return;
+        String nom = txtNom.getText().trim();
+        String type = txtType.getText().trim();
+        String telephone = txtTelephone.getText().trim();
+        String adresse = txtAdresse.getText().trim();
+        String ville = txtVille.getText().trim();
+
+        if (nom.isEmpty()) {
+            showError(nomError, txtNom, "Le nom est obligatoire.");
+            isValid = false;
         }
-        
-        if (!telephone.matches("^\\d{8}$")) {
-            afficherErreur("Numéro invalide", "Le numéro doit comporter exactement 8 chiffres.");
-            return;
+
+        if (type.isEmpty()) {
+            showError(typeError, txtType, "Le type est obligatoire.");
+            isValid = false;
         }
-        
-        if (adresse.length() < 5) {
-            afficherErreur("Adresse trop courte", "L'adresse doit faire au moins 5 caractères.");
-            return;
+
+        if (adresse.isEmpty()) {
+            showError(adresseError, txtAdresse, "L'adresse est obligatoire.");
+            isValid = false;
+        } else if (adresse.length() < 5) {
+            showError(adresseError, txtAdresse, "L'adresse doit faire au moins 5 caractères.");
+            isValid = false;
         }
+
+        if (ville.isEmpty()) {
+            showError(villeError, txtVille, "La ville est obligatoire.");
+            isValid = false;
+        }
+
+        if (telephone.isEmpty()) {
+            showError(telephoneError, txtTelephone, "Le téléphone est obligatoire.");
+            isValid = false;
+        } else if (!telephone.matches("^\\d{8}$")) {
+            showError(telephoneError, txtTelephone, "Le numéro doit comporter exactement 8 chiffres.");
+            isValid = false;
+        }
+
+        if (!isValid || entiteActive == null) return;
 
         entiteActive.setNom(nom);
         entiteActive.setTel(telephone);
@@ -77,31 +127,20 @@ public class ModifierEntiteCollecteController {
             service.modifier(entiteActive);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succès");
+            alert.setHeaderText(null);
             alert.setContentText("Entité modifiée avec succès !");
             alert.showAndWait();
-            fermerFenetre();
+            switchScene(event, "/EntiteCollecteFront.fxml");
         } catch (IllegalArgumentException ex) {
-            afficherErreur("Unicité non validée", ex.getMessage());
+            showError(nomError, txtNom, ex.getMessage());
         } catch (Exception ex) {
-            afficherErreur("Erreur Serveur", ex.getMessage());
+            ex.printStackTrace();
+            showError(nomError, txtNom, "Erreur serveur : " + ex.getMessage());
         }
     }
 
     @FXML
-    void handleAnnuler(ActionEvent event) {
-        fermerFenetre();
-    }
-    
-    private void fermerFenetre() {
-        Stage stage = (Stage) btnAnnuler.getScene().getWindow();
-        stage.close();
-    }
-
-    private void afficherErreur(String titre, String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(titre);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
+    void handleRetour(ActionEvent event) {
+        switchScene(event, "/EntiteCollecteFront.fxml");
     }
 }

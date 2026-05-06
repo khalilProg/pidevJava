@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tn.esprit.entities.Campagne;
@@ -78,13 +79,13 @@ public class CampagneFrontController extends BaseFront implements Initializable 
                 activeList.add(c);
             }
         }
-        
+
         if (isSortedAZ) {
             activeList.sort(Comparator.comparing(Campagne::getTitre, String.CASE_INSENSITIVE_ORDER));
         } else if (isSortedDate) {
             activeList.sort(Comparator.comparing(Campagne::getDateDebut).reversed());
         }
-        
+
         renduCartes();
     }
 
@@ -116,9 +117,22 @@ public class CampagneFrontController extends BaseFront implements Initializable 
         btnTrierDate.setText("Date ↓");
         appliquerFiltres();
     }
+
+    @FXML
+    void handleAjouter(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterCampagneFront.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void renduCartes() {
         gridCampagnes.getChildren().clear();
-        
+
         if (activeList.isEmpty()) {
             vboxEmptyState.setVisible(true);
             scrollPaneCampagnes.setVisible(false);
@@ -139,7 +153,7 @@ public class CampagneFrontController extends BaseFront implements Initializable 
                 controller.setData(c);
 
                 gridCampagnes.add(card, column, row);
-                
+
                 column++;
                 if (column == 3) {
                     column = 0;
@@ -147,6 +161,31 @@ public class CampagneFrontController extends BaseFront implements Initializable 
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void handleExportPDF(ActionEvent event) {
+        if (activeList.isEmpty()) {
+            afficherAlerte(Alert.AlertType.WARNING, "Export PDF", "La liste est vide, rien à exporter.");
+            return;
+        }
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enregistrer le rapport PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
+        fileChooser.setInitialFileName("Rapport_Campagnes_" + LocalDate.now() + ".pdf");
+
+        java.io.File file = fileChooser.showSaveDialog(stage);
+        if (file != null) {
+            try {
+                tn.esprit.tools.CampagnePDFGenerator.generatePDF(file.getAbsolutePath(), activeList);
+                afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Le rapport PDF a été généré avec succès !");
+            } catch (Exception e) {
+                e.printStackTrace();
+                afficherAlerte(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de la génération du PDF.");
             }
         }
     }

@@ -20,11 +20,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Tooltip;
+import org.kordamp.ikonli.javafx.FontIcon;
 import tn.esprit.entities.Campagne;
 import tn.esprit.entities.EntiteDeCollecte;
 import tn.esprit.services.CampagneService;
@@ -52,7 +55,7 @@ public class ListeCampagnesAdmin {
     @FXML private Button addBtn;
     @FXML private TextField searchField;
     @FXML private ComboBox<String> sortComboBox;
-    
+
     @FXML private BarChart<String, Integer> campagneChart;
     @FXML private VBox topMonthsList;
 
@@ -63,11 +66,11 @@ public class ListeCampagnesAdmin {
 
     @FXML public void initialize() {
         sortComboBox.setItems(FXCollections.observableArrayList(
-            "Titre (A-Z)", "Titre (Z-A)", "Date Début (Le plus récent)", "Date Début (Le plus ancien)"
+                "Titre (A-Z)", "Titre (Z-A)", "Date Début (Le plus récent)", "Date Début (Le plus ancien)"
         ));
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
+
         searchField.textProperty().addListener((obs, old, val) -> appliquerFiltresEtTri());
         sortComboBox.valueProperty().addListener((obs, old, val) -> appliquerFiltresEtTri());
 
@@ -148,16 +151,16 @@ public class ListeCampagnesAdmin {
                 } else {
                     VBox box = new VBox(2);
                     box.setAlignment(Pos.CENTER_LEFT);
-                    
+
                     String debutStr = c.getDateDebut() != null ? FORMATTER.format(c.getDateDebut()) : "";
                     String finStr = c.getDateFin() != null ? FORMATTER.format(c.getDateFin()) : "";
-                    
+
                     Label debutLbl = new Label("📅 " + debutStr);
                     debutLbl.setStyle("-fx-text-fill: -primary; -fx-font-size: 11px;");
-                    
+
                     Label finLbl = new Label("📅 " + finStr);
                     finLbl.setStyle("-fx-text-fill: -muted; -fx-font-size: 11px;");
-                    
+
                     box.getChildren().addAll(debutLbl, finLbl);
                     setGraphic(box);
                 }
@@ -166,17 +169,12 @@ public class ListeCampagnesAdmin {
 
         // Actions Column
         actionsColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button actViewBtn = new Button("👁");
-            private final Button actEditBtn = new Button("✏");
-            private final Button actDeleteBtn = new Button("🗑");
+            private final Button actViewBtn = createActionButton("fas-eye", "Voir", "action-icon-btn");
+            private final Button actEditBtn = createActionButton("fas-edit", "Modifier", "action-icon-btn");
+            private final Button actDeleteBtn = createActionButton("fas-trash", "Supprimer", "action-icon-btn", "action-icon-delete");
             private final HBox container = new HBox(8, actViewBtn, actEditBtn, actDeleteBtn);
 
-            {   
-                actViewBtn.getStyleClass().add("action-icon-btn");
-
-                actEditBtn.getStyleClass().add("action-icon-btn");
-
-                actDeleteBtn.getStyleClass().addAll("action-icon-btn", "action-icon-delete");
+            {
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(actViewBtn);
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(actEditBtn);
                 tn.esprit.tools.AnimationUtils.applyHoverAnimation(actDeleteBtn);
@@ -190,7 +188,7 @@ public class ListeCampagnesAdmin {
                         Parent root = loader.load();
                         ViewCampagneAdmin controller = loader.getController();
                         controller.setCampagne(c);
-                        
+
                         Stage stage = (Stage) actViewBtn.getScene().getWindow();
                         tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                         stage.show();
@@ -216,7 +214,7 @@ public class ListeCampagnesAdmin {
                         Parent root = loader.load();
                         ModifierCampagneAdmin controller = loader.getController();
                         controller.setCampagneToEdit(c);
-                        
+
                         Stage stage = (Stage) actEditBtn.getScene().getWindow();
                         tn.esprit.tools.ThemeManager.getInstance().setScene(stage, root);
                         stage.show();
@@ -242,6 +240,19 @@ public class ListeCampagnesAdmin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private Button createActionButton(String iconLiteral, String tooltipText, String... styleClasses) {
+        Button button = new Button();
+        FontIcon icon = new FontIcon(iconLiteral);
+        icon.setIconSize(13);
+        icon.getStyleClass().add("ui-font-icon");
+        button.setGraphic(icon);
+        button.setText("");
+        button.setTooltip(new Tooltip(tooltipText));
+        button.setAccessibleText(tooltipText);
+        button.getStyleClass().addAll(styleClasses);
+        return button;
     }
 
     private void loadStatistics() {
@@ -280,10 +291,10 @@ public class ListeCampagnesAdmin {
         String sortType = sortComboBox.getValue();
 
         List<Campagne> filteredList = baseList.stream()
-            .filter(c -> c.getTitre().toLowerCase().contains(search) || 
-                         c.getDescription().toLowerCase().contains(search) ||
-                         (c.getTypeSang() != null && c.getTypeSang().toLowerCase().contains(search)))
-            .collect(Collectors.toList());
+                .filter(c -> c.getTitre().toLowerCase().contains(search) ||
+                        c.getDescription().toLowerCase().contains(search) ||
+                        (c.getTypeSang() != null && c.getTypeSang().toLowerCase().contains(search)))
+                .collect(Collectors.toList());
 
         if (sortType != null) {
             switch (sortType) {
@@ -308,6 +319,45 @@ public class ListeCampagnesAdmin {
 
     @FXML private void handleAjouter(ActionEvent event) {
         navigateTo(event, "/AjouterCampagneAdmin.fxml");
+    }
+
+    @FXML
+    void handleExportPDF(ActionEvent event) {
+        ObservableList<Campagne> items = tableView.getItems();
+        if (items.isEmpty()) {
+            // No alerte method in this class, I'll use a direct Alert
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+            alert.setTitle("Export PDF");
+            alert.setHeaderText(null);
+            alert.setContentText("La liste est vide, rien à exporter.");
+            alert.showAndWait();
+            return;
+        }
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enregistrer le rapport PDF (Back-Office)");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
+        fileChooser.setInitialFileName("Rapport_Admin_Campagnes_" + LocalDate.now() + ".pdf");
+
+        java.io.File file = fileChooser.showSaveDialog(stage);
+        if (file != null) {
+            try {
+                tn.esprit.tools.CampagnePDFGenerator.generatePDF(file.getAbsolutePath(), new ArrayList<>(items));
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                alert.setTitle("Succès");
+                alert.setHeaderText(null);
+                alert.setContentText("Le rapport PDF administrateur a été généré avec succès !");
+                alert.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Une erreur est survenue lors de la génération du PDF.");
+                alert.showAndWait();
+            }
+        }
     }
 
     // ── Navigation Handlers ──
@@ -346,12 +396,12 @@ public class ListeCampagnesAdmin {
     void handleNavigateRendezVous(ActionEvent event) {
         navigateTo(event, "/ListeRdvAdmin.fxml");
     }
-    
+
     @FXML
     void handleNavigateCampagnes(ActionEvent event) {
         // Already here
     }
-    
+
     @FXML
     void handleNavigateCollectes(ActionEvent event) {
         navigateTo(event, "/ListeEntitesAdmin.fxml");

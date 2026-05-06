@@ -109,7 +109,7 @@ public class EntiteCollecteService implements IGeneralService<EntiteDeCollecte> 
 
         return list;
     }
-    
+
     @Override
     public void modifier(EntiteDeCollecte e) {
         try {
@@ -192,5 +192,56 @@ public class EntiteCollecteService implements IGeneralService<EntiteDeCollecte> 
             entites.add(e);
         }
         return entites;
+    }
+
+    public List<Object[]> getTopEntitesByContributions(int limit) {
+        List<Object[]> results = new ArrayList<>();
+        String sql = "SELECT e.id, e.nom, e.type, e.ville, COUNT(cec.compagne_id) AS nb_campagnes " +
+                "FROM entite_collecte e " +
+                "LEFT JOIN compagne_entite_collecte cec ON e.id = cec.entite_collecte_id " +
+                "GROUP BY e.id, e.nom, e.type, e.ville " +
+                "ORDER BY nb_campagnes DESC " +
+                "LIMIT ?";
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setInt(1, limit);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                results.add(new Object[]{
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("type"),
+                        rs.getString("ville"),
+                        rs.getInt("nb_campagnes")
+                });
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return results;
+    }
+
+    public int countTotalEntites() {
+        try {
+            String sql = "SELECT COUNT(*) FROM entite_collecte";
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) return rs.getInt(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int countTotalCampagnesLiees() {
+        try {
+            String sql = "SELECT COUNT(DISTINCT compagne_id) FROM compagne_entite_collecte";
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) return rs.getInt(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 }

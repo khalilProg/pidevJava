@@ -60,7 +60,6 @@ public class CampagneService implements IGeneralService<Campagne> {
      */
     public static String jsonVersTypeSang(String json) {
         if (json == null || json.isEmpty() || json.equals("[]")) return "";
-        // Nettoyer le JSON : enlever [], " et espaces superflus
         String cleaned = json.replace("[", "").replace("]", "").replace("\"", "");
         String[] parts = cleaned.split(",\\s*");
         return String.join(", ", parts);
@@ -84,7 +83,7 @@ public class CampagneService implements IGeneralService<Campagne> {
             ps.setTimestamp(7, c.getUpdatedAt() != null ? Timestamp.valueOf(c.getUpdatedAt()) : null);
 
             ps.executeUpdate();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 c.setId(rs.getInt(1));
@@ -104,10 +103,10 @@ public class CampagneService implements IGeneralService<Campagne> {
 
             cn.commit();
         } catch (SQLException ex) {
-            cn.rollback();
+            try { cn.rollback(); } catch (Exception e) {}
             throw ex;
         } finally {
-            cn.setAutoCommit(true);
+            try { cn.setAutoCommit(true); } catch (Exception e) {}
         }
     }
 
@@ -116,30 +115,26 @@ public class CampagneService implements IGeneralService<Campagne> {
         try {
             cn.setAutoCommit(false);
 
-            // 1. Supprimer les relations campagne-entité
+            // 1. Supprimer les rendez_vous liés aux questionnaires de cette campagne
+            String sqlRdv = "DELETE FROM rendez_vous WHERE questionnaire_id IN " +
+                    "(SELECT id FROM questionnaire WHERE campagne_id = ?)";
+            PreparedStatement psRdv = cn.prepareStatement(sqlRdv);
+            psRdv.setInt(1, c.getId());
+            psRdv.executeUpdate();
+
+            // 2. Supprimer les questionnaires liés à cette campagne
+            String sqlQ = "DELETE FROM questionnaire WHERE campagne_id = ?";
+            PreparedStatement psQ = cn.prepareStatement(sqlQ);
+            psQ.setInt(1, c.getId());
+            psQ.executeUpdate();
+
+            // 3. Supprimer les relations campagne-entité
             String sqlRel = "DELETE FROM compagne_entite_collecte WHERE compagne_id = ?";
             PreparedStatement psRel = cn.prepareStatement(sqlRel);
             psRel.setInt(1, c.getId());
             psRel.executeUpdate();
 
-            // 2. Tenter de supprimer les tables qui dépendent de compagne
-            // (rendez_vous, questionnaire, etc.)
-            try {
-                PreparedStatement psRv = cn.prepareStatement("DELETE FROM rendez_vous WHERE compagne_id = ?");
-                psRv.setInt(1, c.getId());
-                psRv.executeUpdate();
-            } catch (SQLException ignored) {
-                // La table n'a peut-être pas cette colonne
-            }
-            try {
-                PreparedStatement psQ = cn.prepareStatement("DELETE FROM questionnaire WHERE compagne_id = ?");
-                psQ.setInt(1, c.getId());
-                psQ.executeUpdate();
-            } catch (SQLException ignored) {
-                // La table n'a peut-être pas cette colonne
-            }
-
-            // 3. Supprimer la campagne elle-même
+            // 4. Supprimer la campagne elle-même
             String sql = "DELETE FROM compagne WHERE id = ?";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setInt(1, c.getId());
@@ -147,10 +142,10 @@ public class CampagneService implements IGeneralService<Campagne> {
 
             cn.commit();
         } catch (SQLException e) {
-            try { cn.rollback(); } catch(Exception ex) {}
-            throw new RuntimeException("Impossible de supprimer cette campagne. Elle est peut-être liée à des données existantes (rendez-vous, questionnaires, dons...). Supprimez d'abord ces données.");
+            try { cn.rollback(); } catch (Exception ex) {}
+            throw new RuntimeException("Erreur lors de la suppression : " + e.getMessage());
         } finally {
-            try { cn.setAutoCommit(true); } catch(Exception e) {}
+            try { cn.setAutoCommit(true); } catch (Exception e) {}
         }
     }
 
@@ -161,7 +156,6 @@ public class CampagneService implements IGeneralService<Campagne> {
 
     public List<Campagne> rechercherParTitre(String titre) {
         List<Campagne> list = new ArrayList<>();
-
         try {
             String sql = "SELECT * FROM compagne WHERE titre LIKE ?";
             PreparedStatement ps = cn.prepareStatement(sql);
@@ -173,7 +167,6 @@ public class CampagneService implements IGeneralService<Campagne> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return list;
     }
 
@@ -215,10 +208,10 @@ public class CampagneService implements IGeneralService<Campagne> {
 
             cn.commit();
         } catch (SQLException e) {
-            try { cn.rollback(); } catch(Exception ex) {}
+            try { cn.rollback(); } catch (Exception ex) {}
             throw new RuntimeException("Erreur de modification : " + e.getMessage());
         } finally {
-            try { cn.setAutoCommit(true); } catch(Exception ex) {}
+            try { cn.setAutoCommit(true); } catch (Exception ex) {}
         }
     }
 
@@ -247,22 +240,15 @@ public class CampagneService implements IGeneralService<Campagne> {
         return null;
     }
 
-    public List<Campagne> recupererByClient(Client client) throws SQLException {
-        String sql = "SELECT DISTINCT c.* FROM compagne c WHERE c.type_sang LIKE ? AND c.date_fin > CURRENT_DATE AND c.date_debut >= ?";
+    public List<Campagne> recupererByClient(Client c) throws SQLException {
+        String sql = "SELECT * FROM compagne WHERE type_sang LIKE ?";
         PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setString(1, "%\"" + client.getTypeSang() + "\"%");
-        java.sql.Date minDate = (client.getDernierDon() != null)
-                ? java.sql.Date.valueOf(client.getDernierDon().plusWeeks(3))
-                : java.sql.Date.valueOf("1970-01-01");
-        pst.setDate(2, minDate);
-
+        pst.setString(1, "%" + c.getTypeSang() + "%");
         ResultSet rs = pst.executeQuery();
         List<Campagne> campagnes = new ArrayList<>();
-
         while (rs.next()) {
             campagnes.add(mapCampagne(rs));
         }
-
         return campagnes;
     }
 
