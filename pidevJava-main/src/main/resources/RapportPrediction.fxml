@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="780.0" prefHeight="620.0" spacing="0"
+      style="-fx-background-color: #121212;"
+      stylesheets="@commande.css"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.controllers.RapportPredictionController">
+
+    <!-- Header -->
+    <VBox styleClass="hero-section-alt" style="-fx-padding: 25 30 20 30;" spacing="6">
+        <Label text="🤖 Prédiction IA — Participants Estimés" styleClass="hero-title-large"
+               style="-fx-font-size: 18px;" />
+        <Label fx:id="lblStatut" text="⏳ Analyse en cours..." styleClass="hero-subtitle-alt" />
+    </VBox>
+
+    <!-- Campagne Info Pills -->
+    <HBox spacing="15" style="-fx-padding: 15 30 10 30;" alignment="CENTER_LEFT">
+        <Label fx:id="lblTitreCampagne" text="Campagne" styleClass="live-badge"
+               style="-fx-font-size: 12px; -fx-padding: 5 12;" />
+        <Label fx:id="lblPeriode" text="Période" styleClass="home-muted-text" />
+        <Label fx:id="lblTypesSang" text="Types" styleClass="home-muted-text" />
+    </HBox>
+
+    <!-- Divider -->
+    <Region style="-fx-background-color: #2a2a2a;" prefHeight="1" />
+
+    <!-- Loading Box -->
+    <VBox fx:id="loadingBox" alignment="CENTER" spacing="20" VBox.vgrow="ALWAYS"
+          style="-fx-padding: 40;">
+        <ProgressIndicator style="-fx-progress-color: #e74c3c;"
+                           prefWidth="60" prefHeight="60" />
+        <Label text="Interrogation de Gemini AI en cours..." styleClass="home-muted-text" />
+        <Label text="Analyse des campagnes historiques et construction de la prédiction..."
+               styleClass="home-muted-text" style="-fx-font-size: 11px;" wrapText="true" />
+    </VBox>
+
+    <!-- Result Box (hidden until AI responds) -->
+    <VBox fx:id="resultBox" VBox.vgrow="ALWAYS" visible="false" spacing="10"
+          style="-fx-padding: 20 30 10 30;">
+        <Label text="📊 Rapport de prédiction" styleClass="page-title"
+               style="-fx-font-size: 14px;" />
+        <TextArea fx:id="txtRapportIA" wrapText="true" editable="false"
+                  VBox.vgrow="ALWAYS" styleClass="dark-field"
+                  style="-fx-font-size: 12px; -fx-font-family: 'Segoe UI';" />
+    </VBox>
+
+    <!-- Actions Bar -->
+    <HBox spacing="12" alignment="CENTER_RIGHT"
+          style="-fx-padding: 15 30 20 30; -fx-background-color: #161616;">
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="btnExportPDF" mnemonicParsing="false" onAction="#handleExportPDF"
+                text="📄 Exporter en PDF" styleClass="cancel-button"
+                style="-fx-padding: 9 20; -fx-font-size: 12px; -fx-font-weight: 800;" />
+        <Button fx:id="btnFermer" mnemonicParsing="false" onAction="#handleFermer"
+                text="Fermer" styleClass="submit-button"
+                style="-fx-padding: 9 20; -fx-font-size: 12px;" />
+    </HBox>
+
+</VBox>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane stylesheets="@commande.css" prefHeight="800.0" prefWidth="1550.0" styleClass="root"  xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeCampagnes">
+   <fx:include source="BaseFront.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+   <children>
+            <Text fill="WHITE" layoutX="70" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0" text="Campagnes de collectes" styleClass="hero-title">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fill="#888888" layoutX="70" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0" text="Sélectionnez une campagne pour participer et sauver des vies.">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+
+      <ScrollPane fitToWidth="true" styleClass="scroll-pane" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="240.0">
+         <content>
+            <TilePane fx:id="campaignContainer" hgap="30" prefColumns="3" vgap="30" styleClass="tile-pane" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
+

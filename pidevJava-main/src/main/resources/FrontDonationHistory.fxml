@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane fx:id="rootPane" prefHeight="900.0" prefWidth="1400.0" styleClass="front-commande-root" stylesheets="@commande.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.FrontDonationController">
+    <children>
+        <BorderPane styleClass="front-commande-shell">
+            <top>
+                <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <Label styleClass="brand-label" text="BLOODLINK" />
+                    </HBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <HBox alignment="CENTER" spacing="20.0">
+                        <Button onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+                        <Region prefWidth="12" />
+                        <HBox alignment="CENTER" styleClass="user-pill">
+                            <Circle fill="#e74c3c" radius="10.0" />
+                            <Label styleClass="user-name-label" text="Verified Donor" />
+                        </HBox>
+                        <Region prefWidth="12" />
+                        <Button onAction="#toggleMenu" styleClass="menu-button" text="SYSTEM ☰" />
+                    </HBox>
+                </HBox>
+            </top>
+
+            <center>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="front-commande-scroll" vbarPolicy="AS_NEEDED">
+                    <content>
+                        <VBox spacing="24" styleClass="front-commande-content">
+                            <padding>
+                                <Insets bottom="44" left="42" right="42" top="34" />
+                            </padding>
+
+                            <HBox alignment="CENTER_LEFT" spacing="24" styleClass="front-commande-hero">
+                                <StackPane styleClass="front-commande-hero-icon">
+                                    <FontIcon iconLiteral="fas-history" iconSize="24" styleClass="front-commande-hero-font-icon" />
+                                </StackPane>
+                                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="front-commande-kicker" text="CONTRIBUTION LEDGER" />
+                                    <Label styleClass="front-commande-title" text="Donation Legacy" />
+                                    <Label maxWidth="720" styleClass="front-commande-subtitle" text="Verified decentralized tracking of extracted matter and saving volumes." wrapText="true" />
+                                </VBox>
+                                <VBox alignment="CENTER" styleClass="front-commande-metric">
+                                    <Label fx:id="rankLabel" styleClass="front-commande-metric-value" text="N/A" />
+                                    <Label styleClass="front-commande-metric-label" text="SYSTEM RANKING" />
+                                </VBox>
+                            </HBox>
+
+                            <HBox alignment="TOP_LEFT" fillHeight="false" spacing="24" styleClass="front-commande-form-layout">
+                                <children>
+                                    <VBox spacing="18" styleClass="front-commande-table-card" HBox.hgrow="ALWAYS">
+                                        <HBox alignment="CENTER_LEFT">
+                                            <VBox spacing="2">
+                                                <Label styleClass="front-commande-card-title" text="Official Withdrawals" />
+                                                <Label styleClass="front-commande-card-subtitle" text="Historical logs of all verified bio-fluid transactions." />
+                                            </VBox>
+                                            <Region HBox.hgrow="ALWAYS" />
+                                            <TextField fx:id="searchField" prefWidth="250" promptText="Search receipts..." styleClass="front-commande-input" />
+                                        </HBox>
+
+                                        <TableView fx:id="donationTable" styleClass="front-commande-table" VBox.vgrow="ALWAYS">
+                                            <columns>
+                                                <TableColumn fx:id="colId" prefWidth="120" text="RECEIPT ID" />
+                                                <TableColumn fx:id="colType" prefWidth="150" text="FLUID TYPE" />
+                                                <TableColumn fx:id="colQte" prefWidth="120" text="YIELD (ML)" />
+                                                <TableColumn fx:id="colEntityId" prefWidth="180" text="STATION ID" />
+                                            </columns>
+                                            <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                                        </TableView>
+                                    </VBox>
+
+                                    <VBox minWidth="400.0" prefWidth="420.0" spacing="14">
+
+                                        <HBox spacing="15" styleClass="front-commande-side-card" alignment="CENTER_LEFT">
+                                            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="front-commande-metric-label" text="GROSS BIO-FLUID GIVEN" />
+                                                <HBox alignment="BASELINE_LEFT" spacing="8.0">
+                                                    <Label fx:id="totalVolumeLabel" styleClass="front-commande-metric-value" style="-fx-font-size: 36;" text="0.0" />
+                                                    <Label style="-fx-text-fill: #e74c3c; -fx-font-weight: 900; -fx-font-size: 18;" text="mL" />
+                                                </HBox>
+                                            </VBox>
+
+                                            <StackPane style="-fx-background-color: white; -fx-padding: 5; -fx-background-radius: 8;">
+                                                <ImageView fx:id="qrCodeImage" fitHeight="80" fitWidth="80" preserveRatio="true" />
+                                            </StackPane>
+                                        </HBox>
+
+                                        <VBox spacing="12" styleClass="front-commande-side-card">
+                                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                                <StackPane styleClass="front-commande-side-icon">
+                                                    <FontIcon iconLiteral="fas-brain" iconSize="17" styleClass="front-commande-side-font-icon" />
+                                                </StackPane>
+                                                <Label styleClass="front-commande-card-title" text="Vita-Sphere Analysis" />
+                                            </HBox>
+                                            <Label styleClass="front-commande-info-box" text="Neural network mapping ledger against local deficit volumes..." wrapText="true" />
+                                            <Button maxWidth="Infinity" onAction="#runDeepImpactAnalysis" styleClass="front-commande-primary-btn" text="EXECUTE ALGORITHM ⚡" />
+                                        </VBox>
+
+                                        <VBox spacing="12" styleClass="front-commande-side-card">
+                                            <Label styleClass="front-commande-card-title" text="Volume Trends" />
+                                            <BarChart fx:id="yieldChart" legendVisible="false" prefHeight="220" style="-fx-background-color: transparent;">
+                                                <xAxis><CategoryAxis side="BOTTOM" tickLabelFill="#8f98a3" /></xAxis>
+                                                <yAxis><NumberAxis side="LEFT" tickLabelFill="#8f98a3" /></yAxis>
+                                            </BarChart>
+                                        </VBox>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+
+        <StackPane fx:id="aiOverlay" visible="false" style="-fx-background-color: rgba(10,10,10,0.92);">
+            <VBox maxWidth="800" maxHeight="500" spacing="30" alignment="CENTER" styleClass="front-commande-form-card" style="-fx-border-color: #2ecc71;">
+                <padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
+                <HBox alignment="CENTER" spacing="15">
+                    <FontIcon iconLiteral="fas-microchip" iconSize="26" style="-fx-icon-color: #2ecc71;" />
+                    <Label styleClass="front-commande-title" text="SYNTHESIS REPORT" />
+                </HBox>
+                <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
+                    <Label fx:id="overlayAiText" styleClass="front-commande-subtitle" style="-fx-text-fill: white; -fx-font-size: 16;" text="Executing computations..." wrapText="true" />
+                </ScrollPane>
+                <Button onAction="#closeAIOverlay" styleClass="front-commande-primary-btn" text="CLOSE INTELLIGENCE PANEL" />
+            </VBox>
+        </StackPane>
+
+        <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+            <children>
+                <Region onMouseClicked="#toggleMenu" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+                <VBox fx:id="navMenuPanel" prefWidth="380.0" styleClass="menu-panel">
+                    <padding><Insets bottom="40.0" left="40.0" right="40.0" top="30.0" /></padding>
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button onAction="#toggleMenu" styleClass="front-commande-primary-btn" text="FERMER" />
+                    </HBox>
+                    <Region prefHeight="30.0" />
+                    <Label styleClass="front-commande-kicker" text="SYSTEM NAVIGATOR" />
+                    <Button onAction="#goToMyProfile" styleClass="menu-link" text="► HEALTH PASSPORT" />
+                    <Button styleClass="menu-link, menu-link-active" text="► DONATION LEGACY" />
+                    <Region VBox.vgrow="ALWAYS" />
+                    <Button maxWidth="Infinity" styleClass="front-commande-cancel-btn" text="LOG OUT / ABORT" />
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</StackPane>

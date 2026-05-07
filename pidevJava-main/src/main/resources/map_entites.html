@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Carte des Entités de Collecte</title>
+    <!-- CSS Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- JS Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #141414; /* Fond sombre BloodLink */
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+            border-radius: 8px;
+        }
+        /* Custom Popup Styling for BloodLink Dark Theme */
+        .leaflet-popup-content-wrapper {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+        .leaflet-popup-tip {
+            background-color: #1A1A1A;
+            border: 1px solid #333;
+        }
+        .popup-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #FF3E3E;
+        }
+        .popup-info {
+            font-size: 13px;
+            color: #CCCCCC;
+            margin: 2px 0;
+        }
+        .leaflet-bar a {
+            background-color: #2D2D2D;
+            color: #FFF;
+            border-bottom: 1px solid #141414;
+        }
+        .leaflet-bar a:hover {
+            background-color: #404040;
+            color: #FFF;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+    // Initialisation de la carte, centrée sur la Tunisie par défaut
+    var map = L.map('map').setView([33.8869, 9.5375], 6);
+
+    // Ajout du fond de carte OpenStreetMap (CartoDB Dark Matter pour s'adapter au thème BloodLink)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
+
+    // Icône personnalisée rouge
+    var redIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var markers = [];
+    var markerLayerGroup = L.layerGroup().addTo(map);
+    var geocodeQueue = [];
+    var isGeocoding = false;
+
+    // Fonction pour nettoyer la carte
+    function clearMarkers() {
+        markerLayerGroup.clearLayers();
+        markers = [];
+        geocodeQueue = [];
+    }
+
+    // Fonction appelée par Java
+    function queueMarqueur(nom, type, adresseComplet, telephone) {
+        geocodeQueue.push({nom: nom, type: type, adresse: adresseComplet, telephone: telephone});
+        processQueue();
+    }
+
+    function processQueue() {
+        if (isGeocoding || geocodeQueue.length === 0) return;
+
+        isGeocoding = true;
+        var entity = geocodeQueue.shift();
+
+        // Géocodage via Nominatim
+        var url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(entity.adresse) + '&limit=1';
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    var lat = parseFloat(data[0].lat);
+                    var lon = parseFloat(data[0].lon);
+
+                    var popupContent = '<div class="popup-title">' + entity.nom + '</div>' +
+                        '<div class="popup-info"><b>Type:</b> ' + entity.type + '</div>' +
+                        '<div class="popup-info"><b>Tél:</b> ' + entity.telephone + '</div>' +
+                        '<div class="popup-info"><b>Adresse:</b> ' + entity.adresse + '</div>';
+
+                    var marker = L.marker([lat, lon], {icon: redIcon})
+                        .bindPopup(popupContent);
+
+                    markerLayerGroup.addLayer(marker);
+                    markers.push(marker);
+
+                    // Ajuster la vue si c'est le premier marqueur ou recadrer la carte
+                    if (markers.length === 1) {
+                        map.setView([lat, lon], 12);
+                    } else if (markers.length > 1) {
+                        var group = new L.featureGroup(markers);
+                        map.fitBounds(group.getBounds().pad(0.1));
+                    }
+                } else {
+                    console.warn("Adresse introuvable: " + entity.adresse);
+                }
+
+                // Pause de 1 seconde entre chaque requête pour respecter les limites de Nominatim
+                setTimeout(() => {
+                    isGeocoding = false;
+                    processQueue();
+                }, 1100);
+            })
+            .catch(err => {
+                console.error("Erreur de géocodage:", err);
+                isGeocoding = false;
+                processQueue();
+            });
+    }
+
+    // Informe Java que la carte est prête
+    console.log("MapReady");
+
+</script>
+</body>
+</html>

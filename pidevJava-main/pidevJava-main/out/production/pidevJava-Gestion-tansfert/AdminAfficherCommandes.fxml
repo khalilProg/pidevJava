@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminAfficherCommandesController">
+
+    <!-- ═══ LEFT SIDEBAR ═══ -->
+    <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets bottom="32" left="32" right="32" top="28"/>
+            </padding>
+
+            <!-- Page Header -->
+            <VBox spacing="4">
+                <HBox alignment="CENTER_LEFT">
+                    <Label styleClass="page-title" text="COMMANDES DE SANG"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <Label styleClass="page-subtitle" text="Gérez les demandes de sang et suivez leur statut de validation."/>
+            </VBox>
+
+            <!-- Search + Filters Bar -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <TextField fx:id="tfSearch" prefWidth="300" promptText="🔍  Rechercher par référence, sang..." styleClass="dark-field" HBox.hgrow="ALWAYS"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ComboBox fx:id="cbStatutFiltre" prefWidth="150" promptText="Tous statuts" styleClass="dark-combo"/>
+                <ComboBox fx:id="cbPrioriteFiltre" prefWidth="150" promptText="Priorités" styleClass="dark-combo"/>
+            </HBox>
+
+            <!-- Table -->
+            <VBox spacing="8" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT">
+                    <Label fx:id="lblCount" text="0 commande(s)"/>
+                </HBox>
+
+                <TableView fx:id="tableCommandes" styleClass="dark-table" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colReference" prefWidth="130" text="RÉFÉRENCE"/>
+                        <TableColumn fx:id="colTypeSang" prefWidth="120" text="TYPE SANG"/>
+                        <TableColumn fx:id="colQuantite" prefWidth="120" text="QUANTITÉ"/>
+                        <TableColumn fx:id="colPriorite" prefWidth="130" text="PRIORITÉ"/>
+                        <TableColumn fx:id="colStatut" prefWidth="160" text="STATUT"/>
+                        <TableColumn fx:id="colActions" prefWidth="200" text="ACTIONS" style="-fx-alignment: center-right;"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </center>
+</BorderPane>

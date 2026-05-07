@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.EntiteCollecteBackController">
+    <!-- Sidebar -->
+    <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+
+    <!-- Main Content -->
+    <center>
+        <VBox styleClass="main-content" spacing="20.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="5.0">
+                    <Label styleClass="admin-page-title" text="Entités de Collecte" />
+                    <Label styleClass="admin-page-subtitle" text="Gestion Back-Office" />
+                </VBox>
+            </HBox>
+
+            <!-- Dashboard Intelligent -->
+            <HBox fx:id="dashboardContainer" spacing="15.0">
+                <!-- Filled dynamically by controller -->
+            </HBox>
+
+            <!-- Filter Bar -->
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+                <TextField fx:id="txtRecherche" prefHeight="38.0" promptText="Rechercher une entité..." styleClass="dark-field" HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnTrier" mnemonicParsing="false" onAction="#handleTrier" styleClass="cancel-button" text="⬇ Trier de A - Z" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnSupprimer" mnemonicParsing="false" onAction="#handleSupprimer" styleClass="cancel-button" text="🗑 Supprimer" />
+                <Button fx:id="btnModifier" mnemonicParsing="false" onAction="#handleModifier" styleClass="cancel-button" text="✏ Modifier" />
+                <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#handleAjouter" styleClass="button-primary" text="+ Ajouter" />
+            </HBox>
+
+            <!-- Table -->
+            <TableView fx:id="tableEntite" VBox.vgrow="ALWAYS" styleClass="table-view">
+                <columns>
+                    <TableColumn prefWidth="75.0" text="ID" />
+                    <TableColumn prefWidth="180.0" text="Nom" />
+                    <TableColumn prefWidth="130.0" text="Téléphone" />
+                    <TableColumn prefWidth="150.0" text="Type" />
+                    <TableColumn prefWidth="250.0" text="Adresse" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
