@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+
+<StackPane fx:id="rootPane" prefHeight="900.0" prefWidth="1400.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.FrontMedicalController">
+    <stylesheets><URL value="@front.css" /></stylesheets>
+
+    <VBox styleClass="hero-section">
+
+        <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="nav-bar">
+            <HBox alignment="CENTER_LEFT" spacing="6">
+                <Label styleClass="brand-label" text="BLOODLINK" />
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+            <Region prefWidth="12.0" />
+            <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Utilisateur" />
+            <Region prefWidth="12.0" />
+            <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
+        </HBox>
+
+        <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="scroll-pane" VBox.vgrow="ALWAYS">
+            <VBox alignment="CENTER" spacing="40.0">
+                <padding><Insets bottom="60.0" left="60.0" right="60.0" top="40.0" /></padding>
+
+                <VBox spacing="10">
+                    <Label styleClass="hero-title-large" text="Profil Biométrique." />
+                    <Label styleClass="hero-description-v2" text="Enregistrement systématisé des constantes et modélisation IA intégrée." />
+                </VBox>
+
+                <HBox spacing="35.0" VBox.vgrow="ALWAYS">
+                    <!-- Bio-Data Box (LEFT) -->
+                    <VBox prefWidth="450.0" minWidth="450.0" spacing="25.0" styleClass="card" style="-fx-background-color: #121212;">
+                        <Label styleClass="stat-card-subtitle" text="DERNIÈRE SYNCHRONISATION" />
+                        <GridPane hgap="30" vgap="30">
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="0"><Label styleClass="form-label" text="GROUPE SANGUIN"/><Label fx:id="bloodLabel" styleClass="card-title"/></VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="0"><Label styleClass="form-label" text="BIO-ÂGE"/><Label fx:id="ageLabel" styleClass="card-title"/></VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1"><Label styleClass="form-label" text="TAILLE"/><Label fx:id="heightLabel" styleClass="card-title"/></VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1"><Label styleClass="form-label" text="MASSE CORPORELLE"/><Label fx:id="weightLabel" styleClass="card-title"/></VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2"><Label styleClass="form-label" text="SEXE"/><Label fx:id="genderLabel" styleClass="card-title"/></VBox>
+                        </GridPane>
+                        <Region VBox.vgrow="ALWAYS"/>
+                        <Button onAction="#handleUpdateProfile" styleClass="btn-secondary-home" text="FORCER LA MISE À JOUR DES BIOMÉTRIQUES" maxWidth="Infinity" />
+                    </VBox>
+
+                    <!-- Advanced ML, Charts & Gauges (RIGHT) -->
+                    <VBox spacing="30.0" HBox.hgrow="ALWAYS" styleClass="card" style="-fx-background-color: #121212; -fx-padding: 30 40;">
+                        <HBox alignment="CENTER" spacing="40" VBox.vgrow="ALWAYS">
+                            <!-- Gauge -->
+                            <VBox alignment="CENTER" spacing="20">
+                                <Label styleClass="stat-card-subtitle" text="INDICE VITA-SPHÈRE" />
+                                <StackPane>
+                                    <ImageView fx:id="bmiQuickChartImage" fitHeight="200" fitWidth="260" preserveRatio="true"/>
+                                    <Label fx:id="bmiValueLabel" style="-fx-font-size: 35; -fx-font-weight: 900; -fx-text-fill: white;" translateY="45"/>
+                                </StackPane>
+                                <Label fx:id="bmiStatusLabel" style="-fx-font-weight: 900; -fx-padding: 6 16; -fx-background-radius: 5;" text="ÉVALUATION" />
+
+                                <!-- Standalone AI Simulation Button (Completely divorced from KNN) -->
+                                <Region VBox.vgrow="ALWAYS" />
+                                <Button onAction="#runDeepAIScan" styleClass="btn-prime-home" text="SYNTHÈSE IA" />
+                            </VBox>
+
+                            <!-- Trajectory Graph & DEDICATED KNN WIDGET -->
+                            <VBox spacing="20" HBox.hgrow="ALWAYS">
+                                <!-- Line Chart -->
+                                <VBox spacing="5" VBox.vgrow="ALWAYS">
+                                    <Label styleClass="stat-card-subtitle" text="TRAJECTOIRE DE MASSE" />
+                                    <LineChart fx:id="biometricChart" legendVisible="false" style="-fx-background-color: transparent; -fx-padding: -10 0 0 0;" minHeight="180">
+                                        <xAxis><CategoryAxis side="BOTTOM" tickLabelFill="#999" /></xAxis>
+                                        <yAxis><NumberAxis side="LEFT" forceZeroInRange="false" tickLabelFill="#999"/></yAxis>
+                                    </LineChart>
+                                </VBox>
+
+                                <!-- == NEW: DEDICATED MACHINE LEARNING KNN WIDGET == -->
+                                <VBox styleClass="glass-card" style="-fx-border-color: #4a90e2; -fx-border-width: 1 1 1 5; -fx-background-color: rgba(20,25,35,0.7); -fx-padding: 15;">
+                                    <HBox alignment="CENTER_LEFT" spacing="10">
+                                        <Circle radius="4" fill="#4a90e2" />
+                                        <Label styleClass="form-label" style="-fx-text-fill: #4a90e2;" text="APPRENTISSAGE AUTOMATIQUE KNN DISTANCE EUCLIDIENNE" />
+                                    </HBox>
+                                    <Label fx:id="knnResultLabel" text="Initialisation du modèle de regroupement de données..." style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 8 0 4 0;" wrapText="true" />
+                                    <Label text="Chemin de don optimal généré à partir de profils physiques mathématiquement similaires." styleClass="form-label" style="-fx-font-size: 11;" wrapText="true" />
+                                </VBox>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+    <!-- FULLSCREEN AI OVERLAY (Separated strictly from ML logic!) -->
+    <StackPane fx:id="aiOverlay" mouseTransparent="true" visible="false" style="-fx-background-color: rgba(10,10,10,0.92);">
+        <VBox maxWidth="800" maxHeight="500" spacing="30" alignment="CENTER" styleClass="glass-card" style="-fx-border-color: #cc2be2; -fx-border-width: 2;">
+            <padding><Insets bottom="60" left="60" right="60" top="60" /></padding>
+            <HBox alignment="CENTER" spacing="15">
+                <Circle radius="6" fill="#cc2be2"/>
+                <Label styleClass="hero-title-large" style="-fx-font-size: 26;" text="INFORMATIONS DE SANTÉ GÉNÉRATIVES" />
+            </HBox>
+            <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                <Label fx:id="overlayAiText" wrapText="true" style="-fx-text-fill: #e0e0e0; -fx-font-size: 18px; -fx-line-spacing: 8px;" />
+            </ScrollPane>
+            <Button onAction="#closeAIOverlay" text="TERMINER L'INSTANCE IA" styleClass="btn-primary-modern" />
+        </VBox>
+    </StackPane>
+    <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+        <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+        <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+            <padding>
+                <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_RIGHT">
+                    <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
+                </HBox>
+                <Region prefHeight="20.0" />
+                <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+                <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+                <Button mnemonicParsing="false" onAction="#goToHistorique" styleClass="menu-link" text="HISTORIQUE RDV" />
+                <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
+                <Button mnemonicParsing="false" onAction="#goToDons" styleClass="menu-link" text="MES DONS" />
+                <Button mnemonicParsing="false" onAction="#goToDossierMed" styleClass="menu-link" text="DOSSIER MEDICAL" />
+                <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
+                <Region VBox.vgrow="ALWAYS" />
+                <VBox spacing="15.0">
+                    <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
+                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="Deconnexion" />
+                </VBox>
+            </children>
+        </VBox>
+    </HBox>
+
+</StackPane>

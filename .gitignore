@@ -1,0 +1,46 @@
+
+.apt_generated
+build/
+chatbot.properties
+.classpath
+config.properties
+credentials.json
+/dist/
+.DS_Store
+### Eclipse ###
+email.properties
+.env
+# Environment variables
+.factorypath
+# Google Calendar cached tokens
+google_calendar_tokens.json
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/libraries/
+.idea/modules.xml
+*.iml
+### IntelliJ IDEA ###
+*.ipr
+*.iws
+# Local SMTP secrets
+### Mac OS ###
+!.mvn/wrapper/maven-wrapper.jar
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+/nbproject/private/
+### NetBeans ###
+.project
+# Sensitive configuration files
+.settings
+.springBeans
+!**/src/main/**/build/
+!**/src/main/**/target/
+!**/src/test/**/build/
+!**/src/test/**/target/
+stripe.properties
+.sts4-cache
+target/
+tokens/
+.vscode/
+### VS Code ###

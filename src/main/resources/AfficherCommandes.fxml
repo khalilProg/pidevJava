@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane prefHeight="900.0" prefWidth="1400.0" styleClass="front-commande-root" stylesheets="@commande.css"
+           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="tn.esprit.controllers.AfficherCommandesController">
+    <children>
+        <BorderPane styleClass="front-commande-shell">
+            <top>
+                <HBox alignment="CENTER_LEFT" styleClass="nav-bar">
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <Label styleClass="brand-label" text="BLOODLINK" />
+                    </HBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button fx:id="btnThemeToggle" mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="theme-toggle-btn" text="Light" />
+                    <Region prefWidth="12" />
+                    <Button fx:id="userNameBtn" mnemonicParsing="false" styleClass="user-badge" text="Utilisateur" />
+                    <Region prefWidth="12" />
+                    <Button fx:id="menuToggleBtn" mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="menu-toggle" text="MENU" />
+                </HBox>
+            </top>
+
+            <center>
+                <VBox spacing="22" styleClass="front-commande-content">
+                    <padding>
+                        <Insets bottom="34" left="42" right="42" top="34" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="24" styleClass="front-commande-hero">
+                            <children>
+                                <StackPane styleClass="front-commande-hero-icon">
+                                    <FontIcon iconLiteral="fas-box" iconSize="24" styleClass="front-commande-hero-font-icon" />
+                                </StackPane>
+                                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="front-commande-kicker" text="COMMANDES DE SANG" />
+                                    <Label styleClass="front-commande-title" text="Mes commandes" />
+                                    <Label maxWidth="720" styleClass="front-commande-subtitle" text="Suivez vos demandes, verifiez leur statut et telechargez vos recus." wrapText="true" />
+                                </VBox>
+                                <HBox alignment="CENTER" spacing="12">
+                                    <VBox styleClass="front-commande-metric">
+                                        <Label fx:id="lblTotalCommandes" styleClass="front-commande-metric-value" text="0" />
+                                        <Label styleClass="front-commande-metric-label" text="total" />
+                                    </VBox>
+                                    <VBox styleClass="front-commande-metric">
+                                        <Label fx:id="lblPendingCommandes" styleClass="front-commande-metric-value" text="0" />
+                                        <Label styleClass="front-commande-metric-label" text="en attente" />
+                                    </VBox>
+                                    <VBox styleClass="front-commande-metric">
+                                        <Label fx:id="lblUrgentCommandes" styleClass="front-commande-metric-value" text="0" />
+                                        <Label styleClass="front-commande-metric-label" text="haute priorite" />
+                                    </VBox>
+                                </HBox>
+                                <Button mnemonicParsing="false" onAction="#handleNouvelleCommande" styleClass="front-commande-primary-btn" text="Nouvelle commande">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fas-plus" iconSize="13" styleClass="ui-font-icon" />
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="front-commande-toolbar">
+                            <TextField fx:id="tfSearch" promptText="Reference ou groupe sanguin" styleClass="front-commande-input" HBox.hgrow="ALWAYS" />
+                            <ComboBox fx:id="cbStatutFiltre" prefWidth="220" promptText="Statut" styleClass="front-commande-combo" />
+                            <ComboBox fx:id="cbPrioriteFiltre" prefWidth="220" promptText="Priorite" styleClass="front-commande-combo" />
+                        </HBox>
+
+                        <VBox spacing="14" styleClass="front-commande-table-card" VBox.vgrow="ALWAYS">
+                            <HBox alignment="CENTER_LEFT">
+                                <VBox spacing="2">
+                                    <Label styleClass="front-commande-card-title" text="Historique des commandes" />
+                                    <Label styleClass="front-commande-card-subtitle" text="Les commandes validees diminuent le stock uniquement apres acceptation." />
+                                </VBox>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Label fx:id="lblCount" styleClass="front-commande-count" text="0 commande(s)" />
+                            </HBox>
+
+                            <TableView fx:id="tableCommandes" styleClass="front-commande-table" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colReference" prefWidth="120" text="REFERENCE" />
+                                    <TableColumn fx:id="colTypeSang" prefWidth="140" text="TYPE SANG" />
+                                    <TableColumn fx:id="colQuantite" prefWidth="120" text="QUANTITE" />
+                                    <TableColumn fx:id="colPriorite" prefWidth="150" text="PRIORITE" />
+                                    <TableColumn fx:id="colStatut" prefWidth="160" text="STATUT" />
+                                    <TableColumn fx:id="colActions" prefWidth="170" text="ACTIONS" />
+                                </columns>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                            </TableView>
+                        </VBox>
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <VBox alignment="BOTTOM_RIGHT" pickOnBounds="false" spacing="14.0" StackPane.alignment="BOTTOM_RIGHT">
+            <StackPane.margin>
+                <Insets bottom="30.0" right="30.0" />
+            </StackPane.margin>
+            <children>
+                <VBox fx:id="chatbotWindow" managed="false" maxHeight="550.0" maxWidth="380.0" prefHeight="550.0" prefWidth="380.0" spacing="0.0" styleClass="chatbot-window" visible="false">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="chatbot-header">
+                            <children>
+                                <Label styleClass="chatbot-header-avatar" text="AI" />
+                                <VBox spacing="1.0">
+                                    <children>
+                                        <Label styleClass="chatbot-title" text="BloodLink Assistant" />
+                                        <Label styleClass="chatbot-status" text="Online" />
+                                    </children>
+                                </VBox>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button mnemonicParsing="false" onAction="#handleChatbotClose" styleClass="chatbot-close" text="X" />
+                            </children>
+                        </HBox>
+                        <ScrollPane fx:id="chatbotScroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="chatbot-scroll" VBox.vgrow="ALWAYS">
+                            <content>
+                                <VBox fx:id="chatbotMessages" spacing="12.0" styleClass="chatbot-messages" />
+                            </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" spacing="10.0" styleClass="chatbot-input-bar">
+                            <children>
+                                <TextField fx:id="chatbotInput" onAction="#handleChatbotSubmit" promptText="Ask me a question..." styleClass="chatbot-input" HBox.hgrow="ALWAYS" />
+                                <Button mnemonicParsing="false" onAction="#handleChatbotSubmit" styleClass="chatbot-send" text="&gt;" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Button fx:id="chatbotToggleBtn" mnemonicParsing="false" onAction="#handleChatbotToggle" styleClass="chatbot-toggle" text="MSG" />
+            </children>
+        </VBox>
+
+            <HBox fx:id="menuOverlay" alignment="CENTER_RIGHT" managed="false" visible="false">
+                <Region onMouseClicked="#handleMenuClose" styleClass="menu-backdrop" HBox.hgrow="ALWAYS" />
+                <VBox fx:id="menuPanel" alignment="TOP_LEFT" prefWidth="380.0" spacing="15.0" styleClass="menu-panel">
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_RIGHT">
+                            <Button mnemonicParsing="false" onAction="#handleMenuToggle" styleClass="submit-button" text="FERMER" />
+                        </HBox>
+                        <Region prefHeight="20.0" />
+                        <Button mnemonicParsing="false" onAction="#goToAccueil" styleClass="menu-link" text="ACCUEIL" />
+                        <Button mnemonicParsing="false" onAction="#goToCampagnes" styleClass="menu-link" text="CAMPAGNES" />
+                        <Button mnemonicParsing="false" onAction="#goToHistorique" styleClass="menu-link" text="HISTORIQUE RDV" />
+                        <Button mnemonicParsing="false" onAction="#goToCommandes" styleClass="menu-link" text="COMMANDES" />
+                        <Button mnemonicParsing="false" onAction="#goToDons" styleClass="menu-link" text="MES DONS" />
+                        <Button mnemonicParsing="false" onAction="#goToDossierMed" styleClass="menu-link" text="DOSSIER MEDICAL" />
+                        <Button mnemonicParsing="false" onAction="#goToProfile" styleClass="menu-link" text="MON PROFIL" />
+                        <Region VBox.vgrow="ALWAYS" />
+                        <VBox spacing="15.0">
+                            <Label fx:id="sessionEmailLabel" styleClass="menu-session" text="Session: utilisateur@email.com" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="submit-button" text="Deconnexion" />
+                        </VBox>
+                    </children>
+                </VBox>
+            </HBox>
+    </children>
+</StackPane>
