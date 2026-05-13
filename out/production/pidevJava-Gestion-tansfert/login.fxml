@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane stylesheets="@commande.css" prefHeight="800.0" prefWidth="1200.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.login">
+   <children>
+      <!-- Header -->
+      <HBox alignment="CENTER_LEFT" prefHeight="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="header-bar">
+         <children>
+            <Label text="🩸" style="-fx-text-fill: #e63939; -fx-font-size: 24px;">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="BLOODLINK" styleClass="logo-text" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" styleClass="menu-toggle" text="MENU ☰" onAction="#handleMenuToggle" />
+         </children>
+      </HBox>
+
+      <!-- Center Card -->
+      <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <VBox maxWidth="450.0" prefWidth="450.0" spacing="20.0" styleClass="glass-card">
+               <children>
+                  <!-- Title -->
+                  <VBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Label text="👤" style="-fx-font-size: 36px; -fx-text-fill: -primary;" />
+                        <Label styleClass="title-text" text="CONNEXION" />
+                        <Label styleClass="subtitle-text" text="Accédez à votre compte BloodLink" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </VBox>
+
+                  <!-- Error Message Label -->
+                  <Label fx:id="errorLabel" style="-fx-text-fill: -primary; -fx-font-weight: bold; -fx-font-size: 13px;" text="" visible="false" />
+
+                  <!-- Email -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="form-label" text="ADRESSE EMAIL" />
+                        <TextField fx:id="emailF" maxWidth="1.7976931348623157E308" promptText="nom@exemple.com" styleClass="text-field-custom" />
+                     </children>
+                  </VBox>
+
+                  <!-- Password -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="form-label" text="MOT DE PASSE" />
+                        <PasswordField fx:id="passF" maxWidth="1.7976931348623157E308" promptText="........" styleClass="text-field-custom" />
+                     </children>
+                  </VBox>
+                  
+                  <!-- Remember Me & Forgot Password -->
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <CheckBox fx:id="rememberMeCheckbox" mnemonicParsing="false" text="Se souvenir de moi" style="-fx-text-fill: -muted;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#handleForgotPassword" styleClass="button-link" text="Mot de passe oublié ?" />
+                     </children>
+                  </HBox>
+
+                  <!-- Action Buttons -->
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" styleClass="button-primary" text="SE CONNECTER">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  
+                  <HBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Label styleClass="subtitle-text" text="Pas encore de compte ?" />
+                        <Button mnemonicParsing="false" onAction="#handleGoToRegister" styleClass="button-link" text="S'inscrire" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
+

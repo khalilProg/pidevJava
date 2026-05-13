@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminUsersEditController">
+   <!-- Sidebar -->
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="MODIFIER UTILISATEUR" />
+                <Label fx:id="subtitleLabel" style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Mettre à jour les informations du compte." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="retour-button" mnemonicParsing="false" text="← RETOUR" onAction="#handleNavigateUsers" />
+         </HBox>
+         
+         <VBox styleClass="glass-card" spacing="25.0" maxWidth="800.0" alignment="CENTER_LEFT" style="-fx-padding: 40;">
+             <Label style="-fx-text-fill: -primary; -fx-font-weight: 900; -fx-font-size: 18px;" text="INFORMATIONS DU PROFIL" />
+             
+             <!-- Row 1: Prenom & Nom -->
+             <HBox spacing="20.0">
+                 <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                     <Label styleClass="form-label" text="PRÉNOM" />
+                     <TextField fx:id="prenomF" promptText="Ex: Jean" styleClass="text-field-custom" />
+                     <Label fx:id="prenomError" styleClass="field-error" text="" visible="false" managed="false" />
+                 </VBox>
+                 <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                     <Label styleClass="form-label" text="NOM" />
+                     <TextField fx:id="nomF" promptText="Ex: Dupont" styleClass="text-field-custom" />
+                     <Label fx:id="nomError" styleClass="field-error" text="" visible="false" managed="false" />
+                 </VBox>
+             </HBox>
+             
+             <!-- Row 2: Email -->
+             <VBox spacing="3.0">
+                 <Label styleClass="form-label" text="EMAIL" />
+                 <TextField fx:id="emailF" promptText="jean.dupont@exemple.com" styleClass="text-field-custom" />
+                 <Label fx:id="emailError" styleClass="field-error" text="" visible="false" managed="false" />
+             </VBox>
+             
+             <!-- Row 3: Pass (optional) & Role -->
+             <HBox spacing="20.0">
+                 <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                     <Label styleClass="form-label" text="MOT DE PASSE (Optionnel)" />
+                     <PasswordField fx:id="passF" promptText="Laissez vide pour conserver l'actuel" styleClass="text-field-custom" />
+                     <Label fx:id="passError" styleClass="field-error" text="" visible="false" managed="false" />
+                 </VBox>
+                 <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                     <Label styleClass="form-label" text="RÔLE" />
+                     <ComboBox styleClass="dark-combo" fx:id="roleCombo" promptText="Choisir un rôle" maxWidth="1.7976931348623157E308" />
+                     <Label fx:id="roleError" styleClass="field-error" text="" visible="false" managed="false" />
+                 </VBox>
+             </HBox>
+             
+             <HBox alignment="CENTER_RIGHT">
+                 <Button mnemonicParsing="false" onAction="#handleUpdateUser" styleClass="button-primary" text="✓ METTRE À JOUR" />
+             </HBox>
+         </VBox>
+         
+      </VBox>
+   </center>
+</BorderPane>

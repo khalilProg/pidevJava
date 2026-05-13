@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import com.calendarfx.view.CalendarView?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" styleClass="root" stylesheets="@styles.css"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.ListeRdvAdmin">
+
+    <!-- Navbar -->
+    <fx:include source="BaseBack.fxml" fx:id="headerInclude" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+    <Text fill="WHITE" layoutX="300" layoutY="140" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Liste rendez vous" styleClass="hero-title">
+        <font><Font size="32.0"/></font>
+    </Text>
+    <Button fx:id="generateReportBtn" text="Generate PDF Report"
+            layoutX="950" layoutY="130"
+            styleClass="btn-primary-modern"
+            onAction="#handleGenerateReport"/>
+    <Button fx:id="exportBtn" text="Export Excel" layoutX="700" layoutY="130" styleClass="btn-primary-modern" onAction="#handleExport" AnchorPane.leftAnchor="1300"/>
+    <Text fill="#888888" layoutX="300" layoutY="175" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Consultez la liste des rendez vous soumis.">
+        <font><Font size="16.0"/></font>
+    </Text>
+    <HBox spacing="20" layoutX="300" layoutY="200" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="30">
+
+        <!-- Table VBox -->
+        <VBox spacing="10" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <CalendarView fx:id="calendarView" layoutX="20" layoutY="200" prefWidth="100" prefHeight="520"/>
+            <HBox spacing="20" VBox.vgrow="ALWAYS">
+                <TableView fx:id="tableView" prefWidth="1200" prefHeight="520">
+                    <columns>
+                        <!--                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>-->
+                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="180"/>
+                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="180"/>
+                        <!--                    <TableColumn fx:id="qIdColumn" text="Questionnaire id" prefWidth="150"/>-->
+                        <TableColumn fx:id="entiteColumn" text="Entite de collecte" prefWidth="180"/>
+                        <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="210"/>
+                    </columns>
+                </TableView>
+                <!--                <BarChart fx:id="rdvChart" title="Rendez-vous de la Semaine">-->
+                <!--                    <xAxis>-->
+                <!--                        <CategoryAxis label="Jour" side="BOTTOM" />-->
+                <!--                    </xAxis>-->
+                <!--                    <yAxis>-->
+                <!--                        <NumberAxis label="Nombre" side="LEFT" />-->
+                <!--                    </yAxis>-->
+                <!--                </BarChart>-->
+            </HBox>
+
+        </VBox>
+
+    </HBox>
+</AnchorPane>

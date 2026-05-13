@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@commande.css" styleClass="main-container" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeEntitesAdmin">
+   <!-- Sidebar -->
+   <left><fx:include fx:id="sidebar" source="admin_sidebar.fxml" /></left>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox styleClass="main-content" spacing="35.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         
+         <!-- Header -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="Gestion des Entités" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Interface d'administration" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="addBtn" mnemonicParsing="false" text="+ Nouvelle Entité" onAction="#handleAjouter" styleClass="button-primary" />
+         </HBox>
+
+         <VBox styleClass="glass-card" spacing="30.0" VBox.vgrow="ALWAYS">
+            
+            <!-- Filter Section -->
+            <HBox spacing="20.0" alignment="CENTER_LEFT">
+               <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="-fx-background-color: #1a1a1a; -fx-border-color: rgba(255,255,255,0.08); -fx-border-radius: 8; -fx-padding: 5px 15px;">
+                   <Label text="🔍" style="-fx-text-fill: -muted;" />
+                   <TextField fx:id="searchField" styleClass="dark-field" promptText="Rechercher une entité..." HBox.hgrow="ALWAYS" />
+               </HBox>
+               <ComboBox fx:id="sortComboBox" styleClass="dark-combo" promptText="Trier" prefWidth="250.0" />
+            </HBox>
+
+            <!-- Table -->
+            <TableView fx:id="tableView" VBox.vgrow="ALWAYS" >
+               <columns>
+                  <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                  <TableColumn fx:id="nomColumn" text="NOM" prefWidth="220" />
+                  <TableColumn fx:id="adresseColumn" text="ADRESSE" prefWidth="250" />
+                  <TableColumn fx:id="villeColumn" text="VILLE" prefWidth="180" />
+                  <TableColumn fx:id="telephoneColumn" text="TÉLÉPHONE" prefWidth="180" />
+                  <TableColumn fx:id="actionsColumn" text="ACTIONS" prefWidth="150" />
+               </columns>
+            </TableView>
+         </VBox>
+         
+      </VBox>
+   </center>
+</BorderPane>

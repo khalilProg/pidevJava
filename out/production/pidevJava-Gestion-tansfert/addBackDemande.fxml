@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<BorderPane stylesheets="@commande.css" prefHeight="900.0" prefWidth="1400.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.addDemandeController">
+   
+   <left><fx:include source="admin_sidebar.fxml" /></left>
+
+   <center>
+      <VBox styleClass="main-content" spacing="40.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         
+         <!-- HEADER -->
+         <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5.0">
+                <Label style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: 900;" text="NOUVELLE DEMANDE" />
+                <Label style="-fx-text-fill: -muted; -fx-font-size: 14px;" text="Envoyer une demande de sang vers une banque partenaire." />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="retour-button" mnemonicParsing="false" text="← RETOUR" onAction="#goBack" />
+         </HBox>
+
+         <!-- FORM CARD -->
+         <VBox styleClass="glass-card" spacing="30.0" maxWidth="800">
+             
+            <Label style="-fx-text-fill: #e63939; -fx-font-weight: 900; -fx-font-size: 18px;" text="DÉTAILS DE LA DEMANDE" />
+
+            <GridPane hgap="30" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" />
+                    <ColumnConstraints percentWidth="50" />
+                </columnConstraints>
+                
+                <!-- BANQUE -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+                    <Label styleClass="form-label" text="BANQUE DESTINATAIRE" />
+                    <ComboBox fx:id="cbBanque" promptText="Sélectionner une banque" styleClass="text-field-custom" prefWidth="800" />
+                    <Label fx:id="banqueError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+
+                <!-- TYPE DE SANG -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="TYPE DE SANG" />
+                    <ComboBox fx:id="comboType" promptText="Type de sang" styleClass="text-field-custom" prefWidth="400">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="A+" />
+                                <String fx:value="A-" />
+                                <String fx:value="B+" />
+                                <String fx:value="B-" />
+                                <String fx:value="O+" />
+                                <String fx:value="O-" />
+                                <String fx:value="AB+" />
+                                <String fx:value="AB-" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label fx:id="typeError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+
+                <!-- QUANTITE -->
+                <VBox spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="QUANTITÉ (UNITÉS)" />
+                    <TextField fx:id="txtQuantite" promptText="Ex: 50" styleClass="text-field-custom" />
+                    <Label fx:id="quantiteError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+
+                <!-- URGENCE -->
+                <VBox spacing="4.0" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+                    <Label styleClass="form-label" text="NIVEAU D'URGENCE" />
+                    <ComboBox fx:id="comboUrgence" promptText="Niveau d'urgence" styleClass="text-field-custom" prefWidth="800">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="FAIBLE" />
+                                <String fx:value="MOYENNE" />
+                                <String fx:value="URGENTE" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label fx:id="urgenceError" styleClass="field-error" managed="false" visible="false" />
+                </VBox>
+            </GridPane>
+
+            <Region prefHeight="10" />
+
+            <HBox spacing="15.0" alignment="CENTER_RIGHT">
+                <Button styleClass="cancel-button" mnemonicParsing="false" onAction="#goBack" text="ANNULER" />
+                <Button mnemonicParsing="false" onAction="#ajouterDemande" styleClass="button-primary" text="✓ ENREGISTRER" prefWidth="180" />
+            </HBox>
+            
+         </VBox>
+
+      </VBox>
+   </center>
+</BorderPane>
