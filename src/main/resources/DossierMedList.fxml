@@ -13,39 +13,7 @@
     <StackPane styleClass="main-container" />
 
     <HBox spacing="0">
-        <VBox prefWidth="280.0" minWidth="280.0" styleClass="sidebar">
-            <padding>
-                <Insets bottom="30.0" left="20.0" right="20.0" top="40.0" />
-            </padding>
-
-            <VBox spacing="10.0" styleClass="sidebar-brand">
-                <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Circle fill="#e63939" radius="6.0" />
-                    <Label styleClass="sidebar-brand-text" text="BLOODLINK" />
-                </HBox>
-                <Label styleClass="sidebar-admin-badge" text="INTELLIGENT SYSTEMS" />
-            </VBox>
-
-            <Region prefHeight="60.0" />
-
-            <VBox spacing="10.0" styleClass="sidebar-nav-list">
-                <Label styleClass="sidebar-section-label" text="ADMINISTRATION" />
-                <Button onAction="#goToDashboard" styleClass="sidebar-nav-item" text="📊 Master Dashboard" maxWidth="Infinity" alignment="CENTER_LEFT" />
-                <Button styleClass="sidebar-nav-item-active" text="🩺 Medical Folders" maxWidth="Infinity" alignment="CENTER_LEFT" />
-                <Button onAction="#goToDonationLogs" styleClass="sidebar-nav-item" text="🩸 Donation Logs" maxWidth="Infinity" alignment="CENTER_LEFT"/>
-            </VBox>
-
-            <Region VBox.vgrow="ALWAYS" />
-
-            <VBox styleClass="form-card" spacing="12">
-                <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
-                <Label styleClass="welcome-badge-text" text="CLINICAL AI" />
-                <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Circle radius="4" fill="#2ecc71" />
-                    <Label styleClass="admin-card-copy" text="Biometric Engine Active" />
-                </HBox>
-            </VBox>
-        </VBox>
+        <fx:include fx:id="sidebar" source="admin_sidebar.fxml" />
 
         <VBox styleClass="content-area" HBox.hgrow="ALWAYS" spacing="30.0">
             <padding>
@@ -54,14 +22,14 @@
 
             <HBox alignment="CENTER_LEFT">
                 <VBox spacing="5">
-                    <Label styleClass="breadcrumb-label" text="ADMIN / CLINICAL / REPOSITORY" />
-                    <Label styleClass="page-title" text="Medical Intelligence" />
-                    <Label styleClass="page-subtitle" text="Encrypted demographic parameters and AI eligibility predictions." />
+                    <Label styleClass="breadcrumb-label" text="ADMIN / CLINIQUE / RÉFÉRENTIEL" />
+                    <Label styleClass="page-title" text="Intelligence Médicale" />
+                    <Label styleClass="page-subtitle" text="Paramètres démographiques et prédictions d'éligibilité IA." />
                 </VBox>
                 <Region HBox.hgrow="ALWAYS" />
                 <HBox alignment="CENTER" spacing="15">
-                    <TextField fx:id="searchField" prefWidth="350" promptText="Filter by patient name..." styleClass="dark-field" />
-                    <Button onAction="#openAddMedicalView" styleClass="submit-button" text="+ New Enrollment" />
+                    <TextField fx:id="searchField" prefWidth="350" promptText="Filtrer par nom du patient..." styleClass="dark-field" />
+                    <Button onAction="#openAddMedicalView" styleClass="submit-button" text="+ Nouvelle inscription" />
                 </HBox>
             </HBox>
 
@@ -70,17 +38,17 @@
                     <padding>
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                     </padding>
-                    <Label styleClass="form-title" text="ACTIVE CLINICAL PROFILES" />
+                    <Label styleClass="form-title" text="PROFILS CLINIQUES ACTIFS" />
 
                     <TableView fx:id="mainTable" styleClass="dark-table" VBox.vgrow="ALWAYS">
                         <columns>
-                            <TableColumn fx:id="colId" prefWidth="50" text="FILE ID" />
-                            <TableColumn fx:id="colPrenom" prefWidth="130" text="GIVEN NAME" />
-                            <TableColumn fx:id="colNom" prefWidth="130" text="FAMILY NAME" />
-                            <TableColumn fx:id="colAge" prefWidth="60" text="AGE" />
-                            <TableColumn fx:id="colSexe" prefWidth="80" text="SEX" />
-                            <TableColumn fx:id="colBlood" prefWidth="80" text="CLASS" />
-                            <TableColumn fx:id="colTaille" prefWidth="90" text="VERT(cm)" />
+                            <TableColumn fx:id="colId" prefWidth="50" text="ID FICHIER" />
+                            <TableColumn fx:id="colPrenom" prefWidth="130" text="PRÉNOM" />
+                            <TableColumn fx:id="colNom" prefWidth="130" text="NOM" />
+                            <TableColumn fx:id="colAge" prefWidth="60" text="ÂGE" />
+                            <TableColumn fx:id="colSexe" prefWidth="80" text="SEXE" />
+                            <TableColumn fx:id="colBlood" prefWidth="80" text="GROUPE" />
+                            <TableColumn fx:id="colTaille" prefWidth="90" text="TAILLE(cm)" />
                             <TableColumn fx:id="colTemp" prefWidth="90" text="TEMP(°C)" />
                         </columns>
                         <columnResizePolicy>
@@ -89,7 +57,7 @@
                     </TableView>
 
                     <HBox alignment="CENTER_RIGHT">
-                        <Button onAction="#openManageMedicalView" styleClass="cancel-button" text="Edit Selected Profile" />
+                        <Button onAction="#openManageMedicalView" styleClass="cancel-button" text="Modifier le profil sélectionné" />
                     </HBox>
                 </VBox>
 
@@ -102,8 +70,8 @@
                         <HBox alignment="CENTER_LEFT" spacing="10">
                             <Label style="-fx-font-size: 24px;" text="🧠" />
                             <VBox>
-                                <Label styleClass="form-section-title" text="AI HEMATOLOGY SCAN" />
-                                <Label styleClass="admin-card-copy" text="Gemini Pro Vision Engine" />
+                                <Label styleClass="form-section-title" text="SCAN HÉMATOLOGIQUE IA" />
+                                <Label styleClass="admin-card-copy" text="Moteur Gemini Pro Vision" />
                             </VBox>
                         </HBox>
 
@@ -111,12 +79,12 @@
 
                         <Label fx:id="aiResultLabel" styleClass="admin-card-copy"
                                style="-fx-font-size: 14px; -fx-text-fill: white; -fx-line-spacing: 6;"
-                               text="Please select a genetic profile from the index to run eligibility diagnostics."
+                               text="Veuillez sélectionner un profil génétique dans l'index pour lancer les diagnostics d'éligibilité."
                                wrapText="true" />
 
                         <Region VBox.vgrow="ALWAYS" />
 
-                        <Button maxWidth="Infinity" onAction="#runAIPrediction" styleClass="submit-button" text="Initialize Analysis Sequence" />
+                        <Button maxWidth="Infinity" onAction="#runAIPrediction" styleClass="submit-button" text="Lancer l'analyse" />
                     </VBox>
                 </VBox>
             </HBox>

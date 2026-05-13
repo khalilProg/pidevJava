@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1755897e-08cb-4bb5-a645-0ed8184ff9ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pidevJava-main (5).iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReplaceEncodingFix.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestList2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestList2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestList3.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/.idea/IntelliLang.xml" beforeDir="false" />
@@ -19,7 +20,8 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/.idea/material_theme_project_new.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/.run/Launcher.run.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pidevJava-main/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pidevJava-main/.run/mainfx.run.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/AdminAfficherCommandes_original.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/ReplaceEncodingFix.class" beforeDir="false" />
@@ -269,509 +271,11 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tools/ThemeManager$Theme.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tools/ThemeManager.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/out/production/pidevJava-Gestion-tansfert/validateDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.idea/IntelliLang.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.idea/material_theme_project_new.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/.run/mainfx.run.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/AdminAfficherCommandes_original.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/ReplaceEncodingFix.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/compile.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AdminAfficherCommandes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AdminModifierCommande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AfficherCommandes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AfficherStocks.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjoutCommande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjoutDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjoutStock.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterCampagne.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterEntiteAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterEntiteCollecte.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterQuestAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterQuestionnaire.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterRendezVous.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/AjouterRendezVousAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/BaseBack.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/BaseFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/CampagneBack.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/CampagneCalendar.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/CampagneCard.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/CampagneFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/DemandeBackView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/EntiteCollecteBack.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/EntiteCollecteFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/HeaderFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/Home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/HomeAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/Liste.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ListeCampagnes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ListeCampagnesAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ListeEntitesAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ListeQuestAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ListeRdvAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ModifierCampagne.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ModifierCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ModifierEntiteAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ModifierEntiteCollecte.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ModifierStock.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/OverlayMenu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/TransfertBackView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/TransfertView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/Update.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/UpdateRdvAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ViewCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/ViewEntiteAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/addBackDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/addDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/addTransfert.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_dashboard.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_sidebar.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users_add.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users_complete_banque.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users_complete_client.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users_edit.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users_edit_banque.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users_edit_client.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/admin_users_view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/client_home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/commande-light.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/commande.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/custom_menu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/editBackDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/editBackTransfert.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/forgot_password.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/register.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/reset_password.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/styleBack.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/styleFront.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/stylesAdmin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController$6$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminAfficherCommandesController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminModifierCommandeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminSidebarController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersAddController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersCompleteBanqueController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersCompleteClientController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersEditBanqueController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersEditClientController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersEditController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AdminUsersViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherCommandesController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherCommandesController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherCommandesController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherCommandesController$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherCommandesController$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherCommandesController$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherCommandesController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController$6$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AfficherStocksController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjoutCommandeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjoutStockController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterCampagneAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterCampagneController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterEntiteAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterEntiteCollecteController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterQuestAdmin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterQuestAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterQuestionnaire.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterRendezVous$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/AjouterRendezVous.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/BaseBack.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/BaseFront.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/CampagneBackController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/CampagneCalendarController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/CampagneCard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/CampagneFrontController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ClientHomeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/DemandeController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/DemandeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/EditDemandeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/EditTransfertController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/EntiteCollecteBackController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/EntiteCollecteFrontController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ForgotPasswordController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/Home.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/Liste$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/Liste.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnesAdmin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnesAdmin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnesAdmin$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnesAdmin$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnesAdmin$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnesAdmin$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeCampagnesAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeEntitesAdmin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeEntitesAdmin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeEntitesAdmin$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeEntitesAdmin$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeEntitesAdmin$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeEntitesAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeQuestAdmin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeQuestAdmin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeQuestAdmin$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeQuestAdmin$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeQuestAdmin$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeQuestAdmin$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeQuestAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeRdvAdmin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeRdvAdmin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeRdvAdmin$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeRdvAdmin$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeRdvAdmin$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeRdvAdmin$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ListeRdvAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ModifierCampagneAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ModifierCampagneController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ModifierEntiteAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ModifierEntiteCollecteController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ModifierStockController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ResetPasswordController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/TransfertController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/TransfertController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/Update$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/Update.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/UpdateRdvAdmin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/UpdateRdvAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ValidateDemandeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ViewCampagneAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/ViewEntiteAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/addDemandeController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/addDemandeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/addTrasnfertController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/admin_dashboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backDemandeController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backDemandeController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backDemandeController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backDemandeController$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backDemandeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backTransfertController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backTransfertController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backTransfertController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/backTransfertController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/custom_menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/login.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/controllers/register.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Banque.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Campagne.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Commande.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Demande.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Don.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/DossierMedical.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/EntiteDeCollecte.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Questionnaire.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/RendezVous.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Stock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/Transfert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/entities/client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/CampagneMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/ClientMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/CommandeMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/DemandeMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/DonMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/DossierMedicalMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/EntiteCollecteMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/MainFx.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/QuestionnaireMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/RendezVousMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/StockMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/TransfertMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/UserMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/mains/banqueMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/BanqueService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/CampagneService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/ClientService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/CommandeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/DemandeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/DonService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/DossierMedicalService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/EmailService$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/EmailService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/EntiteCollecteService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/IGeneralService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/PasswordResetService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/QuestionnaireService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/RendezVousService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/StockService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/TransfertService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/services/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tests/MainFX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tests/TestFxml.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tests/TestLoad.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tools/AnimationUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tools/MyDatabase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tools/ThemeManager$Theme.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/tn/esprit/tools/ThemeManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/out/production/pidevJava-Gestion-tansfert/validateDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AIResultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminAfficherCommandesController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminModifierCommandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminSidebarController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersAddController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersCompleteBanqueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersCompleteClientController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersEditBanqueController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersEditClientController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersEditController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersViewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AfficherCommandesController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AfficherStocksController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AgentBanqueAddDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AgentBanqueBaseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AgentBanqueDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AgentBanqueEditDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AgentBanqueTransfertController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AgentBanqueViewDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AgentBanqueViewTransfertController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjoutCommandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjoutStockController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterCampagneAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterCampagneController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterEntiteAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterEntiteCollecteController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterQuestAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterQuestionnaire.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterRendezVous.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/BaseBack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/BaseFront.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/CampagneBackController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/CampagneCalendarController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/CampagneCard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/CampagneFrontController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ClientHomeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ClientProfileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/CntsAgentHomeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ConfigLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/DemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/DonationListController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/DonationManageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMedAddController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMedController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMedListController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMedManageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/EditDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/EditTransfertController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/EntiteCollecteBackController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/EntiteCollecteFrontController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ForgotPasswordController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/FrontDonationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/FrontMedicalController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/Home.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/Liste.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ListeCampagnes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ListeCampagnesAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ListeEntitesAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ListeQuestAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ListeRdvAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierCampagneAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierCampagneController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierEntiteAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierEntiteCollecteController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierStockController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ResetPasswordController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/TransfertController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/Update.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/UpdateRdvAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ValidateDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ViewCampagneAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/ViewEntiteAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/addDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/addTrasnfertController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/admin_dashboard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/backDemandeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/backTransfertController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/custom_menu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/controllers/register.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Banque.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Campagne.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Commande.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Demande.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Don.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/DossierMed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/EntiteDeCollecte.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Questionnaire.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/RendezVous.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Stock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/Transfert.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/entities/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/mains/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/mains/MainFx.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/AIService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/AiReportService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/BanqueService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/CampagneService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/ChatbotService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/ClientService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/CommandeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/DemandeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/EmailService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/EntiteCollecteService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/FaceIdService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/GeminiService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/GoogleCalendarOAuthService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/GoogleOAuthService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/IGeneralService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/KNNModelService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/MailService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/PasswordResetService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/QuestionnaireService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/RendezVousService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/ServiceDon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/ServiceDossierMed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/StockService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/TransfertService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/services/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tests/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tests/MainFx.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tests/TestFxml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tests/TestLoad.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/AnimationUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/ComboItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/DataSource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/GoogleOAuthConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/IconUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/MyDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/SessionManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/java/tn/esprit/tools/ThemeManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AIResultModal.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AdminAfficherCommandes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AdminModifierCommande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AfficherCommandes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AfficherStocks.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AgentBanqueAddDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AgentBanqueBase.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AgentBanqueDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AgentBanqueEditDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AgentBanqueTransfert.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AgentBanqueViewDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AgentBanqueViewTransfert.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjoutCommande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjoutDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjoutStock.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterCampagne.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterEntiteAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterEntiteCollecte.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterQuestAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterQuestionnaire.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterRendezVous.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/AjouterRendezVousAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/BaseBack.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/BaseFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/CampagneBack.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/CampagneCalendar.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/CampagneCard.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/CampagneFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ClientCampagneCard.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ClientProfile.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DemandeBackView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DonationAdd.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DonationList.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DonationManage.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DonationView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DossierMedAdd.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DossierMedList.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DossierMedManage.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/DossierMedView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/EntiteCollecteBack.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/EntiteCollecteFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/FrontDonationHistory.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/FrontDonationView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/HeaderFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/Home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/HomeAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/Liste.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ListeCampagnes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ListeCampagnesAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ListeEntitesAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ListeQuestAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ListeRdvAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ModifierCampagne.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ModifierCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ModifierEntiteAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ModifierEntiteCollecte.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ModifierStock.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/OverlayMenu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/TransfertBackView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/TransfertView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/Update.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/UpdateRdvAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ViewCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/ViewEntiteAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/addBackDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/addDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/addTransfert.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_dashboard.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_sidebar.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users_add.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users_complete_banque.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users_complete_client.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users_edit.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users_edit_banque.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users_edit_client.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/admin_users_view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/agent_banque.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/client-campagnes.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/client_home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/cnts_agent_home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/commande-light.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/commande.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/custom_menu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/editBackDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/editBackTransfert.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/forgot_password.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/images/home-campagnes.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/images/home-commandes.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/images/home-dons.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/images/home-dossier.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/register.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/reset_password.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/styleBack.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/styleFront.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/stylesAdmin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/main/resources/validateDemande.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/tn/esprit/services/CampagneServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/tn/esprit/services/ClientServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/tn/esprit/services/EntiteCollecteServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/tn/esprit/services/QuestionnaireServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/pidevJava-main/src/tn/esprit/services/RendezVousServiceTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AIResultController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AdminAfficherCommandesController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AdminModifierCommandeController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AdminSidebarController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AdminTopBar.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersAddController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersCompleteBanqueController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AdminUsersCompleteClientController.java" beforeDir="false" />
@@ -793,7 +297,6 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AjoutStockController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterCampagneAdmin.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterCampagneController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterCampagneFrontController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterEntiteAdmin.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterEntiteCollecteController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/AjouterQuestAdmin.java" beforeDir="false" />
@@ -812,7 +315,6 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/DemandeController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/DonationListController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/DonationManageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMed.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMedAddController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMedController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/DossierMedListController.java" beforeDir="false" />
@@ -833,11 +335,9 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ListeRdvAdmin.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierCampagneAdmin.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierCampagneController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierCampagneFrontController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierEntiteAdmin.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierEntiteCollecteController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ModifierStockController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/RapportPredictionController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/ResetPasswordController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/TransfertController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/controllers/Update.java" beforeDir="false" />
@@ -866,13 +366,11 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/entities/Stock.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/entities/Transfert.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/entities/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/mains/Launcher.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/mains/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/mains/MainFx.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/AIService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/AiReportService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/BanqueService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/BloodCompatibilityService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/CampagneService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/ChatbotService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/ClientService.java" beforeDir="false" />
@@ -882,7 +380,6 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/EntiteCollecteService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/FaceIdService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/GeminiService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/GeminiServiceCampagne.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/GoogleCalendarOAuthService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/GoogleOAuthService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/IGeneralService.java" beforeDir="false" />
@@ -894,14 +391,13 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/ServiceDon.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/ServiceDossierMed.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/StockService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/StripeCheckoutService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/TransfertService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/services/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tests/MainFX.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tests/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tests/MainFx.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tests/TestFxml.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tests/TestLoad.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tools/AnimationUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tools/CampagnePDFGenerator.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tools/ComboItem.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tools/DataSource.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/java/tn/esprit/tools/GoogleOAuthConfig.java" beforeDir="false" />
@@ -926,7 +422,6 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/AjoutStock.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/AjouterCampagne.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/AjouterCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/AjouterCampagneFront.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/AjouterEntiteAdmin.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/AjouterEntiteCollecte.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/AjouterQuestAdmin.fxml" beforeDir="false" />
@@ -952,11 +447,8 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/DossierMedView.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/EntiteCollecteBack.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/EntiteCollecteFront.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/Front.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/FrontDonationHistory.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/FrontDonationView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/FrontMedicalProfile.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/FrontMedicalView.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/HeaderFront.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/Home.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/HomeAdmin.fxml" beforeDir="false" />
@@ -968,12 +460,10 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/ListeRdvAdmin.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/ModifierCampagne.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/ModifierCampagneAdmin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/ModifierCampagneFront.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/ModifierEntiteAdmin.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/ModifierEntiteCollecte.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/ModifierStock.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/OverlayMenu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/RapportPrediction.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/TransfertBackView.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/TransfertView.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/Update.fxml" beforeDir="false" />
@@ -1008,7 +498,6 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/images/home-dons.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/images/home-dossier.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/map_entites.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/register.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/reset_password.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/main/resources/styleBack.css" beforeDir="false" />
@@ -1021,7 +510,32 @@
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/tn/esprit/services/EntiteCollecteServiceTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/tn/esprit/services/QuestionnaireServiceTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pidevJava-main/src/tn/esprit/services/RendezVousServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pidevJava-main/stripe.properties.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/AgentBanqueBaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/controllers/BaseFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GeminiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/services/GeminiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherCommandes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherCommandes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AgentBanqueBase.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AjoutCommande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjoutCommande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterQuestionnaire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterQuestionnaire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterRendezVous.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterRendezVous.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CampagneFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CampagneFront.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ClientProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ClientProfile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/DonationList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DonationList.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/DonationManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DonationManage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/DossierMedList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DossierMedList.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/DossierMedManage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DossierMedManage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/EntiteCollecteFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/EntiteCollecteFront.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FrontDonationHistory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FrontDonationHistory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FrontDonationView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FrontDonationView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FrontMedicalProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FrontMedicalProfile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FrontMedicalView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FrontMedicalView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Liste.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Liste.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ListeCampagnes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ListeCampagnes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/OverlayMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/OverlayMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/client_home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/client_home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cnts_agent_home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cnts_agent_home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1039,29 +553,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Launcher.executor": "Run",
-    "Application.Main.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main2",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/khalil/bloodlink/pom.xml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main2&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/khalil/bloodlink/pom.xml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-24" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="tn.esprit.mains.Main" />
       <module name="bloodlink" />
       <extension name="coverage">
@@ -1074,6 +590,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Launcher" />
+      <item itemvalue="Application.Main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -1099,6 +619,13 @@
       <workItem from="1778680844211" duration="131000" />
       <workItem from="1778680997845" duration="203000" />
       <workItem from="1778681338426" duration="7276000" />
+      <workItem from="1778708079065" duration="280000" />
+      <workItem from="1778708435249" duration="16000" />
+      <workItem from="1778708481815" duration="108000" />
+      <workItem from="1778708615280" duration="30000" />
+      <workItem from="1778708684829" duration="330000" />
+      <workItem from="1778709026987" duration="227000" />
+      <workItem from="1778709268509" duration="2685000" />
     </task>
     <servers />
   </component>

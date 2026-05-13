@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tn.esprit.services.ChatbotService;
@@ -119,6 +120,81 @@ public class BaseFront {
         if (sessionEmailLabel != null) {
             String email = user.getEmail();
             sessionEmailLabel.setText(email == null || email.isBlank() ? "Session: " + displayName : "Session: " + email);
+        }
+
+        // Bind and filter dynamic menu events from included FXML
+        if (menuOverlay != null) {
+            Button menuAccueilBtn = (Button) menuOverlay.lookup("#menuAccueilBtn");
+            Button menuCampagnesBtn = (Button) menuOverlay.lookup("#menuCampagnesBtn");
+            Button menuEntitesBtn = (Button) menuOverlay.lookup("#menuEntitesBtn");
+            Button menuHistoriqueBtn = (Button) menuOverlay.lookup("#menuHistoriqueBtn");
+            Button menuCommandesBtn = (Button) menuOverlay.lookup("#menuCommandesBtn");
+            Button menuDonsBtn = (Button) menuOverlay.lookup("#menuDonsBtn");
+            Button menuDossierMedBtn = (Button) menuOverlay.lookup("#menuDossierMedBtn");
+            Button menuProfilBtn = (Button) menuOverlay.lookup("#menuProfilBtn");
+            Button menuDemandesBtn = (Button) menuOverlay.lookup("#menuDemandesBtn");
+            Button menuTransfertsBtn = (Button) menuOverlay.lookup("#menuTransfertsBtn");
+            Button menuFermerBtn = (Button) menuOverlay.lookup("#menuFermerBtn");
+            Button menuLogoutBtn = (Button) menuOverlay.lookup("#menuLogoutBtn");
+            Region menuBackdrop = (Region) menuOverlay.lookup("#menuBackdrop");
+            Label sessionEmailLabelOverlay = (Label) menuOverlay.lookup("#sessionEmailLabel");
+
+            if (menuAccueilBtn != null) menuAccueilBtn.setOnAction(this::goToAccueil);
+            if (menuCampagnesBtn != null) menuCampagnesBtn.setOnAction(this::goToCampagnes);
+            if (menuEntitesBtn != null) menuEntitesBtn.setOnAction(this::goToEntites);
+            if (menuHistoriqueBtn != null) menuHistoriqueBtn.setOnAction(this::goToHistorique);
+            if (menuCommandesBtn != null) menuCommandesBtn.setOnAction(this::goToCommandes);
+            if (menuDonsBtn != null) menuDonsBtn.setOnAction(this::goToDons);
+            if (menuDossierMedBtn != null) menuDossierMedBtn.setOnAction(this::goToDossierMed);
+            if (menuProfilBtn != null) menuProfilBtn.setOnAction(this::goToProfile);
+            if (menuDemandesBtn != null) menuDemandesBtn.setOnAction(this::goToDemandes);
+            if (menuTransfertsBtn != null) menuTransfertsBtn.setOnAction(this::goToTransferts);
+            if (menuFermerBtn != null) menuFermerBtn.setOnAction(this::handleMenuToggle);
+            if (menuLogoutBtn != null) menuLogoutBtn.setOnAction(this::handleLogout);
+            if (menuBackdrop != null) menuBackdrop.setOnMouseClicked(this::handleMenuClose);
+            
+            if (sessionEmailLabelOverlay != null) {
+                String email = user.getEmail();
+                sessionEmailLabelOverlay.setText(email == null || email.isBlank() ? "Session: " + displayName : "Session: " + email);
+            }
+
+            boolean isCnts = user.getRole() != null && user.getRole().toLowerCase().contains("cnts");
+            boolean isBanque = user.getRole() != null && user.getRole().toLowerCase().contains("banque");
+
+            if (isBanque) {
+                if (menuAccueilBtn != null) { menuAccueilBtn.setVisible(false); menuAccueilBtn.setManaged(false); }
+                if (menuCampagnesBtn != null) { menuCampagnesBtn.setVisible(false); menuCampagnesBtn.setManaged(false); }
+                if (menuEntitesBtn != null) { menuEntitesBtn.setVisible(false); menuEntitesBtn.setManaged(false); }
+                if (menuHistoriqueBtn != null) { menuHistoriqueBtn.setVisible(false); menuHistoriqueBtn.setManaged(false); }
+                if (menuCommandesBtn != null) { menuCommandesBtn.setVisible(false); menuCommandesBtn.setManaged(false); }
+                if (menuDonsBtn != null) { menuDonsBtn.setVisible(false); menuDonsBtn.setManaged(false); }
+                if (menuDossierMedBtn != null) { menuDossierMedBtn.setVisible(false); menuDossierMedBtn.setManaged(false); }
+                if (menuDemandesBtn != null) { menuDemandesBtn.setVisible(true); menuDemandesBtn.setManaged(true); }
+                if (menuTransfertsBtn != null) { menuTransfertsBtn.setVisible(true); menuTransfertsBtn.setManaged(true); }
+                if (menuProfilBtn != null) { menuProfilBtn.setVisible(true); menuProfilBtn.setManaged(true); }
+            } else if (isCnts) {
+                if (menuAccueilBtn != null) { menuAccueilBtn.setVisible(false); menuAccueilBtn.setManaged(false); }
+                if (menuCampagnesBtn != null) { menuCampagnesBtn.setVisible(true); menuCampagnesBtn.setManaged(true); }
+                if (menuEntitesBtn != null) { menuEntitesBtn.setVisible(true); menuEntitesBtn.setManaged(true); }
+                if (menuHistoriqueBtn != null) { menuHistoriqueBtn.setVisible(false); menuHistoriqueBtn.setManaged(false); }
+                if (menuCommandesBtn != null) { menuCommandesBtn.setVisible(false); menuCommandesBtn.setManaged(false); }
+                if (menuDonsBtn != null) { menuDonsBtn.setVisible(false); menuDonsBtn.setManaged(false); }
+                if (menuDossierMedBtn != null) { menuDossierMedBtn.setVisible(false); menuDossierMedBtn.setManaged(false); }
+                if (menuDemandesBtn != null) { menuDemandesBtn.setVisible(false); menuDemandesBtn.setManaged(false); }
+                if (menuTransfertsBtn != null) { menuTransfertsBtn.setVisible(false); menuTransfertsBtn.setManaged(false); }
+                if (menuProfilBtn != null) { menuProfilBtn.setVisible(true); menuProfilBtn.setManaged(true); }
+            } else {
+                if (menuAccueilBtn != null) { menuAccueilBtn.setVisible(true); menuAccueilBtn.setManaged(true); }
+                if (menuCampagnesBtn != null) { menuCampagnesBtn.setVisible(true); menuCampagnesBtn.setManaged(true); }
+                if (menuEntitesBtn != null) { menuEntitesBtn.setVisible(false); menuEntitesBtn.setManaged(false); }
+                if (menuHistoriqueBtn != null) { menuHistoriqueBtn.setVisible(true); menuHistoriqueBtn.setManaged(true); }
+                if (menuCommandesBtn != null) { menuCommandesBtn.setVisible(true); menuCommandesBtn.setManaged(true); }
+                if (menuDonsBtn != null) { menuDonsBtn.setVisible(true); menuDonsBtn.setManaged(true); }
+                if (menuDossierMedBtn != null) { menuDossierMedBtn.setVisible(true); menuDossierMedBtn.setManaged(true); }
+                if (menuDemandesBtn != null) { menuDemandesBtn.setVisible(false); menuDemandesBtn.setManaged(false); }
+                if (menuTransfertsBtn != null) { menuTransfertsBtn.setVisible(false); menuTransfertsBtn.setManaged(false); }
+                if (menuProfilBtn != null) { menuProfilBtn.setVisible(true); menuProfilBtn.setManaged(true); }
+            }
         }
     }
 
@@ -522,12 +598,28 @@ public class BaseFront {
 
     @FXML
     public void goToCampagnes(javafx.event.Event event) {
-        switchScene(event, "/ListeCampagnes.fxml");
+        User user = SessionManager.getCurrentUser();
+        boolean isCnts = user != null && user.getRole() != null && user.getRole().toLowerCase().contains("cnts");
+        if (isCnts) {
+            switchScene(event, "/cnts_agent_home.fxml");
+        } else {
+            switchScene(event, "/ListeCampagnes.fxml");
+        }
     }
 
     @FXML
     public void goToCommandes(javafx.event.Event event) {
         switchScene(event, "/AfficherCommandes.fxml");
+    }
+
+    @FXML
+    public void goToDemandes(javafx.event.Event event) {
+        // Overridden in child classes (AgentBanqueBaseController)
+    }
+
+    @FXML
+    public void goToTransferts(javafx.event.Event event) {
+        // Overridden in child classes (AgentBanqueBaseController)
     }
 
     @FXML

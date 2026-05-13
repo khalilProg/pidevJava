@@ -394,7 +394,7 @@ public class EmailService {
             + "\nDATE ENVOI: " + dateEnvoi
             + "\nDATE RECEPTION: " + dateReception;
         return sendHtmlEmail(toEmail, "BloodLink ✔ Votre demande a été validée", htmlContent, debug,
-            "ramysnoussi@gmail.com", "");
+            "ramysnoussi@gmail.com", "qajndcivavvcmwaf");
     }
 
     private String buildDemandeValideeHtml(String userName, String banqueName, int demandeId,

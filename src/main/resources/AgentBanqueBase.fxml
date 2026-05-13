@@ -43,33 +43,5 @@
     </VBox>
 
     <!-- Side Menu Overlay -->
-    <HBox fx:id="menuOverlay" visible="false" managed="false" StackPane.alignment="TOP_RIGHT"
-          style="-fx-background-color: rgba(0,0,0,0.6);" onMouseClicked="#handleMenuClose">
-        <HBox HBox.hgrow="ALWAYS" /> <!-- Filler left space -->
-
-        <VBox styleClass="menu-drawer" prefWidth="420" spacing="24" onMouseClicked="#consumeMenuClick">
-            <!-- Close Header -->
-            <HBox alignment="CENTER_RIGHT" prefHeight="50">
-                <Button text="✕  FERMER" styleClass="nav-link" onAction="#handleMenuToggle"/>
-            </HBox>
-
-            <!-- Links -->
-            <VBox spacing="12">
-                <Button text="ACCUEIL" styleClass="menu-btn" onAction="#goToAccueil" maxWidth="Infinity" alignment="CENTER_LEFT" />
-                <Button text="DEMANDES" styleClass="menu-btn" onAction="#goToDemandes" maxWidth="Infinity" alignment="CENTER_LEFT"/>
-                <Button text="TRANSFERTS" styleClass="menu-btn" onAction="#goToTransferts" maxWidth="Infinity" alignment="CENTER_LEFT"/>
-                <Button text="MON PROFIL" styleClass="menu-btn" onAction="#goToProfil" maxWidth="Infinity" alignment="CENTER_LEFT"/>
-            </VBox>
-
-            <Region VBox.vgrow="ALWAYS" />
-
-            <!-- Session Footer -->
-            <VBox spacing="15">
-                <Label text="Session:" styleClass="agent-session-label" />
-                <Label fx:id="sessionEmailLabel" text="email@example.com" styleClass="agent-session-email" />
-                <Button text="Deconnexion" styleClass="logout-btn" maxWidth="Infinity" onAction="#handleLogout"/>
-            </VBox>
-        </VBox>
-    </HBox>
-
+    <fx:include source="OverlayMenu.fxml" fx:id="menuOverlay"/>
 </StackPane>

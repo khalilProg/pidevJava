@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GeminiService {
-    private static final String API_KEY = " ";
+    private static final String API_KEY = "AIzaSyDqH-c7jOuC9wx5toKaAA_VCXxqOvtxSG0";
     private static final String URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" +   API_KEY;
 
     public String predireBesoins(String stocks, String demandes) throws Exception {

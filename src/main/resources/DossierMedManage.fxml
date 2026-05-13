@@ -16,46 +16,46 @@
             </padding>
 
             <VBox alignment="CENTER" spacing="5">
-                <Label styleClass="page-title" style="-fx-font-size:26px;" text="Clinical Override Terminal" />
-                <Label styleClass="page-subtitle" text="Edit Patient Biological Data." />
+                <Label styleClass="page-title" style="-fx-font-size:26px;" text="Terminal de Surcharge Clinique" />
+                <Label styleClass="page-subtitle" text="Modifier les données biologiques du patient." />
             </VBox>
 
             <Separator style="-fx-opacity: 0.1;" />
 
             <GridPane hgap="20" vgap="18">
                 <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <Label styleClass="field-label" text="GIVEN NAME" />
+                    <Label styleClass="field-label" text="PRÉNOM" />
                     <TextField fx:id="prenomField" styleClass="dark-field" />
                 </VBox>
                 <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <Label styleClass="field-label" text="FAMILY NAME" />
+                    <Label styleClass="field-label" text="NOM" />
                     <TextField fx:id="nomField" styleClass="dark-field" />
                 </VBox>
 
                 <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <Label styleClass="field-label" text="HEIGHT (cm)" />
+                    <Label styleClass="field-label" text="TAILLE (cm)" />
                     <TextField fx:id="tailleField" styleClass="dark-field" />
                 </VBox>
                 <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <Label styleClass="field-label" text="WEIGHT (kg)" />
+                    <Label styleClass="field-label" text="POIDS (kg)" />
                     <TextField fx:id="poidField" styleClass="dark-field" />
                 </VBox>
 
                 <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    <Label styleClass="field-label" text="BLOOD TYPE" />
+                    <Label styleClass="field-label" text="GROUPE SANGUIN" />
                     <TextField fx:id="bloodTypeField" styleClass="dark-field" />
                 </VBox>
                 <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <Label styleClass="field-label" text="BODY TEMP (°C)" />
+                    <Label styleClass="field-label" text="TEMP. CORPORELLE (°C)" />
                     <TextField fx:id="tempField" styleClass="dark-field" />
                 </VBox>
 
                 <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                    <Label styleClass="field-label" text="AGE" />
+                    <Label styleClass="field-label" text="ÂGE" />
                     <TextField fx:id="ageField" styleClass="dark-field" />
                 </VBox>
                 <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <Label styleClass="field-label" text="GENDER" />
+                    <Label styleClass="field-label" text="SEXE" />
                     <TextField fx:id="sexeField" styleClass="dark-field" />
                 </VBox>
                 <columnConstraints>
@@ -73,9 +73,9 @@
             <Region VBox.vgrow="ALWAYS" />
 
             <VBox spacing="12">
-                <Button maxWidth="Infinity" onAction="#handleUpdateFolder" styleClass="submit-button" text="Confirm Biometric Update" />
-                <Button maxWidth="Infinity" onAction="#handleDeleteFolder" styleClass="action-btn-delete" text="Eradicate Record" />
-                <Button maxWidth="Infinity" onAction="#closeWindow" styleClass="cancel-button" text="Discard Changes" />
+                <Button maxWidth="Infinity" onAction="#handleUpdateFolder" styleClass="submit-button" text="Confirmer la mise à jour" />
+                <Button maxWidth="Infinity" onAction="#handleDeleteFolder" styleClass="action-btn-delete" text="Supprimer le dossier" />
+                <Button maxWidth="Infinity" onAction="#closeWindow" styleClass="cancel-button" text="Annuler les modifications" />
             </VBox>
         </VBox>
     </VBox>

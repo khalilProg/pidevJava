@@ -89,13 +89,13 @@ public class AgentBanqueBaseController extends BaseFront {
     }
 
     @FXML
-    public void goToDemandes(ActionEvent event) {
+    public void goToDemandes(javafx.event.Event event) {
         loadView("/AgentBanqueDemande.fxml");
         closeMenu();
     }
 
     @FXML
-    public void goToTransferts(ActionEvent event) {
+    public void goToTransferts(javafx.event.Event event) {
         loadView("/AgentBanqueTransfert.fxml");
         closeMenu();
     }
